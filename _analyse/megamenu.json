@@ -1,0 +1,1516 @@
+[
+ {
+  "label": "Artikelsuche",
+  "href": "/was-ist-neu",
+  "groups": [
+   {
+    "group": "Artikelsuche",
+    "img": "/media/bild/Kitchen1-512x154.jpg",
+    "img_title": "Artikelauflistung, Alle Artikel von Matten.de",
+    "links": [
+     {
+      "label": "MATTENDESIGNER",
+      "href": "https://www.matten.net/de/custom-mat/create",
+      "title": "Mattendesigner. Entwerfen Sie Ihr eigenes Wunsch-Mattendesign"
+     },
+     {
+      "label": "Ad-Mat",
+      "href": "/logomatten/werbematten-dekomatten/",
+      "title": "Ad-Mats, Advertisingmatten, Werbematten, Dekomatten"
+     },
+     {
+      "label": "Aluminium-Profilmatten",
+      "href": "/aluminium_profilmatten/Diplomat-Original",
+      "title": "Aluminium-Profilmatte und Rahmen aus Aluminium. Messing, Edelstahl"
+     },
+     {
+      "label": "Alu-Profil 5- R, 5- LR",
+      "href": "/aluminium_profilmatten/Diplomat-Original",
+      "title": "Aluminium-Profilmatten R und LR (Large) breite Profile"
+     },
+     {
+      "label": "Anlaufprofil-Aluminium",
+      "href": "/kokosmatten/#artikel_randprofil",
+      "title": "Aluminium-Anlaufprofil"
+     },
+     {
+      "label": "> Anlaufprofil-Kunststoff",
+      "href": "/kokosmatten/#artikel_randprofil",
+      "title": ""
+     },
+     {
+      "label": "Anti-Ermüdungsmatten",
+      "href": "/gummi_und_kunststoffmatten/#artikel_6910002",
+      "title": "Antiermüdungsmatten"
+     },
+     {
+      "label": "Assistent",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Assistent1",
+      "title": "Asssistent Eingnagsmatten"
+     },
+     {
+      "label": "Attache",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Attache",
+      "title": "Attache Eingangsmatten"
+     },
+     {
+      "label": "Automatten",
+      "href": "/Logomatten/#artikel_6304020",
+      "title": "Automatten für jedes Fahrzeug geketelt oder mit Bandeinfassung. Einfarbig oder beliebigem Aufdruck. Wir benötigen lediglich die Type und Seriennummer des Fahrzeuges"
+     },
+     {
+      "label": "Biergartenmatten",
+      "href": "/logomatten/bierbankmatten",
+      "title": "Biergartenmatten, Matten für Biergartenbänke, Biergartenmatten mit Werbeaufdruck und individuellem Design"
+     },
+     {
+      "label": ">",
+      "href": "/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten",
+      "title": "durchsichtige Schreibtischstuhl-Unterlagen für Teppiche und Hartböden"
+     },
+     {
+      "label": "Bodenschutzmatten",
+      "href": "/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten",
+      "title": "durchsichtige Schreibtischstuhl-Unterlagen für Teppiche und Hartböden"
+     },
+     {
+      "label": "Corona-Matte",
+      "href": "/logomatten/sicherheits_symbol_matten",
+      "title": "Coronamatten. Hinweismatten, Gebotsmatten, Sicherheitsmatten, Unfallverhütungs-Schutzmatten, Unfallschutzmatten"
+     },
+     {
+      "label": "Enter-Matten",
+      "href": "https://www.matten.de/fussmatten/standard-schmutzfangmatten/#artikel_ENTER",
+      "title": "Enter-Eingangsmatte, aufliegend oder in Rahmen verlegt"
+     },
+     {
+      "label": "Ersatz-Ripsstreifen",
+      "href": "/aluminium_profilmatten/#artikel_Dipl-r-ripsstreifen",
+      "title": "Ersatz-Ripsstreifen für Aluminium-Profilmatten"
+     },
+     {
+      "label": "Event Mat",
+      "href": "/logomatten/#artikel_6600101",
+      "title": "Eventmatten, EventmatteTM Werbematte für Events, Mesen, Austellungen und auch als Hinweismatten Messematten, Läufer, Bahnenware"
+     },
+     {
+      "label": "Gummimatten> Gummiunterlagen",
+      "href": "#artikel_Gummiunterlage1",
+      "title": "Gummi-Matten, Kunstoffmatte, Bodenschutzmatten"
+     },
+     {
+      "label": "Hinweismatten",
+      "href": "/logomatten/sicherheits_symbol_matten",
+      "title": "Hinweismatten, Gebotsmatten, Verbotsmatten, Sicherheitsmatten"
+     },
+     {
+      "label": "Höhenausgleich",
+      "href": "#artikel_6920071",
+      "title": "Höhenausgleichsmatten, Hartfilzunterlagen zum Höhenausgleich bei Kokosmatten. Fest verleimt oder lose mitgeliefert"
+     },
+     {
+      "label": "IronHorse-Matten",
+      "href": "/fussmatten/standard-schmutzfangmatten#artikel_64000121",
+      "title": "IRON-HORSE Schmutzfangmatten, Die Nr.1 als Eingangsmatte oder Mietmatte"
+     },
+     {
+      "label": "IRON-HORSE XL",
+      "href": "/fussmatten/standard-schmutzfangmatten#artikel_64000161",
+      "title": "IRON-HORSE XL-Schmutzfangmatten für extreme Beanspruchung und große Schmutzaufnahme und Feuchte-Aufnahme"
+     },
+     {
+      "label": "JetPrint-Logo",
+      "href": "/logomatten#artikel_6300201-Logomatte",
+      "title": "JetPrint-Logomatten, JetPrint-Matten Individuell angefertigt Beliebige Maße, beliebige Formen. Riesige Farbauswahl, RGB-Farben, Pantone-Farben, Fotorealistische Reproduktion Ihrer Vorlagen"
+     },
+     {
+      "label": "JetPrint 1-farbig",
+      "href": "/fussmatten/standard-schmutzfangmatten",
+      "title": ""
+     },
+     {
+      "label": "JetPrint-light Logo",
+      "href": "/logomatten/#artikel_6300202",
+      "title": "JetPrint light-Matten Individuell angefertigt Beliebige Maße, beliebige Formen. Riesige Farbauswahl, RGB-Farben, Pantone-Farben, Fotorealistische Reproduktion Ihrer Vorlagen"
+     },
+     {
+      "label": "> JetPrint-light 1-farbig",
+      "href": "/logomatten/#artikel_6300202",
+      "title": "JetPrint light-Matten Individuell angefertigt Beliebige Maße, beliebige Formen. Riesige Farbauswahl, RGB-Farben, Pantone-Farben, Fotorealistische Reproduktion Ihrer Vorlagen"
+     },
+     {
+      "label": "JetPrint Velour Logo",
+      "href": "/logomatten/#artikel_6400201-Velourmatte",
+      "title": "JetPrint-Velour-Matten"
+     },
+     {
+      "label": "JetPrint Velour 1-farbig",
+      "href": "/logomatten/#artikel_6400201-Velourmatte",
+      "title": "Jet-Print-Velour-Matten, einfarbig und mehrfarbig, nach Kundenwunsch gestalter"
+     },
+     {
+      "label": "Kable-Mat",
+      "href": "/logomatten/sicherheits_symbol_matten/sicherheitsmatten3",
+      "title": "Hinweismatte und Sicherheitsmatte, Schutzmatte für Kabelführungen, Stolperschutz"
+     },
+     {
+      "label": "Komfort",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Komfort-soft",
+      "title": "Komfort-Soft Anti-Ermüdungsmatten"
+     },
+     {
+      "label": "Kokos-naturfarbig",
+      "href": "/kokosmatten/#artikel_6920001",
+      "title": "Kokosmatten, naturfarbig 13mm, 16mm, 20mm, 22mm, 24mm, 27mm und 30mm hoch"
+     },
+     {
+      "label": "Kokos-farbig",
+      "href": "/kokosmatten/#artikel_6920002",
+      "title": "Kokosmatten, farbig: schwarz, grau, rot, blau, grün >17mm und 24mm"
+     },
+     {
+      "label": "> Kokos-Design",
+      "href": "/kokosmatten/#artikel_6920003-a",
+      "title": "Kokosmatten natur oder farbig individuell gestaltet"
+     },
+     {
+      "label": "Komfort Design",
+      "href": "/fussmatten/standard-schmutzfangmatten/komfort-design",
+      "title": "Komfirt-Design Anti-Ermüdungsmatte mit beliebigem Kunden-Design"
+     },
+     {
+      "label": "Komfort Office",
+      "href": "/fussmatten/standard-schmutzfangmatten/komfort-office",
+      "title": "Komfort-Office-Mattem Anti-Ermüdungsmatten"
+     },
+     {
+      "label": "Komfort-Soft",
+      "href": "/fussmatten/standard-schmutzfangmatten/komfort-soft",
+      "title": "Komfort-Soft-Matten einfarbige Anti-Ermüdungsmatten in 3 Standardgrößen und verschiedenen Farben"
+     },
+     {
+      "label": "Kleen-Scrape",
+      "href": "/fussmatten/standard-schmutzfangmatten/#artikel_6900012",
+      "title": "Scrape-Matten, rutschfeste Gummimatten mit Scrape-Oberfläche"
+     },
+     {
+      "label": "Kleen-Thru Plus",
+      "href": "/fussmatten/standard-schmutzfangmatten/#artikel_6910001",
+      "title": "Thru-Plus Gummimatte, speziell für Nassbereiche, rutschfest"
+     },
+     {
+      "label": "KleenWay Rubber",
+      "href": "/logomatten/#artikel_6600201",
+      "title": "Kleen-Way-Rubber Bahmenware bis 20m Länge in 4 Standardbreiten"
+     },
+     {
+      "label": "Kushion-Koil",
+      "href": "/gummi_und_kunststoffmatten/#artikel_6910002",
+      "title": "Kushion-Koil Anti-Ermüdungsmatten für den gewerblichen und privaten Einsatz"
+     },
+     {
+      "label": "Kunststoffmatten",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Sixform%20Star",
+      "title": "Kunststoffmatten, Six-Form-Matten"
+     },
+     {
+      "label": "Mietmatten",
+      "href": "/miet-mattenservice/service_miet-mattenservice",
+      "title": "IRON-HORSE Mietmatten"
+     },
+     {
+      "label": "Monoton",
+      "href": "/fussmatten/standard-schmutzfangmatten#artikel_monoton-Standard",
+      "title": "MONOTON-Matten"
+     },
+     {
+      "label": "NatursteinWaschbecken",
+      "href": "https://www.matten.de/was-ist-neu/terrazzo",
+      "title": "Naturstein-Waschbecken, Wannen, Onyx, Marmor, Flußstein, Fossil"
+     },
+     {
+      "label": "Naturstein-Wannen",
+      "href": "https://www.matten.de/was-ist-neu/terrazzo",
+      "title": "Naturstein-Waschwannen, Marmor, Onyx, Fossil"
+     },
+     {
+      "label": "Optibrush Reinstreifer",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Optibrush1%207418",
+      "title": "Optibrush Reinstreifer"
+     },
+     {
+      "label": "OS-Physio-REHAB",
+      "href": "/logomatten/os-physio-rehab-matten",
+      "title": "OS-Physio und RTA REHAB-Matten auch mit individuellem Funktionsdesign und Kundenlogo"
+     },
+     {
+      "label": "Reinstreifer-Matten",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Assistent1",
+      "title": "Reinstreifer-Matten für aufliegende Verlegung und zum Verlegen in Mattenrahmen"
+     },
+     {
+      "label": "REHAB-Matten",
+      "href": "/logomatten/os-physio-rehab-matten",
+      "title": "RTA OS-Physio REHAB-Matten mit Standard- und individuellem Funktionsdesign und Kundenlogo"
+     },
+     {
+      "label": "Ripsstreifen",
+      "href": "/aluminium_profilmatten/#artikel_Dipl-r-ripsstreifen",
+      "title": "Ersatz-Ripsstreifen für Aluminium-Profilmatten"
+     },
+     {
+      "label": "RTA-REHAB-Matten",
+      "href": "/logomatten/s_und_s-trainings-teppiche",
+      "title": "RTA-REHAB-und OS-Physio Matten"
+     },
+     {
+      "label": "Sicherheitsmatten",
+      "href": "/logomatten/sicherheits_symbol_matten",
+      "title": "Sicherheitsmatten. Unfallverhütung, Unfallschutz, Verbotsmatten, Gebotsmatten"
+     },
+     {
+      "label": "Sixform",
+      "href": "http://www.matten.de/gummi_und_kunststoffmatten/#artikel_Sixform%20Star",
+      "title": ""
+     },
+     {
+      "label": "Super-Mat",
+      "href": "/fussmatten/standard-schmutzfangmatten#artikel_6400031",
+      "title": "SUPER-Mat mit extra Bürsteffekt"
+     },
+     {
+      "label": "Unfallverhütung",
+      "href": "/logomatten/sicherheits_symbol_matten",
+      "title": "Unfall-Verhütungsmatten, Sicherheitsmatten, Gebotsmatten, Verbotsmatten, Hinweismatten, Stolperschutzmatten"
+     },
+     {
+      "label": ">",
+      "href": "/fussmatten/standard-schmutzfangmatten#artikel_6400031",
+      "title": "SUPER-Mat mit extra Bürsteffekt"
+     },
+     {
+      "label": "Wash-Horse",
+      "href": "/fussmatten/standard-schmutzfangmatten/#artikel_6100200",
+      "title": "Wash-Horse-Matten 100% Baumwoll-Flor. Ideal für den gewerblichen Einsatz, z.B. in Werkstätten, Tankstellen. Hält besonders gut Öle und Fette zurück. Geeignet für die Wäsche mit hohen Temperaturen"
+     },
+     {
+      "label": "Water-Horse",
+      "href": "/fussmatten/standard-schmutzfangmatten/#artikel_Water_Horse",
+      "title": "Water-Horse-Matten für den Einsatz in allen Naßbereichen: Schwimmbädern, Saunen, Fertgungsbetrieben"
+     },
+     {
+      "label": "WetStep",
+      "href": "/fussmatten/standard-schmutzfangmatten/#artikel_WetStep",
+      "title": "WetStep - die Wasserbarriere für den Innenbereich und Außenbereich! Ideal für Schwimmbäder, Duschen, Saunen"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/OS-Physio-2.jpg",
+    "img_title": "OS-Physio-REHAB-Matten",
+    "links": [
+     {
+      "label": "OS-Physio REHA-Matten und Trainings-Teppiche",
+      "href": "/logomatten/s_und_s-trainings-teppiche",
+      "title": "OS-Physio REHAB-Matten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/bathtube3.jpg",
+    "img_title": "Naturstein-Waschbecken, Naturstein-Wannen, Flußstein, Marmor, Onyx, Fossil",
+    "links": [
+     {
+      "label": "Naturstein Bad-ArtikelWannen-BeckenZubehör",
+      "href": "/was-ist-neu/terrazzo",
+      "title": "Naturstein-Waschbecken, Naturstein-Wannen, Flußstein, Marmor, Onyx, Fossil"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/07-150.L_1600-512.jpg",
+    "img_title": "Bodenschutzmatten für Büro und Heim",
+    "links": [
+     {
+      "label": "Bodenschutzmatten Büro + Heim",
+      "href": "/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten",
+      "title": "Bodenschutzmatte für Büro und Heim"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/SuperMat_512x340.jpg",
+    "img_title": "SUPER-Mat mit extra Bürsteffekt",
+    "links": [
+     {
+      "label": "SUPER-Matmit extra Bürsteffekt",
+      "href": "/fussmatten/standard-schmutzfangmatten#artikel_6400031",
+      "title": "SUPER-Mat mit extra Bürsteffekt"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "OS-Physio REHA-Matten",
+      "href": "/was-ist-neu/neue-artikel",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Terrazzo- Stein-Wannen, Waschbecken",
+      "href": "/was-ist-neu/terrazzo",
+      "title": ""
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "label": "Fussmatten",
+  "href": "/fussmatten",
+  "groups": [
+   {
+    "group": "",
+    "img": "/media/bild/VierJahr2_512x340-farb.JPG",
+    "img_title": "einfarbige und melierte Matten. Auswahl mehr als 100 verschiedenen Farben, aus verschiedenen Farbpaletten, 5 Jahre Garantie, teilweise 11 Jahre Farbgarantie. Viele Standardabmessungen und darüberhinaus in individuellen Wunschgrößen bis zu 200cm Breite und 7m Länge. Bahnenware  bis 20m Länge",
+    "links": [
+     {
+      "label": "einfarbige und melierte Matten",
+      "href": "/fussmatten/standard-schmutzfangmatten",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/photo_startseite.jpg",
+    "img_title": "Fußmatten, Schmutzfangmatten, Designmatten, Logomatten - Matten mit Standardlogos oder nach Ihren Wünschen individuell gestaltet in Ihrer Wunschgröße",
+    "links": [
+     {
+      "label": "Individuelle Logomatten",
+      "href": "/logomatten",
+      "title": "Fußmatten, Schmutzfangmatten, Designmatten, Logomatten - Matten mit Standardlogos oder nach Ihren Wünschen individuell gestaltet in Ihrer Wunschgröße"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/OS-Physio-2.jpg",
+    "img_title": "OS-Physio-Matten, Matten für den REHA-Bereich, REHA-Praxismatten",
+    "links": [
+     {
+      "label": "OS Reha +Training",
+      "href": "/logomatten/os-physio-rehab-matten",
+      "title": "OS-Physio-Matten, Matten für den REHA-Bereich, REHA-Praxismatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/kokos_b1_q1.jpg",
+    "img_title": "Kokosmatten, schnittfest mit Vinyl-Rückenbeschichtung, in 7 verschiedenen Höhen, natur, farbig oder gestaltet, beliebige Größen oder Bahnenware.",
+    "links": [
+     {
+      "label": "Kokosmatten-Verlour",
+      "href": "/kokosmatten",
+      "title": "Kokosmatten, schnittfest mit Vinyl-Rückenbeschichtung, in 7 verschiedenen Höhen, natur, farbig oder gestaltet, beliebige Größen oder Bahnenware."
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Dip-RCB.jpg",
+    "img_title": "Aluminium- und Kunststoff- Profilmatten in verschiedenen Höhen mit unterschiedlicher Oberflächengestaltung.",
+    "links": [
+     {
+      "label": "Aluminium-Profil-Matten",
+      "href": "/aluminium_profilmatten",
+      "title": "Aluminium- und Kunststoff- Profilmatten in verschiedenen Höhen mit unterschiedlicher Oberflächengestaltung."
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/rahmen_ganz-2.jpg",
+    "img_title": "Profilrahmen aus Aluminium, Messing und Edelstahl nach Kundenwunsch rechtwinklig und in Sonderformen angefertigt",
+    "links": [
+     {
+      "label": "Rahmen und Zubehör",
+      "href": "/aluminium_profilmatten/rahmen_und_zubehoer",
+      "title": "Profilrahmen aus Aluminium, Messing und Edelstahl nach Kundenwunsch rechtwinklig und in Sonderformen angefertigt"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/nomad_aqua_verlege1.jpg",
+    "img_title": "Matten für Außenbereiche in Standargrößen, als Bahnenware und Zuschnitten nach Kundenwunsch",
+    "links": [
+     {
+      "label": "Matten für Außenbereiche",
+      "href": "/fussmatten/matten_fuer_aussenbereiche",
+      "title": "Matten für Außenbereiche in Standargrößen, als Bahnenware und Zuschnitten nach Kundenwunsch"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/CushionCoil-kl.jpg",
+    "img_title": "Anti-Ermüdungsmatten, Gummi-Eingangsmatten, Gummimatten für den Kassenbereich, Tresenbereich in Hotels und Gastronomie, Maschinenbereich",
+    "links": [
+     {
+      "label": "Gummi- und Kunststoffmatte",
+      "href": "/gummi_und_kunststoffmatten",
+      "title": "Gummimatten und Kunststoffmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Morgensonne_50x75.jpg",
+    "img_title": "Matten für Haus und Heim, dekorative Eingangsmatten, Logomatten speziell für Ihr Kinderzimmer",
+    "links": [
+     {
+      "label": "Matten für Haus+Heim",
+      "href": "/logomatten/matten_fuer_haus_und_heim",
+      "title": "Matten für Haus und Heim, dekorative Eingangsmatten, Logomatten speziell für Ihr Kinderzimmer"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/photo_logomatten-Baelle.jpg",
+    "img_title": "Werbematten Dekomatten, Fußmatten, Schmutzfangmatten unifarbig oder meliert. Farben nach Ihren Wünschen mit einer Auswahl aus über 100 Standard-Farben",
+    "links": [
+     {
+      "label": "WerbemattenDekomatten",
+      "href": "/logomatten/werbematten-dekomatten",
+      "title": "Werbematten-Dekomatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Logo7.png",
+    "img_title": "Bitte Abstand halten, Hinweismatten, Gebotsmatten, Symbolmatten",
+    "links": [
+     {
+      "label": "Hinweis-Gebotsmatten",
+      "href": "/logomatten/sicherheits_symbol_matten",
+      "title": "Hinweismatten, Gebotsmatten,Symbolmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Si-Feuergefährlich.jpg",
+    "img_title": "Sicherheits, Arbeitssicherheit, Unfallverhütung,Arbeitsschutz- Symbolmatten",
+    "links": [
+     {
+      "label": "Sicherheits-Symbolmatten",
+      "href": "/logomatten/sicherheits_symbol_matten",
+      "title": "Sicherheits, Arbeitssicherheit, Unfallverhütung,Arbeitsschutz- Symbolmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Bierbank_0687_512x340.jpg",
+    "img_title": "Bierbankmatten mit Standarddesigns und mit beliebigem Kundeendesign",
+    "links": [
+     {
+      "label": "Bierbank-Matten",
+      "href": "/logomatten/bierbankmatten",
+      "title": "Bierbankmatten mit Standarddesigns und mit beliebigem Kundeendesign"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Automatte-Band.jpg",
+    "img_title": "Automatten",
+    "links": [
+     {
+      "label": "Automattenuni + gestaltet",
+      "href": "/home/6304010",
+      "title": "Automatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/IH_008.jpg",
+    "img_title": "Miet-Mattenservice, individueller Mattenservice, Mattenreinigung Ihrer Privatmatten, Mattenwäsche",
+    "links": [
+     {
+      "label": "Miet-Matten-Service",
+      "href": "/miet-mattenservice/service_miet-mattenservice",
+      "title": "Miet-Mattenservice, individueller Mattenservice, Mattenreinigung Ihrer Privatmatten, Mattenwäsche"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Fleckenset-2.jpg",
+    "img_title": "Teppich-Reinigungsprodukte und Hilfsmittel, Teppichreinigung",
+    "links": [
+     {
+      "label": "TeppichReinigungsprodukte",
+      "href": "/miet-mattenservice/reinigungsprodukte",
+      "title": "Teppich-Reinigungsprodukte und Hilfsmittel, Teppichreinigung"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Bathtubes-1.JPG",
+    "img_title": "Terrazzo-Produkte, Terrazzo-Badewannen, Terazzo-Waschbecken, Auch Sonder-Anfertigung in individuelle Formen und Maßen",
+    "links": [
+     {
+      "label": "Terrazzo-Produkt",
+      "href": "/was-ist-neu/terrazzo",
+      "title": "Terrazzo-Produkte, Terrazzo-Badewannen, Terazzo-Waschbecken, Auch Sonder-Anfertigung in individuelle Formen und Maßen"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Einfarbige und Logo Fußmatten",
+      "href": "/fussmatten/fussmatten",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Baumwollmatten, Nylon-Fussmatten",
+      "href": "/fussmatten/standard-schmutzfangmatten",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Matten für Außenbereiche",
+      "href": "/fussmatten/matten_fuer_aussenbereiche",
+      "title": ""
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "label": "Logomatten",
+  "href": "/logomatten",
+  "groups": [
+   {
+    "group": "",
+    "img": "/media/bild/OS-Physio-2.jpg",
+    "img_title": "OS-Physio-2.jpg",
+    "links": [
+     {
+      "label": "REHA-MattenOS-Physio",
+      "href": "/logomatten/os-physio-rehab-matten",
+      "title": "Mietmatten-Waschservice - einfarbige und melierte Miet-Matten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Regent.jpg",
+    "img_title": "schön&sauber Jet-Print Logo-Matten, Designmatten individuell gestaltet",
+    "links": [
+     {
+      "label": "LOGOMATTENJetPrint-Premium",
+      "href": "/logomatten/#artikel_6300201",
+      "title": "schön&sauber Jet-Print Logo-Matten, Designmatten individuell gestaltet"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Jet-Print_Vision-512x340-Nr.jpg",
+    "img_title": "Jet-Print Light Logo-Matten, Designmatten individuell gestaltet",
+    "links": [
+     {
+      "label": "LOGOMATTEN",
+      "href": "/logomatten/#artikel_6300202",
+      "title": "Jet-Print Light Logo-Matten, Designmatten individuell gestaltet"
+     },
+     {
+      "label": "JetPrint-light",
+      "href": "/logomatten/#artikel_6300202",
+      "title": "Jet-Print Light Logo-Matten, Designmatten individuell gestaltet"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Jet-Print%20Velour_512x340.jpg",
+    "img_title": "Jet-Print Velour",
+    "links": [
+     {
+      "label": "LOGOMATTENJetPrint-Velour",
+      "href": "/logomatten/#artikel_6400201-Velourmatte",
+      "title": "Jet-Print Velour Logo-Matten, Designmatten fotorealistisch gestaltet"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Kleen-Way_512x340.jpg",
+    "img_title": "Kleen-Way_512x340.jpg",
+    "links": [
+     {
+      "label": "BahnenwareKleen-Way-Rubber",
+      "href": "/logomatten/#artikel_6600201",
+      "title": "Kleen-Way Designmatten als Bahnenware"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Event_Mat_512x340.jpg",
+    "img_title": "Event_Mat_512x340.jpg",
+    "links": [
+     {
+      "label": "EVENT-Designmatten",
+      "href": "/logomatten/#artikel_6600101",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/BigSize_512x340.jpg",
+    "img_title": "BigSize_512x340.jpg",
+    "links": [
+     {
+      "label": "BIGSIZE-",
+      "href": "/logomatten/#artikel_6600102",
+      "title": "BigSize-Matten"
+     },
+     {
+      "label": "matten",
+      "href": "/logomatten/#artikel_6600102",
+      "title": "BigSize-Matten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Patio-512x340.jpg",
+    "img_title": "Chromojet Werbematten, Patio-Werbematten, Designmatten, Advertising-mats",
+    "links": [
+     {
+      "label": "WERBEMATTENPatio-Ad-Mat",
+      "href": "/logomatten/#artikel_6300203",
+      "title": "Chromojet Werbematten, Patio-Werbematten, Designmatten, Advertising-mats"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Bar-Mats-512x340.jpg",
+    "img_title": "Barmatten, Bar.-Mats, Thekenmatten, Tresenmatten, Verkaufstresenmatten",
+    "links": [
+     {
+      "label": "BARMATTENThekenmatten",
+      "href": "/logomatten/werbematten-dekomatten/",
+      "title": "Barmatten, Bar.-Mats, Thekenmatten, Tresenmatten, Verkaufstresenmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/jp-promotion.jpg",
+    "img_title": "JetPrint Velour- Logomatten, Designmatten, Advertising-mats",
+    "links": [
+     {
+      "label": "AdvertisingWerbematten",
+      "href": "/logomatten/werbematten-dekomatten/",
+      "title": "JetPrint Velour- Logomatten, Designmatten, Advertising-mats"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/K-Turf-7081-mi.jpg",
+    "img_title": "K-Turf Aussenmatten JetPrint-Logomatten für den Außenbereich. Ideal als Bootsanleger-Matten und im Naßbereich",
+    "links": [
+     {
+      "label": "OUT-DOORAussenbereich",
+      "href": "/fussmatten/matten_fuer_aussenbereiche",
+      "title": "Matten für Außenbereiche Outdoormatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/welcome_holz_8_512x340.jpg",
+    "img_title": "welcome_holz",
+    "links": [
+     {
+      "label": "WELCOMEHolzdesign",
+      "href": "/logomatten/welcome-holzdesign",
+      "title": "WELCOME-Matten im Holzdesign"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/I_love_Muenchen_var1_50x75.jpg",
+    "img_title": "I Love München -Matten, I Love mit individuellem Logo und Schrift nach Kundenwunsch",
+    "links": [
+     {
+      "label": "I Love..Matten",
+      "href": "/logomatten/matten_fuer_haus_und_heim/#artikel_6301053",
+      "title": "I Love München -Matten, I Love mit individuellem Logo und Schrift nach Kundenwunsch"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Bierbank_0687_512x340.jpg",
+    "img_title": "Biergarten-Bankmatten in vielen verschiedenen Ausführungen  auch mit Aufdruck nach Kundenwunsch",
+    "links": [
+     {
+      "label": "BiergartenbankMatten",
+      "href": "/logomatten/bierbankmatten",
+      "title": "Biergarten-Bankmatten in vielen verschiedenen Ausführungen  auch mit Aufdruck nach Kundenwunsch"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Bitte%20Abstand%20halten_512x340.JPG",
+    "img_title": "Bitte Abstand halten_512x340.JPG",
+    "links": [
+     {
+      "label": "CORONAHinweismatten",
+      "href": "/logomatten/jetprint-designs-hinweise",
+      "title": "Sicherheits-Symbolmatten, Bitte Abstand halten, Gebotsmatten, Hinweismatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Si-Feuergefährlich.jpg",
+    "img_title": "Sicherheits, Arbeitssicherheit, Unfallverhütung,Arbeitsschutz- Symbolmatten",
+    "links": [
+     {
+      "label": "Sicherheits-Symbolmatten",
+      "href": "/logomatten/sicherheits_symbol_matten",
+      "title": "Sicherheits, Arbeitssicherheit, Unfallverhütung,Arbeitsschutz- Symbolmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Automatte-Band.jpg",
+    "img_title": "Automatten für alle Fahrzeugmodelle und Fahrzeugtypen, wir benötigen nur den Typ und die Nummer aus dem Krftfahzeugschein",
+    "links": [
+     {
+      "label": "AUTOMatten",
+      "href": "/logomatten/#artikel_6304020",
+      "title": "Automatten für alle Fahrzeugmodelle und Fahrzeugtypen, wir benötigen nur den Typ und die Nummer aus dem Krftfahzeugschein"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Sicherheits-und Symbol-Matten",
+      "href": "/logomatten/sicherheits_symbol_matten",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "OS-Physio REHAB Trainings-Matten",
+      "href": "/logomatten/os-physio-rehab-matten",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Werbematten - Dekomatten",
+      "href": "/logomatten/werbematten-dekomatten",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Art-Designs Welcome-Holzdesigns",
+      "href": "/logomatten/welcome-holzdesign",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Wunschdesign-Matten",
+      "href": "/logomatten/wunschdesign-matten",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Matten für Haus und Heim",
+      "href": "/logomatten/matten_fuer_haus_und_heim",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Biergartenbank-Matten",
+      "href": "/logomatten/bierbankmatten",
+      "title": ""
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "label": "Kokosmatten",
+  "href": "/kokosmatten",
+  "groups": [
+   {
+    "group": "",
+    "img": "/media/bild/kokos_natur_140.jpg",
+    "img_title": "Kokos-natur, beliebige Zuschnitte, Breiten bis 200cm ",
+    "links": [
+     {
+      "label": "Kokosmatte, natur",
+      "href": "/kokosmatten/#artikel_6920003",
+      "title": "Kokos-natur, beliebige Zuschnitte, Breiten bis 200cm und Längen bis 1200cm"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/kokos_farbig_140.jpg",
+    "img_title": "farbige Kokosmatten, beliebige Zuschnitte, Breiten bis 200cm und Längen bis 1200cm",
+    "links": [
+     {
+      "label": "Kokosmatten, farbig",
+      "href": "/kokosmatten/#artikel_6920002",
+      "title": "farbige Kokosmatten, beliebige Zuschnitte, Breiten bis 200cm und Längen bis 1200cm"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Kokos-gestalt_140.jpg",
+    "img_title": "naturfarbige oder farbige Kokosmatten in Standard oder Wunschgrößen, gestaltet durch 1- oder 2-farbige Beflockung nach Kundenvorlage",
+    "links": [
+     {
+      "label": "Design-Koko, beflockt",
+      "href": "/kokosmatten/#artikel_6920004",
+      "title": "naturfarbige oder farbige Kokosmatten in Standard oder Wunschgrößen, gestaltet durch 1- oder 2-farbige Beflockung nach Kundenvorlage"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/kokos_intarsia_140.jpg",
+    "img_title": "Kokos, gestaltet, Intarsia. Hergestellt im Grafic-Inlay-Verfahren. Geeignet für Darstellungen mit Schrift- und Strichstärken von ca. 2cm Stärke",
+    "links": [
+     {
+      "label": "Kokos",
+      "href": "/kokosmatten/#artikel_6920004",
+      "title": ""
+     },
+     {
+      "label": "Design",
+      "href": "/kokosmatten/#artikel_6920004",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Kokos-mR-glatt-512.jpg",
+    "img_title": "Randprofile f.Kokosmatten in verschiedenen Höhen und Ausführungen, individuell auf Maß zugeschnitten, Ecken auf Gehrung. 1-, 2-, 3- oder 4-seitig montiert",
+    "links": [
+     {
+      "label": "Randprofile f. Kokosmatten",
+      "href": "/kokosmatten/#artikel_6920080",
+      "title": "Randprofile f.Kokosmatten in verschiedenen Höhen und Ausführungen, individuell auf Maß zugeschnitten, Ecken auf Gehrung. 1-, 2-, 3- oder 4-seitig montiert"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Anlaufpofil-Alu-2.jpg",
+    "img_title": "Aluminium-Anlaufprofile in  verschiedenen Höhen",
+    "links": [
+     {
+      "label": "Aluminum-Anlaufprofile",
+      "href": "/aluminium_profilmatten/#artikel_Aluminium-Anlaufprofil",
+      "title": "Aluminium-Anlaufprofile in  verschiedenen Höhen"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Hartfilzunterlage.JPG",
+    "img_title": "Höhenausgleich für Kokosmatten, Hartfilz, 5mm oder 2x 5mm",
+    "links": [
+     {
+      "label": "Höhenausgleich für Matten",
+      "href": "/kokosmatten/#artikel_6920071",
+      "title": "Höhenausgleich für Kokosmatten, Hartfilz, 5mm oder 2x 5mm"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Gummiunterlage%20512x340.jpg",
+    "img_title": "Gummiunterlage 512x340.jpg",
+    "links": [
+     {
+      "label": "Gummimatten",
+      "href": "/kokosmatten/#artikel_Gummiunterlage1",
+      "title": "Gummimatten als Unterlagen für Aluminium-Profilmatten oder als Höhenausgleich für Matten im Mattenbett"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "label": "Aluminium-Matten",
+  "href": "/aluminium_profilmatten",
+  "groups": [
+   {
+    "group": "",
+    "img": "/media/bild/Dip-R.jpg",
+    "img_title": "DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilstärke, verschiedene Höhen, teils auch geeignet für Außenbereiche ",
+    "links": [
+     {
+      "label": "DIPLOMAT-***ALU-ORIGINAL",
+      "href": "/aluminium_profilmatten/#artikel_Marschall-Premium-Aluminium",
+      "title": "DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilstärke, verschiedene Höhen, teils auch geeignet für Außenbereiche"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Dip-R.jpg",
+    "img_title": "DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilstärke, verschiedene Höhen, teils auch geeignet für Außenbereiche ",
+    "links": [
+     {
+      "label": "DIPLOMAT-STANDARGRÖSSEN",
+      "href": "/aluminium_profilmatten/shop-alu-profil",
+      "title": "DIPLOMAT-ORIGINAL-Aluminium-Profilmatten in Standardgrößen"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Dip-R.jpg",
+    "img_title": "DIPLOMAT-PREMIUM-Aluminium-Profilmatten, 1mm Profilstärke, verschiedene Höhen, teils auch geeignet für Außenbereiche ",
+    "links": [
+     {
+      "label": "DIPLOMAT-ALU-PREMIUM",
+      "href": "/aluminium_profilmatten/#artikel_53601",
+      "title": "DIPLOMAT-PREMIUM-Aluminium-Profilmatten, 1mm Profilstärke, verschiedene Höhen, teils auch geeignet für Außenbereiche"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/MARSCHALL_522S_R.jpg",
+    "img_title": "MARSCHALL-Aluminium-Profilmatten für extreme Belastungen, 2,5mm Profilstärke, 17mm und 22mm Höhe, teils auch geeignet für Außenbereiche",
+    "links": [
+     {
+      "label": "MARSCHALL-ALU-ORIGINAL",
+      "href": "/aluminium_profilmatten/#artikel_5420",
+      "title": "MARSCHALL-Aluminium-Profilmatten für extreme Belastungen, 2,5mm Profilstärke, 17mm und 22mm Höhe, teils auch geeignet für Außenbereiche"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/MARSCHALL_522S_R.jpg",
+    "img_title": "MARSCHALL-Aluminium-Profilmatten für extreme Belastungen, 2,5mm Profilstärke, 17mm und 22mm Höhe, teils auch geeignet für Außenbereiche",
+    "links": [
+     {
+      "label": "MARSCHALL-ALU-PREMIUM",
+      "href": "/aluminium_profilmatten/#artikel_5440",
+      "title": "MARSCHALL-Aluminium-Profilmatten für extreme Belastungen, 2,5mm Profilstärke, 17mm und 22mm Höhe, teils auch geeignet für Außenbereiche"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/PLAZA_42R-512x340.jpg",
+    "img_title": "PLAZA_Aluminium-Profilmatten",
+    "links": [
+     {
+      "label": "PLAZA-ALUMINIUM_PROFIL",
+      "href": "/aluminium_profilmatten/#artikel_5561542",
+      "title": "PLAZA_Aluminium-Profilmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Dip-R.jpg",
+    "img_title": "DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilstärke, verschiedene Höhen, teils auch geeignet für Außenbereiche ",
+    "links": [
+     {
+      "label": "ALU-PROFILMATTENNORMGRÖSSEN",
+      "href": "/aluminium_profilmatten/#artikel_Marschall-Premium-Aluminium",
+      "title": "DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilstärke, verschiedene Höhen, teils auch geeignet für Außenbereiche"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/TopClean-Rips-512x340.jpg",
+    "img_title": "TopClean-Rips",
+    "links": [
+     {
+      "label": "TOP-CLEAN-ALUMINIUM_PROFIL",
+      "href": "/aluminium_profilmatten/#artikel_TopClean-R",
+      "title": "PLAZA_Aluminium-Profilmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Anlaufpofil-Alu-2.jpg",
+    "img_title": "Aluminium-Anlaufprofil",
+    "links": [
+     {
+      "label": "ALUMINIUM_ANLAUFPROFIL",
+      "href": "/aluminium_profilmatten/#artikel_Aluminium-Anlaufprofil",
+      "title": "Aluminium-Anaufprofil"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/rahmen_ganz-2.jpg",
+    "img_title": "Winkelprofilrahmen, Aluminium, Messing, Edelstahl",
+    "links": [
+     {
+      "label": "RAHMEN u.Zubehör",
+      "href": "/aluminium_profilmatten/rahmen_und_zubehoer",
+      "title": "Aluminium-Winkelprofilrahmen, Messing-Winkelprofilrahm"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Schmutzfangwanne-513x340.jpg",
+    "img_title": "Schmutzfangwanne-513x340.jpg",
+    "links": [
+     {
+      "label": "SCHMUTZFANG-WANNEN",
+      "href": "/aluminium_profilmatten/#artikel_5022_CN",
+      "title": "Schmutzfangwanne"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Unterkonstruktion-Ra_512x340.jpg",
+    "img_title": "Spezialrahmen-Unterkonstruktion zur Abdeckung mit Aluminium-Profilmatten von begehbaren Lichtschächten",
+    "links": [
+     {
+      "label": "SPEZIALRAHMEN-UNTERKONSTRUKTION",
+      "href": "/aluminium_profilmatten/#artikel_5022_CN",
+      "title": "Schmutzfangwanne"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/rips_color_512x340.jpg",
+    "img_title": "rips_color Ripseinlagen",
+    "links": [
+     {
+      "label": "RIPSSTREIFEN u.",
+      "href": "/aluminium_profilmatten/#artikel_Dipl-r-ripsstreifen",
+      "title": "Ripsstreifen-Profileinlagen"
+     },
+     {
+      "label": "PROFIL-EINLAGEN",
+      "href": "/aluminium_profilmatten/#artikel_Profileinlagen",
+      "title": "Ripsstreifen-Profileinlagen"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Gummiunterlage%20512x340.jpg",
+    "img_title": "Gummiunterlage 512x340.jpg",
+    "links": [
+     {
+      "label": "GUMMI-UNTERLAGEN",
+      "href": "/aluminium_profilmatten/#artikel_Gummiunterlage1",
+      "title": "Gummiunterlagen-als Höhenausgleich"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Normrost_512x340.jpg",
+    "img_title": "Normrost Gitterrost",
+    "links": [
+     {
+      "label": "GITTERROST-verzinkt",
+      "href": "/aluminium_profilmatten/#artikel_Gitterrost",
+      "title": "Normrost -Gitterrsot"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Aluminiumrahmen, Schmutzfangmatten, Messingrahmen, Edelstahlrahmen, Zubehör",
+      "href": "/aluminium_profilmatten/rahmen_und_zubehoer",
+      "title": ""
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "label": "Gummi-/Kunststoffmatten",
+  "href": "/gummi_und_kunststoffmatten",
+  "groups": [
+   {
+    "group": "",
+    "img": "/media/bild/07-150.L_1600-512.jpg",
+    "img_title": "ECO-Grip Bodenschutzmatte",
+    "links": [
+     {
+      "label": "BodenschutzMatten",
+      "href": "/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten",
+      "title": "ECO-Grip Bodenschutzmatte"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Komfort-Standard_512x340.jpg",
+    "img_title": "Komfort-Standard_Anti-Ermüdungsmatten",
+    "links": [
+     {
+      "label": "Komfort-StandardAnti-Ermüdung",
+      "href": "/gummi_und_kunststoffmatten/#artikel_komfort-standard",
+      "title": "Komfort-Soft Anti-Ermüdungsmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Komfort-Design_512x340.jpg",
+    "img_title": "Komfort-Design_512x340.jpg",
+    "links": [
+     {
+      "label": "Komfort-DesignAnti-Ermüdung",
+      "href": "/gummi_und_kunststoffmatten/#artikel_komfort-design",
+      "title": "Komfort-Soft Anti-Ermüdungsmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Komfort-Office-512x340.jpg",
+    "img_title": "Komfort-Office-512x340.jpg",
+    "links": [
+     {
+      "label": "Komfort-OfficeAnti-Ermüdung",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Komfort-office",
+      "title": "Komfort-Soft Anti-Ermüdungsmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Komfort_Soft_512x340.jpg",
+    "img_title": "Komfort_Soft_Anti-Ermüdungsmatten",
+    "links": [
+     {
+      "label": "Komfort-SoftAnti-Ermüdung",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Komfort-soft",
+      "title": "Komfort-Soft Anti-Ermüdungsmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/CushionCoil-512x340.jpg",
+    "img_title": "Cushion-Coil Antiermüdungsmatten",
+    "links": [
+     {
+      "label": "Cushion-CoilAnti-Ermüdung",
+      "href": "/gummi_und_kunststoffmatten/#artikel_6910002",
+      "title": "Cushion-Coil Antiermüdungsmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Complete-Comfort.JPG",
+    "img_title": "Complete-Comfort.JPG",
+    "links": [
+     {
+      "label": "CompleteComfort",
+      "href": "/gummi_und_kunststoffmatten/#artikel_6910003",
+      "title": "Komfort-Soft Anti-Ermüdungsmatten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Scraper_512x340.jpg",
+    "img_title": "Scraper-Matten, geeignet für Feuchträume, besonders für Küche und Pass",
+    "links": [
+     {
+      "label": "ScraperMatten",
+      "href": "/gummi_und_kunststoffmatten/#artikel_6900012",
+      "title": "Scraper-Matten, geeignet für Feuchträume, besonders für Küche und Pass"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Thru%20PLUS_512x340.jpg",
+    "img_title": "Thru-Plus Gummimatten für den Naßbereich in Bädern und besonders Küchen und am Pass",
+    "links": [
+     {
+      "label": "Thru-PlusMatten",
+      "href": "/gummi_und_kunststoffmatten/#artikel_6910001",
+      "title": "Thru-Plus Gummimatten für den Naßbereich in Bädern und besonders Küchen und am Pass"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/Struktura-220_512x340.jpg",
+    "img_title": "Gummiwabenmatten mit und ohne Einsatzbürsten",
+    "links": [
+     {
+      "label": "Gummi",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Gummiwabenmatten",
+      "title": "Gummiwabenmatten mit und ohne Einsatzbürsten"
+     },
+     {
+      "label": "Wabenmatten",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Gummiwabenmatten",
+      "title": "Gummiwabenmatten mit und ohne Einsatzbürsten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/attache-512x340.jpg",
+    "img_title": "Kunststoffmatten, Eingangsmatten, Feinstreifer und Grobstreifer",
+    "links": [
+     {
+      "label": "KunststoffReinstreifer",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Nomad-Matten",
+      "title": "Nomad-Matten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/nomad_extra_512x340.jpg",
+    "img_title": "Nomad-Matten",
+    "links": [
+     {
+      "label": "NOMADSpaghetti",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Nomad-Matten",
+      "title": "Nomad-Matten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/mitwell_super_512x340.jpg",
+    "img_title": "Mitwell-Matten",
+    "links": [
+     {
+      "label": "MitwellMatten",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Mitwell-Matten",
+      "title": "Mitwell-Matten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/sixform_star_512x340.jpg",
+    "img_title": "Sixform Star",
+    "links": [
+     {
+      "label": "SixformKunststoff",
+      "href": "/gummi_und_kunststoffmatten/#artikel_Sixform%20Star",
+      "title": "Sixform Star"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/stewell_512x340.jpg",
+    "img_title": "STEWELL",
+    "links": [
+     {
+      "label": "StewellKunststoff",
+      "href": "/gummi_und_kunststoffmatten/#artikel_STEWELL-Front-Tex",
+      "title": "STEWELL"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Bodenschutzmatten",
+      "href": "/gummi_und_kunststoffmatten/bodenschutzmatten",
+      "title": ""
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "label": "Miet-Mattenservice",
+  "href": "/miet-mattenservice",
+  "groups": [
+   {
+    "group": "",
+    "img": "/media/bild/IH_008.jpg",
+    "img_title": "Mietmatten-Waschservice - einfarbige und melierte Miet-Matten",
+    "links": [
+     {
+      "label": "einfarbige + melierte Miet-Matten",
+      "href": "/miet-mattenservice/service_miet-mattenservice/#artikel_6400111",
+      "title": "Mietmatten-Waschservice - einfarbige und melierte Miet-Matten"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/HerzWillkommen_512x340.jpg",
+    "img_title": "gestaltete Matten / Miet-Waschservice",
+    "links": [
+     {
+      "label": "gestaltete Miet-Matten",
+      "href": "/miet-mattenservice/service_miet-mattenservice/#artikel_6400111",
+      "title": "gestaltete Matten / Miet-Waschservice"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": "/media/bild/VierJahr1_512x340.jpg",
+    "img_title": "Teppichboden-Reinigung",
+    "links": [
+     {
+      "label": "Teppichboden-Reinigung",
+      "href": "/miet-mattenservice/reinigungsprodukte",
+      "title": "Teppichboden-Reinigung"
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Miet-Fußmatten",
+      "href": "/miet-mattenservice/service_miet-mattenservice",
+      "title": ""
+     }
+    ]
+   },
+   {
+    "group": "",
+    "img": null,
+    "img_title": "",
+    "links": [
+     {
+      "label": "Teppich-Reinigungsprodukte",
+      "href": "/miet-mattenservice/reinigungsprodukte",
+      "title": ""
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "label": "Schnaeppchen",
+  "href": "/schnaeppchen",
+  "groups": []
+ }
+]

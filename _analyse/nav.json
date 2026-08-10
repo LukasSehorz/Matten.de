@@ -1,0 +1,42 @@
+[
+ {
+  "label": "Artikelsuche",
+  "href": "/was-ist-neu",
+  "children": []
+ },
+ {
+  "label": "Fussmatten",
+  "href": "/fussmatten",
+  "children": []
+ },
+ {
+  "label": "Logomatten",
+  "href": "/logomatten",
+  "children": []
+ },
+ {
+  "label": "Kokosmatten",
+  "href": "/kokosmatten",
+  "children": []
+ },
+ {
+  "label": "Aluminium-Matten",
+  "href": "/aluminium_profilmatten",
+  "children": []
+ },
+ {
+  "label": "Gummi-/Kunststoffmatten",
+  "href": "/gummi_und_kunststoffmatten",
+  "children": []
+ },
+ {
+  "label": "Miet-Mattenservice",
+  "href": "/miet-mattenservice",
+  "children": []
+ },
+ {
+  "label": "Schnaeppchen",
+  "href": "/schnaeppchen",
+  "children": []
+ }
+]

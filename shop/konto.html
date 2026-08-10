@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mein Konto – Mattenfuchs</title>
+<meta name="description" content="Kundenkonto im Mattenfuchs-Shop.">
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div id="site-header"></div>
+<script>MF.mount();</script>
+
+<main id="main">
+  <div class="cat-head">
+    <div class="container">
+      <nav class="crumbs"><a href="index.html">Start</a><span>›</span>Mein Konto</nav>
+      <h1>Mein Konto</h1>
+      
+    </div>
+  </div>
+  <div class="container">
+    <div class="grid g-2" style="padding-block:40px 80px;gap:56px;align-items:start;max-width:920px">
+      <form class="summary" style="position:static">
+        <h2>Anmelden</h2>
+        <div class="field"><label for="l_mail">E-Mail</label><input id="l_mail" type="email"></div>
+        <div class="field"><label for="l_pw">Passwort</label><input id="l_pw" type="password"></div>
+        <button class="btn btn--block" type="button" onclick="MF.toast('Demo — es gibt kein Backend.')">Einloggen</button>
+        <p class="summary__note">Passwort vergessen? In der echten Version folgt hier der
+        Zurücksetzen-Link.</p>
+      </form>
+      <div class="prose" style="padding:0">
+        <h2>Noch kein Kundenkonto?</h2>
+        <p>Mit einem Kundenkonto sehen Sie frühere Bestellungen, wiederholen Nachbestellungen
+        mit denselben Maßen und hinterlegen abweichende Lieferadressen.</p>
+        <ul>
+          <li>Bestellhistorie mit allen Maßen und Farben</li>
+          <li>Nachbestellung identischer Matten mit einem Klick</li>
+          <li>Mehrere Lieferadressen für Filialen und Objekte</li>
+          <li>Angebote und Auftragsbestätigungen als PDF</li>
+        </ul>
+        <p><button class="btn btn--ghost" type="button"
+           onclick="MF.toast('Demo — Registrierung ohne Backend nicht möglich.')">Konto anlegen</button></p>
+        <div class="demo-note" style="margin-top:24px">
+          <div><b>Hinweis zur Demo</b>Diese Seite zeigt nur, wo das Kundenkonto sitzt.
+          Es gibt in dieser Vorschau kein Backend und keine Datenspeicherung.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script>MF.boot(); MF.initReveal(); MF.initFaq(document);</script>
+
+</body>
+</html>

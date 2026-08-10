@@ -1,0 +1,945 @@
+{
+ "https://matten.de/media/bild/Kitchen1-512x154.jpg": {
+  "file": "kitchen1-512x154.png",
+  "task": "6b99cf19cb0de444d869926421465996",
+  "bytes": 2564056,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/crystal-anthracite-512x340.jpg": {
+  "file": "crystal-anthracite-512x340.png",
+  "task": "a0392501ea54c51c193992d1361b009c",
+  "bytes": 2569032,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/I_love_Wunschschrift.jpg": {
+  "file": "i_love_wunschschrift.png",
+  "task": "09d528ebb8401fb5efc3585e82db8e37",
+  "bytes": 2247040,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Paketbote_512x340.jpg": {
+  "file": "paketbote_512x340.png",
+  "task": "b89cc70b73c9e00a9b34fd913686e2b2",
+  "bytes": 2442487,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Morgensonne_512x340.jpg": {
+  "file": "morgensonne_512x340.png",
+  "task": "5402499907e2d1cfab4d417b72a8e9b4",
+  "bytes": 2482930,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Kitchen2-512x154.jpg": {
+  "file": "kitchen2-512x154.png",
+  "task": "d380f12797d84b4f21566f390439da40",
+  "bytes": 2165410,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/welcome_holz_4_512x340.jpg": {
+  "file": "welcome_holz_4_512x340.png",
+  "task": "0ba8864a501ab90fa9d8d610ce3fe985",
+  "bytes": 2756241,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/welcome_holz_2_512x340.jpg": {
+  "file": "welcome_holz_2_512x340.png",
+  "task": "2f9bdf1daf207d82d25dba60c76fbed6",
+  "bytes": 2617666,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/welcome_holz_6_512x340.jpg": {
+  "file": "welcome_holz_6_512x340.png",
+  "task": "589d033c5391de9dbe2cc5c82f02b454",
+  "bytes": 2442075,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/welcome_holz_3_512x340.jpg": {
+  "file": "welcome_holz_3_512x340.png",
+  "task": "2e78e1e658544de8ac41d0aa03900eac",
+  "bytes": 2432074,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/welcome_holz_5_512x340.jpg": {
+  "file": "welcome_holz_5_512x340.png",
+  "task": "7993a0998867ab444f37c042883b708c",
+  "bytes": 2625055,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/welcome_holz_7_512x340.jpg": {
+  "file": "welcome_holz_7_512x340.png",
+  "task": "3c14bc804cafff73453535bfe231da56",
+  "bytes": 2568296,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/welcome_holz_8_512x340.jpg": {
+  "file": "welcome_holz_8_512x340.png",
+  "task": "71d72c0cbac120f3878e594e59e65f74",
+  "bytes": 2648555,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Tibet-Terrier_512x340.jpg": {
+  "file": "tibet-terrier_512x340.png",
+  "task": "39cbf4bd44550a596a0709581fcc1f8d",
+  "bytes": 2587106,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/home_holz_1-512x361.jpg": {
+  "file": "home_holz_1-512x361.png",
+  "task": "21492051b2cdfa1a3a671db44c894c71",
+  "bytes": 2525706,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Hündchen-9182-512x340.jpg": {
+  "file": "h-ndchen-9182-512x340.png",
+  "task": "82215b77e62cd20a6e78a835b15bea6f",
+  "bytes": 2604921,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/katzen_willkommen_512x340.jpg": {
+  "file": "katzen_willkommen_512x340.png",
+  "task": "d71d80a04d9d8387ba0f29d8f09ed2a9",
+  "bytes": 2519690,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Village_50x75.jpg": {
+  "file": "village_50x75.png",
+  "task": "a2f139cac2f4ff5e2cc04dbed1b7de2f",
+  "bytes": 2184649,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Outdoor%20Willkommen_512x340.jpg": {
+  "file": "outdoor-20willkommen_512x340.png",
+  "task": "876854b35bc6f1497acc5b0c817b24f7",
+  "bytes": 2621964,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Jungle_50x75.jpg": {
+  "file": "jungle_50x75.png",
+  "task": "b8884b6701612682f20b1eec87c60754",
+  "bytes": 2498950,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Ford%20Model%20T_50x75.jpg": {
+  "file": "ford-20model-20t_50x75.png",
+  "task": "510029316789b1bf1afde5e0339eae84",
+  "bytes": 2626064,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Logomatten-Kind_512x340.jpg": {
+  "file": "logomatten-kind_512x340.png",
+  "task": "6e632fddfd16a544809148df24b8097d",
+  "bytes": 2759530,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/JP-644-mink_0.JPG": {
+  "file": "jp-644-mink_0.png",
+  "task": "62103f1f0b7faa3ee14b0e0df84951ca",
+  "bytes": 2490125,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/HerzWillkommen_512x340.jpg": {
+  "file": "herzwillkommen_512x340.png",
+  "task": "d9648876ad90a71ed5ba16b2e7731538",
+  "bytes": 2652466,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Logomatten-Baelle-512x340.jpg": {
+  "file": "logomatten-baelle-512x340.png",
+  "task": "efca9578392c33f48095209223ec091d",
+  "bytes": 2363136,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Willkommen bei Fam-Wunsch_512x340.jpg": {
+  "file": "willkommen-bei-fam-wunsch_512x340.png",
+  "task": "4fab6619c16a75c27d53828cccb73934",
+  "bytes": 2254060,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_Rath_var1_50x75.jpg": {
+  "file": "i_love_muenchen_rath_var1_50x75.png",
+  "task": "a674ede36ef562e35efb0f29dcb5641a",
+  "bytes": 2369886,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_var1_50x75.jpg": {
+  "file": "i_love_muenchen_var1_50x75.png",
+  "task": "4174529f543614ac45533878c7030798",
+  "bytes": 2359476,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_Odeon_var1_50x75.jpg": {
+  "file": "i_love_muenchen_odeon_var1_50x75.png",
+  "task": "5094171fefbdd59fb13425f73d31c86c",
+  "bytes": 2342878,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_Siegestor_var1_50x75.jpg": {
+  "file": "i_love_muenchen_siegestor_var1_50x75.png",
+  "task": "7d44f6bbd8a96b660ce36fc42dc6b43c",
+  "bytes": 2616299,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_var2_50x75.jpg": {
+  "file": "i_love_muenchen_var2_50x75.png",
+  "task": "c95b4176242b3009b5a26d10cdeddddc",
+  "bytes": 2168810,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_Odeon_var3_50x75.jpg": {
+  "file": "i_love_muenchen_odeon_var3_50x75.png",
+  "task": "e92d65e5ada96e66f1f2f4fc3ca272d1",
+  "bytes": 2494342,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_var3_50x75.jpg": {
+  "file": "i_love_muenchen_var3_50x75.png",
+  "task": "afca21a4d450359118b78c2a1230e6ee",
+  "bytes": 2647750,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_Rath_var3_50x75.jpg": {
+  "file": "i_love_muenchen_rath_var3_50x75.png",
+  "task": "433b3d61dd39c6bcd381620f819441b5",
+  "bytes": 2547449,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_Siegestor_var2_50x75.jpg": {
+  "file": "i_love_muenchen_siegestor_var2_50x75.png",
+  "task": "9160f39d8f901ca1c365a589d8cb83c5",
+  "bytes": 2487309,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Muenchen_Rath_var2_50x75.jpg": {
+  "file": "i_love_muenchen_rath_var2_50x75.png",
+  "task": "d52ef40d3c8c1c088a403942a55b9d90",
+  "bytes": 2515295,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/cache/I_love_Muenchen_Rath_var3_50x75.jpg_m0_300_199.jpg": {
+  "file": "i_love_muenchen_rath_var3_50x75-jpg_m0_300_199.png",
+  "task": "feaee1c7aca5780961119c1508e64f27",
+  "bytes": 2589599,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/I_love_Ismaning_512x340.jpg": {
+  "file": "i_love_ismaning_512x340.png",
+  "task": "84d97b314186c51bc6b13e03ed6289cc",
+  "bytes": 2123536,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Bierbank_Oktoberfest1.jpg": {
+  "file": "bierbank_oktoberfest1.png",
+  "task": "c61bd1196a30db674f01fba02cf82d3b",
+  "bytes": 1819107,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Oktoberfest2.jpg": {
+  "file": "bierbank_oktoberfest2.png",
+  "task": "9c70a1150e33fec0b5af6b12dc5a75eb",
+  "bytes": 1921647,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Oktoberfest3.jpg": {
+  "file": "bierbank_oktoberfest3.png",
+  "task": "b08432f387a235b54bcdd5a98b5f5b7e",
+  "bytes": 1683932,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Oktoberfest6.jpg": {
+  "file": "bierbank_oktoberfest6.png",
+  "task": "6d712832401ddf35a380659001f7ccf4",
+  "bytes": 1934988,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Oktoberfest4.jpg": {
+  "file": "bierbank_oktoberfest4.png",
+  "task": "ed6960715ba0ecbac8b2fca08a9ae512",
+  "bytes": 1889689,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Oktoberfest5.jpg": {
+  "file": "bierbank_oktoberfest5.png",
+  "task": "8beefbfd7a369dc860092a82f6f5517c",
+  "bytes": 1656045,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Edelweiss.jpg": {
+  "file": "bierbank_edelweiss.png",
+  "task": "4584de3b79db1c5a11d271c5963cd3a5",
+  "bytes": 1921315,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Rauten.jpg": {
+  "file": "bierbank_rauten.png",
+  "task": "8d240d109c92f9ab7f8bd376f542fe76",
+  "bytes": 1648212,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Rauten-Fries.jpg": {
+  "file": "bierbank_rauten-fries.png",
+  "task": "87c8b8d86fedf8f5b381b821199bee8d",
+  "bytes": 1777709,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Bambus.jpg": {
+  "file": "bierbank_bambus.png",
+  "task": "e92591109f452b103ca46f7fdadc45f4",
+  "bytes": 1805664,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Alm.jpg": {
+  "file": "bierbank_alm.png",
+  "task": "d309f407c04a692db68845c6b979f31f",
+  "bytes": 1919215,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Almhütte.jpg": {
+  "file": "bierbank_almh-tte.png",
+  "task": "4d4dd1e3756346badf657f8c051786a1",
+  "bytes": 2039520,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Herzen.jpg": {
+  "file": "bierbank_herzen.png",
+  "task": "dd5b2e82e0eb6eb739d1a12c2b113a1c",
+  "bytes": 1984126,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_KuhKopf.jpg": {
+  "file": "bierbank_kuhkopf.png",
+  "task": "0a235a8b75adfa5ada620621cda46dbf",
+  "bytes": 1664453,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Bergwiesen.jpg": {
+  "file": "bierbank_bergwiesen.png",
+  "task": "1308b50210bdd2856a469aba4d9f777f",
+  "bytes": 1803411,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Bierkrone.jpg": {
+  "file": "bierbank_bierkrone.png",
+  "task": "3af9ea41f463b827e46aaf79c46962c3",
+  "bytes": 1722757,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Pils.jpg": {
+  "file": "bierbank_pils.png",
+  "task": "7a7e9de7bf1119e27c8be12637a110ce",
+  "bytes": 1905159,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Bier-Brezn-Rauten.jpg": {
+  "file": "bierbank_bier-brezn-rauten.png",
+  "task": "b03b5b9e1b418b44e64835b0f7bf5e07",
+  "bytes": 1709485,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Bier-Brezn-Gras.jpg": {
+  "file": "bierbank_bier-brezn-gras.png",
+  "task": "e8bded0a04f2b078d2032f7acda09b53",
+  "bytes": 1866135,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Blümchen.jpg": {
+  "file": "bierbank_bl-mchen.png",
+  "task": "9eeb2fae992f03291bf8fb34289bd5df",
+  "bytes": 1929965,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Karos_rt-ws.jpg": {
+  "file": "bierbank_karos_rt-ws.png",
+  "task": "1981898c27dd7046434735055e5d4081",
+  "bytes": 1776244,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Streifen-bunt.jpg": {
+  "file": "bierbank_streifen-bunt.png",
+  "task": "9b1caad29600da5df1b5cc24f9441608",
+  "bytes": 1654049,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_sw-rt-gd.jpg": {
+  "file": "bierbank_sw-rt-gd.png",
+  "task": "42e446c1fa51b49876c400c20fb980f5",
+  "bytes": 1753647,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Streifen-orange.jpg": {
+  "file": "bierbank_streifen-orange.png",
+  "task": "4723e2fa0ff81761a924324acbaa66c7",
+  "bytes": 1600304,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Streifen-türkis.jpg": {
+  "file": "bierbank_streifen-t-rkis.png",
+  "task": "8ba15d9c111d0a843188ee1539cd21ae",
+  "bytes": 1597914,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Streifen-grün.jpg": {
+  "file": "bierbank_streifen-gr-n.png",
+  "task": "d5438ec26d143bb3e9978d5382634202",
+  "bytes": 1702433,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Streifen-blau.jpg": {
+  "file": "bierbank_streifen-blau.png",
+  "task": "365965e49872f805e9041191f77f443b",
+  "bytes": 1685359,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Wellen-grün.jpg": {
+  "file": "bierbank_wellen-gr-n.png",
+  "task": "1db02ee86e837f8d81bd439f39f380fa",
+  "bytes": 1800733,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Wellen-rot.jpg": {
+  "file": "bierbank_wellen-rot.png",
+  "task": "9326b6899d5f7eaa52cadd9576952305",
+  "bytes": 1729375,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Wellen-blau.jpg": {
+  "file": "bierbank_wellen-blau.png",
+  "task": "38b777edd1e10a3ee2e5e33dfba26b45",
+  "bytes": 1699883,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/Bierbank_Wellen-türkis.jpg": {
+  "file": "bierbank_wellen-t-rkis.png",
+  "task": "9f12fb1ed26a4ec7b502914eda1bfe84",
+  "bytes": 1678526,
+  "family": "bierbank"
+ },
+ "https://matten.de/media/bild/JP_variant_0.jpg": {
+  "file": "jp_variant_0.png",
+  "task": "4b0fa1d73925e183cf728816b22a09b1",
+  "bytes": 2107978,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/IH_IH-711-black-blue_0.jpg": {
+  "file": "ih_ih-711-black-blue_0.png",
+  "task": "285a8966adaa3bbb5d4c7d20c769faa6",
+  "bytes": 2410985,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/IH_IH-681-black-steel_0.jpg": {
+  "file": "ih_ih-681-black-steel_0.png",
+  "task": "f1b0db20202d3ccb6a1a40fc3314e8a7",
+  "bytes": 2549707,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/Mono_default_0.JPG": {
+  "file": "mono_default_0.png",
+  "task": "c3a0f91c72ffff2700a6ba5c16e5e862",
+  "bytes": 2633581,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/IH_008.jpg": {
+  "file": "ih_008.png",
+  "task": "2107365e99483cd838072cb122a1ecb0",
+  "bytes": 2193858,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/WaterHorse_512x340.jpg": {
+  "file": "waterhorse_512x340.png",
+  "task": "8272b80bea1562baf744989b8e02c21e",
+  "bytes": 2240054,
+  "family": "outdoor"
+ },
+ "https://matten.de/media/bild/JP_default_8.jpg": {
+  "file": "jp_default_8.png",
+  "task": "3f859452dc390f952fd05ea4a5340e45",
+  "bytes": 2345186,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Log3.png": {
+  "file": "log3.png",
+  "task": "6ff3d27220320e67701778215cfb65ae",
+  "bytes": 2255914,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/kokos-natur_308x157.jpg": {
+  "file": "kokos-natur_308x157.png",
+  "task": "45ddef1856583cb2569d2052dd5598a6",
+  "bytes": 2390453,
+  "family": "kokos"
+ },
+ "https://matten.de/media/bild/kokos_rot_16.jpg": {
+  "file": "kokos_rot_16.png",
+  "task": "6001e9fa63feb28b9a91eaee57ba8be4",
+  "bytes": 2451623,
+  "family": "kokos"
+ },
+ "https://matten.de/media/bild/Raucherzone.png": {
+  "file": "raucherzone.png",
+  "task": "ee1e4f6a22a52691bf2e45ba49eba068",
+  "bytes": 2437893,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Hartfilzunterlage.JPG": {
+  "file": "hartfilzunterlage.png",
+  "task": "b94aeadac6a9e642fb58c5822d7f3b65",
+  "bytes": 2538807,
+  "family": "kokos"
+ },
+ "https://matten.de/media/bild/Gummiunterlage%20512x340.jpg": {
+  "file": "gummiunterlage-20512x340.png",
+  "task": "3c513bada310a1c464e86deb5e469308",
+  "bytes": 2332457,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Anlaufpofil-Alu-2.jpg": {
+  "file": "anlaufpofil-alu-2.png",
+  "task": "ffccbb98493eca6e84d8bd0cebec6021",
+  "bytes": 1736706,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-RCB-400x220.jpg": {
+  "file": "dip-rcb-400x220.png",
+  "task": "8501ff5895418e3cc5f97ee8e07e7619",
+  "bytes": 2408677,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-CB-400x220.jpg": {
+  "file": "dip-cb-400x220.png",
+  "task": "923efff38df19a6a2811c6f2cb8073b5",
+  "bytes": 2328595,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Z-517 PL Maximus Image B_variant_3.jpg": {
+  "file": "z-517-pl-maximus-image-b_variant_3.png",
+  "task": "e6f1c2f06a9b71725066ad48e6c2fb8b",
+  "bytes": 2477346,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/z-Dipl-R_default_0.jpg": {
+  "file": "z-dipl-r_default_0.png",
+  "task": "f94fc8c8019675c6e6414edd9bdf737c",
+  "bytes": 2714500,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-RB-400x220.jpg": {
+  "file": "dip-rb-400x220.png",
+  "task": "021150b435bcbed48c929ce007aafa94",
+  "bytes": 2445926,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-RK-400x220.jpg": {
+  "file": "dip-rk-400x220.png",
+  "task": "f80fdc6009c85c961d0c93b58eeb66b8",
+  "bytes": 2601110,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-GB-400x220.jpg": {
+  "file": "dip-gb-400x220.png",
+  "task": "d8f2f2fa4f4b697d123bb0ea82d0f272",
+  "bytes": 2364459,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-RG-400x220.jpg": {
+  "file": "dip-rg-400x220.png",
+  "task": "632586b1c90b1743b35ede6106220f86",
+  "bytes": 2610285,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-G-GB-400x220.jpg": {
+  "file": "dip-g-gb-400x220.png",
+  "task": "7d10922257c6ffd95e70ebef37ffface",
+  "bytes": 2484972,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-G5.jpg": {
+  "file": "dip-g5.png",
+  "task": "c4a2c3b5dbd4ad1429be325522b55ec0",
+  "bytes": 2322292,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-GCB-400x220.jpg": {
+  "file": "dip-gcb-400x220.png",
+  "task": "a1a4c07506937ce90c7d616af737b9a9",
+  "bytes": 2320128,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/cache/PLAZA_542_SRn.jpg_m0_300_160.jpg": {
+  "file": "plaza_542_srn-jpg_m0_300_160.png",
+  "task": "7e21d4a0720e917255c54024b90bffb1",
+  "bytes": 2255778,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/rahmen_messing-oA-200.jpg": {
+  "file": "rahmen_messing-oa-200.png",
+  "task": "b06d6939620ea03fe54ff0ad22a9b324",
+  "bytes": 2325162,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Scraper.jpg": {
+  "file": "scraper.png",
+  "task": "4416040901a85dcce4fe82558d029896",
+  "bytes": 2347658,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/ThruPlus2.jpg": {
+  "file": "thruplus2.png",
+  "task": "42305c0d10a5615c76fb66ba1f140fc7",
+  "bytes": 2000117,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/Complete-Comfort.JPG": {
+  "file": "complete-comfort.png",
+  "task": "92d874416a361f9f9d79b4f3910d183a",
+  "bytes": 2493708,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/CushionCoil2.jpg": {
+  "file": "cushioncoil2.png",
+  "task": "a998c218ba593eefa8c83f9a0e5829e5",
+  "bytes": 2084672,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/nomad_aqua_verlege1.jpg": {
+  "file": "nomad_aqua_verlege1.png",
+  "task": "fc6d866275153140ada70a59e53d169d",
+  "bytes": 2606173,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/nomad_extra_b1.jpg": {
+  "file": "nomad_extra_b1.png",
+  "task": "f5799e966b1def80ecc2e272fec92591",
+  "bytes": 2635208,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/attache-512x340.jpg": {
+  "file": "attache-512x340.png",
+  "task": "77a6343fb9ac21c90ba07de15762b426",
+  "bytes": 2365924,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/StewellGripp_2000-rot.jpg": {
+  "file": "stewellgripp_2000-rot.png",
+  "task": "18d56898132b2737c2733ab3f6dd93d0",
+  "bytes": 1847979,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/Logo8.png": {
+  "file": "logo8.png",
+  "task": "2cf452a4a96d1ccaa270ff2aac13067c",
+  "bytes": 2334338,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Bitte hier warten.png": {
+  "file": "bitte-hier-warten.png",
+  "task": "a7126bb968ab1ad82c00ac4488e3d87b",
+  "bytes": 2183246,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/cache/Logo11.png_m0_300_193.png": {
+  "file": "logo11-png_m0_300_193.png",
+  "task": "6367b2d313cac82b2ad71ea4b15adda4",
+  "bytes": 2417357,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/cache/Si-Achtung.jpg_m0_300_529.jpg": {
+  "file": "si-achtung-jpg_m0_300_529.png",
+  "task": "a685749889640443d588d919037bef3d",
+  "bytes": 2351193,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Logo12.png": {
+  "file": "logo12.png",
+  "task": "195554fac23bf8c62d9e1ecc8fa31112",
+  "bytes": 2326386,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/cache/Si-giftige Stoffe.jpg_m0_300_529.jpg": {
+  "file": "si-giftige-stoffe-jpg_m0_300_529.png",
+  "task": "ee2dff5dfe2d90313ce9043eb9bde6e0",
+  "bytes": 2467166,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/cache/Si-Stop.jpg_m0_300_529.jpg": {
+  "file": "si-stop-jpg_m0_300_529.png",
+  "task": "2a3703f5952a94d995afd5d8d9a0d864",
+  "bytes": 2498669,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/cache/Si-sw-ge-Rand.jpg_m0_300_529.jpg": {
+  "file": "si-sw-ge-rand-jpg_m0_300_529.png",
+  "task": "c87368d917bb551f90909254fa22f765",
+  "bytes": 2263229,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/IH_009.jpg": {
+  "file": "ih_009.png",
+  "task": "a4c730169ac77837bc36837602613d6c",
+  "bytes": 2366278,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/cache/schnellreiniger_5l.gif_m0_300_346.gif": {
+  "file": "schnellreiniger_5l-gif_m0_300_346.png",
+  "task": "aa89929f2452100739eeb480dac5b29a",
+  "bytes": 2683809,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/cache/schmutzbremse.gif_m0_300_346.gif": {
+  "file": "schmutzbremse-gif_m0_300_346.png",
+  "task": "b8c9f8f639a63541df2335efbda8e7eb",
+  "bytes": 2638971,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/embossed-pattern, black_0.jpg": {
+  "file": "embossed-pattern-black_0.png",
+  "task": "25a975277980cd460fceaf0d758d813e",
+  "bytes": 2482177,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/Ind-Design_512x340.jpg": {
+  "file": "ind-design_512x340.png",
+  "task": "b841922ee13b0bdbba94794aa7b86aa2",
+  "bytes": 2671345,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/IH-XL-512x340_default_0.jpg": {
+  "file": "ih-xl-512x340_default_0.png",
+  "task": "ef8317267ef1d0da3d7dfc1d5d73a91e",
+  "bytes": 2561605,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/IH_IH-000-black-brown_0.jpg": {
+  "file": "ih_ih-000-black-brown_0.png",
+  "task": "fe63d190070eb52904aac3e6f3c16252",
+  "bytes": 2311189,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/Supermat-512x340_default_0.jpg": {
+  "file": "supermat-512x340_default_0.png",
+  "task": "8efd9d5e2df3bb63ed5fad917d6654c3",
+  "bytes": 2508276,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/PC-Polycotton-600x800_default_0.JPG": {
+  "file": "pc-polycotton-600x800_default_0.png",
+  "task": "5bae152eb7ebaa41994f476271e1547b",
+  "bytes": 2189035,
+  "family": "default"
+ },
+ "https://matten.de/media/bild/Bar-Mats-512x340.jpg": {
+  "file": "bar-mats-512x340.png",
+  "task": "b66299d79df3c77b3ce29d88bce6083c",
+  "bytes": 2722441,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/JP-632-schwarz_0.JPG": {
+  "file": "jp-632-schwarz_0.png",
+  "task": "40409201159d5dff1e25fea9b2cb5302",
+  "bytes": 2305673,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/JPL_variant_1.jpg": {
+  "file": "jpl_variant_1.png",
+  "task": "b34457da8962c7d76c9b95c43a5128c4",
+  "bytes": 2499830,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Logo6.png": {
+  "file": "logo6.png",
+  "task": "e3154721568f2895d596ced63745c083",
+  "bytes": 2374186,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/BitteAbstand_variant_6.jpg": {
+  "file": "bitteabstand_variant_6.png",
+  "task": "2e40b0a781525e0af1bf674f73bc07ab",
+  "bytes": 2791135,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/DQ0004379-638-weinrot_variant_1.jpg": {
+  "file": "dq0004379-638-weinrot_variant_1.png",
+  "task": "91720edf0cd91092b3ecb9ef45e88803",
+  "bytes": 2640572,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Abstand3-800x600-630-mittelgrau_0.JPG": {
+  "file": "abstand3-800x600-630-mittelgrau_0.png",
+  "task": "38f0042fc7d4406c5baa16e667c465d1",
+  "bytes": 2685255,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/800011157-1_600x800_variant_0.jpg": {
+  "file": "800011157-1_600x800_variant_0.png",
+  "task": "0f1efa2f70ad0d152eccf8df0585a2e5",
+  "bytes": 2449743,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Abstandhalten4-800x600_default_0.jpg": {
+  "file": "abstandhalten4-800x600_default_0.png",
+  "task": "e92bc4551f2e290ad406db9643a74dc5",
+  "bytes": 2679264,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/800011166_variant_0.jpg": {
+  "file": "800011166_variant_0.png",
+  "task": "0a04ea53196988a65fecbb4a536e03ca",
+  "bytes": 2381826,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Abstand2-631-dunkelgrau_default_0.jpg": {
+  "file": "abstand2-631-dunkelgrau_default_0.png",
+  "task": "fdfd375c803104b907662b1097429256",
+  "bytes": 2395782,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Abstand3-630-mittelgrau_variant_0.JPG": {
+  "file": "abstand3-630-mittelgrau_variant_0.png",
+  "task": "79426915822c538c6a8846aaa95a2b7d",
+  "bytes": 2301460,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/800011273-Desinfektion-800x600-632-schwarz_0.JPG": {
+  "file": "800011273-desinfektion-800x600-632-schwarz_0.png",
+  "task": "4342d1ae48a1068fab00301cb1b1047f",
+  "bytes": 2156053,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Hände1-800x600_default_0.jpg": {
+  "file": "h-nde1-800x600_default_0.png",
+  "task": "d8d3c6567f7763e9a0881ed1ffe5e9d6",
+  "bytes": 2423136,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Abstand-4_variant_0.jpg": {
+  "file": "abstand-4_variant_0.png",
+  "task": "c17c77fcd2c048c25cbaf854833f3032",
+  "bytes": 2005859,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Maße%20Diplomat.jpg": {
+  "error": "Image fetch failed. Check access settings or use our File Upload API instead.",
+  "task": "6a6927a95f8e7ee97012f18e8c24d982"
+ },
+ "https://matten.de/media/bild/Hände2-800x600_default_0.jpg": {
+  "file": "h-nde2-800x600_default_0.png",
+  "task": "8ffc2c30c494cac2a7dfcca8d4bb0818",
+  "bytes": 2467835,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Hände3-800x600_default_0.jpg": {
+  "error": "download: ('Connection broken: IncompleteRead(1711488 bytes read, 856450 more expected)', IncompleteRead(1711488 bytes read, 85645"
+ },
+ "https://matten.de/media/bild/800011279-Schuhe-800x600-632-schwarz_0.JPG": {
+  "file": "800011279-schuhe-800x600-632-schwarz_0.png",
+  "task": "1bba37a553e2abec579e24e00e0d4f63",
+  "bytes": 2285386,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Ripseinlagen%20Original.JPG": {
+  "file": "ripseinlagen-20original.png",
+  "task": "bec6b1c93a55357ded17f1696b6a49e1",
+  "bytes": 2312203,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Alu-Rahmen-500N-Skizze.jpg": {
+  "file": "alu-rahmen-500n-skizze.png",
+  "task": "1c6010f7614e2a6b76cadd550636d10f",
+  "bytes": 1840114,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Dip-GK-512x340_0.jpg": {
+  "file": "dip-gk-512x340_0.png",
+  "task": "3ee9b46e9c3f88449d72385102d57fe6",
+  "bytes": 2699963,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Classic-Ripsfarben.png": {
+  "file": "classic-ripsfarben.png",
+  "task": "3c20195440f2bdd27bff4437db37c5af",
+  "bytes": 2478952,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Marschall-522-SR_SLR.JPG": {
+  "file": "marschall-522-sr_slr.png",
+  "task": "ee46f167cdc7a79803b2b3442a405a09",
+  "bytes": 3025115,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Eingangsmatte-Marschall-Profilbreiten.jpg": {
+  "file": "eingangsmatte-marschall-profilbreiten.png",
+  "task": "73d82d773523c6b0be4a6e2bb7c2758b",
+  "bytes": 2201230,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/PREM_Prem-OUTD-rot_0.jpg": {
+  "file": "prem_prem-outd-rot_0.png",
+  "task": "0b9141a714d95f0a08d9f1b541357d5f",
+  "bytes": 2546615,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/Unterkonstruktion C_default_0.JPG": {
+  "file": "unterkonstruktion-c_default_0.png",
+  "task": "de2e10ee5cee5a72fe35b0b6a7fa627a",
+  "bytes": 2344480,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/rahmen-chromnickel-512x340.jpg": {
+  "file": "rahmen-chromnickel-512x340.png",
+  "task": "f74161c1f8ea0512e247e591ef8637b9",
+  "bytes": 2393582,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/rahmen_ganz.jpg": {
+  "file": "rahmen_ganz.png",
+  "task": "585db3f245de0da382d826a6220e0258",
+  "bytes": 2169155,
+  "family": "alu"
+ },
+ "https://matten.de/media/bild/cache/018_ECO-GRIP Heavy-Hartböden_farboption.jpg_m0_300_254.jpg": {
+  "file": "018_eco-grip-heavy-hartb-den_farboption-jpg_m0_300_254.png",
+  "task": "8bf71520fc31e5788214f5889c636e7e",
+  "bytes": 2501081,
+  "family": "gummi"
+ },
+ "https://matten.de/media/bild/cache/Outdoor Willkommen_mi.jpg_m0_300_199.jpg": {
+  "file": "outdoor-willkommen_mi-jpg_m0_300_199.png",
+  "task": "00916ac60ccd82f7b2720bb5b63795ec",
+  "bytes": 2785731,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/cache/admat.jpg_m0_300_144.jpg": {
+  "file": "admat-jpg_m0_300_144.png",
+  "task": "a261419f506ea13e7b52da162e52f6d5",
+  "bytes": 2153167,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/RTA-Quadrat_default_0.jpg": {
+  "file": "rta-quadrat_default_0.png",
+  "task": "78a37161d4e4a42f9009a508f2f88e74",
+  "bytes": 2519946,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/OS-Physio-2_variant_0.jpg": {
+  "file": "os-physio-2_variant_0.png",
+  "task": "360502b1eb1c3e856865e213af1b0994",
+  "bytes": 2210441,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Y_default_8.jpg": {
+  "file": "y_default_8.png",
+  "task": "953010723d3c0b29aecddecd0f6d9845",
+  "bytes": 2610332,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/5P_default_3.jpg": {
+  "file": "5p_default_3.png",
+  "task": "f5a8b2e7cb44303739f20044b3b97c2c",
+  "bytes": 2200374,
+  "family": "logo"
+ },
+ "https://matten.de/media/bild/Monotone_140.jpg": {
+  "file": "monotone_140.png",
+  "task": "fbbe291bd69d4c9f0d119c17a1bde6c5",
+  "bytes": 2347843,
+  "family": "default"
+ }
+}

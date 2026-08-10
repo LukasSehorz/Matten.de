@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kasse – Mattenfuchs</title>
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/site.js"></script>
+<style>
+/* PayPal-Demo-Overlay */
+.pp-overlay{position:fixed;inset:0;background:rgba(5,10,64,.6);display:none;
+  align-items:center;justify-content:center;z-index:300;padding:20px}
+.pp-overlay.is-open{display:flex}
+.pp-modal{background:#fff;border-radius:8px;width:100%;max-width:420px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.35);animation:ppin .26s cubic-bezier(.2,.8,.3,1)}
+@keyframes ppin{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.pp-head{background:#003087;color:#fff;padding:18px 24px;display:flex;align-items:center;
+  justify-content:space-between}
+.pp-logo{font-family:var(--ff-display);font-size:22px;font-style:italic;font-weight:700}
+.pp-logo s{color:#00a6ff;text-decoration:none}
+.pp-body{padding:24px}
+.pp-body h3{font-size:18px;margin-bottom:4px}
+.pp-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--c-line);font-size:14.5px}
+.pp-row:last-of-type{border-bottom:0}
+.pp-total{font-family:var(--ff-display);font-weight:700;font-size:20px;color:#003087}
+.pp-mock{background:var(--c-surface-2);border-radius:4px;padding:14px 16px;margin:16px 0;font-size:14px}
+.pp-mock b{display:block;font-family:var(--ff-display)}
+.pp-spinner{width:38px;height:38px;border:3px solid #d7e3f5;border-top-color:#003087;
+  border-radius:50%;animation:ppspin .8s linear infinite;margin:22px auto}
+@keyframes ppspin{to{transform:rotate(360deg)}}
+.pp-close{background:none;border:0;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:0 4px}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div id="site-header"></div>
+<script>MF.mount();</script>
+
+<main id="main">
+  <div class="container">
+    <nav class="crumbs"><a href="index.html">Start</a><span>›</span>
+      <a href="warenkorb.html">Warenkorb</a><span>›</span>Kasse</nav>
+    <div class="steps-bar">
+      <span>1. Warenkorb</span><span class="sep">›</span><b>2. Adresse &amp; Zahlung</b>
+      <span class="sep">›</span><span>3. Bestätigung</span>
+    </div>
+    <h1>Kasse</h1>
+
+    <div class="demo-note">
+      <span data-ico="info"></span>
+      <div><b>Demo-Checkout</b>Alle Zahlarten sind beispielhaft eingebaut. Es wird nichts
+        abgebucht und keine Bestellung ausgelöst.</div>
+    </div>
+
+    <div class="cart-layout">
+      <form id="checkout" novalidate>
+        <h2 style="font-size:20px">Rechnungsanschrift</h2>
+        <div class="field--2">
+          <div class="field"><label for="anrede">Anrede</label>
+            <select id="anrede"><option>Firma</option><option>Frau</option><option>Herr</option>
+              <option>Divers / keine Angabe</option></select></div>
+          <div class="field"><label for="firma">Firma / Name</label>
+            <input id="firma" autocomplete="organization" placeholder="Mustermann GmbH"></div>
+        </div>
+        <div class="field--2">
+          <div class="field"><label for="vorname">Vorname</label>
+            <input id="vorname" autocomplete="given-name" required></div>
+          <div class="field"><label for="nachname">Nachname</label>
+            <input id="nachname" autocomplete="family-name" required></div>
+        </div>
+        <div class="field--2">
+          <div class="field"><label for="strasse">Straße und Hausnummer</label>
+            <input id="strasse" autocomplete="street-address" required></div>
+          <div class="field"><label for="zusatz">Adresszusatz</label>
+            <input id="zusatz" placeholder="optional"></div>
+        </div>
+        <div class="field--2">
+          <div class="field"><label for="plz">PLZ</label>
+            <input id="plz" inputmode="numeric" autocomplete="postal-code" required></div>
+          <div class="field"><label for="ort">Ort</label>
+            <input id="ort" autocomplete="address-level2" required></div>
+        </div>
+        <div class="field--2">
+          <div class="field"><label for="land">Land</label>
+            <select id="land"><option>Deutschland</option><option>Österreich</option>
+              <option>Schweiz</option></select></div>
+          <div class="field"><label for="tel">Telefon</label>
+            <input id="tel" type="tel" autocomplete="tel" placeholder="für Rückfragen zum Aufmaß"></div>
+        </div>
+        <div class="field"><label for="mail">E-Mail</label>
+          <input id="mail" type="email" autocomplete="email" required></div>
+
+        <h2 style="font-size:20px;margin-top:36px">Zahlungsart</h2>
+        <div class="paymethods" data-pay>
+          <label class="paymethod is-active">
+            <input type="radio" name="pay" value="paypal" checked>
+            <span style="flex:1"><b>PayPal</b><small>Zahlung über Ihr PayPal-Konto — in dieser Demo simuliert</small></span>
+            <span class="paychip" style="background:#ffc439;color:#003087">PayPal</span>
+          </label>
+          <label class="paymethod">
+            <input type="radio" name="pay" value="rechnung">
+            <span style="flex:1"><b>Kauf auf Rechnung</b><small>Für Geschäftskunden nach Prüfung</small></span>
+          </label>
+          <label class="paymethod">
+            <input type="radio" name="pay" value="vorkasse">
+            <span style="flex:1"><b>Vorkasse per Überweisung</b><small>Fertigung startet nach Zahlungseingang</small></span>
+          </label>
+          <label class="paymethod">
+            <input type="radio" name="pay" value="karte">
+            <span style="flex:1"><b>Kreditkarte</b><small>Visa, Mastercard, American Express</small></span>
+            <span class="paychip">Visa</span><span class="paychip">Mastercard</span>
+          </label>
+        </div>
+
+        <div class="field" style="margin-top:24px">
+          <label for="hinweis">Nachricht zur Bestellung</label>
+          <textarea id="hinweis" placeholder="z. B. Wunschtermin, Logo-Datei folgt, Angaben zum Aufmaß"></textarea>
+        </div>
+
+        <label class="filter-opt" style="align-items:flex-start;gap:12px;margin-top:8px">
+          <input type="checkbox" id="agb" style="margin-top:4px">
+          <span style="font-size:14px">Ich habe die <a href="agb.html">AGB</a>, die
+            <a href="widerruf.html">Widerrufsbelehrung</a> und die
+            <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und akzeptiere sie.
+            Mir ist bekannt, dass bei Sonderanfertigungen nach § 312g Abs. 2 Nr. 1 BGB kein
+            Widerrufsrecht besteht.</span>
+        </label>
+      </form>
+
+      <aside class="summary" data-summary></aside>
+    </div>
+  </div>
+</main>
+
+<!-- PayPal-Demo -->
+<div class="pp-overlay" id="ppOverlay" role="dialog" aria-modal="true" aria-label="PayPal (Demo)">
+  <div class="pp-modal">
+    <div class="pp-head">
+      <span class="pp-logo"><b>Pay</b><s>Pal</s></span>
+      <button class="pp-close" type="button" data-ppclose aria-label="Schließen">×</button>
+    </div>
+    <div class="pp-body" data-ppbody></div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="assets/js/kasse.js"></script>
+</body>
+</html>

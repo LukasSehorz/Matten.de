@@ -1,0 +1,66 @@
+{
+ "kachel-innen": {
+  "file": "kachel-innen.png",
+  "task": "24eeeb12133d8bb52a16e6a8c53b266b"
+ },
+ "hero-logomatte": {
+  "file": "hero-logomatte.png",
+  "task": "af307d032a9f035a7ba00d33896812a1"
+ },
+ "hero-eingang": {
+  "file": "hero-eingang.png",
+  "task": "9a87ec54c16d1026eac9dc4fb7081f14"
+ },
+ "hero-alu": {
+  "file": "hero-alu.png",
+  "task": "a7e788523df8ac81930fed465b34200d"
+ },
+ "kachel-aussen": {
+  "file": "kachel-aussen.png",
+  "task": "e1148da64d77b0894cbc76ed26356e4f"
+ },
+ "kachel-logo": {
+  "file": "kachel-logo.png",
+  "task": "d8bbd2973c552b10a6e8ffbe83993f95"
+ },
+ "kachel-kokos": {
+  "file": "kachel-kokos.png",
+  "task": "377fe4844ee98a5181a7613c80edb9e2"
+ },
+ "schritt-1-anfrage": {
+  "file": "schritt-1-anfrage.png",
+  "task": "1eaed7e7f5a5ab081b8334dbeec20068"
+ },
+ "schritt-2-beratung": {
+  "file": "schritt-2-beratung.png",
+  "task": "8a5f8ffb78438a4e6448feeab1aa3521"
+ },
+ "schritt-3-aufmass": {
+  "file": "schritt-3-aufmass.png",
+  "task": "4c96dfc30b2928e2339be4be43af9e24"
+ },
+ "schritt-4-produktion": {
+  "file": "schritt-4-produktion.png",
+  "task": "7dd50f896bef92ac6524285a1f26a383"
+ },
+ "schritt-5-versand": {
+  "file": "schritt-5-versand.png",
+  "task": "13a3c8b2f9da371004b7f3af90f4b3fd"
+ },
+ "cta-beratung": {
+  "file": "cta-beratung.png",
+  "task": "699b09355df32dcc90c8fab0f98b93ef"
+ },
+ "projekt-hotel": {
+  "file": "projekt-hotel.png",
+  "task": "516b3be608f234e9eec5f0e6e8999c74"
+ },
+ "projekt-praxis": {
+  "file": "projekt-praxis.png",
+  "task": "b42aea8ba098475c9c90a1d79df67b9e"
+ },
+ "projekt-industrie": {
+  "file": "projekt-industrie.png",
+  "task": "973d2e1cd87db96d9829774c9d516cb5"
+ }
+}

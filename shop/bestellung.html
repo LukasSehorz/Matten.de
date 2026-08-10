@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bestellbestätigung – Mattenfuchs</title>
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div id="site-header"></div>
+<script>MF.mount();</script>
+
+<main id="main">
+  <div class="container">
+    <div class="steps-bar">
+      <span>1. Warenkorb</span><span class="sep">›</span><span>2. Adresse &amp; Zahlung</span>
+      <span class="sep">›</span><b>3. Bestätigung</b>
+    </div>
+    <div data-confirm></div>
+  </div>
+
+  <section class="section section--grey">
+    <div class="container">
+      <div class="section-head section-head--left" style="max-width:none">
+        <p class="kicker">Weiter im Sortiment</p>
+        <h2 style="margin:0">Das könnte auch passen</h2>
+      </div>
+      <div class="grid g-4" data-more style="margin-top:28px"></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/bestellung.js"></script>
+</body>
+</html>

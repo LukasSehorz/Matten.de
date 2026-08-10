@@ -1,0 +1,22 @@
+# Rohmaterial der Analyse — nicht ins Repo (fremdes Material, mehrere hundert MB)
+_analyse/html/
+_analyse/pages.json
+_analyse/images.json
+_analyse/products_raw.json
+_analyse/price_matrix.json
+_analyse/sitemap.xml
+_analyse/crawl_index.json
+_analyse/urls.txt
+_assets_original/
+_screenshots/
+
+# Betriebssystem / Editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
