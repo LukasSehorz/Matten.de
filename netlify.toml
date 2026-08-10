@@ -1,0 +1,27 @@
+# Die Seite liegt im Unterordner shop/ — Netlify muss diesen ausliefern.
+[build]
+  publish = "shop"
+  command = ""
+
+# Statische Seite ohne Build-Schritt.
+[build.environment]
+  NODE_VERSION = "20"
+
+# Schriften und Bilder aendern sich nicht mehr — lange cachen.
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# HTML immer frisch pruefen, damit Aenderungen sofort sichtbar sind.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
