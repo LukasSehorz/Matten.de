@@ -398,7 +398,9 @@
           '<span style="margin-left:auto;font-size:13px;opacity:.75">Zahlarten in dieser Demo nur beispielhaft</span>' +
         "</div>" +
         '<div class="footer__bottom">' +
-          "<div>© " + new Date().getFullYear() + " " + esc(f.name) + " · " + esc(f.hrb) + " · USt-IdNr. " + esc(f.ustid) + "</div>" +
+          "<div>© " + new Date().getFullYear() + " " + esc(f.name) + " · " + esc(f.hrb) + " · USt-IdNr. " + esc(f.ustid) +
+            '<div class="footer__ai">Teile der Inhalte dieser Website wurden mit Unterstützung von KI erstellt.</div>' +
+          "</div>" +
           '<div class="footer__legal">' +
             '<a href="widerruf.html">Widerruf</a><a href="datenschutz.html">Datenschutz</a>' +
             '<a href="agb.html">AGB</a><a href="impressum.html">Impressum</a><a href="versand.html">Versand</a>' +
