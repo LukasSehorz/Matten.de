@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kasse – Mattenfuchs</title>
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div id="site-header"></div>
+<script>MF.mount();</script>
+
+<main id="main">
+  <div class="container">
+    <nav class="crumbs"><a href="index.html">Start</a><span>›</span>
+      <a href="warenkorb.html">Warenkorb</a><span>›</span>Kasse</nav>
+    <div class="steps-bar">
+      <span>1. Warenkorb</span><span class="sep">›</span><b>2. Adresse &amp; Zahlung</b>
+      <span class="sep">›</span><span>3. Bestätigung</span>
+    </div>
+    <h1>Kasse</h1>
+
+    <div class="demo-note">
+      <span data-ico="info"></span>
+      <div><b>Echte Bestellstrecke des Altsystems</b>Adresse, Versandart und Zahlungsart werden
+        wirklich in der Sitzung von matten.de gespeichert und dort geprüft. Der letzte,
+        verbindliche Klick sitzt bewusst nicht auf dieser Seite — er läuft über die abgesicherte
+        Bestellseite der Demo. PayPal und Kreditkarte sind serverseitig gesperrt, weil sie zum
+        Zahlungsdienstleister Worldline/Ogone führen würden.</div>
+    </div>
+
+    <div class="cart-layout">
+      <div>
+        <form id="checkout" novalidate>
+          <h2 style="font-size:20px">Lieferadresse</h2>
+          <p style="font-size:14px;color:var(--c-ink-muted);margin:-6px 0 18px">
+            Die Felder unten sind exakt die des Adressformulars von matten.de — Namen,
+            Reihenfolge und Pflichtangaben kommen von dort.</p>
+          <div data-adressform>
+            <div class="bridge-load">Das Adressformular wird bei matten.de gelesen …</div>
+          </div>
+
+          <h2 style="font-size:20px;margin-top:36px">Versand &amp; Zahlung</h2>
+          <div data-optionen></div>
+
+          <label class="filter-opt" style="align-items:flex-start;gap:12px;margin-top:18px">
+            <input type="checkbox" id="agb" style="margin-top:4px">
+            <span style="font-size:14px">Ich habe die <a href="agb.html">AGB</a>, die
+              <a href="widerruf.html">Widerrufsbelehrung</a> und die
+              <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und akzeptiere sie.
+              Mir ist bekannt, dass bei Sonderanfertigungen nach § 312g Abs. 2 Nr. 1 BGB kein
+              Widerrufsrecht besteht.</span>
+          </label>
+
+          <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn btn--lg" type="button" data-save>Daten an matten.de übergeben</button>
+            <a class="btn btn--lg btn--ghost" href="warenkorb.html">Zurück zum Warenkorb</a>
+          </div>
+          <div data-saveresult></div>
+        </form>
+
+        <section id="pruefung" data-vorschau style="margin-top:44px"></section>
+      </div>
+
+      <aside class="summary" data-summary>
+        <div class="bridge-load">Warenkorb wird gelesen …</div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/kasse.js"></script>
+</body>
+</html>

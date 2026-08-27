@@ -1,0 +1,32 @@
+# Rohmaterial der Analyse — nicht ins Repo (fremdes Material, mehrere hundert MB)
+_analyse/html/
+_analyse/pages.json
+_analyse/images.json
+_analyse/products_raw.json
+_analyse/price_matrix.json
+_analyse/sitemap.xml
+_analyse/crawl_index.json
+_analyse/urls.txt
+_assets_original/
+_screenshots/
+
+# Beim Netlify-Build erzeugt (bridge-demo/build-katalog.mjs).
+# Gehoert nicht ins Repo: dist/ ist eine Kopie von bridge-demo/public/ plus
+# dem Katalog, und katalog-daten.mjs sind rund 3,6 MB aus matten.de gelesene
+# Daten, die bei jedem Deployment ohnehin neu entstehen.
+dist/
+netlify/katalog-daten.mjs
+
+# Arbeitsverzeichnis der Netlify-CLI
+.netlify/
+
+# Betriebssystem / Editor
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc

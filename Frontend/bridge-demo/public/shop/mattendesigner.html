@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mattendesigner – Mattenfuchs</title>
+<meta name="description" content="Mattendesigner: Maße, Menge und Ausführung eingeben und sofort den Anfragepreis für Ihre Wunschmatte sehen — mit nachlesbarem Rechenweg.">
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div id="site-header"></div>
+<script>MF.mount();</script>
+
+<main id="main">
+  <div class="cat-head">
+    <div class="container">
+      <nav class="crumbs"><a href="index.html">Start</a><span>›</span>Mattendesigner</nav>
+      <h1>Mattendesigner</h1>
+      <p>Maße, Menge und Ausführung eingeben — der Preis für Ihre Wunschmatte steht sofort da,
+        samt Rechenweg.</p>
+    </div>
+  </div>
+
+  <!-- ============ Rechner ============ -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="calc">
+
+        <form class="calc__form" id="calcForm" novalidate>
+          <h3>Ihre Matte</h3>
+
+          <div class="calc__grid">
+            <div class="field">
+              <label for="breite">Breite in cm</label>
+              <input id="breite" type="number" inputmode="numeric" value="50" min="30" step="1">
+              <span class="calc__err" data-err="breite"></span>
+            </div>
+            <div class="field">
+              <label for="laenge">Länge in cm</label>
+              <input id="laenge" type="number" inputmode="numeric" value="200" min="30" step="1">
+              <span class="calc__err" data-err="laenge"></span>
+            </div>
+          </div>
+
+          <div class="calc__grid">
+            <div class="field">
+              <label for="menge">Menge</label>
+              <input id="menge" type="number" inputmode="numeric" value="1" min="1" step="1">
+              <span class="calc__err" data-err="menge"></span>
+            </div>
+            <div class="field">
+              <label for="colortype">Ausführung</label>
+              <select id="colortype">
+                <option value="1" selected>Mehrfarbig</option>
+                <option value="2">Einfarbig</option>
+                <option value="3">Ped-Print</option>
+              </select>
+            </div>
+          </div>
+
+          <p style="font-size:13.5px;color:var(--c-ink-muted);margin:2px 0 14px" data-massinfo></p>
+
+          <div style="border-top:1px solid var(--c-line);padding-top:12px">
+            <label class="calc__check">
+              <input type="checkbox" id="formOhne">
+              <span><b>Sonderform ohne Rand</b><br>
+                <span style="color:var(--c-ink-muted);font-size:13.5px">z. B. Rundung oder
+                schiefwinkliger Zuschnitt, frei verlegt — 30 % Aufschlag</span></span>
+            </label>
+            <label class="calc__check">
+              <input type="checkbox" id="formMit">
+              <span><b>Sonderform mit Rand</b><br>
+                <span style="color:var(--c-ink-muted);font-size:13.5px">Sonderform mit umlaufendem
+                Gummirand — 50 % Aufschlag</span></span>
+            </label>
+            <label class="calc__check">
+              <input type="checkbox" id="sonderfarbe">
+              <span><b>Sonderfarbe</b><br>
+                <span style="color:var(--c-ink-muted);font-size:13.5px">Farbe außerhalb der
+                Standardpalette — fester Betrag, einmal je Auftrag</span></span>
+            </label>
+          </div>
+        </form>
+
+        <div class="calc__out">
+          <div data-ergebnis></div>
+          <div class="calc__body">
+            <p class="calc__meta" data-meta></p>
+            <div class="calc__note">
+              <b>Das ist ein Anfragepreis.</b>
+              Er stammt aus unserer Kalkulationstabelle für Sonderanfertigungen — <b>das
+              Altsystem matten.de kennt diese Formel nicht</b> und führt für Ihre Maße keinen
+              Artikel. Verbindlich wird der Preis erst mit unserem schriftlichen Angebot.
+              Netto, ohne Umsatzsteuer und ohne Versand.
+            </div>
+
+            <div data-anfrage></div>
+
+            <details>
+              <summary>Rechenweg anzeigen <span style="font-weight:400;color:var(--c-ink-muted)"
+                data-rechenwegKurz></span></summary>
+              <table class="steps-tbl"><tbody data-schritte></tbody></table>
+              <pre class="formel" data-formel></pre>
+              <p class="bridge-source">Jede Zeile trägt die Zelle aus der Arbeitsmappe
+                <code>PREISE-Brian-26-10_22-11.xlsx</code>, aus der sie stammt. Die Umsetzung
+                liegt in <code>public/preisformel.js</code> und ist gegen 61 Testfälle geprüft
+                (<code>node pruefe-preisformel.mjs</code>).</p>
+            </details>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Inhalt ============ -->
+  <div class="container">
+    <div class="prose">
+      <h2>Was Sie im Mattendesigner festlegen</h2>
+      <ul>
+        <li><strong>Größe:</strong> Format der Matte — Standardmaß oder eigenes Maß für Ihren Eingang.</li>
+        <li><strong>Grundfarbe:</strong> die Farbe des Mattenfelds, auf dem Ihr Motiv steht.</li>
+        <li><strong>Motiv:</strong> Ihr Logo, Signet oder Piktogramm.</li>
+        <li><strong>Schriftzug:</strong> Firmenname, Willkommensgruß oder ein kurzer Hinweistext.</li>
+      </ul>
+      <p>Welche Formate und Farben je Qualität möglich sind, finden Sie unter
+      <a href="technik.html">Technische Daten</a> und <a href="farben.html">Farbpaletten</a>.</p>
+
+      <h2>In vier Schritten zum Entwurf</h2>
+      <div class="grid g-4">
+        <div class="step reveal">
+          <img src="assets/img/szenen/schritt-1-anfrage.webp" alt="">
+          <div class="step__no">1.</div>
+          <h3>Format wählen</h3>
+          <p>Größe und Ausrichtung der Matte festlegen – orientiert an der Breite Ihrer Tür oder
+          Ihres Eingangsbereichs.</p>
+        </div>
+        <div class="step reveal">
+          <img src="assets/img/szenen/schritt-2-beratung.webp" alt="">
+          <div class="step__no">2.</div>
+          <h3>Grundfarbe setzen</h3>
+          <p>Die Farbe des Mattenfelds bestimmen. Dunkle Töne verbergen Schmutz, helle lassen
+          Motive stärker hervortreten.</p>
+        </div>
+        <div class="step reveal">
+          <img src="assets/img/szenen/schritt-3-aufmass.webp" alt="">
+          <div class="step__no">3.</div>
+          <h3>Motiv und Text ergänzen</h3>
+          <p>Logo hochladen, Schriftzug eingeben und beides auf der Fläche positionieren.</p>
+        </div>
+        <div class="step reveal">
+          <img src="assets/img/szenen/schritt-4-produktion.webp" alt="">
+          <div class="step__no">4.</div>
+          <h3>Entwurf übergeben</h3>
+          <p>Den fertigen Entwurf an uns senden. Wir prüfen die Daten, klären offene Punkte und
+          erstellen Ihr Angebot.</p>
+        </div>
+      </div>
+
+      <div class="demo-note">
+        <div><b>Bitte Vektordateien einreichen</b>
+        Für ein sauberes Druckbild bevorzugen wir Vektordateien Ihres Logos (z. B. AI, EPS, PDF
+        oder SVG). Vektoren lassen sich verlustfrei auf Mattengröße skalieren. Pixeldateien wie
+        JPG oder PNG sind nur dann geeignet, wenn sie in ausreichend hoher Auflösung für das
+        Endformat vorliegen.</div>
+      </div>
+
+      <h2>Hinweise zur Gestaltung</h2>
+      <ul>
+        <li><strong>Klare Formen wirken am besten.</strong> Ein Textilflor kann feine Haarlinien
+        und sehr kleine Schrift nicht beliebig fein auflösen.</li>
+        <li><strong>Kontrast einplanen.</strong> Motivfarbe und Grundfarbe sollten sich deutlich
+        unterscheiden, damit das Logo aus dem Gehbereich lesbar bleibt.</li>
+        <li><strong>Randabstand beachten.</strong> Halten Sie Text und Motiv vom umlaufenden Rand
+        fern, damit nichts angeschnitten wirkt.</li>
+        <li><strong>Farben sind Annäherungen.</strong> Die Bildschirmdarstellung gibt die Wirkung
+        wieder, verbindlich sind unsere Originalfarbmuster.</li>
+      </ul>
+
+      <h2>Häufige Fragen</h2>
+      <div class="faq">
+        <div class="faq__item">
+          <button class="faq__q" type="button">Warum steht der Preis nicht schon im Warenkorb?</button>
+          <div class="faq__a"><p>Weil das Altsystem matten.de für frei konfigurierte Maße keinen
+          Artikel führt. Es rechnet nur mit Preisen, die an einem hinterlegten Artikel hängen.
+          Der Preis oben stammt aus unserer eigenen Kalkulation und ist deshalb ein
+          Anfragepreis — verbindlich wird er mit unserem Angebot.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__q" type="button">Ist der Entwurf schon eine Bestellung?</button>
+          <div class="faq__a"><p>Nein. Der Mattendesigner erzeugt einen Gestaltungsvorschlag.
+          Wir prüfen Ihre Daten und stimmen Format, Qualität und Farben mit Ihnen ab, bevor
+          etwas produziert wird.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__q" type="button">Welche Dateiformate soll ich liefern?</button>
+          <div class="faq__a"><p>Bevorzugt Vektordaten (AI, EPS, PDF, SVG). Liegt Ihr Logo nur als
+          Pixelbild vor, senden Sie es bitte in der höchsten verfügbaren Auflösung – wir prüfen,
+          ob es für Ihr Format ausreicht.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__q" type="button">Ich habe keine druckfähige Datei – was nun?</button>
+          <div class="faq__a"><p>Senden Sie uns, was vorhanden ist, über das
+          <a href="kontakt.html">Kontaktformular</a>. Wir sagen Ihnen, ob die Vorlage nutzbar ist
+          oder aufbereitet werden muss.</p></div>
+        </div>
+      </div>
+
+      <h2>Weiter im Shop</h2>
+      <ul>
+        <li><a href="kategorie.html?cat=logomatten">Logomatten im Sortiment</a></li>
+        <li><a href="technik.html">Technische Daten der Mattenqualitäten</a></li>
+        <li><a href="farben.html">Farbpaletten ansehen</a></li>
+        <li><a href="kontakt.html">Entwurf besprechen</a></li>
+      </ul>
+      <p><a class="btn btn--ghost" href="kontakt.html">Entwurf besprechen</a></p>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script>MF.boot(); MF.initReveal(); MF.initFaq(document);</script>
+<script type="module" src="assets/js/mattendesigner.js"></script>
+</body>
+</html>

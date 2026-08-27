@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Brücken-Test: Bierbankmatte Pils — Warenkorb-POST an matten.de</title>
+<!--
+  BRÜCKEN-TEST-SEITE (self-contained, funktioniert per Doppelklick über file://)
+
+  Zweck: Prüfen, ob das neue Mattenfuchs-Frontend Artikel in das alte
+  Backend des Live-Shops matten.de legen kann.
+
+  Referenzprodukt: https://matten.de/Logomatten/Bierbankmatten/6303041
+  ("Bierbankmatte: Pils", interne Artikel-ID 278, 47,60 € brutto)
+
+  Produktbild: https://matten.de/media/bild/Bierbank_Pils.jpg
+  (verifiziert: exakt dieses Bild steht auf der Live-Produktseite in der
+  Produktgalerie direkt über dem Formular #artikelform278, alt-Text
+  "Bierbankmatte, Bierbankauflage, Pils"; onerror-Fallback vorhanden)
+
+  WICHTIG: Kein fetch()/XHR auf matten.de — der Preis-JSON-Endpunkt sendet
+  keine CORS-Header. Der Preis (47,60 €) ist deshalb statisch hinterlegt;
+  die Summe wird rein clientseitig gerechnet. Nur der native Formular-POST
+  geht an https://matten.de/warenkorb (von CORS nicht betroffen).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&amp;family=Barlow:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #050a40;
+    --navy-2: #000080;
+    --blue: #0072b8;
+    --cyan: #00a8e0;
+    --red: #d0021b;
+    --ink: #15181d;
+    --muted: #5c636e;
+    --lines: #dfe3e8;
+    --surface-2: #f4f6f8;
+    --font-head: "Archivo", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Barlow", "Segoe UI", system-ui, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  .container {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Test-Banner ---------- */
+  .test-banner {
+    background: #ffb100;
+    background: linear-gradient(90deg, #ffb100, #ff8a00);
+    color: #241500;
+    padding: 12px 24px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    border-bottom: 2px solid #b36200;
+  }
+  .test-banner strong {
+    font-family: var(--font-head);
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- Header ---------- */
+  .site-header {
+    border-bottom: 1px solid var(--lines);
+    background: #fff;
+  }
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .brand {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--navy);
+    letter-spacing: 0.01em;
+  }
+  .brand .fx { color: var(--red); }
+  .header-note {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* ---------- Breadcrumb ---------- */
+  .breadcrumb {
+    padding: 14px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .breadcrumb span { color: var(--blue); }
+
+  /* ---------- Produkt-Layout ---------- */
+  .product {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 40px;
+    padding: 24px 0 48px;
+    align-items: start;
+  }
+
+  .media-card {
+    background: var(--surface-2);
+    border: 1px solid var(--lines);
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .media-card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+  }
+
+  /* ---------- Kaufbox ---------- */
+  .buybox h1 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.2;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .artnr {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  .price-block {
+    background: var(--surface-2);
+    border: 1px solid var(--lines);
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+  }
+  .price-main {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+  .price-meta {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .price-sum {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--lines);
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .price-sum output {
+    font-family: var(--font-head);
+    font-weight: 600;
+    color: var(--blue);
+  }
+
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .field .hint {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  .form-control {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--lines);
+    border-radius: 3px;
+    padding: 10px 12px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .form-control:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(0, 168, 224, 0.18);
+  }
+
+  /* Menge */
+  .qty-row {
+    display: inline-flex;
+    align-items: stretch;
+    border: 1px solid var(--lines);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .qty-btn {
+    width: 44px;
+    border: none;
+    background: var(--surface-2);
+    color: var(--navy);
+    font-family: var(--font-head);
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .qty-btn:hover { background: var(--lines); }
+  .qty-btn:active { background: var(--cyan); color: #fff; }
+  .qty-row .anzahlselect {
+    width: 64px;
+    border: none;
+    border-left: 1px solid var(--lines);
+    border-right: 1px solid var(--lines);
+    border-radius: 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .qty-row .anzahlselect:focus { box-shadow: none; }
+
+  /* CTA */
+  .cta {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    background: var(--red);
+    color: #fff;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    padding: 15px 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(208, 2, 27, 0.28);
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta:hover { background: #b00217; box-shadow: 0 3px 10px rgba(208, 2, 27, 0.35); }
+  .cta:active { background: #92010f; }
+  .cta-note {
+    margin-top: 8px;
+    font-size: 12.5px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* ---------- Info-Box ---------- */
+  .check-box {
+    margin-top: 28px;
+    border: 1px solid var(--lines);
+    border-left: 4px solid var(--cyan);
+    border-radius: 4px;
+    background: var(--surface-2);
+    padding: 18px 20px;
+  }
+  .check-box h2 {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .check-box ol {
+    margin-left: 20px;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  .check-box li { margin-bottom: 6px; }
+  .check-box li:last-child { margin-bottom: 0; }
+
+  /* ---------- Footer ---------- */
+  .site-footer {
+    border-top: 1px solid var(--lines);
+    background: var(--surface-2);
+    padding: 18px 0;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 720px) {
+    .product {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding-bottom: 32px;
+    }
+    .buybox h1 { font-size: 24px; }
+    .price-main { font-size: 26px; }
+    .site-header .container { flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="test-banner" role="alert">
+    <strong>BRÜCKEN-TEST</strong> — Diese Seite sendet echte Daten an den Live-Shop matten.de
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">matten<span class="fx">fuchs</span> <small style="font-family: var(--font-body); font-weight: 400; font-size: 13px; color: var(--muted);">Design-Prototyp</small></div>
+      <div class="header-note">Test: neues Frontend &rarr; altes Backend (Warenkorb-POST)</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Pfadnavigation">
+      Logomatten &rsaquo; Bierbankmatten &rsaquo; <span>Bierbankmatte: Pils</span>
+    </nav>
+
+    <div class="product">
+
+      <figure class="media-card">
+        <!-- Produktbild gehotlinkt vom Live-Shop (siehe HTML-Kommentar im <head>) -->
+        <img src="https://matten.de/media/bild/Bierbank_Pils.jpg"
+             alt="Bierbankmatte, Bierbankauflage, Pils"
+             width="512" height="340" loading="eager"
+             onerror="this.style.display='none'; document.getElementById('imgfallback').style.display='flex';">
+        <div id="imgfallback" style="display: none; align-items: center; justify-content: center; width: 100%; min-height: 220px; background: var(--lines); border-radius: 2px; color: var(--muted); font-size: 14px;">Bild offline nicht verf&uuml;gbar</div>
+      </figure>
+
+      <section class="buybox" aria-labelledby="produktname">
+        <h1 id="produktname">Bierbankmatte: Pils</h1>
+        <p class="artnr">Artikel-Nr. 6303041 &middot; interne Artikel-ID 278</p>
+
+        <div class="price-block">
+          <p class="price-main">47,60&nbsp;&euro;</p>
+          <p class="price-meta">inkl. 19&nbsp;% USt. &middot; zzgl. Versand (DE): 11,90&nbsp;&euro;</p>
+          <p class="price-sum">Summe (<span id="sumqty">1</span> &times; 47,60&nbsp;&euro;): <output id="sumprice" for="anzahl" aria-live="polite">47,60&nbsp;&euro;</output></p>
+        </div>
+
+        <!--
+          Formular exakt kompatibel zum Live-Shop-Formular #artikelform278.
+          action ist absolut, damit der POST von file:// bzw. fremder Origin
+          auf dem Live-Shop landet. Feldnamen und Werte 1:1 übernommen.
+        -->
+        <form id="artikelform278" class="artikel_buy_form" method="post" action="https://matten.de/warenkorb">
+
+          <div class="field">
+            <label for="bedruckung">Individuelle Bedruckung</label>
+            <select class="form-control artikelselect" id="bedruckung" name="attribute[Individuelle Bedruckung]">
+              <option value="nein" selected="selected">Individuelle Bedruckung nein</option>
+              <option value='ja, Vorlage-Datei senden an: "info@matten.de"'>Individuelle Bedruckung ja, Vorlage-Datei senden an: &quot;info@matten.de&quot;</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="kommentar">Kommentar zur Bestellung</label>
+            <input class="form-control" type="text" id="kommentar" name="kommentar" size="75" value="TEST Lukas - bitte ignorieren">
+            <p class="hint">Hinweis: Das alte Backend &uuml;bernimmt diesen Kommentar beim In-den-Warenkorb-Legen voraussichtlich nicht &mdash; er l&auml;sst sich erst auf der Warenkorbseite setzen. Bitte im Admin-Backend gegenpr&uuml;fen, ob er dort dennoch ankommt.</p>
+          </div>
+
+          <div class="field">
+            <label for="anzahl">Anzahl</label>
+            <div class="qty-row">
+              <button type="button" class="qty-btn" id="qtyminus" aria-label="Anzahl verringern">&minus;</button>
+              <input class="anzahlselect form-control input-md" size="2" id="anzahl" name="anzahl" type="text" inputmode="numeric" value="1" aria-describedby="sumprice">
+              <button type="button" class="qty-btn" id="qtyplus" aria-label="Anzahl erh&ouml;hen">+</button>
+            </div>
+          </div>
+
+          <input type="hidden" name="price_updates" value="/logomatten/bierbankmatten/6303041?getpricejson=1">
+          <input type="hidden" name="price_incomplete_prefix" value="ab">
+          <input type="hidden" name="artikel" value="278">
+
+          <input type="submit" class="cta" id="addtocart" name="addtocart" value="In den Warenkorb">
+          <p class="cta-note">Der Klick sendet einen echten POST an https://matten.de/warenkorb</p>
+        </form>
+
+        <aside class="check-box" aria-labelledby="checkhl">
+          <h2 id="checkhl">So pr&uuml;fst du den Test</h2>
+          <ol>
+            <li>Klick auf &bdquo;In den Warenkorb&ldquo;.</li>
+            <li>Du landest auf matten.de/warenkorb und siehst den Artikel.</li>
+            <li>Pr&uuml;fe im alten Backend, ob die Warenkorb-Session/Daten angekommen sind.</li>
+          </ol>
+        </aside>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Interne Test-Seite &middot; Mattenfuchs-Design-Prototyp &middot; kein &ouml;ffentliches Angebot
+    </div>
+  </footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // Statischer Bruttopreis (47,60 €). KEIN fetch/XHR auf matten.de —
+  // der Preis-JSON-Endpunkt sendet keine CORS-Header.
+  var UNIT_PRICE = 47.60;
+
+  var qtyInput = document.getElementById("anzahl");
+  var minusBtn = document.getElementById("qtyminus");
+  var plusBtn  = document.getElementById("qtyplus");
+  var sumQty   = document.getElementById("sumqty");
+  var sumOut   = document.getElementById("sumprice");
+
+  function readQty() {
+    var n = parseInt(String(qtyInput.value).replace(/[^0-9]/g, ""), 10);
+    if (isNaN(n) || n < 1) { n = 1; }
+    if (n > 999) { n = 999; }
+    return n;
+  }
+
+  function formatEuro(value) {
+    // deutsches Format: 1.234,56 €
+    return value.toFixed(2)
+      .replace(".", ",")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " €";
+  }
+
+  // Nur Summe/Anzeige aktualisieren — Feldwert NICHT überschreiben,
+  // damit Tippen (inkl. zwischenzeitlich leerem Feld) nicht gestört wird.
+  function updateSum() {
+    var n = readQty();
+    sumQty.textContent = String(n);
+    sumOut.textContent = formatEuro(n * UNIT_PRICE);
+  }
+
+  // Feldwert normalisieren + Summe aktualisieren (nur bei blur und Buttons).
+  function normalize() {
+    qtyInput.value = String(readQty());
+    updateSum();
+  }
+
+  minusBtn.addEventListener("click", function () {
+    qtyInput.value = String(Math.max(1, readQty() - 1));
+    normalize();
+  });
+
+  plusBtn.addEventListener("click", function () {
+    qtyInput.value = String(readQty() + 1);
+    normalize();
+  });
+
+  qtyInput.addEventListener("input", updateSum);
+  qtyInput.addEventListener("blur", normalize);
+
+  normalize();
+})();
+</script>
+
+</body>
+</html>

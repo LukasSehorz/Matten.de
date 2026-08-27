@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sortiment – Mattenfuchs</title>
+<meta name="description" content="Alle Matten im Mattenfuchs-Shop: Schmutzfangmatten, Logomatten, Kokosmatten, Aluminium-Profilmatten, Gummi- und Kunststoffmatten.">
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div id="site-header"></div>
+<script>MF.mount();</script>
+
+<main id="main">
+  <div class="cat-head">
+    <div class="container">
+      <nav class="crumbs" aria-label="Pfad" data-crumbs></nav>
+      <h1 data-cat-title>Sortiment</h1>
+      <p data-cat-teaser></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="listing">
+      <aside class="filters" data-filters aria-label="Filter"></aside>
+      <div>
+        <div class="listing__bar">
+          <div class="listing__count" data-count></div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn btn--ghost btn--sm" type="button" data-filter-toggle
+                    style="display:none">Filter</button>
+            <label class="sr-only" for="sort">Sortierung</label>
+            <select class="sortsel" id="sort">
+              <option value="rel">Empfehlung</option>
+              <option value="price-asc">Preis aufsteigend</option>
+              <option value="price-desc">Preis absteigend</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </div>
+        </div>
+        <div class="listing__grid" data-grid></div>
+        <div data-more style="text-align:center;margin-top:36px"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script src="assets/js/kategorie.js"></script>
+</body>
+</html>

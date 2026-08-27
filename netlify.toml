@@ -1,22 +1,119 @@
-# Die Seite liegt im Unterordner shop/ — Netlify muss diesen ausliefern.
+# =============================================================================
+#  Mattenfuchs-Bruecke auf Netlify
+# =============================================================================
+#
+#  Diese Datei liegt in der Repository-Wurzel -- dort sucht Netlify sie. Der
+#  gesamte Inhalt der Seite liegt aber eine Ebene tiefer unter Frontend/.
+#  Genau dafuer ist "base" da: Netlify wechselt vor dem Build dorthin, und
+#  command, publish und functions sind ab da relativ zu Frontend/.
+#
+#  Was beim Build passiert (Einzelheiten in bridge-demo/DEPLOY.md):
+#
+#    1. build-katalog.mjs kopiert bridge-demo/public/ nach dist/
+#       -> 19 Shop-Seiten, index.html, kasse.html, rechner.html,
+#          preisformel.js, Schriften, CSS, Bilder
+#    2. dasselbe Skript liest matten.de einmal komplett (rund 390 Anfragen,
+#       etwa drei Minuten) und schreibt
+#          dist/shop/assets/js/catalog.js          fuer den Browser
+#          netlify/functions/katalog-daten.mjs     fuer die Function
+#    3. Scheitert das, endet der Build mit Exit-Code 1 -- lieber kein
+#       Deployment als eines mit leerem Katalog.
+#
+#  Zur Laufzeit ist nur noch der Katalog vorgebaut. Warenkorb, Preisabfrage,
+#  Kasse, Konto und Bildproxy sprechen live mit matten.de.
+# =============================================================================
+
 [build]
-  publish = "shop"
-  command = ""
+  base = "Frontend"
+  command = "node bridge-demo/build-katalog.mjs"
+  publish = "dist"
+  functions = "netlify/functions"
 
-# Statische Seite ohne Build-Schritt.
 [build.environment]
-  NODE_VERSION = "20"
+  # Der Kern benutzt fs.cp und moderne Node-Builtins. 22 ist die aktuelle
+  # LTS-Fassung auf Netlify und deckt das ab.
+  NODE_VERSION = "22"
 
-# Schriften und Bilder aendern sich nicht mehr — lange cachen.
+# -----------------------------------------------------------------------------
+#  Weiterleitungen
+# -----------------------------------------------------------------------------
+
+# Alle API-Aufrufe gehen an die eine Function. Sie unterscheidet die Endpunkte
+# selbst -- so steht die Zuordnung an einer Stelle (netlify/functions/api.mjs)
+# und nicht zusaetzlich hier in einer Liste, die auseinanderlaufen koennte.
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+# Wer die nackte Adresse aufruft, soll im Shop landen und nicht auf der
+# Entwickler-Demoseite. Darum die Startseite direkt auf /shop/.
+#
+# force = true ist hier zwingend: im Publish-Verzeichnis liegt eine
+# index.html (die Entwickler-Demoseite), und eine vorhandene Datei gewinnt
+# bei Netlify gegen eine Weiterleitung. Ohne force lieferte "/" also
+# stillschweigend weiter die Demoseite aus -- unter "netlify dev"
+# nachgemessen: HTTP 200 statt 302.
+[[redirects]]
+  from = "/"
+  to = "/shop/"
+  status = 302
+  force = true
+
+# Die Bruecken-Demoseiten des Entwicklers bleiben erreichbar, nur eben nicht
+# als Startseite: /demo/ zeigt auf die alte index.html.
+[[redirects]]
+  from = "/demo"
+  to = "/index.html"
+  status = 302
+
+# -----------------------------------------------------------------------------
+#  Kopfzeilen
+# -----------------------------------------------------------------------------
+
+# Schriften aendern sich nie -- ein Jahr, unveraenderlich.
 [[headers]]
-  for = "/assets/fonts/*"
+  for = "/shop/assets/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
 
 [[headers]]
-  for = "/assets/img/*"
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+# Layoutbilder und Stylesheet: einen Monat.
+[[headers]]
+  for = "/shop/assets/img/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/shop/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+    X-Content-Type-Options = "nosniff"
+
+# Der Katalog wird bei jedem Deployment neu erzeugt und ist rund 1 MB gross.
+# Eine Stunde Browser-Cache, danach neu pruefen: so sieht ein Besucher einen
+# frisch deployten Katalog spaetestens nach einer Stunde, ohne dass die Datei
+# bei jedem Seitenwechsel neu uebertragen wird.
+[[headers]]
+  for = "/shop/assets/js/catalog.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+
+# Seitenskripte: kurz, damit Korrekturen sofort ankommen.
+[[headers]]
+  for = "/shop/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+    X-Content-Type-Options = "nosniff"
 
 # HTML immer frisch pruefen, damit Aenderungen sofort sichtbar sind.
 [[headers]]
@@ -25,3 +122,12 @@
     Cache-Control = "public, max-age=0, must-revalidate"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Grundregeln fuer alles Uebrige. Die Function setzt ihre eigenen Kopfzeilen
+# (no-store, nosniff) und wird davon nicht beruehrt.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"

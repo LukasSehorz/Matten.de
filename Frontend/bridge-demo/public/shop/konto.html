@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mein Konto – Mattenfuchs</title>
+<meta name="description" content="Kundenkonto im Mattenfuchs-Shop.">
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div id="site-header"></div>
+<script>MF.mount();</script>
+
+<main id="main">
+  <div class="cat-head">
+    <div class="container">
+      <nav class="crumbs"><a href="index.html">Start</a><span>›</span>Mein Konto</nav>
+      <h1>Mein Konto</h1>
+      <p data-status>Der Anmeldestand wird bei matten.de abgefragt …</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="grid g-2" style="padding-block:40px 80px;gap:56px;align-items:start;max-width:920px">
+      <form class="summary" style="position:static" data-login>
+        <h2>Anmelden</h2>
+        <p style="font-size:14px;color:var(--c-ink-muted);margin:-6px 0 14px">
+          Die Anmeldung geht an das echte Login von matten.de. Zugangsdaten werden nur
+          durchgereicht und nirgends gespeichert.</p>
+        <div class="field"><label for="l_mail">E-Mail</label>
+          <input id="l_mail" type="email" autocomplete="username"></div>
+        <div class="field"><label for="l_pw">Passwort</label>
+          <input id="l_pw" type="password" autocomplete="current-password"></div>
+        <button class="btn btn--block" type="button" data-do-login>Einloggen</button>
+        <div data-loginresult></div>
+        <p class="summary__note">Endpunkte: <code>GET /api/konto</code> ·
+          <code>POST /api/konto/login</code></p>
+      </form>
+
+      <div class="prose" style="padding:0">
+        <h2>Was das Altsystem hier kann — und was nicht</h2>
+        <p>Der alte Shop kennt ein Kundenkonto mit Anmeldung. Eine <b>Registrierung über die
+        Oberfläche gibt es dort nicht</b>: <code>/register</code> antwortet zwar mit Status 200,
+        liefert aber kein Formular, sondern nur einen Begrüßungstext. Ein Konto lässt sich
+        deshalb über diese Brücke nicht anlegen.</p>
+        <p>Bestellen funktioniert auch ohne Konto — die Adresse wird direkt im Bestellvorgang
+        erfasst.</p>
+
+        <h2>Kontomenü von matten.de</h2>
+        <p style="font-size:14px;color:var(--c-ink-muted)">Der Proxy liest den Anmeldestand aus
+        dem Kopfmenü der Live-Seite. Hier steht der Inhalt unverändert, damit die Einschätzung
+        nachprüfbar bleibt:</p>
+        <ul data-kontomenue><li>wird geladen …</li></ul>
+
+        <h2>Gespeicherte Adresse</h2>
+        <div data-adresse><p style="color:var(--c-ink-muted)">wird geladen …</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script>
+(function () {
+  "use strict";
+  var $status = document.querySelector("[data-status]");
+  var $menue  = document.querySelector("[data-kontomenue]");
+  var $adr    = document.querySelector("[data-adresse]");
+  var $res    = document.querySelector("[data-loginresult]");
+
+  function zeichnen(j) {
+    if (!j || !j.ok) {
+      $status.innerHTML = "";
+      $menue.innerHTML = "<li>Kontomenü nicht lesbar.</li>";
+      $adr.innerHTML = MF.apiFehler(j, "Kontostand lesen");
+      return;
+    }
+    $status.textContent = j.hinweis || (j.eingeloggt ? "angemeldet" : "nicht angemeldet");
+    $menue.innerHTML = (j.kontoMenue || []).length
+      ? j.kontoMenue.map(function (e) {
+          return "<li>" + MF.esc(e.text) + ' <span style="color:var(--c-ink-muted);font-size:13px">' +
+            "(" + MF.esc(e.ziel) + ")</span></li>";
+        }).join("")
+      : "<li>Das Kopfmenü von matten.de enthielt keine Einträge.</li>";
+
+    var a = j.adresse;
+    var gefuellt = a && Object.keys(a).some(function (k) { return a[k]; });
+    $adr.innerHTML = gefuellt
+      ? '<table class="spec"><tbody>' + (j.felder || []).map(function (f) {
+          return a[f.name]
+            ? "<tr><th>" + MF.esc(f.label) + "</th><td>" + MF.esc(a[f.name]) + "</td></tr>" : "";
+        }).join("") + "</tbody></table>"
+      : '<p style="color:var(--c-ink-muted)">In dieser Sitzung ist bei matten.de noch keine ' +
+        'Adresse hinterlegt. <a href="kasse.html">Zur Kasse</a></p>';
+  }
+
+  document.querySelector("[data-do-login]").addEventListener("click", function () {
+    var btn = this;
+    var mail = document.getElementById("l_mail").value.trim();
+    var pw = document.getElementById("l_pw").value;
+    if (!mail || !pw) { MF.toast("Bitte E-Mail und Passwort angeben."); return; }
+    btn.disabled = true;
+    btn.textContent = "wird an matten.de gesendet …";
+    $res.innerHTML = "";
+    MF.api("/api/konto/login", { method: "POST", body: { email: mail, passwort: pw } })
+      .then(function (j) {
+        btn.disabled = false;
+        btn.textContent = "Einloggen";
+        document.getElementById("l_pw").value = "";
+        if (j && j.eingeloggt) {
+          $res.innerHTML = '<div class="demo-note" style="margin-top:14px">' +
+            "<div><b>Angemeldet</b>matten.de hat die Sitzung als angemeldet bestätigt.</div></div>";
+        } else {
+          $res.innerHTML = MF.apiFehler(j, "Anmeldung");
+        }
+        return MF.api("/api/konto").then(zeichnen);
+      });
+  });
+
+  MF.boot();
+  MF.initReveal();
+  MF.api("/api/konto").then(zeichnen);
+})();
+</script>
+</body>
+</html>

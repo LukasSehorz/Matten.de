@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Preisrechner &ndash; Mattenfuchs</title>
+<meta name="robots" content="noindex, nofollow" />
+<!-- Schriften liegen lokal im Proxy (public/fonts/). Kein Google Fonts,
+     keine Fremdverbindung beim normalen Betrieb der Seite. -->
+<link href="/fonts/fonts.css" rel="stylesheet" />
+<style>
+  :root{
+    --navy-900:#050a40;
+    --navy-700:#000080;
+    --blue:#0072b8;
+    --cyan:#00a8e0;
+    --red:#d0021b;
+    --red-dark:#a80116;
+    --ink:#15181d;
+    --muted:#5c636e;
+    --lines:#dfe3e8;
+    --surface:#ffffff;
+    --surface-2:#f4f6f8;
+    --radius:3px;
+    --radius-sm:2px;
+    --maxw:1360px;
+    --shadow:0 1px 2px rgba(5,10,64,.06), 0 8px 24px rgba(5,10,64,.08);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;background:var(--surface-2);color:var(--ink);
+    font-family:"Barlow","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-size:16px;line-height:1.55;
+    display:flex;flex-direction:column;min-height:100vh;
+  }
+  h1,h2,h3,h4{
+    font-family:"Archivo","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-weight:700;letter-spacing:-.01em;margin:0;
+  }
+  a{color:var(--blue);}
+  :focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:var(--radius-sm);}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;width:100%;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+
+  /* ---------- Kopf ---------- */
+  .demo-banner{
+    background:var(--navy-900);color:#c9cfe8;font-size:.8125rem;
+    letter-spacing:.02em;border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .demo-banner .wrap{display:flex;gap:10px;align-items:center;padding:8px 20px;flex-wrap:wrap;}
+  .demo-banner strong{color:#fff;font-family:"Archivo",sans-serif;font-weight:600;letter-spacing:.06em;font-size:.75rem;}
+  .demo-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex:none;box-shadow:0 0 0 3px rgba(0,168,224,.2);}
+
+  header.site{background:var(--surface);border-bottom:1px solid var(--lines);}
+  header.site .wrap{display:flex;align-items:center;gap:24px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;}
+  .brand-mark{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.375rem;color:var(--navy-900);letter-spacing:-.02em;}
+  .brand-mark span{color:var(--blue);}
+  .back-link{margin-left:auto;font-size:.9375rem;font-weight:600;text-decoration:none;}
+  .back-link:hover{text-decoration:underline;}
+
+  /* ---------- Hinweisbanner ---------- */
+  .quelle-warn{background:#fff8e8;border-bottom:2px solid #e0b64a;color:#6b4a00;font-size:.875rem;}
+  .quelle-warn .wrap{padding:11px 20px;display:flex;gap:10px;align-items:flex-start;}
+  .quelle-warn strong{font-family:"Archivo",sans-serif;}
+  .quelle-warn code{
+    font-family:"Consolas",ui-monospace,monospace;font-size:.9em;
+    background:rgba(107,74,0,.08);padding:1px 5px;border-radius:var(--radius-sm);
+  }
+
+  /* ---------- Layout ---------- */
+  .kopfzeile{padding:26px 0 4px;}
+  .kopfzeile h1{font-size:1.625rem;color:var(--navy-900);}
+  .kopfzeile p{color:var(--muted);font-size:.9375rem;margin:6px 0 0;max-width:74ch;}
+
+  .rechner{display:grid;grid-template-columns:1fr;gap:22px;padding:18px 0 44px;align-items:start;}
+  @media(min-width:900px){
+    .rechner{grid-template-columns:minmax(0,1fr) minmax(380px,.95fr);gap:28px;}
+  }
+
+  .card{
+    background:var(--surface);border:1px solid var(--lines);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);
+  }
+  .card + .card{margin-top:20px;}
+  .card > h2{font-size:1.25rem;color:var(--navy-900);}
+  .lead{color:var(--muted);font-size:.9375rem;margin:6px 0 18px;}
+  .eyebrow{
+    font-family:"Archivo",sans-serif;font-size:.6875rem;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0 0 6px;
+  }
+
+  /* ---------- Formular ---------- */
+  fieldset{border:0;margin:0 0 22px;padding:0;}
+  fieldset:last-of-type{margin-bottom:0;}
+  legend{font-family:"Archivo",sans-serif;font-weight:700;font-size:1rem;color:var(--navy-900);padding:0 0 8px;}
+  .feld{margin-bottom:14px;}
+  .feld label{display:block;font-weight:600;font-size:.875rem;margin-bottom:5px;}
+  .feld .hint{display:block;font-weight:400;color:var(--muted);font-size:.8125rem;margin-top:4px;}
+  input[type=number],input[type=text]{
+    width:100%;border:1px solid var(--lines);border-radius:var(--radius);
+    padding:11px 12px;font-family:"Barlow",sans-serif;font-size:1.0625rem;
+    font-variant-numeric:tabular-nums;color:var(--ink);background:#fff;
+  }
+  input:focus{border-color:var(--blue);}
+  .feld[data-fehler="true"] input{border-color:var(--red);background:#fdf2f3;}
+  .feld-fehler{color:#8c1220;font-size:.8125rem;font-weight:600;margin:5px 0 0;}
+  .feld-fehler:empty{display:none;}
+  .masse{display:grid;grid-template-columns:1fr;gap:0 16px;}
+  @media(min-width:520px){ .masse{grid-template-columns:1fr 1fr;} }
+
+  .einheit{position:relative;}
+  .einheit input{padding-right:44px;}
+  .einheit .suffix{
+    position:absolute;right:12px;top:50%;transform:translateY(-50%);
+    color:var(--muted);font-size:.875rem;pointer-events:none;font-variant-numeric:tabular-nums;
+  }
+
+  /* Colortype: Karten-Radios wie im Bestellstrecken-Design */
+  .radio-row{display:flex;flex-direction:column;gap:8px;}
+  .radio-opt{
+    display:flex;gap:11px;align-items:flex-start;
+    border:1px solid var(--lines);border-radius:var(--radius);
+    padding:11px 13px;cursor:pointer;background:#fff;
+  }
+  .radio-opt:hover{border-color:var(--cyan);}
+  .radio-opt input{margin-top:3px;accent-color:var(--blue);flex:none;width:17px;height:17px;}
+  .radio-opt:has(input:checked){border-color:var(--blue);background:#f2f9fd;box-shadow:inset 0 0 0 1px var(--blue);}
+  .radio-opt-text{font-size:.9375rem;font-weight:600;}
+  .radio-opt-text small{display:block;color:var(--muted);font-size:.8125rem;font-weight:400;}
+
+  /* Schalter fuer die Sonderoptionen */
+  .schalter-row{display:flex;flex-direction:column;gap:9px;}
+  .schalter{
+    display:flex;gap:13px;align-items:flex-start;
+    border:1px solid var(--lines);border-radius:var(--radius);
+    padding:12px 14px;cursor:pointer;background:#fff;
+  }
+  .schalter:hover{border-color:var(--cyan);}
+  .schalter:has(input:checked){border-color:var(--blue);background:#f2f9fd;box-shadow:inset 0 0 0 1px var(--blue);}
+  .schalter input[type=checkbox]{
+    appearance:none;-webkit-appearance:none;margin:2px 0 0;flex:none;
+    width:42px;height:24px;border-radius:12px;background:#c8cdd6;border:1px solid #b3b9c4;
+    position:relative;cursor:pointer;transition:background .15s ease,border-color .15s ease;
+  }
+  .schalter input[type=checkbox]::after{
+    content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.28);transition:transform .15s ease;
+  }
+  .schalter input[type=checkbox]:checked{background:var(--blue);border-color:var(--blue);}
+  .schalter input[type=checkbox]:checked::after{transform:translateX(18px);}
+  .schalter-text{font-size:.9375rem;font-weight:600;}
+  .schalter-text small{display:block;color:var(--muted);font-size:.8125rem;font-weight:400;}
+  .schalter-faktor{
+    margin-left:auto;font-family:"Archivo",sans-serif;font-size:.75rem;font-weight:600;
+    color:var(--blue);background:#eaf4fb;border-radius:999px;padding:3px 10px;
+    white-space:nowrap;align-self:center;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .schalter input[type=checkbox],.schalter input[type=checkbox]::after{transition:none;}
+  }
+
+  /* ---------- Ergebnis ---------- */
+  .ergebnis{position:sticky;top:16px;}
+  .ergebnis > h2{font-size:1.125rem;color:var(--navy-900);margin-bottom:4px;}
+
+  .preis-gitter{display:grid;grid-template-columns:1fr;gap:12px;margin:16px 0 6px;}
+  @media(min-width:420px){ .preis-gitter{grid-template-columns:1fr 1fr;} }
+  .preis-block{
+    border:1px solid var(--lines);border-radius:var(--radius);
+    padding:14px 16px;background:var(--surface-2);
+  }
+  .preis-block--gesamt{background:#f2f9fd;border-color:#bfe0f2;}
+  .preis-label{
+    display:block;font-family:"Archivo",sans-serif;font-size:.6875rem;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  }
+  .preis-block--gesamt .preis-label{color:#0a4f78;}
+  .preis-zahl{
+    display:block;font-family:"Archivo",sans-serif;font-weight:700;
+    font-size:clamp(1.625rem,5.2vw,2.125rem);line-height:1.15;color:var(--navy-900);
+    letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-top:4px;
+  }
+  .preis-fuss{font-size:.8125rem;color:var(--muted);margin:0;}
+  .preis-fuss b{color:var(--ink);font-variant-numeric:tabular-nums;}
+
+  .preis-fehler{
+    border:2px solid var(--red);border-radius:var(--radius);background:#fdf2f3;
+    padding:16px 18px;margin:16px 0 6px;
+  }
+  .preis-fehler h3{font-family:"Archivo",sans-serif;font-size:1.0625rem;color:#8c1220;margin:0 0 5px;}
+  .preis-fehler p{margin:0;font-size:.9375rem;color:#8c1220;}
+  .preis-fehler .zelle{
+    display:inline-block;margin-top:9px;font-family:"Consolas",ui-monospace,monospace;
+    font-size:.75rem;color:#8c1220;background:rgba(140,18,32,.09);
+    padding:2px 7px;border-radius:var(--radius-sm);
+  }
+
+  .hinweis-box{
+    background:#fff8e8;border:1px solid #f0dcae;color:#7a5600;
+    border-radius:var(--radius);padding:10px 13px;font-size:.8125rem;margin-top:12px;
+  }
+  .hinweis-box ul{margin:0;padding-left:18px;}
+
+  /* ---------- Rechenweg ---------- */
+  details.block{
+    border:1px solid var(--lines);border-radius:var(--radius);background:#fff;margin-top:18px;
+  }
+  details.block > summary{
+    cursor:pointer;padding:13px 16px;font-weight:700;font-family:"Archivo",sans-serif;
+    font-size:.9375rem;color:var(--navy-900);list-style:none;display:flex;gap:9px;align-items:center;
+  }
+  details.block > summary::-webkit-details-marker{display:none;}
+  details.block > summary::before{content:"\25B8";color:var(--blue);font-size:.9em;}
+  details.block[open] > summary::before{content:"\25BE";}
+  details.block > summary .zusatz{
+    margin-left:auto;font-family:"Barlow",sans-serif;font-weight:400;
+    font-size:.8125rem;color:var(--muted);
+  }
+  details.block .body{border-top:1px solid var(--lines);padding:16px;}
+
+  .formelzeile{
+    font-family:"Consolas",ui-monospace,monospace;font-size:.78125rem;line-height:1.9;
+    background:#03062b;color:#cfe4ff;border-radius:var(--radius);
+    padding:12px 14px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin:0 0 16px;
+  }
+  .formelzeile b{color:#7ee08a;font-weight:700;}
+  .formelzeile i{color:#8f98c0;font-style:normal;}
+
+  table.schritte{width:100%;border-collapse:collapse;font-size:.875rem;}
+  table.schritte th,table.schritte td{
+    text-align:left;padding:7px 8px;border-bottom:1px solid var(--lines);vertical-align:top;
+  }
+  table.schritte thead th{
+    font-family:"Archivo",sans-serif;font-size:.6875rem;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--lines);
+  }
+  table.schritte td.zelle{
+    font-family:"Consolas",ui-monospace,monospace;font-size:.75rem;color:var(--blue);
+    white-space:nowrap;width:1%;
+  }
+  table.schritte td.wert{
+    text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;width:1%;
+  }
+  table.schritte td.wert small{display:block;font-weight:400;color:var(--muted);font-size:.75rem;}
+  table.schritte td .warum{display:block;color:var(--muted);font-size:.8125rem;}
+  table.schritte tr.summe td{
+    border-top:2px solid var(--navy-900);border-bottom:0;padding-top:10px;
+    font-family:"Archivo",sans-serif;font-weight:700;color:var(--navy-900);
+  }
+  table.schritte tr.summe td.zelle{font-family:"Consolas",ui-monospace,monospace;color:var(--navy-900);}
+  .tabellen-rahmen{overflow-x:auto;}
+
+  /* ---------- Interne Kalkulation ---------- */
+  .intern{
+    background:var(--navy-900);color:#c9cfe8;border-radius:var(--radius);
+    padding:20px 22px;margin-top:18px;border:1px solid var(--navy-900);
+  }
+  .intern h2{color:#fff;font-size:1rem;margin:0;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .intern .stempel{
+    font-family:"Archivo",sans-serif;font-size:.625rem;font-weight:700;letter-spacing:.14em;
+    background:var(--red);color:#fff;padding:3px 8px;border-radius:var(--radius-sm);
+  }
+  .intern p.lead{color:#8f98c0;font-size:.8125rem;margin:8px 0 14px;}
+  .intern dl{
+    display:grid;grid-template-columns:1fr auto;gap:0;margin:0;
+    font-size:.875rem;font-variant-numeric:tabular-nums;
+  }
+  .intern dt{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.09);color:#a9b2d6;}
+  .intern dd{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.09);margin:0;text-align:right;color:#e8ecf7;font-weight:600;}
+  .intern dt code{font-family:"Consolas",ui-monospace,monospace;font-size:.85em;color:#7ea6ff;}
+  .intern dt.gross,.intern dd.gross{border-bottom:0;padding-top:11px;font-size:1.0625rem;}
+  .intern dd.gross{font-family:"Archivo",sans-serif;color:#7ee08a;}
+  .intern dt.gross{color:#fff;font-weight:700;font-family:"Archivo",sans-serif;}
+  .intern .fussnote{font-size:.75rem;color:#8f98c0;margin:12px 0 0;}
+
+  footer.site{background:#03062b;color:#6f78a3;font-size:.75rem;padding:16px 0;margin-top:auto;}
+  footer.site .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <div class="wrap">
+    <span class="demo-dot" aria-hidden="true"></span>
+    <strong>BR&Uuml;CKEN-DEMO &middot; PREISRECHNER</strong>
+    <span>Die Kalkulation l&auml;uft vollst&auml;ndig im Browser &ndash; kein Aufruf beim Altsystem.</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="brand-mark">Matten<span>fuchs</span></span>
+    </a>
+    <a class="back-link" href="/">&larr; Zur&uuml;ck zum Produkt</a>
+  </div>
+</header>
+
+<div class="quelle-warn">
+  <div class="wrap">
+    <span aria-hidden="true">&#9888;</span>
+    <p style="margin:0">
+      Diese Kalkulation stammt aus <code>PREISE-Brian-26-10_22-11.xlsx</code> und
+      l&auml;uft in dieser neuen Oberfl&auml;che. Das Altsystem matten.de kennt diese
+      Formel nicht &ndash; der berechnete Preis ist deshalb ein
+      <strong>Anfragepreis</strong>.
+    </p>
+  </div>
+</div>
+
+<main class="wrap" id="main">
+
+  <div class="kopfzeile">
+    <h1>Mattenpreis berechnen</h1>
+    <p>
+      Ma&szlig;e, Menge und Ausf&uuml;hrung eingeben &ndash; der Preis wird bei jeder
+      &Auml;nderung sofort neu gerechnet. Jeder Zwischenschritt ist unter
+      &bdquo;Rechenweg&ldquo; einzeln nachlesbar, samt der Excel-Zelle, aus der er stammt.
+    </p>
+  </div>
+
+  <div class="rechner">
+
+    <!-- ================= Eingaben ================= -->
+    <section class="card" aria-labelledby="eingabenT">
+      <p class="eyebrow">Anfrage</p>
+      <h2 id="eingabenT">Ihre Matte</h2>
+      <p class="lead">Alle Angaben in Zentimetern. Kommazahlen sind erlaubt.</p>
+
+      <form id="form" novalidate autocomplete="off">
+
+        <fieldset>
+          <legend>Ma&szlig;e und Menge</legend>
+
+          <div class="masse">
+            <div class="feld" id="feldBreite">
+              <label for="breite">Breite</label>
+              <div class="einheit">
+                <input type="number" id="breite" name="breite" value="50"
+                       min="30" max="700" step="0.5" inputmode="decimal"
+                       aria-describedby="breiteHint breiteFehler" />
+                <span class="suffix" aria-hidden="true">cm</span>
+              </div>
+              <span class="hint" id="breiteHint">Mindestens 30&nbsp;cm.</span>
+              <p class="feld-fehler" id="breiteFehler" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="feld" id="feldLaenge">
+              <label for="laenge">L&auml;nge</label>
+              <div class="einheit">
+                <input type="number" id="laenge" name="laenge" value="200"
+                       min="30" max="700" step="0.5" inputmode="decimal"
+                       aria-describedby="laengeHint laengeFehler" />
+                <span class="suffix" aria-hidden="true">cm</span>
+              </div>
+              <span class="hint" id="laengeHint">30 bis 700&nbsp;cm.</span>
+              <p class="feld-fehler" id="laengeFehler" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="feld" id="feldMenge" style="max-width:220px">
+            <label for="menge">Menge</label>
+            <div class="einheit">
+              <input type="number" id="menge" name="menge" value="1"
+                     min="1" step="1" inputmode="numeric"
+                     aria-describedby="mengeHint mengeFehler" />
+              <span class="suffix" aria-hidden="true">Stk</span>
+            </div>
+            <span class="hint" id="mengeHint">Ab 2 St&uuml;ck greift die Mengenstaffel.</span>
+            <p class="feld-fehler" id="mengeFehler" role="status" aria-live="polite"></p>
+          </div>
+
+          <p class="hint" id="massHinweis" style="margin-top:2px"></p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Colortype <span class="sr-only">&ndash; Qualit&auml;t der Matte</span></legend>
+          <div class="radio-row" role="radiogroup" aria-label="Colortype">
+            <label class="radio-opt">
+              <input type="radio" name="colortype" value="1" checked />
+              <span class="radio-opt-text">Mehrfarbig
+                <small>Colortype&nbsp;1 &middot; Salesfactor 1,931 &middot; Zelle F1</small>
+              </span>
+            </label>
+            <label class="radio-opt">
+              <input type="radio" name="colortype" value="2" />
+              <span class="radio-opt-text">Einfarbig
+                <small>Colortype&nbsp;2 &middot; Salesfactor 1,728 &middot; Zelle I1</small>
+              </span>
+            </label>
+            <label class="radio-opt">
+              <input type="radio" name="colortype" value="3" />
+              <span class="radio-opt-text">Ped-Print
+                <small>Colortype&nbsp;3 &middot; Salesfactor 1,800 &middot; Zelle L1</small>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sonderausf&uuml;hrung</legend>
+          <div class="schalter-row">
+            <label class="schalter">
+              <input type="checkbox" role="switch" id="sfOhne" />
+              <span class="schalter-text">Sonderform ohne Rand
+                <small>Zelle N3 &rarr; Faktor N5</small>
+              </span>
+              <span class="schalter-faktor" aria-hidden="true">&times;&thinsp;1,3</span>
+            </label>
+            <label class="schalter">
+              <input type="checkbox" role="switch" id="sfMit" />
+              <span class="schalter-text">Sonderform mit Rand
+                <small>Zelle O3 &rarr; Faktor O5</small>
+              </span>
+              <span class="schalter-faktor" aria-hidden="true">&times;&thinsp;1,5</span>
+            </label>
+            <label class="schalter">
+              <input type="checkbox" role="switch" id="sfarbe" />
+              <span class="schalter-text">Sonderfarbe
+                <small>Zelle P3 &rarr; Aufschlag P5/P6, einmal je Auftrag</small>
+              </span>
+              <span class="schalter-faktor" aria-hidden="true">+&thinsp;68&nbsp;&euro;</span>
+            </label>
+          </div>
+        </fieldset>
+
+      </form>
+    </section>
+
+    <!-- ================= Ergebnis ================= -->
+    <div>
+      <section class="card ergebnis" aria-labelledby="ergebnisT">
+        <p class="eyebrow">Anfragepreis</p>
+        <h2 id="ergebnisT">Verkaufspreis</h2>
+
+        <div id="ergebnisBereich" role="status" aria-live="polite" aria-atomic="true">
+          <!-- wird per Skript gefuellt -->
+        </div>
+
+        <div id="hinweise"></div>
+      </section>
+
+      <details class="block" id="rechenwegBlock" open>
+        <summary>
+          Rechenweg
+          <span class="zusatz" id="rechenwegKurz"></span>
+        </summary>
+        <div class="body">
+          <p class="formelzeile" id="formelzeile"></p>
+          <div class="tabellen-rahmen">
+            <table class="schritte" id="schritteTabelle">
+              <caption class="sr-only">Alle Zwischenschritte der Preisformel mit Excel-Zellbezug</caption>
+              <thead>
+                <tr><th scope="col">Zelle</th><th scope="col">Schritt</th><th scope="col" style="text-align:right">Wert</th></tr>
+              </thead>
+              <tbody id="schritteBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <section class="intern" aria-labelledby="internT">
+        <h2 id="internT">Interne Kalkulation <span class="stempel">NUR INTERN</span></h2>
+        <p class="lead">
+          Einkauf und Marge. Diese Zahlen geh&ouml;ren nicht in ein Kundenangebot &ndash;
+          sie stehen hier, weil die Tabelle sie mitrechnet.
+        </p>
+        <dl id="internWerte"></dl>
+        <p class="fussnote" id="internFussnote"></p>
+      </section>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Br&uuml;cken-Demo &middot; Preisformel aus PREISE-Brian-26-10_22-11.xlsx, Blatt1</span>
+    <span>Rechnet lokal im Browser &middot; kein Aufruf bei matten.de</span>
+  </div>
+</footer>
+
+<script type="module">
+'use strict';
+
+/* Das Rechenmodul. Faellt der Import aus (z. B. weil die Datei per file://
+   geoeffnet wurde), sagen wir das deutlich, statt still nichts zu tun. */
+let M = null;
+try {
+  M = await import('./preisformel.js');
+} catch (e) {
+  document.getElementById('ergebnisBereich').innerHTML =
+    '<div class="preis-fehler"><h3>Rechenmodul nicht geladen</h3>' +
+    '<p>Bitte diese Seite &uuml;ber den lokalen Server &ouml;ffnen ' +
+    '(<code>node server.mjs</code>, dann <code>http://localhost:8787/rechner.html</code>). ' +
+    'Direkt aus dem Dateisystem l&auml;sst der Browser das Modul nicht zu.</p></div>';
+}
+
+if (M) {
+  const { berechne, KONSTANTEN, runde, euro, zahl } = M;
+  const K = KONSTANTEN;
+  const $ = (id) => document.getElementById(id);
+
+  const felder = {
+    breite: $('breite'), laenge: $('laenge'), menge: $('menge'),
+    sfOhne: $('sfOhne'), sfMit: $('sfMit'), sfarbe: $('sfarbe')
+  };
+  const rollenbreite = K.standardbreiten[K.standardbreiten.length - 1];
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function colortype() {
+    const r = document.querySelector('input[name="colortype"]:checked');
+    return r ? Number(r.value) : 1;
+  }
+
+  function eingaben() {
+    return {
+      breite: felder.breite.value,
+      laenge: felder.laenge.value,
+      menge:  felder.menge.value,
+      colortype: colortype(),
+      sonderformOhneRand: felder.sfOhne.checked,
+      sonderformMitRand:  felder.sfMit.checked,
+      sonderfarbe:        felder.sfarbe.checked
+    };
+  }
+
+  /* ---------------- Feldweise Live-Pruefung ---------------------------- */
+
+  function setzeFeldFehler(feldId, fehlerId, text) {
+    $(feldId).setAttribute('data-fehler', text ? 'true' : 'false');
+    $(fehlerId).textContent = text || '';
+  }
+
+  function pruefeFelder(e) {
+    const b = Number(String(e.breite).replace(',', '.'));
+    const l = Number(String(e.laenge).replace(',', '.'));
+    const m = Number(String(e.menge).replace(',', '.'));
+
+    let fb = '', fl = '', fm = '';
+
+    if (!Number.isFinite(b) || b <= 0)        fb = 'Bitte eine Breite eintragen.';
+    else if (b < K.minBreite)                 fb = 'Mindestens ' + K.minBreite + ' cm.';
+    if (!Number.isFinite(l) || l <= 0)        fl = 'Bitte eine Länge eintragen.';
+    else if (l < K.minBreite)                 fl = 'Mindestens ' + K.minBreite + ' cm.';
+
+    if (!fb && !fl) {
+      if (b > rollenbreite && l > rollenbreite) {
+        const meldung = 'Eine der beiden Seiten darf höchstens ' + rollenbreite +
+                        ' cm messen – die Matte kommt von der Rolle.';
+        fb = meldung; fl = meldung;
+      } else if (b <= rollenbreite && l > K.maxLaenge) {
+        fl = 'Höchstens ' + K.maxLaenge + ' cm.';
+      } else if (l <= rollenbreite && b > K.maxLaenge) {
+        fb = 'Höchstens ' + K.maxLaenge + ' cm.';
+      }
+    }
+
+    if (!Number.isFinite(m))      fm = 'Bitte eine Menge eintragen.';
+    else if (m < 1)               fm = 'Mindestens 1 Stück.';
+    else if (m !== Math.floor(m)) fm = 'Bitte eine ganze Zahl.';
+
+    setzeFeldFehler('feldBreite', 'breiteFehler', fb);
+    setzeFeldFehler('feldLaenge', 'laengeFehler', fl);
+    setzeFeldFehler('feldMenge',  'mengeFehler',  fm);
+
+    /* Hinweis zu den Standardbreiten */
+    const trifft = K.standardbreiten.filter((s) => b === s || l === s);
+    const liste = K.standardbreiten.join(', ') + ' cm';
+    $('massHinweis').innerHTML = trifft.length
+      ? 'Standardbreite <b>' + trifft[0] + ' cm</b> getroffen – kein Zuschlag für Sonderbreite. ' +
+        '<span style="color:var(--muted)">Standardbreiten: ' + liste + '</span>'
+      : 'Keine Seite trifft eine Standardbreite (' + liste + ') – Zuschlag <b>× ' +
+        zahl(K.faktorSondermass, 2) + '</b> auf Verkauf und Einkauf.';
+  }
+
+  /* ---------------- Ergebnisdarstellung -------------------------------- */
+
+  function zeigeFehler(r) {
+    $('ergebnisBereich').innerHTML =
+      '<div class="preis-fehler">' +
+        '<h3>' + esc(r.grund) + '</h3>' +
+        '<p>' + esc(r.klartext || 'Diese Maße sind so nicht herstellbar.') + '</p>' +
+        (r.zelle ? '<span class="zelle">Excel: ' + esc(r.zelle) + ' liefert &bdquo;' + esc(r.grund) + '&ldquo;</span>' : '') +
+      '</div>' +
+      '<p class="preis-fuss">Bitte die Maße anpassen. Solange die Tabelle eine Meldung ' +
+      'statt einer Zahl liefert, gibt es keinen Preis.</p>';
+
+    $('hinweise').innerHTML = '';
+    $('rechenwegKurz').textContent = 'kein Ergebnis';
+    $('formelzeile').innerHTML = '<i>Die Tabelle liefert in Zelle ' + esc(r.zelle || '—') +
+      ' den Text &bdquo;' + esc(r.grund) + '&ldquo;. Excel rechnet damit nicht weiter (#WERT!).</i>';
+    $('schritteBody').innerHTML =
+      '<tr><td class="zelle">D4</td><td>Fläche je Stück</td><td class="wert">' +
+      (Number.isFinite(r.qmProStueck) ? zahl(r.qmProStueck, 4) + ' m²' : '—') + '</td></tr>' +
+      '<tr><td class="zelle">' + esc(r.zelle || '') + '</td><td>Größenprüfung</td>' +
+      '<td class="wert" style="color:var(--red)">' + esc(r.grund) + '</td></tr>';
+
+    $('internWerte').innerHTML = '<dt>Keine Kalkulation möglich</dt><dd>—</dd>';
+    $('internFussnote').textContent = '';
+  }
+
+  function zeigeErgebnis(r) {
+    const menge = r.eingaben.menge;
+
+    /* --- die grossen Zahlen ------------------------------------------- */
+    $('ergebnisBereich').innerHTML =
+      '<div class="preis-gitter">' +
+        '<div class="preis-block">' +
+          '<span class="preis-label">Je Stück</span>' +
+          '<span class="preis-zahl">' + euro(runde(r.vkProStueck, 2)) + '</span>' +
+        '</div>' +
+        '<div class="preis-block preis-block--gesamt">' +
+          '<span class="preis-label">Gesamt &middot; ' + zahl(menge, 0) + '&nbsp;Stück</span>' +
+          '<span class="preis-zahl">' + euro(runde(r.vkGesamt, 2)) + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<p class="preis-fuss">' +
+        'Netto, ohne Umsatzsteuer und Versand &middot; ' +
+        '<b>' + zahl(r.qmProStueck, 3) + '&nbsp;m²</b> je Stück, ' +
+        '<b>' + zahl(r.gesamtQm, 3) + '&nbsp;m²</b> gesamt &middot; ' +
+        'Listenpreis je Stück <b>' + euro(runde(r.listenpreisProStueck, 2)) + '</b>' +
+      '</p>';
+
+    /* --- Hinweise aus dem Modul --------------------------------------- */
+    $('hinweise').innerHTML = (r.hinweise && r.hinweise.length)
+      ? '<div class="hinweis-box"><ul>' +
+        r.hinweise.map((h) => '<li>' + esc(h) + '</li>').join('') + '</ul></div>'
+      : '';
+
+    /* --- Rechenweg: die Formelzeile ----------------------------------- */
+    const staffelText = r.staffelSchwelle === 1 ? '1' : zahl(r.staffelfaktor, 2);
+    $('formelzeile').innerHTML =
+      '<i>VK je Stück (G5) =</i>\n' +
+      '  ' + zahl(r.qmProStueck, 4) + ' m²' +
+      '  × ' + zahl(K.ekListenpreisProQm, 2) + ' €/m²' +
+      '  × ' + zahl(r.salesfactor, 3) + ' <i>(Salesfactor)</i>\n' +
+      '  × ' + staffelText + ' <i>(Staffel)</i>' +
+      '  × ' + zahl(r.tzFaktor, 2) + ' <i>(TZ)</i>' +
+      '  × ' + zahl(r.faktorBreite, 2) + ' <i>(L5)</i>' +
+      '  × ' + zahl(r.faktorLaenge, 2) + ' <i>(M5)</i>' +
+      '  × ' + zahl(r.faktorFormOhneRand, 2) + ' <i>(N5)</i>' +
+      '  × ' + zahl(r.faktorFormMitRand, 2) + ' <i>(O5)</i>\n' +
+      '  + ' + zahl(r.aufschlagVK, 2) + ' € <i>(P5)</i>\n' +
+      '  = <b>' + zahl(r.vkProStueck, 5) + ' €</b>\n\n' +
+      '<i>VK gesamt (F5) =</i> ' + zahl(menge, 0) + ' × ' + zahl(r.vkProStueck, 5) +
+      ' − ' + (menge - 1) + ' × ' + zahl(r.aufschlagVK, 2) +
+      ' = <b>' + zahl(r.vkGesamt, 5) + ' €</b>';
+
+    /* --- Rechenweg: Schritt fuer Schritt ------------------------------ */
+    const ctName = (M.COLORTYPES.find((c) => c.wert === r.eingaben.colortype) || {}).name || 'unbekannt';
+    const trifft = K.standardbreiten.filter((s) => r.eingaben.breite === s || r.eingaben.laenge === s);
+
+    const zeilen = [
+      ['D4', 'Fläche je Stück',
+       zahl(r.eingaben.breite, 1) + ' × ' + zahl(r.eingaben.laenge, 1) + ' cm × 0,01 × 0,01',
+       zahl(r.qmProStueck, 4) + ' m²'],
+      ['Q5', 'Einkaufs-Listenpreis je m²', 'Artikelkonstante',
+       zahl(K.ekListenpreisProQm, 2) + ' €'],
+      ['C2', 'Salesfactor', 'Colortype ' + r.eingaben.colortype + ' – ' + ctName,
+       '× ' + zahl(r.salesfactor, 3)],
+      ['R5–V5', 'Mengenstaffel',
+       r.staffelSchwelle === null
+         ? 'Menge unter 1 – Excel rechnet mit 0 weiter'
+         : (r.staffelSchwelle === 1
+            ? 'ab 1 Stück – kein Nachlass'
+            : 'ab ' + r.staffelSchwelle + ' Stück – ' + zahl((1 - r.staffelfaktor) * 100, 0) + ' % Nachlass'),
+       '× ' + zahl(r.staffelfaktor, 2)],
+      ['S2', 'Teuerungszuschlag TZ', 'TZ ' + zahl(K.tzProzent, 1) + ' % (Zelle R2)',
+       '× ' + zahl(r.tzFaktor, 2)],
+      ['L5', 'Faktor Sonderbreite',
+       trifft.length
+         ? trifft[0] + ' cm ist Standardbreite'
+         : 'keine Seite trifft 60/75/85/115/150/200 cm',
+       '× ' + zahl(r.faktorBreite, 2)],
+      ['M5', 'Faktor Sonderlänge', 'Maße im zulässigen Rahmen',
+       '× ' + zahl(r.faktorLaenge, 2)],
+      ['N5', 'Sonderform ohne Rand',
+       r.eingaben.sonderformOhneRand ? 'gewählt – 30 % Aufschlag' : 'nicht gewählt',
+       '× ' + zahl(r.faktorFormOhneRand, 2)],
+      ['O5', 'Sonderform mit Rand',
+       r.eingaben.sonderformMitRand ? 'gewählt – 50 % Aufschlag' : 'nicht gewählt',
+       '× ' + zahl(r.faktorFormMitRand, 2)],
+      ['P5', 'Aufschlag Sonderfarbe (VK)',
+       r.eingaben.sonderfarbe ? 'gewählt – fällt einmal je Auftrag an' : 'nicht gewählt',
+       '+ ' + zahl(r.aufschlagVK, 2) + ' €']
+    ];
+
+    let html = zeilen.map((z0) =>
+      '<tr><td class="zelle">' + esc(z0[0]) + '</td>' +
+      '<td>' + esc(z0[1]) + '<span class="warum">' + esc(z0[2]) + '</span></td>' +
+      '<td class="wert">' + esc(z0[3]) + '</td></tr>').join('');
+
+    html += '<tr class="summe"><td class="zelle">G5</td><td>Verkaufspreis je Stück</td>' +
+            '<td class="wert">' + euro(runde(r.vkProStueck, 2)) +
+            '<small>exakt ' + zahl(r.vkProStueck, 5) + ' €</small></td></tr>';
+    html += '<tr class="summe"><td class="zelle">F5</td>' +
+            '<td>Verkaufspreis gesamt<span class="warum">' +
+            zahl(menge, 0) + ' × G5 − ' + (menge - 1) + ' × P5 &nbsp;' +
+            '– der Sonderfarbenaufschlag zählt nur einmal</span></td>' +
+            '<td class="wert">' + euro(runde(r.vkGesamt, 2)) +
+            '<small>exakt ' + zahl(r.vkGesamt, 5) + ' €</small></td></tr>';
+    $('schritteBody').innerHTML = html;
+
+    $('rechenwegKurz').textContent =
+      zahl(r.qmProStueck, 3) + ' m² × ' + zahl(K.ekListenpreisProQm, 2) +
+      ' € × ' + zahl(r.salesfactor, 3) +
+      (r.zuschlagsfaktor !== 1 ? ' × ' + zahl(r.zuschlagsfaktor, 4) : '') +
+      (r.staffelfaktor !== 1 ? ' × ' + zahl(r.staffelfaktor, 2) : '') +
+      (r.aufschlagVK ? ' + ' + zahl(r.aufschlagVK, 0) + ' €' : '');
+
+    /* --- Interne Kalkulation ------------------------------------------ */
+    const margeProzent = r.vkGesamt !== 0 ? (r.marge / r.vkGesamt) * 100 : 0;
+    $('internWerte').innerHTML =
+      '<dt>Einkauf je m² <code>J5</code></dt><dd>' + euro(runde(r.ekProQm, 2)) + '</dd>' +
+      '<dt>Einkauf je Stück <code>I5</code></dt><dd>' + euro(runde(r.ekProStueck, 2)) + '</dd>' +
+      '<dt>Einkauf gesamt <code>H5</code></dt><dd>' + euro(runde(r.ekGesamt, 2)) + '</dd>' +
+      '<dt>Verkauf gesamt <code>F5</code></dt><dd>' + euro(runde(r.vkGesamt, 2)) + '</dd>' +
+      '<dt>Gesamtfläche <code>D6</code></dt><dd>' + zahl(r.gesamtQm, 3) + ' m²</dd>' +
+      '<dt class="gross">Marge <code>K5</code></dt>' +
+      '<dd class="gross">' + euro(runde(r.marge, 2)) +
+      ' <span style="font-size:.75rem;color:#8f98c0;font-family:Barlow,sans-serif">(' +
+      zahl(margeProzent, 1) + ' %)</span></dd>';
+
+    $('internFussnote').textContent = r.eingaben.sonderfarbe
+      ? 'Achtung: Der EK-Aufschlag von ' + zahl(K.aufschlagSonderfarbeEK, 2) +
+        ' € steckt sowohl in I5 (je Stück) als auch in H5 (gesamt) – in der Tabelle ' +
+        'jeweils in voller Höhe. I5 × Menge ergibt deshalb nicht H5.'
+      : 'Marge = Verkauf gesamt (F5) minus Einkauf gesamt (H5). Der Teuerungszuschlag TZ ' +
+        'wirkt nur auf den Verkauf, nie auf den Einkauf.';
+  }
+
+  /* ---------------- Neu rechnen ---------------------------------------- */
+
+  function neuRechnen() {
+    const e = eingaben();
+    pruefeFelder(e);
+    const r = berechne(e);
+    if (r.ok) zeigeErgebnis(r);
+    else zeigeFehler(r);
+  }
+
+  document.getElementById('form').addEventListener('input', neuRechnen);
+  document.getElementById('form').addEventListener('change', neuRechnen);
+  neuRechnen();
+}
+</script>
+
+</body>
+</html>

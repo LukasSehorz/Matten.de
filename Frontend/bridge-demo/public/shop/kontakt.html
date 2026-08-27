@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt – Mattenfuchs</title>
+<meta name="description" content="Kontakt zum Mattenfuchs-Shop der FUCHSIUS multi-media GmbH in Ismaning bei München.">
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+<div id="site-header"></div>
+<script>MF.mount();</script>
+
+<main id="main">
+  <div class="cat-head">
+    <div class="container">
+      <nav class="crumbs"><a href="index.html">Start</a><span>›</span>Kontakt</nav>
+      <h1>Kontakt &amp; Beratung</h1>
+      
+    </div>
+  </div>
+  <div class="container">
+    <div class="grid g-2" style="padding-block:40px 80px;align-items:start;gap:56px">
+      <div class="prose" style="padding:0">
+        <h2>Wir beraten Sie persönlich</h2>
+        <p class="lead">Komplizierte bauliche Situation, exotisches Maß oder ein Logo, das exakt
+        sitzen muss? Rufen Sie an — meist ist die Sache in fünf Minuten geklärt.</p>
+        <table>
+          <tbody>
+            <tr><th>Telefon</th><td><a href="tel:+498954558264">+49 89 54 55 82 64</a></td></tr>
+            <tr><th>Hotline / Mobil</th><td><a href="tel:+491717755400">+49 171 77 55 400</a></td></tr>
+            <tr><th>Telefax</th><td>+49 89 54 88 83 33</td></tr>
+            <tr><th>E-Mail</th><td><a href="mailto:info@matten.de">info@matten.de</a></td></tr>
+            <tr><th>Anschrift</th><td>FUCHSIUS multi-media GmbH<br>Fischerstrasse 2<br>D-85737 Ismaning</td></tr>
+          </tbody>
+        </table>
+        <h3>Was wir für ein Angebot brauchen</h3>
+        <ul>
+          <li>Maße in cm (Breite × Länge) oder eine Skizze</li>
+          <li>Einsatzort: innen, außen, Nasszone, Arbeitsplatz</li>
+          <li>Gewünschtes Material bzw. Produktlinie</li>
+          <li>Bei Logomatten: Ihre Vorlage als Vektordatei oder hochauflösende Grafik</li>
+          <li>Ob die Matte lose liegt oder in einen Rahmen eingelassen wird</li>
+        </ul>
+      </div>
+      <form class="summary" style="position:static" id="anfrage" novalidate>
+        <h2>Angebot anfordern</h2>
+        <div class="field"><label for="k_firma">Firma</label><input id="k_firma"></div>
+        <div class="field--2">
+          <div class="field"><label for="k_name">Name *</label><input id="k_name" required></div>
+          <div class="field"><label for="k_tel">Telefon</label><input id="k_tel" type="tel"></div>
+        </div>
+        <div class="field"><label for="k_mail">E-Mail *</label><input id="k_mail" type="email" required></div>
+        <div class="field--2">
+          <div class="field"><label for="k_breite">Breite in cm</label><input id="k_breite" type="number"></div>
+          <div class="field"><label for="k_laenge">Länge in cm</label><input id="k_laenge" type="number"></div>
+        </div>
+        <div class="field"><label for="k_produkt">Produkt / Interesse</label>
+          <input id="k_produkt" placeholder="z. B. Logomatte JetPrint"></div>
+        <div class="field"><label for="k_text">Ihre Nachricht</label>
+          <textarea id="k_text" placeholder="Einsatzort, Motiv, Termin …"></textarea></div>
+        <label class="filter-opt" style="align-items:flex-start;gap:10px">
+          <input type="checkbox" id="k_dsgvo" style="margin-top:4px">
+          <span style="font-size:13.5px">Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a>
+          gelesen und bin mit der Verarbeitung meiner Angaben zur Bearbeitung der Anfrage einverstanden.</span>
+        </label>
+        <button class="btn btn--lg btn--block" type="submit" style="margin-top:16px">Anfrage senden</button>
+        <p class="summary__note">Demo-Formular — es wird nichts versendet.</p>
+      </form>
+    </div>
+  </div>
+</main>
+
+<div id="site-footer"></div>
+<script>MF.boot(); MF.initReveal(); MF.initFaq(document);</script>
+<script>
+(function(){
+  var f = document.getElementById('anfrage');
+  var art = MF.qs('artikel');
+  if (art) document.getElementById('k_produkt').value = art;
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var miss = ['k_name','k_mail'].filter(function(id){ return !document.getElementById(id).value.trim(); });
+    if (miss.length) { MF.toast('Bitte Name und E-Mail angeben.'); document.getElementById(miss[0]).focus(); return; }
+    if (!document.getElementById('k_dsgvo').checked) { MF.toast('Bitte der Datenschutzerklärung zustimmen.'); return; }
+    f.innerHTML = '<h2>Danke für Ihre Anfrage!</h2>' +
+      '<p>In der echten Version ginge Ihre Anfrage jetzt an info@matten.de. ' +
+      'Antwort erhalten Sie in der Regel innerhalb von 24 Stunden.</p>' +
+      '<p class="summary__note">Demo-Formular — es wurde nichts versendet.</p>' +
+      '<a class="btn btn--block" href="kategorie.html">Weiter zum Sortiment</a>';
+    window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

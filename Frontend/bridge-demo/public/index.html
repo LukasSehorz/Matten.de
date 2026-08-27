@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bierbankmatte: Pils &ndash; Mattenfuchs</title>
+<meta name="robots" content="noindex, nofollow" />
+<!-- Schriften liegen lokal im Proxy (public/fonts/). Kein Google Fonts,
+     keine Fremdverbindung beim normalen Betrieb der Seite. -->
+<link href="/fonts/fonts.css" rel="stylesheet" />
+<style>
+  :root{
+    --navy-900:#050a40;
+    --navy-700:#000080;
+    --blue:#0072b8;
+    --cyan:#00a8e0;
+    --red:#d0021b;
+    --red-dark:#a80116;
+    --ink:#15181d;
+    --muted:#5c636e;
+    --lines:#dfe3e8;
+    --surface:#ffffff;
+    --surface-2:#f4f6f8;
+    --radius:3px;
+    --radius-sm:2px;
+    --maxw:1360px;
+    --shadow:0 1px 2px rgba(5,10,64,.06), 0 8px 24px rgba(5,10,64,.08);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--surface-2);
+    color:var(--ink);
+    font-family:"Barlow","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  h1,h2,h3,.font-head{
+    font-family:"Archivo","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-weight:700;
+    letter-spacing:-.01em;
+    margin:0;
+  }
+  img{max-width:100%;display:block;}
+  a{color:var(--blue);}
+
+  :focus-visible{
+    outline:3px solid var(--cyan);
+    outline-offset:2px;
+    border-radius:var(--radius-sm);
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+
+  /* ---------- Demo-Banner ---------- */
+  .demo-banner{
+    background:var(--navy-900);
+    color:#c9cfe8;
+    font-size:.8125rem;
+    letter-spacing:.02em;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .demo-banner .wrap{
+    display:flex;gap:10px;align-items:center;
+    padding-top:8px;padding-bottom:8px;flex-wrap:wrap;
+  }
+  .demo-banner strong{
+    color:#fff;font-family:"Archivo",sans-serif;font-weight:600;
+    letter-spacing:.06em;font-size:.75rem;
+  }
+  .demo-dot{
+    width:7px;height:7px;border-radius:50%;background:var(--cyan);
+    flex:none;box-shadow:0 0 0 3px rgba(0,168,224,.2);
+  }
+
+  /* ---------- Kopfzeile ---------- */
+  header.site{
+    background:var(--surface);
+    border-bottom:1px solid var(--lines);
+    position:sticky;top:0;z-index:40;
+  }
+  header.site .wrap{
+    display:flex;align-items:center;gap:24px;
+    padding-top:14px;padding-bottom:14px;
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;}
+  .brand-mark{
+    font-family:"Archivo",sans-serif;font-weight:700;font-size:1.375rem;
+    color:var(--navy-900);letter-spacing:-.02em;
+  }
+  .brand-mark span{color:var(--blue);}
+  .brand-claim{
+    font-size:.75rem;color:var(--muted);
+    display:none;
+  }
+  @media(min-width:900px){ .brand-claim{display:inline;} }
+
+  nav.main{margin-left:auto;display:none;gap:22px;}
+  @media(min-width:900px){ nav.main{display:flex;} }
+  nav.main a{
+    color:var(--ink);text-decoration:none;font-weight:500;font-size:.9375rem;
+    padding:4px 0;border-bottom:2px solid transparent;
+  }
+  nav.main a:hover{color:var(--navy-700);border-bottom-color:var(--cyan);}
+
+  .cart-button{
+    margin-left:auto;
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--surface-2);border:1px solid var(--lines);
+    border-radius:var(--radius);
+    padding:9px 14px;cursor:pointer;
+    font-family:"Barlow",sans-serif;font-size:.9375rem;font-weight:600;
+    color:var(--navy-900);
+  }
+  @media(min-width:900px){ .cart-button{margin-left:0;} }
+  .cart-button:hover{border-color:var(--cyan);background:#fff;}
+  .cart-badge{
+    min-width:22px;height:22px;padding:0 6px;
+    background:var(--red);color:#fff;border-radius:11px;
+    font-size:.75rem;font-weight:700;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-variant-numeric:tabular-nums;
+  }
+  .cart-badge[data-empty="true"]{background:var(--muted);}
+
+  /* ---------- Breadcrumb ---------- */
+  .crumbs{
+    font-size:.8125rem;color:var(--muted);
+    padding-top:18px;
+  }
+  .crumbs a{color:var(--muted);text-decoration:none;}
+  .crumbs a:hover{color:var(--blue);text-decoration:underline;}
+  .crumbs span{margin:0 7px;opacity:.5;}
+
+  /* ---------- Produkt-Layout ---------- */
+  .product{
+    display:grid;grid-template-columns:1fr;gap:28px;
+    padding:22px 0 44px;
+  }
+  @media(min-width:720px){
+    .product{grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:40px;}
+  }
+
+  .gallery{
+    background:var(--surface);border:1px solid var(--lines);
+    border-radius:var(--radius);overflow:hidden;
+  }
+  .gallery-main{background:#fff;padding:20px;}
+  .gallery-main img{
+    width:100%;height:auto;border-radius:var(--radius-sm);
+    aspect-ratio:4/3;object-fit:contain;
+  }
+  .gallery-note{
+    border-top:1px solid var(--lines);background:var(--surface-2);
+    padding:10px 20px;font-size:.75rem;color:var(--muted);
+  }
+  .gallery-note code{
+    font-size:.72rem;background:#fff;border:1px solid var(--lines);
+    padding:1px 5px;border-radius:var(--radius-sm);
+    word-break:break-all;
+  }
+
+  /* ---------- Kaufbox ---------- */
+  .buybox{
+    background:var(--surface);border:1px solid var(--lines);
+    border-radius:var(--radius);padding:26px;
+    box-shadow:var(--shadow);
+    align-self:start;
+  }
+  .eyebrow{
+    font-family:"Archivo",sans-serif;font-size:.6875rem;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--blue);
+    margin-bottom:8px;
+  }
+  .buybox h1{font-size:1.75rem;line-height:1.2;color:var(--navy-900);}
+  .artnr{font-size:.8125rem;color:var(--muted);margin-top:6px;}
+
+  .price-block{
+    margin:20px 0;padding:16px 0;
+    border-top:1px solid var(--lines);border-bottom:1px solid var(--lines);
+  }
+  .price-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .price{
+    font-family:"Archivo",sans-serif;font-weight:700;font-size:2rem;
+    color:var(--navy-900);font-variant-numeric:tabular-nums;
+    line-height:1.1;
+  }
+  .price[data-loading="true"]{opacity:.4;}
+  .price-unit{font-size:.875rem;color:var(--muted);}
+  .price-meta{font-size:.8125rem;color:var(--muted);margin-top:7px;}
+  .price-src{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:.75rem;color:var(--blue);margin-top:9px;
+  }
+  .spinner{
+    width:11px;height:11px;border:2px solid var(--lines);
+    border-top-color:var(--blue);border-radius:50%;
+    animation:spin .7s linear infinite;flex:none;
+  }
+  .spinner[hidden]{display:none;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @media(prefers-reduced-motion:reduce){ .spinner{animation-duration:2s;} }
+
+  fieldset{border:0;margin:0 0 18px;padding:0;}
+  legend, .field-label{
+    font-weight:600;font-size:.875rem;color:var(--ink);
+    padding:0;margin-bottom:8px;display:block;
+  }
+  .hint{font-weight:400;color:var(--muted);font-size:.8125rem;}
+
+  .radio-row{display:flex;flex-direction:column;gap:8px;}
+  .radio-opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid var(--lines);border-radius:var(--radius);
+    padding:11px 13px;cursor:pointer;background:#fff;
+  }
+  .radio-opt:hover{border-color:var(--cyan);}
+  .radio-opt input{margin-top:3px;accent-color:var(--blue);flex:none;}
+  .radio-opt:has(input:checked){
+    border-color:var(--blue);background:#f2f9fd;
+    box-shadow:inset 0 0 0 1px var(--blue);
+  }
+  .radio-opt-text{font-size:.9375rem;}
+  .radio-opt-text small{display:block;color:var(--muted);font-size:.8125rem;}
+
+  .qty{display:inline-flex;border:1px solid var(--lines);border-radius:var(--radius);overflow:hidden;background:#fff;}
+  .qty button{
+    width:42px;height:42px;border:0;background:var(--surface-2);
+    font-size:1.25rem;line-height:1;color:var(--navy-900);cursor:pointer;
+    font-family:"Barlow",sans-serif;
+  }
+  .qty button:hover:not(:disabled){background:var(--lines);}
+  .qty button:disabled{opacity:.35;cursor:not-allowed;}
+  .qty input{
+    width:62px;height:42px;border:0;border-left:1px solid var(--lines);
+    border-right:1px solid var(--lines);text-align:center;
+    font-family:"Barlow",sans-serif;font-size:1rem;font-weight:600;
+    font-variant-numeric:tabular-nums;color:var(--ink);
+  }
+  .qty input::-webkit-outer-spin-button,
+  .qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  .qty input[type=number]{-moz-appearance:textfield;}
+
+  textarea{
+    width:100%;border:1px solid var(--lines);border-radius:var(--radius);
+    padding:10px 12px;font-family:"Barlow",sans-serif;font-size:.9375rem;
+    color:var(--ink);resize:vertical;min-height:76px;background:#fff;
+  }
+  textarea:focus{border-color:var(--blue);}
+
+  .btn-cta{
+    width:100%;background:var(--red);color:#fff;border:0;
+    border-radius:var(--radius);padding:16px 20px;cursor:pointer;
+    font-family:"Archivo",sans-serif;font-weight:700;font-size:1.0625rem;
+    letter-spacing:.01em;
+    transition:background .15s ease;
+  }
+  .btn-cta:hover:not(:disabled){background:var(--red-dark);}
+  .btn-cta:disabled{cursor:progress;background:#9aa1ad;}
+  .btn-cta[data-state="done"]{background:#1c7a3e;cursor:default;}
+
+  .usp{
+    list-style:none;margin:16px 0 0;padding:0;
+    display:grid;gap:6px;font-size:.8125rem;color:var(--muted);
+  }
+  .usp li{display:flex;gap:8px;align-items:flex-start;}
+  .usp li::before{content:"\2713";color:var(--blue);font-weight:700;flex:none;}
+
+  .msg{
+    margin-top:14px;padding:11px 13px;border-radius:var(--radius);
+    font-size:.875rem;border:1px solid;
+  }
+  .msg:empty{display:none;}
+  .msg[data-kind="error"]{background:#fdf2f3;border-color:#f3c4c9;color:#8c1220;}
+  .msg[data-kind="ok"]{background:#f0f8f3;border-color:#c2e2ce;color:#1c5c34;}
+  .msg[data-kind="info"]{background:#f2f9fd;border-color:#bfe0f2;color:#0a4f78;}
+
+  /* ---------- Warenkorb-Drawer ---------- */
+  .drawer-backdrop{
+    position:fixed;inset:0;background:rgba(5,10,64,.45);
+    opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s;
+    z-index:50;
+  }
+  .drawer-backdrop[data-open="true"]{opacity:1;visibility:visible;}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);
+    background:var(--surface);z-index:51;
+    display:flex;flex-direction:column;
+    transform:translateX(100%);transition:transform .24s cubic-bezier(.32,.72,0,1);
+    box-shadow:-8px 0 32px rgba(5,10,64,.18);
+  }
+  .drawer[data-open="true"]{transform:translateX(0);}
+  @media(prefers-reduced-motion:reduce){
+    .drawer{transition:none;} .drawer-backdrop{transition:none;}
+  }
+  .drawer-head{
+    display:flex;align-items:center;gap:12px;
+    padding:18px 22px;border-bottom:1px solid var(--lines);
+    background:var(--navy-900);color:#fff;
+  }
+  .drawer-head h2{font-size:1.0625rem;color:#fff;}
+  .drawer-close{
+    margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,.3);
+    color:#fff;width:32px;height:32px;border-radius:var(--radius);
+    cursor:pointer;font-size:1.125rem;line-height:1;
+  }
+  .drawer-close:hover{background:rgba(255,255,255,.12);}
+  .drawer-body{flex:1;overflow-y:auto;padding:18px 22px;}
+  .drawer-foot{border-top:1px solid var(--lines);padding:16px 22px;background:var(--surface-2);}
+
+  .cart-item{
+    display:grid;grid-template-columns:56px 1fr;gap:13px;
+    padding:14px 0;border-bottom:1px solid var(--lines);
+  }
+  .cart-item img{
+    width:56px;height:56px;object-fit:cover;border-radius:var(--radius-sm);
+    border:1px solid var(--lines);background:#fff;
+  }
+  .cart-item-name{font-weight:600;font-size:.9375rem;line-height:1.3;}
+  .cart-item-attr{font-size:.8125rem;color:var(--muted);margin-top:3px;}
+  .cart-item-qty{
+    font-size:.8125rem;color:var(--ink);margin-top:6px;
+    display:flex;gap:10px;flex-wrap:wrap;
+  }
+  .cart-item-qty b{font-variant-numeric:tabular-nums;}
+
+  .totals{display:grid;gap:5px;font-size:.875rem;margin-bottom:12px;}
+  .totals div{display:flex;justify-content:space-between;gap:14px;color:var(--muted);}
+  .totals div.grand{
+    color:var(--navy-900);font-weight:700;font-size:1.0625rem;
+    font-family:"Archivo",sans-serif;
+    border-top:1px solid var(--lines);padding-top:8px;margin-top:4px;
+  }
+  .totals span{font-variant-numeric:tabular-nums;}
+
+  .btn-ghost{
+    display:block;width:100%;text-align:center;
+    background:#fff;border:1px solid var(--lines);color:var(--navy-900);
+    border-radius:var(--radius);padding:11px 14px;cursor:pointer;
+    font-family:"Barlow",sans-serif;font-weight:600;font-size:.9375rem;
+    text-decoration:none;
+  }
+  .btn-ghost:hover{border-color:var(--cyan);background:var(--surface-2);}
+  .btn-ghost + .btn-ghost{margin-top:8px;}
+  /* Der Weg zur Kasse ist die Hauptaktion im Warenkorb -- entsprechend
+     hervorgehoben, aber weiterhin ein normaler Link (kein Skript noetig). */
+  .btn-kasse{
+    background:var(--navy-900);border-color:var(--navy-900);color:#fff;
+    font-family:"Archivo",sans-serif;font-weight:700;margin-bottom:8px;
+  }
+  .btn-kasse:hover{background:var(--navy-700);border-color:var(--navy-700);color:#fff;}
+  .empty-cart{color:var(--muted);font-size:.9375rem;padding:26px 0;text-align:center;}
+
+  .verify-note{
+    font-size:.75rem;color:var(--muted);margin-top:10px;line-height:1.45;
+  }
+
+  /* ---------- Status / Beweis ---------- */
+  .proof{
+    background:var(--navy-900);color:#c9cfe8;margin-top:auto;
+    padding:30px 0 36px;
+  }
+  .proof h2{
+    color:#fff;font-size:1rem;margin-bottom:4px;
+    font-family:"Archivo",sans-serif;
+  }
+  .proof p.lead{font-size:.8125rem;color:#8f98c0;margin:0 0 14px;max-width:78ch;}
+  .proof code{font-family:"Consolas",ui-monospace,monospace;font-size:.9em;color:#cfe4ff;}
+  .log{
+    background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1);
+    border-radius:var(--radius);padding:12px 14px;
+    font-family:"Consolas",ui-monospace,monospace;font-size:.78125rem;
+    line-height:1.7;max-height:210px;overflow-y:auto;
+  }
+  .log-row{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline;}
+  .log-row + .log-row{border-top:1px solid rgba(255,255,255,.06);padding-top:3px;margin-top:3px;}
+  .log-m{color:var(--cyan);font-weight:700;min-width:44px;}
+  .log-u{color:#e8ecf7;word-break:break-all;flex:1;min-width:0;}
+  .log-s{color:#7ee08a;font-weight:700;}
+  .log-s[data-bad="true"]{color:#ff9a9a;}
+  .log-t{color:#8f98c0;}
+  .log-empty{color:#8f98c0;}
+
+  footer.site{
+    background:#03062b;color:#6f78a3;font-size:.75rem;
+    padding:16px 0;
+  }
+  footer.site .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;}
+
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
+  body{display:flex;flex-direction:column;min-height:100vh;}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <div class="wrap">
+    <span class="demo-dot" aria-hidden="true"></span>
+    <strong>BR&Uuml;CKEN-DEMO</strong>
+    <span>neues Frontend, altes Backend. Der Besucher verl&auml;sst diese Seite nie.</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <span class="brand-mark">Matten<span>fuchs</span></span>
+      <span class="brand-claim">individuell &middot; werbewirksam &middot; sauber</span>
+    </a>
+    <nav class="main" aria-label="Hauptnavigation">
+      <a href="#">Logomatten</a>
+      <a href="#">Sauberlaufmatten</a>
+      <a href="#">Arbeitsplatzmatten</a>
+      <a href="#">Miet-Service</a>
+    </nav>
+    <button class="cart-button" id="cartBtn" aria-haspopup="dialog" aria-controls="drawer">
+      <span aria-hidden="true">&#128722;</span>
+      <span>Warenkorb</span>
+      <span class="cart-badge" id="cartBadge" data-empty="true">0</span>
+      <span class="sr-only" id="cartBadgeSr">0 Artikel im Warenkorb</span>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+
+  <nav class="crumbs" aria-label="Sie sind hier">
+    <a href="#">Start</a><span>&rsaquo;</span>
+    <a href="#">Logomatten</a><span>&rsaquo;</span>
+    <a href="#">Bierbankmatten</a><span>&rsaquo;</span>
+    Bierbankmatte: Pils
+  </nav>
+
+  <div class="product">
+
+    <!-- Bild -->
+    <section class="gallery" aria-label="Produktbild">
+      <div class="gallery-main">
+        <img src="/api/img/bild/Bierbank_Pils.jpg"
+             alt="Bierbankmatte mit Pils-Motiv, aufgelegt auf einer Bierbank" width="800" height="600" />
+      </div>
+      <p class="gallery-note">
+        Bild liegt weiterhin im Altsystem und wird &uuml;ber den Proxy geholt:
+        <code>/api/img/&hellip;</code> &rarr; <code>matten.de/media/bild/Bierbank_Pils.jpg</code>
+      </p>
+    </section>
+
+    <!-- Kaufbox -->
+    <section class="buybox" aria-label="Produkt kaufen">
+      <p class="eyebrow">Logomatten &middot; Bierbankmatten</p>
+      <h1>Bierbankmatte: Pils</h1>
+      <p class="artnr">Art.-Nr. <strong>6303041</strong> &middot; interne Artikel-ID 278</p>
+
+      <div class="price-block">
+        <div class="price-row">
+          <span class="price" id="price" data-loading="true">&ndash;,&ndash;&nbsp;&euro;</span>
+          <span class="price-unit" id="priceUnit">inkl. MwSt.</span>
+        </div>
+        <p class="price-meta" id="priceMeta">Preis wird geladen &hellip;</p>
+        <p class="price-src">
+          <span class="spinner" id="priceSpin" hidden></span>
+          <span id="priceSrc">Preis kommt live von matten.de</span>
+        </p>
+      </div>
+
+      <!-- onsubmit="return false" ist die zweite Sicherung: selbst wenn das
+           Skript ausfaellt, navigiert die Seite niemals zum Altsystem. -->
+      <form id="buyForm" novalidate action="" onsubmit="return false">
+
+        <fieldset>
+          <legend>Individuelle Bedruckung</legend>
+          <div class="radio-row">
+            <label class="radio-opt">
+              <input type="radio" name="attribut" value="nein" checked />
+              <span class="radio-opt-text">Nein &ndash; Standardmotiv
+                <small>Motiv wie abgebildet, ohne eigenes Logo.</small></span>
+            </label>
+            <label class="radio-opt">
+              <input type="radio" name="attribut" value="ja" />
+              <span class="radio-opt-text">Ja &ndash; mit eigener Vorlage
+                <small>Vorlage-Datei senden an info@matten.de</small></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <label class="field-label" for="anzahl">Menge</label>
+          <div class="qty">
+            <button type="button" id="qtyMinus" aria-label="Menge verringern">&minus;</button>
+            <input type="number" id="anzahl" name="anzahl" value="1" min="1" max="999" step="1"
+                   inputmode="numeric" aria-label="Menge in St&uuml;ck" />
+            <button type="button" id="qtyPlus" aria-label="Menge erh&ouml;hen">+</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <label class="field-label" for="kommentar">
+            Ihr Kommentar <span class="hint">(optional)</span>
+          </label>
+          <textarea id="kommentar" name="kommentar" maxlength="500"
+                    placeholder="z.&nbsp;B. Wunschfarbe, Liefertermin, R&uuml;ckfragen &hellip;"></textarea>
+        </fieldset>
+
+        <button type="submit" class="btn-cta" id="addBtn" data-state="idle">In den Warenkorb</button>
+
+        <p class="msg" id="formMsg" role="status" aria-live="polite" data-kind="info"></p>
+
+        <ul class="usp">
+          <li>Versand nach Deutschland, Preise laut Altsystem</li>
+          <li>&Uuml;ber 35 Jahre Erfahrung &middot; Der Mattenfuchs-Shop</li>
+          <li>Bestellstrecke angebunden &ndash; nur Vorkasse und Rechnung, kein Geldfluss</li>
+        </ul>
+      </form>
+    </section>
+  </div>
+</main>
+
+<!-- Beweis-Bereich -->
+<section class="proof" aria-label="Status der Proxy-Aufrufe">
+  <div class="wrap">
+    <h2>Status &ndash; was gerade wirklich passiert ist</h2>
+    <p class="lead">
+      Jede Zeile ist ein echter Aufruf, den der lokale Proxy an matten.de geschickt hat.
+      Auf dieser Seite spricht Ihr Browser mit dem Altsystem gar nicht &ndash; auch das
+      Produktbild kommt &uuml;ber den Proxy (<code>/api/img/&hellip;</code>), und die
+      Schriften liegen lokal.
+      Die einzige Ausnahme sind die Beweis-Ansichten
+      (<code>/api/cart/raw</code>, <code>/api/kasse/raw</code>): Sie zeigen die
+      Originalseite des alten Shops und laden deren Bilder und Stile deshalb
+      direkt von dort. Deren Formulare und Kn&ouml;pfe schaltet der Proxy vorher ab.
+    </p>
+    <div class="log" id="log" role="log" aria-live="polite" aria-label="Protokoll der Backend-Aufrufe">
+      <div class="log-row log-empty">Noch keine Aufrufe. Preis oder Warenkorb ausl&ouml;sen &hellip;</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Br&uuml;cken-Demo &middot; lokaler Node-Proxy &middot; Backend: matten.de</span>
+    <span>Kasse angebunden &ndash; nur Vorkasse und Rechnung, dabei flie&szlig;t kein Geld.</span>
+  </div>
+</footer>
+
+<!-- Warenkorb-Drawer -->
+<div class="drawer-backdrop" id="backdrop" data-open="false" hidden></div>
+<aside class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true"
+       aria-labelledby="drawerTitle" aria-hidden="true" inert>
+  <div class="drawer-head">
+    <span aria-hidden="true">&#128722;</span>
+    <h2 id="drawerTitle">Ihr Warenkorb</h2>
+    <button class="drawer-close" id="drawerClose" aria-label="Warenkorb schlie&szlig;en">&times;</button>
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <p class="empty-cart">Der Warenkorb wird geladen &hellip;</p>
+  </div>
+  <div class="drawer-foot">
+    <div class="totals" id="totals"></div>
+    <a class="btn-ghost btn-kasse" href="/kasse.html">Zur Kasse &ndash; Bestellstrecke &rsaquo;</a>
+    <button class="btn-ghost" id="continueBtn">Weiter einkaufen</button>
+    <a class="btn-ghost" href="https://matten.de/warenkorb" target="_blank" rel="noopener noreferrer">
+      Zur Kontrolle: Warenkorb im alten Shop &ouml;ffnen &nearr;
+    </a>
+    <button class="btn-ghost" id="clearBtn">Warenkorb leeren</button>
+    <p class="verify-note">
+      Hinweis zur Kontrolle: Der alte Shop f&uuml;hrt im neuen Tab seine <em>eigene</em> Sitzung.
+      Die Sitzung dieser Demo geh&ouml;rt dem Proxy-Server, nicht Ihrem Browser &ndash;
+      der Artikel ist dort deshalb m&ouml;glicherweise nicht zu sehen.
+      Der Beweis steht im Status-Protokoll unten auf der Seite.
+    </p>
+  </div>
+</aside>
+
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  var priceEl   = $('price'),   priceMeta = $('priceMeta'), priceUnit = $('priceUnit');
+  var priceSpin = $('priceSpin'), priceSrc = $('priceSrc');
+  var anzahlEl  = $('anzahl'),  addBtn    = $('addBtn'),    formMsg   = $('formMsg');
+  var badge     = $('cartBadge'), badgeSr = $('cartBadgeSr');
+  var drawer    = $('drawer'),  backdrop  = $('backdrop'),  drawerBody = $('drawerBody');
+  var totalsEl  = $('totals'),  logEl     = $('log');
+
+  var lastFocus = null;
+  var priceTimer = null;
+  var doneTimer = null;
+
+  var eur = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+
+  /* ---------- Protokoll ---------- */
+  function logCalls(label, entries, ms) {
+    var rows = [];
+    (entries || []).forEach(function (e) {
+      rows.push({ m: e.method, u: e.url, s: e.status, t: e.ms });
+    });
+    if (!rows.length) rows.push({ m: label, u: '(kein Upstream-Aufruf)', s: '-', t: ms });
+    rows.forEach(function (r) {
+      var div = document.createElement('div');
+      div.className = 'log-row';
+      var bad = !(r.s >= 200 && r.s < 400);
+      div.innerHTML =
+        '<span class="log-m">' + esc(r.m) + '</span>' +
+        '<span class="log-u">' + esc(r.u) + '</span>' +
+        '<span class="log-s"' + (bad ? ' data-bad="true"' : '') + '>&rarr; ' + esc(r.s) + '</span>' +
+        '<span class="log-t">&middot; ' + esc(r.t) + '&nbsp;ms</span>';
+      var empty = logEl.querySelector('.log-empty');
+      if (empty) empty.remove();
+      logEl.insertBefore(div, logEl.firstChild);
+    });
+    while (logEl.children.length > 40) logEl.removeChild(logEl.lastChild);
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function setMsg(text, kind) {
+    formMsg.textContent = text || '';
+    formMsg.setAttribute('data-kind', kind || 'info');
+  }
+
+  /* ---------- Preis ---------- */
+
+  /** Aktuell gewaehlte Bedruckungs-Option ("ja" oder "nein"). */
+  function currentAttribut() {
+    var checked = document.querySelector('input[name="attribut"]:checked');
+    return checked ? checked.value : 'nein';
+  }
+
+  // Zaehler gegen Wettlaufe: eine langsamere aeltere Antwort darf eine
+  // neuere nicht ueberschreiben.
+  var priceSeq = 0;
+  var priceBusy = false;
+
+  /**
+   * Solange ein Preis geladen wird, darf nicht bestellt werden -- sonst
+   * koennte ein sehr schneller Klick "ja" in den Korb legen, waehrend auf
+   * der Seite noch der "nein"-Preis steht.
+   */
+  function updateCta() {
+    if (addBtn.getAttribute('data-state') !== 'idle') return;
+    addBtn.disabled = priceBusy;
+    addBtn.textContent = priceBusy ? 'Preis wird geprüft …' : 'In den Warenkorb';
+  }
+
+  function loadPrice() {
+    var n = clampQty(anzahlEl.value);
+    var attribut = currentAttribut();
+    var seq = ++priceSeq;
+
+    priceBusy = true;
+    updateCta();
+    priceEl.setAttribute('data-loading', 'true');
+    priceSpin.hidden = false;
+    priceSrc.textContent = 'Frage Preis bei matten.de ab …';
+
+    return fetch('/api/price?anzahl=' + encodeURIComponent(n) +
+          '&attribut=' + encodeURIComponent(attribut),
+          { headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (seq !== priceSeq) return;          // veraltete Antwort verwerfen
+        logCalls('GET', d.upstream);
+        priceBusy = false;
+        updateCta();
+        priceSpin.hidden = true;
+        priceEl.setAttribute('data-loading', 'false');
+
+        if (!d.ok || d.preis == null) {
+          priceEl.textContent = '–,– €';
+          priceMeta.textContent = 'Preis konnte nicht gelesen werden.';
+          priceSrc.textContent = 'Antwort vom Altsystem war unvollständig.';
+          return;
+        }
+        priceEl.textContent = eur.format(d.preis * n);
+        priceUnit.textContent = d.brutto ? 'inkl. MwSt.' : 'zzgl. MwSt.';
+
+        var meta = esc(eur.format(d.preis)) + ' je Stück &times; ' + n;
+        if (d.attributepreis) {
+          meta += ' &middot; davon ' + esc(eur.format(d.attributepreis)) + ' Bedruckung';
+        }
+        if (d.versand != null) {
+          meta += ' &middot; Versand ab ' + esc(eur.format(d.versand));
+        }
+        // Der Shop rechnet intern netto und rundet erst am Schluss. Bei
+        // mehreren Stück kann die Hochrechnung hier um einen Cent
+        // abweichen; maßgeblich ist immer der Warenkorb.
+        if (n > 1) {
+          meta += ' &middot; <em>Endbetrag laut Warenkorb</em>';
+        }
+        priceMeta.innerHTML = meta;
+        priceSrc.textContent = 'Preis live von matten.de gelesen ✓';
+      })
+      .catch(function (err) {
+        if (seq !== priceSeq) return;
+        priceBusy = false;
+        updateCta();
+        priceSpin.hidden = true;
+        priceEl.setAttribute('data-loading', 'false');
+        priceSrc.textContent = 'Preisabfrage fehlgeschlagen: ' + err.message;
+      });
+  }
+
+  // Die Bedruckungs-Option aendert den Preis (nein 47,60 € / ja 56,17 €).
+  // Ohne diesen Listener zeigte die Seite einen anderen Preis an, als
+  // anschliessend in den Warenkorb ginge.
+  Array.prototype.forEach.call(
+    document.querySelectorAll('input[name="attribut"]'),
+    function (radio) { radio.addEventListener('change', loadPrice); }
+  );
+
+  function clampQty(v) {
+    var n = parseInt(v, 10);
+    if (isNaN(n) || n < 1) n = 1;
+    if (n > 999) n = 999;
+    return n;
+  }
+
+  /** Nur Feld und Knopf-Zustaende angleichen -- ohne Preisabfrage. */
+  function syncQty() {
+    var n = clampQty(anzahlEl.value);
+    anzahlEl.value = n;
+    $('qtyMinus').disabled = n <= 1;
+    $('qtyPlus').disabled = n >= 999;
+    return n;
+  }
+
+  /** Angleichen und den Preis entprellt neu holen. */
+  function syncQtyAndReload() {
+    syncQty();
+    clearTimeout(priceTimer);
+    priceTimer = setTimeout(loadPrice, 220);
+  }
+
+  $('qtyMinus').addEventListener('click', function () {
+    anzahlEl.value = clampQty(anzahlEl.value) - 1; syncQtyAndReload();
+  });
+  $('qtyPlus').addEventListener('click', function () {
+    anzahlEl.value = clampQty(anzahlEl.value) + 1; syncQtyAndReload();
+  });
+  anzahlEl.addEventListener('input', syncQtyAndReload);
+  anzahlEl.addEventListener('blur', syncQtyAndReload);
+
+  /* ---------- Warenkorb rendern ---------- */
+  function renderCart(data) {
+    var count = data && data.count != null ? data.count : 0;
+    badge.textContent = count;
+    badge.setAttribute('data-empty', count > 0 ? 'false' : 'true');
+    // "Artikel" ist im Deutschen in Ein- und Mehrzahl gleich; unterschieden
+    // werden muss nur der leere Warenkorb.
+    badgeSr.textContent = count === 0
+      ? 'Warenkorb ist leer'
+      : count + ' Artikel im Warenkorb';
+
+    drawerBody.innerHTML = '';
+    var items = (data && data.items) || [];
+
+    if (!items.length) {
+      var p = document.createElement('p');
+      p.className = 'empty-cart';
+      p.textContent = 'Ihr Warenkorb ist noch leer.';
+      drawerBody.appendChild(p);
+    } else {
+      // Die Warenkorb-Tabelle des Altsystems weist NETTO aus, die
+      // Produktseite BRUTTO. Mit dem Steuersatz aus derselben Antwort
+      // zeigen wir beides an -- sonst sucht man die 56,17 € von oben hier
+      // vergeblich und hält die Zahlen für widersprüchlich.
+      var satz = data && typeof data.ustSatz === 'number' ? data.ustSatz : null;
+
+      items.forEach(function (it) {
+        var einzel = '';
+        if (it.preis) {
+          einzel = 'Einzel: <b>' + esc(it.preis) + '</b> netto';
+          if (satz != null && it.preisNum != null) {
+            einzel += ' &middot; <b>' + esc(eur.format(it.preisNum * (1 + satz / 100))) +
+                      '</b> brutto';
+          }
+        }
+
+        var row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML =
+          '<img src="/api/img/bild/Bierbank_Pils.jpg" alt="" />' +
+          '<div>' +
+            '<div class="cart-item-name">' + esc(it.name || 'Unbenannter Artikel') + '</div>' +
+            (it.attribut ? '<div class="cart-item-attr">' + esc(it.attribut) + '</div>' : '') +
+            (it.kommentar ? '<div class="cart-item-attr">Kommentar: ' + esc(it.kommentar) + '</div>' : '') +
+            '<div class="cart-item-qty">' +
+              '<span>Menge: <b>' + esc(it.anzahl == null ? '?' : it.anzahl) + '</b></span>' +
+              (einzel ? '<span>' + einzel + '</span>' : '') +
+              (it.summe ? '<span>Summe: <b>' + esc(it.summe) + '</b> netto</span>' : '') +
+            '</div>' +
+          '</div>';
+        drawerBody.appendChild(row);
+      });
+    }
+
+    totalsEl.innerHTML = '';
+    function total(label, value, cls) {
+      if (!value) return;
+      var d = document.createElement('div');
+      if (cls) d.className = cls;
+      d.innerHTML = '<span>' + esc(label) + '</span><span>' + esc(value) + '</span>';
+      totalsEl.appendChild(d);
+    }
+    total('Zwischensumme', data && data.zwischensumme);
+    total('Versandkosten', data && data.versand);
+    total('Umsatzsteuer', data && data.umsatzsteuer);
+    total('Gesamtsumme', data && data.gesamt, 'grand');
+  }
+
+  /* ---------- Drawer ---------- */
+  function openDrawer() {
+    if (drawer.getAttribute('data-open') === 'true') return;
+    lastFocus = document.activeElement;
+    backdrop.hidden = false;
+    drawer.removeAttribute('inert');          // erst jetzt fokussierbar
+    drawer.setAttribute('aria-hidden', 'false');
+    requestAnimationFrame(function () {
+      backdrop.setAttribute('data-open', 'true');
+      drawer.setAttribute('data-open', 'true');
+    });
+    $('drawerClose').focus();
+    document.addEventListener('keydown', onKeydown);
+  }
+  function closeDrawer() {
+    backdrop.setAttribute('data-open', 'false');
+    drawer.setAttribute('data-open', 'false');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.removeEventListener('keydown', onKeydown);
+    // Fokus zurueckholen, BEVOR der Drawer inert wird -- sonst landet der
+    // Fokus beim <body> und die Tastaturbedienung verliert ihren Platz.
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    drawer.setAttribute('inert', '');         // geschlossen = nicht tabbar
+    setTimeout(function () { backdrop.hidden = true; }, 240);
+  }
+  function onKeydown(e) {
+    if (e.key === 'Escape') { closeDrawer(); return; }
+    if (e.key !== 'Tab') return;
+    var f = drawer.querySelectorAll('button, [href], input, textarea, select');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
+  $('cartBtn').addEventListener('click', function () { openDrawer(); refreshCart(); });
+  $('drawerClose').addEventListener('click', closeDrawer);
+  $('continueBtn').addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+
+  /* ---------- API ---------- */
+  function refreshCart() {
+    return fetch('/api/cart', { headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { logCalls('GET', d.upstream); renderCart(d); return d; })
+      .catch(function (err) {
+        drawerBody.innerHTML = '<p class="empty-cart">Warenkorb konnte nicht geladen werden: ' +
+          esc(err.message) + '</p>';
+      });
+  }
+
+  $('clearBtn').addEventListener('click', function () {
+    var btn = this;
+    btn.disabled = true; btn.textContent = 'Wird geleert …';
+    fetch('/api/cart/clear', { method: 'POST', headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { logCalls('POST', d.upstream); renderCart(d); })
+      .catch(function () { /* still zeigen wir den alten Stand */ })
+      .then(function () { btn.disabled = false; btn.textContent = 'Warenkorb leeren'; });
+  });
+
+  $('buyForm').addEventListener('submit', function (e) {
+    e.preventDefault();                       // KEINE Navigation
+    if (addBtn.getAttribute('data-state') !== 'idle') return;
+    // Nicht bestellen, solange der angezeigte Preis noch geprueft wird.
+    if (priceBusy) return;
+
+    clearTimeout(doneTimer);
+    setMsg('', 'info');
+    addBtn.setAttribute('data-state', 'busy');
+    addBtn.disabled = true;
+    addBtn.textContent = 'Wird hinzugefügt …';
+
+    var payload = {
+      artikel: 278,
+      anzahl: clampQty(anzahlEl.value),
+      attribut: currentAttribut(),
+      kommentar: $('kommentar').value
+    };
+
+    fetch('/api/cart/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        logCalls('POST', res.d.upstream);
+        if (!res.ok || !res.d.ok) throw new Error(res.d.fehler || 'Das Altsystem hat die Anfrage abgelehnt.');
+
+        renderCart(res.d);
+        addBtn.setAttribute('data-state', 'done');
+        addBtn.textContent = '✓ Hinzugefügt';
+        setMsg('Der Artikel liegt jetzt im Warenkorb des alten Shops – ohne dass Sie diese Seite verlassen haben.', 'ok');
+        openDrawer();
+
+        doneTimer = setTimeout(function () {
+          addBtn.setAttribute('data-state', 'idle');
+          addBtn.disabled = false;
+          addBtn.textContent = 'In den Warenkorb';
+          updateCta();   // falls inzwischen wieder ein Preis laedt
+        }, 2000);
+      })
+      .catch(function (err) {
+        addBtn.setAttribute('data-state', 'idle');
+        addBtn.disabled = false;
+        addBtn.textContent = 'In den Warenkorb';
+        setMsg('Es hat nicht geklappt: ' + err.message +
+               ' Bitte prüfen Sie, ob der Proxy läuft und matten.de erreichbar ist.', 'error');
+      });
+  });
+
+  /* ---------- Start ---------- */
+  syncQty();      // nur Knopf-Zustaende; loadPrice() folgt direkt darunter
+
+  // Nacheinander, nicht parallel: der erste Aufruf holt sich das
+  // bridge_sid-Cookie. Liefen beide gleichzeitig los, bekaeme jeder eine
+  // eigene Sitzung -- und eine davon bliebe als Waise zurueck.
+  loadPrice().then(refreshCart);
+})();
+</script>
+</body>
+</html>

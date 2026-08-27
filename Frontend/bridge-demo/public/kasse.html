@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kasse &ndash; Mattenfuchs</title>
+<meta name="robots" content="noindex, nofollow" />
+<!-- Schriften liegen lokal im Proxy (public/fonts/). Kein Google Fonts,
+     keine Fremdverbindung beim normalen Betrieb der Seite. -->
+<link href="/fonts/fonts.css" rel="stylesheet" />
+<style>
+  :root{
+    --navy-900:#050a40;
+    --navy-700:#000080;
+    --blue:#0072b8;
+    --cyan:#00a8e0;
+    --red:#d0021b;
+    --red-dark:#a80116;
+    --ink:#15181d;
+    --muted:#5c636e;
+    --lines:#dfe3e8;
+    --surface:#ffffff;
+    --surface-2:#f4f6f8;
+    --radius:3px;
+    --radius-sm:2px;
+    --maxw:1360px;
+    --shadow:0 1px 2px rgba(5,10,64,.06), 0 8px 24px rgba(5,10,64,.08);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;background:var(--surface-2);color:var(--ink);
+    font-family:"Barlow","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-size:16px;line-height:1.55;
+    display:flex;flex-direction:column;min-height:100vh;
+  }
+  h1,h2,h3,h4{
+    font-family:"Archivo","Segoe UI",system-ui,-apple-system,sans-serif;
+    font-weight:700;letter-spacing:-.01em;margin:0;
+  }
+  img{max-width:100%;display:block;}
+  a{color:var(--blue);}
+  :focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:var(--radius-sm);}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;width:100%;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+
+  /* ---------- Banner / Kopf ---------- */
+  .demo-banner{
+    background:var(--navy-900);color:#c9cfe8;font-size:.8125rem;
+    letter-spacing:.02em;border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .demo-banner .wrap{display:flex;gap:10px;align-items:center;padding:8px 20px;flex-wrap:wrap;}
+  .demo-banner strong{color:#fff;font-family:"Archivo",sans-serif;font-weight:600;letter-spacing:.06em;font-size:.75rem;}
+  .demo-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex:none;box-shadow:0 0 0 3px rgba(0,168,224,.2);}
+
+  header.site{background:var(--surface);border-bottom:1px solid var(--lines);}
+  header.site .wrap{display:flex;align-items:center;gap:24px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;}
+  .brand-mark{font-family:"Archivo",sans-serif;font-weight:700;font-size:1.375rem;color:var(--navy-900);letter-spacing:-.02em;}
+  .brand-mark span{color:var(--blue);}
+  .back-link{margin-left:auto;font-size:.9375rem;font-weight:600;text-decoration:none;}
+  .back-link:hover{text-decoration:underline;}
+
+  /* ---------- Warnbalken ---------- */
+  .live-warn{
+    background:#fdf2f3;border-bottom:2px solid var(--red);
+    color:#8c1220;font-size:.875rem;
+  }
+  .live-warn .wrap{padding:11px 20px;display:flex;gap:10px;align-items:flex-start;}
+  .live-warn strong{font-family:"Archivo",sans-serif;}
+
+  /* ---------- Stepper ---------- */
+  .stepper{padding:22px 0 6px;}
+  .stepper ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;}
+  .stepper li{flex:1 1 150px;}
+  .stepper .st{
+    display:flex;gap:9px;align-items:center;width:100%;text-align:left;
+    background:var(--surface);border:1px solid var(--lines);border-radius:var(--radius);
+    padding:10px 12px;font-family:"Barlow",sans-serif;font-size:.875rem;
+    color:var(--muted);cursor:default;
+  }
+  .stepper .st[data-state="aktiv"]{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);color:var(--navy-900);font-weight:600;background:#f2f9fd;}
+  .stepper .st[data-state="fertig"]{color:var(--navy-900);}
+  .st-num{
+    width:24px;height:24px;flex:none;border-radius:50%;background:var(--surface-2);
+    border:1px solid var(--lines);display:inline-flex;align-items:center;justify-content:center;
+    font-size:.75rem;font-weight:700;font-variant-numeric:tabular-nums;
+  }
+  .st[data-state="aktiv"] .st-num{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .st[data-state="fertig"] .st-num{background:#1c7a3e;border-color:#1c7a3e;color:#fff;}
+
+  /* ---------- Layout ---------- */
+  .checkout{display:grid;grid-template-columns:1fr;gap:24px;padding:14px 0 44px;}
+  @media(min-width:960px){ .checkout{grid-template-columns:minmax(0,1.5fr) minmax(320px,.8fr);gap:32px;align-items:start;} }
+
+  .card{
+    background:var(--surface);border:1px solid var(--lines);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);
+  }
+  .card + .card{margin-top:20px;}
+  .card > h2{font-size:1.25rem;color:var(--navy-900);}
+  .card > h3{font-size:1rem;color:var(--navy-900);margin-top:22px;}
+  .lead{color:var(--muted);font-size:.9375rem;margin:6px 0 18px;}
+  .eyebrow{
+    font-family:"Archivo",sans-serif;font-size:.6875rem;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0 0 6px;
+  }
+  section.step[hidden]{display:none;}
+
+  /* ---------- Formularfelder ---------- */
+  fieldset{border:0;margin:0 0 18px;padding:0;}
+  legend{font-family:"Archivo",sans-serif;font-weight:700;font-size:1rem;color:var(--navy-900);padding:0 0 4px;}
+  .feld{margin-bottom:14px;}
+  .feld label{display:block;font-weight:600;font-size:.875rem;margin-bottom:5px;}
+  .feld .req{color:var(--red);}
+  .feld .hint{display:block;font-weight:400;color:var(--muted);font-size:.8125rem;margin-top:3px;}
+  input[type=text],input[type=email],input[type=password],select,textarea{
+    width:100%;border:1px solid var(--lines);border-radius:var(--radius);
+    padding:10px 12px;font-family:"Barlow",sans-serif;font-size:.9375rem;
+    color:var(--ink);background:#fff;
+  }
+  textarea{resize:vertical;min-height:70px;}
+  input:focus,select:focus,textarea:focus{border-color:var(--blue);}
+  .feld[data-fehler="true"] input,.feld[data-fehler="true"] select{border-color:var(--red);background:#fdf2f3;}
+  .feld-fehler{color:#8c1220;font-size:.8125rem;font-weight:600;margin:4px 0 0;}
+  .feld-fehler:empty{display:none;}
+  .zwei{display:grid;grid-template-columns:1fr;gap:0 14px;}
+  @media(min-width:560px){ .zwei{grid-template-columns:1fr 1fr;} .zwei-plz{grid-template-columns:110px 1fr;} }
+
+  .radio-row{display:flex;flex-direction:column;gap:8px;}
+  .radio-opt{
+    display:flex;gap:10px;align-items:flex-start;
+    border:1px solid var(--lines);border-radius:var(--radius);
+    padding:11px 13px;cursor:pointer;background:#fff;
+  }
+  .radio-opt:hover{border-color:var(--cyan);}
+  .radio-opt input{margin-top:3px;accent-color:var(--blue);flex:none;}
+  .radio-opt:has(input:checked){border-color:var(--blue);background:#f2f9fd;box-shadow:inset 0 0 0 1px var(--blue);}
+  .radio-opt-text{font-size:.9375rem;}
+  .radio-opt-text small{display:block;color:var(--muted);font-size:.8125rem;}
+
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:.9375rem;}
+  .check input{margin-top:4px;accent-color:var(--blue);flex:none;width:18px;height:18px;}
+
+  /* ---------- Knoepfe ---------- */
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+  .btn{
+    border-radius:var(--radius);padding:13px 20px;cursor:pointer;
+    font-family:"Archivo",sans-serif;font-weight:700;font-size:1rem;border:0;
+    text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .btn-primary{background:var(--navy-900);color:#fff;}
+  .btn-primary:hover:not(:disabled){background:var(--navy-700);}
+  .btn-secondary{background:#fff;border:1px solid var(--lines);color:var(--navy-900);font-family:"Barlow",sans-serif;font-weight:600;}
+  .btn-secondary:hover{border-color:var(--cyan);background:var(--surface-2);}
+  .btn:disabled{cursor:not-allowed;background:#9aa1ad;color:#fff;border-color:#9aa1ad;}
+
+  /* Der scharfe Knopf: rot, breit, mit Rahmen abgesetzt. */
+  .btn-scharf{
+    width:100%;background:var(--red);color:#fff;font-size:1.0625rem;padding:17px 20px;
+    box-shadow:0 0 0 3px rgba(208,2,27,.18);
+  }
+  .btn-scharf:hover:not(:disabled){background:var(--red-dark);}
+  .btn-scharf:disabled{background:#c3c8d0;color:#fff;box-shadow:none;}
+
+  /* ---------- Meldungen ---------- */
+  .msg{margin-top:14px;padding:11px 13px;border-radius:var(--radius);font-size:.875rem;border:1px solid;}
+  .msg:empty{display:none;}
+  .msg[data-kind="error"]{background:#fdf2f3;border-color:#f3c4c9;color:#8c1220;}
+  .msg[data-kind="ok"]{background:#f0f8f3;border-color:#c2e2ce;color:#1c5c34;}
+  .msg[data-kind="info"]{background:#f2f9fd;border-color:#bfe0f2;color:#0a4f78;}
+  .msg[data-kind="warn"]{background:#fff8e8;border-color:#f0dcae;color:#7a5600;}
+  .msg ul{margin:6px 0 0;padding-left:20px;}
+
+  .kasten{
+    background:var(--surface-2);border:1px solid var(--lines);border-radius:var(--radius);
+    padding:14px 16px;font-size:.875rem;color:var(--muted);
+  }
+  .kasten strong{color:var(--ink);}
+  .kasten + .kasten{margin-top:10px;}
+
+  /* ---------- Zusammenfassung ---------- */
+  .summary{position:sticky;top:16px;}
+  .summary h2{font-size:1rem;color:var(--navy-900);margin-bottom:10px;}
+  .sum-item{display:grid;grid-template-columns:48px 1fr;gap:11px;padding:11px 0;border-bottom:1px solid var(--lines);}
+  .sum-item img{width:48px;height:48px;object-fit:cover;border:1px solid var(--lines);border-radius:var(--radius-sm);background:#fff;}
+  .sum-name{font-weight:600;font-size:.9375rem;line-height:1.3;}
+  .sum-meta{font-size:.8125rem;color:var(--muted);margin-top:2px;}
+  .totals{display:grid;gap:5px;font-size:.875rem;margin-top:12px;}
+  .totals div{display:flex;justify-content:space-between;gap:14px;color:var(--muted);}
+  .totals div.grand{
+    color:var(--navy-900);font-weight:700;font-size:1.0625rem;font-family:"Archivo",sans-serif;
+    border-top:1px solid var(--lines);padding-top:8px;margin-top:4px;
+  }
+  .totals span{font-variant-numeric:tabular-nums;}
+
+  .review{display:grid;gap:14px;}
+  .review-block{border:1px solid var(--lines);border-radius:var(--radius);padding:14px 16px;background:var(--surface-2);}
+  .review-block h3{font-size:.875rem;font-family:"Archivo",sans-serif;color:var(--navy-900);margin-bottom:6px;}
+  .review-block p{margin:0;font-size:.9375rem;white-space:pre-line;}
+  .review-block .aendern{font-size:.8125rem;margin-left:8px;font-family:"Barlow",sans-serif;font-weight:500;}
+
+  details.raw{
+    border:1px solid var(--lines);border-radius:var(--radius);background:#fff;margin-top:16px;
+  }
+  details.raw > summary{
+    cursor:pointer;padding:13px 16px;font-weight:700;font-family:"Archivo",sans-serif;
+    font-size:.9375rem;color:var(--navy-900);list-style:none;display:flex;gap:9px;align-items:center;
+  }
+  details.raw > summary::-webkit-details-marker{display:none;}
+  details.raw > summary::before{content:"\25B8";color:var(--blue);font-size:.9em;}
+  details.raw[open] > summary::before{content:"\25BE";}
+  details.raw .raw-body{
+    border-top:1px solid var(--lines);padding:14px 16px;
+    background:#03062b;color:#cfe4ff;border-radius:0 0 var(--radius) var(--radius);
+  }
+  details.raw pre{
+    margin:0;font-family:"Consolas",ui-monospace,monospace;font-size:.78125rem;
+    line-height:1.65;white-space:pre-wrap;word-break:break-word;
+  }
+
+  .scharf-box{
+    border:2px solid var(--red);border-radius:var(--radius);
+    padding:18px;margin-top:20px;background:#fff;
+  }
+  .scharf-box h3{font-size:1rem;color:#8c1220;margin-bottom:8px;}
+
+  /* ---------- Ergebnis ---------- */
+  .ergebnis-nr{
+    font-family:"Archivo",sans-serif;font-weight:700;font-size:1.75rem;
+    color:var(--navy-900);margin:8px 0;
+  }
+
+  /* ---------- Protokoll ---------- */
+  .proof{background:var(--navy-900);color:#c9cfe8;margin-top:auto;padding:30px 0 36px;}
+  .proof h2{color:#fff;font-size:1rem;margin-bottom:4px;font-family:"Archivo",sans-serif;}
+  .proof p.lead{font-size:.8125rem;color:#8f98c0;margin:0 0 14px;max-width:78ch;}
+  .proof code{font-family:"Consolas",ui-monospace,monospace;font-size:.9em;color:#cfe4ff;}
+  .log{
+    background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);
+    padding:12px 14px;font-family:"Consolas",ui-monospace,monospace;font-size:.78125rem;
+    line-height:1.7;max-height:230px;overflow-y:auto;
+  }
+  .log-row{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline;}
+  .log-row + .log-row{border-top:1px solid rgba(255,255,255,.06);padding-top:3px;margin-top:3px;}
+  .log-m{color:var(--cyan);font-weight:700;min-width:44px;}
+  .log-u{color:#e8ecf7;word-break:break-all;flex:1;min-width:0;}
+  .log-s{color:#7ee08a;font-weight:700;}
+  .log-s[data-bad="true"]{color:#ff9a9a;}
+  .log-t{color:#8f98c0;}
+  .log-empty{color:#8f98c0;}
+
+  footer.site{background:#03062b;color:#6f78a3;font-size:.75rem;padding:16px 0;}
+  footer.site .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;}
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <div class="wrap">
+    <span class="demo-dot" aria-hidden="true"></span>
+    <strong>BR&Uuml;CKEN-DEMO &middot; KASSE</strong>
+    <span>Die Bestellung entsteht im alten Shop matten.de &ndash; Sie bleiben die ganze Zeit hier.</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="brand-mark">Matten<span>fuchs</span></span>
+    </a>
+    <a class="back-link" href="/">&larr; Zur&uuml;ck zum Produkt</a>
+  </div>
+</header>
+
+<div class="live-warn">
+  <div class="wrap">
+    <span aria-hidden="true">&#9888;</span>
+    <p style="margin:0">
+      <strong>Achtung, Livesystem.</strong> Am Ende dieser Strecke entsteht eine
+      <em>echte</em> Bestellung im Altsystem matten.de. Angeboten werden nur
+      <strong>Vorkasse</strong> und <strong>Rechnung</strong> &ndash; dabei
+      flie&szlig;t kein Geld, es entsteht nur ein Datensatz.
+      Bitte l&ouml;schen Sie die Testbestellung anschlie&szlig;end im Admin-Backend.
+    </p>
+  </div>
+</div>
+
+<main class="wrap" id="main">
+
+  <nav class="stepper" aria-label="Fortschritt der Bestellung">
+    <ol>
+      <li><span class="st" id="stepBtn1" data-state="aktiv"><span class="st-num">1</span> Konto</span></li>
+      <li><span class="st" id="stepBtn2" data-state="offen"><span class="st-num">2</span> Lieferadresse</span></li>
+      <li><span class="st" id="stepBtn3" data-state="offen"><span class="st-num">3</span> Versand &amp; Zahlung</span></li>
+      <li><span class="st" id="stepBtn4" data-state="offen"><span class="st-num">4</span> Pr&uuml;fen &amp; Bestellen</span></li>
+      <li><span class="st" id="stepBtn5" data-state="offen"><span class="st-num">5</span> Ergebnis</span></li>
+    </ol>
+  </nav>
+
+  <div class="checkout">
+    <div>
+
+      <!-- ============ Schritt 1: Konto ============ -->
+      <section class="step" id="step1" aria-labelledby="h1t">
+        <div class="card">
+          <p class="eyebrow">Schritt 1 von 5</p>
+          <h2 id="h1t">Kundenkonto</h2>
+          <p class="lead">
+            Der alte Shop verlangt f&uuml;r eine Bestellung <strong>kein</strong> Kundenkonto.
+            Sie k&ouml;nnen sich anmelden, wenn Sie eines haben &ndash; oder direkt weiter
+            zur Lieferadresse gehen.
+          </p>
+
+          <p class="msg" id="kontoStatus" role="status" aria-live="polite" data-kind="info"></p>
+
+          <form id="loginForm" novalidate action="" onsubmit="return false">
+            <fieldset>
+              <legend>Anmelden</legend>
+              <div class="feld">
+                <label for="loginEmail">E-Mail-Adresse</label>
+                <input type="email" id="loginEmail" name="loginEmail" autocomplete="username"
+                       placeholder="" value="" />
+                <span class="hint">Ihre eigene E-Mail-Adresse &ndash; an diese geht die Bestellbest&auml;tigung.</span>
+              </div>
+              <div class="feld">
+                <label for="loginPass">Passwort</label>
+                <input type="password" id="loginPass" name="loginPass" autocomplete="current-password" />
+              </div>
+              <button type="submit" class="btn btn-secondary" id="loginBtn">Anmelden</button>
+              <p class="msg" id="loginMsg" role="status" aria-live="polite" data-kind="error"></p>
+            </fieldset>
+          </form>
+
+          <h3>Noch kein Kundenkonto?</h3>
+          <p class="lead">
+            Ob das Altsystem eine Registrierung anbietet, fragt der Proxy live nach.
+            Das Ergebnis steht unver&auml;ndert unten.
+          </p>
+          <button type="button" class="btn btn-secondary" id="registerBtn">
+            Registrierung im Altsystem pr&uuml;fen
+          </button>
+          <p class="msg" id="registerMsg" role="status" aria-live="polite" data-kind="info"></p>
+
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="zu2">Weiter zur Lieferadresse</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Schritt 2: Lieferadresse ============ -->
+      <section class="step" id="step2" hidden aria-labelledby="h2t">
+        <div class="card">
+          <p class="eyebrow">Schritt 2 von 5</p>
+          <h2 id="h2t">Lieferadresse</h2>
+          <p class="lead">
+            Diese Felder sind exakt die des alten Shops. Gepr&uuml;ft wird ebenfalls dort &ndash;
+            Fehlermeldungen unten stammen w&ouml;rtlich aus dem Altsystem.
+          </p>
+
+          <div class="kasten">
+            <strong>Name und Firma sind als Testdaten vorbelegt.</strong>
+            E-Mail-Adresse, Stra&szlig;e, PLZ, Ort und Telefon tragen Sie bitte selbst ein &ndash;
+            an die E-Mail-Adresse geht die Auftragsbest&auml;tigung des Altsystems.
+          </div>
+
+          <form id="adrForm" novalidate action="" onsubmit="return false" style="margin-top:18px">
+            <div class="feld" data-feld="anrede">
+              <label for="f_anrede">Anrede <span class="req" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span></label>
+              <input type="text" id="f_anrede" name="anrede" value="Herr" autocomplete="honorific-prefix" />
+              <p class="feld-fehler" id="e_anrede"></p>
+            </div>
+
+            <div class="zwei">
+              <div class="feld" data-feld="vorname">
+                <label for="f_vorname">Vorname <span class="req" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span></label>
+                <input type="text" id="f_vorname" name="vorname" value="TEST" autocomplete="given-name" />
+                <p class="feld-fehler" id="e_vorname"></p>
+              </div>
+              <div class="feld" data-feld="name">
+                <label for="f_name">Nachname <span class="req" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span></label>
+                <input type="text" id="f_name" name="name" value="TEST Sehorz (Bitte ignorieren)" autocomplete="family-name" />
+                <p class="feld-fehler" id="e_name"></p>
+              </div>
+            </div>
+
+            <div class="feld" data-feld="firma">
+              <label for="f_firma">Firmenname</label>
+              <input type="text" id="f_firma" name="firma" value="TESTBESTELLUNG - kein echter Auftrag" autocomplete="organization" />
+              <span class="hint">Bewusst so vorbelegt: Im Admin-Backend ist die Bestellung damit sofort als Test erkennbar.</span>
+              <p class="feld-fehler" id="e_firma"></p>
+            </div>
+
+            <div class="feld" data-feld="strasse">
+              <label for="f_strasse">Stra&szlig;e und Hausnummer <span class="req" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span></label>
+              <input type="text" id="f_strasse" name="strasse" value="" autocomplete="street-address" />
+              <span class="hint">Bitte selbst eintragen.</span>
+              <p class="feld-fehler" id="e_strasse"></p>
+            </div>
+
+            <div class="zwei zwei-plz">
+              <div class="feld" data-feld="plz">
+                <label for="f_plz">PLZ <span class="req" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span></label>
+                <input type="text" id="f_plz" name="plz" value="" inputmode="numeric" autocomplete="postal-code" />
+                <p class="feld-fehler" id="e_plz"></p>
+              </div>
+              <div class="feld" data-feld="ort">
+                <label for="f_ort">Ort <span class="req" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span></label>
+                <input type="text" id="f_ort" name="ort" value="" autocomplete="address-level2" />
+                <p class="feld-fehler" id="e_ort"></p>
+              </div>
+            </div>
+
+            <div class="feld" data-feld="land">
+              <label for="f_land">Land <span class="req" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span></label>
+              <select id="f_land" name="land" autocomplete="country">
+                <option value="de">Deutschland</option>
+              </select>
+              <span class="hint">Liste kommt aus dem Altsystem.</span>
+              <p class="feld-fehler" id="e_land"></p>
+            </div>
+
+            <div class="zwei">
+              <div class="feld" data-feld="email">
+                <label for="f_email">E-Mail-Adresse <span class="req" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span></label>
+                <input type="email" id="f_email" name="email" value="" autocomplete="email" />
+                <span class="hint">Ihre eigene E-Mail-Adresse &ndash; an diese geht die Bestellbest&auml;tigung.</span>
+                <p class="feld-fehler" id="e_email"></p>
+              </div>
+              <div class="feld" data-feld="telefon">
+                <label for="f_telefon">Telefon <span class="req" aria-hidden="true">*</span><span class="sr-only">Pflichtfeld</span></label>
+                <input type="text" id="f_telefon" name="telefon" value="" autocomplete="tel" />
+                <span class="hint">Bitte selbst eintragen.</span>
+                <p class="feld-fehler" id="e_telefon"></p>
+              </div>
+            </div>
+
+            <div class="feld" data-feld="bemerkungen">
+              <label for="f_bemerkungen">Bemerkungen</label>
+              <textarea id="f_bemerkungen" name="bemerkungen">TESTBESTELLUNG aus der Bruecken-Demo - kein echter Auftrag, bitte nicht ausliefern.</textarea>
+              <p class="feld-fehler" id="e_bemerkungen"></p>
+            </div>
+
+            <div class="feld" data-feld="agb">
+              <label class="check" for="f_agb">
+                <input type="checkbox" id="f_agb" name="agb" />
+                <span>Ja, ich akzeptiere die AGB und die Widerrufsbelehrung des Altsystems.
+                  <span class="req" aria-hidden="true">*</span></span>
+              </label>
+              <p class="feld-fehler" id="e_agb"></p>
+            </div>
+
+            <p class="msg" id="adrMsg" role="status" aria-live="polite" data-kind="error"></p>
+
+            <div class="actions">
+              <button type="button" class="btn btn-secondary" id="zurueck2">Zur&uuml;ck</button>
+              <button type="submit" class="btn btn-primary" id="adrBtn">Adresse pr&uuml;fen und speichern</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ Schritt 3: Versand & Zahlung ============ -->
+      <section class="step" id="step3" hidden aria-labelledby="h3t">
+        <div class="card">
+          <p class="eyebrow">Schritt 3 von 5</p>
+          <h2 id="h3t">Versand und Zahlung</h2>
+          <p class="lead">
+            Beide Listen kommen aus dem Warenkorb des Altsystems. Nach dem Speichern
+            rechnet der alte Shop die Versandkosten neu &ndash; die Summe rechts
+            &auml;ndert sich entsprechend.
+          </p>
+
+          <form id="optForm" novalidate action="" onsubmit="return false">
+            <fieldset>
+              <legend>Versandart</legend>
+              <div class="radio-row" id="versandRow">
+                <p class="lead">Wird geladen &hellip;</p>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Zahlungsart</legend>
+              <div class="kasten" style="margin-bottom:10px">
+                <strong>Bei beiden flie&szlig;t kein Geld &ndash; es entsteht nur ein Datensatz.</strong>
+                Vorkasse und Rechnung l&ouml;sen keine Zahlung aus. PayPal und Kreditkarte
+                sind in dieser Demo gesperrt: sie w&uuml;rden zum Zahlungsdienstleister
+                Worldline/Ogone weiterleiten. Der Proxy lehnt sie mit
+                <code>400</code> ab, noch bevor er das Altsystem fragt.
+              </div>
+              <div class="radio-row" id="zahlungRow">
+                <p class="lead">Wird geladen &hellip;</p>
+              </div>
+              <p class="kasten" id="gesperrtHinweis" style="margin-top:10px"></p>
+            </fieldset>
+
+            <p class="msg" id="optMsg" role="status" aria-live="polite" data-kind="info"></p>
+
+            <div class="actions">
+              <button type="button" class="btn btn-secondary" id="zurueck3">Zur&uuml;ck</button>
+              <button type="submit" class="btn btn-primary" id="optBtn">Speichern und weiter</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ Schritt 4: Pruefen & Bestellen ============ -->
+      <section class="step" id="step4" hidden aria-labelledby="h4t">
+        <div class="card">
+          <p class="eyebrow">Schritt 4 von 5</p>
+          <h2 id="h4t">Pr&uuml;fen und bestellen</h2>
+          <p class="lead">
+            Alles unten stammt aus der Bestell&uuml;bersicht des Altsystems &ndash;
+            nichts davon rechnet dieses Frontend selbst aus.
+          </p>
+
+          <div class="review" id="review">
+            <p class="lead">&Uuml;bersicht wird geladen &hellip;</p>
+          </div>
+
+          <p class="msg" id="pruefMsg" role="status" aria-live="polite" data-kind="info"></p>
+
+          <details class="raw" id="rawDetails">
+            <summary>Was genau abgeschickt wird</summary>
+            <div class="raw-body">
+              <pre id="rawFinal">wird geladen &hellip;</pre>
+            </div>
+          </details>
+
+          <div class="scharf-box">
+            <h3>Scharfe Aktion</h3>
+            <p style="margin:0 0 12px;font-size:.9375rem">
+              Der n&auml;chste Klick legt im Livesystem matten.de eine Bestellung an
+              und l&ouml;st die Auftragsbest&auml;tigung per E-Mail aus.
+            </p>
+            <label class="check" for="scharf" style="margin-bottom:14px">
+              <input type="checkbox" id="scharf" />
+              <span>Mir ist bewusst, dass dies eine echte Bestellung im Live-System erzeugt.</span>
+            </label>
+            <button type="button" class="btn btn-scharf" id="bestellBtn" disabled>
+              Testbestellung verbindlich ausl&ouml;sen
+            </button>
+            <p class="msg" id="bestellMsg" role="status" aria-live="polite" data-kind="error"></p>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" id="zurueck4">Zur&uuml;ck zu Versand &amp; Zahlung</button>
+            <button type="button" class="btn btn-secondary" id="neuLaden">&Uuml;bersicht neu laden</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Schritt 5: Ergebnis ============ -->
+      <section class="step" id="step5" hidden aria-labelledby="h5t">
+        <div class="card">
+          <p class="eyebrow">Schritt 5 von 5</p>
+          <h2 id="h5t">Ergebnis</h2>
+          <div id="ergebnis" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ============ Seitenspalte: Bestellwert ============ -->
+    <aside class="card summary" aria-labelledby="sumT">
+      <h2 id="sumT">Ihre Bestellung</h2>
+      <div id="sumItems"><p class="lead">Wird geladen &hellip;</p></div>
+      <div class="totals" id="sumTotals"></div>
+      <p class="kasten" style="margin-top:14px">
+        Alle Betr&auml;ge stammen aus der Antwort von matten.de. Die Artikeltabelle
+        des Altsystems f&uuml;hrt <strong>netto</strong>, die Umsatzsteuer steht
+        als eigene Zeile.
+      </p>
+      <p style="margin-top:12px">
+        <a href="/api/cart/raw" target="_blank" rel="noopener">Rohantwort des Warenkorbs ansehen &nearr;</a>
+        <span class="hint">&Ouml;ffnet die Originalseite des alten Shops in einem neuen Tab.
+          Nur diese Ansicht l&auml;dt Bilder und Stile direkt von matten.de;
+          ihre Formulare sind abgeschaltet.</span>
+      </p>
+    </aside>
+  </div>
+</main>
+
+<section class="proof" aria-label="Status der Proxy-Aufrufe">
+  <div class="wrap">
+    <h2>Status &ndash; was gerade wirklich passiert ist</h2>
+    <p class="lead">
+      Jede Zeile ist ein echter Aufruf, den der lokale Proxy an matten.de geschickt hat.
+      Auf dieser Seite spricht Ihr Browser mit dem Altsystem nicht &ndash; auch
+      Produktbilder kommen &uuml;ber <code>/api/img/&hellip;</code>.
+      Die einzige Ausnahme sind die Beweis-Ansichten
+      (<code>/api/cart/raw</code>, <code>/api/kasse/raw</code>): Sie zeigen die
+      Originalseite und laden deren Bilder und Stile deshalb direkt von matten.de.
+      Deren Formulare und Knöpfe schaltet der Proxy vorher ab.
+    </p>
+    <div class="log" id="log" role="log" aria-live="polite" aria-label="Protokoll der Backend-Aufrufe">
+      <div class="log-row log-empty">Noch keine Aufrufe.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Br&uuml;cken-Demo &middot; lokaler Node-Proxy &middot; Backend: matten.de</span>
+    <span>Zahlungsarten: nur Vorkasse und Rechnung &ndash; es flie&szlig;t kein Geld.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+  var eur = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+  var logEl = $('log');
+
+  /** Zustand: die zuletzt gelesene Vorschau des Altsystems. */
+  var vorschau = null;
+  var aktuellerSchritt = 1;
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function setMsg(el, text, kind) {
+    if (typeof el === 'string') el = $(el);
+    if (!el) return;
+    el.textContent = text || '';
+    el.setAttribute('data-kind', kind || 'info');
+  }
+
+  function setMsgHtml(el, html, kind) {
+    if (typeof el === 'string') el = $(el);
+    if (!el) return;
+    el.innerHTML = html || '';
+    el.setAttribute('data-kind', kind || 'info');
+  }
+
+  /* ---------- Protokoll ---------- */
+  function logCalls(entries) {
+    (entries || []).forEach(function (e) {
+      var div = document.createElement('div');
+      div.className = 'log-row';
+      var bad = !(e.status >= 200 && e.status < 400);
+      div.innerHTML =
+        '<span class="log-m">' + esc(e.method) + '</span>' +
+        '<span class="log-u">' + esc(e.url) + '</span>' +
+        '<span class="log-s"' + (bad ? ' data-bad="true"' : '') + '>&rarr; ' + esc(e.status) + '</span>' +
+        '<span class="log-t">&middot; ' + esc(e.ms) + '&nbsp;ms</span>';
+      var empty = logEl.querySelector('.log-empty');
+      if (empty) empty.remove();
+      logEl.insertBefore(div, logEl.firstChild);
+    });
+    while (logEl.children.length > 60) logEl.removeChild(logEl.lastChild);
+  }
+
+  /* ---------- Netz ---------- */
+  function hole(url) {
+    return fetch(url, { headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.json().then(function (d) { return { http: r.status, ok: r.ok, d: d }; }); })
+      .then(function (res) { logCalls(res.d && res.d.upstream); return res; });
+  }
+
+  function sende(url, payload) {
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload || {})
+    })
+      .then(function (r) { return r.json().then(function (d) { return { http: r.status, ok: r.ok, d: d }; }); })
+      .then(function (res) { logCalls(res.d && res.d.upstream); return res; });
+  }
+
+  /* ---------- Schrittsteuerung ---------- */
+  function zeigeSchritt(n) {
+    aktuellerSchritt = n;
+    for (var i = 1; i <= 5; i++) {
+      $('step' + i).hidden = (i !== n);
+      var btn = $('stepBtn' + i);
+      btn.setAttribute('data-state', i === n ? 'aktiv' : (i < n ? 'fertig' : 'offen'));
+      if (i < n) btn.querySelector('.st-num').textContent = '✓';
+      else btn.querySelector('.st-num').textContent = String(i);
+    }
+    var h = $('step' + n).querySelector('h2');
+    if (h) { h.setAttribute('tabindex', '-1'); h.focus(); }
+    // Wer weiche Bewegung abgewaehlt hat, bekommt einen harten Sprung.
+    var sanft = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: sanft ? 'smooth' : 'auto' });
+  }
+
+  /* ---------- Seitenspalte ---------- */
+  function renderSummary(data) {
+    var items = (data && data.items) || [];
+    var box = $('sumItems');
+    box.innerHTML = '';
+    if (!items.length) {
+      box.innerHTML = '<p class="lead">Der Warenkorb ist leer. ' +
+        '<a href="/">Zur&uuml;ck zum Produkt</a></p>';
+    } else {
+      items.forEach(function (it) {
+        var d = document.createElement('div');
+        d.className = 'sum-item';
+        d.innerHTML =
+          '<img src="/api/img/bild/Bierbank_Pils.jpg" alt="" />' +
+          '<div>' +
+            '<div class="sum-name">' + esc(it.name || 'Artikel') + '</div>' +
+            (it.attribut ? '<div class="sum-meta">' + esc(it.attribut) + '</div>' : '') +
+            (it.kommentar ? '<div class="sum-meta">Kommentar: ' + esc(it.kommentar) + '</div>' : '') +
+            '<div class="sum-meta">Menge ' + esc(it.anzahl == null ? '?' : it.anzahl) +
+              (it.summe ? ' &middot; ' + esc(it.summe) + ' netto' : '') + '</div>' +
+          '</div>';
+        box.appendChild(d);
+      });
+    }
+
+    var t = $('sumTotals');
+    t.innerHTML = '';
+    function zeile(label, wert, cls) {
+      if (!wert) return;
+      var d = document.createElement('div');
+      if (cls) d.className = cls;
+      d.innerHTML = '<span>' + esc(label) + '</span><span>' + esc(wert) + '</span>';
+      t.appendChild(d);
+    }
+    zeile('Zwischensumme', data && data.zwischensumme);
+    zeile('Versandkosten', data && data.versand);
+    zeile('Umsatzsteuer', data && data.umsatzsteuer);
+    zeile('Gesamtsumme', data && data.gesamt, 'grand');
+  }
+
+  /* ---------- Schritt 1: Konto ---------- */
+  function zeigeKonto(konto) {
+    if (!konto) return;
+    setMsg('kontoStatus',
+      konto.eingeloggt
+        ? 'Diese Sitzung ist beim Altsystem angemeldet. ' + (konto.hinweis || '')
+        : 'Sie sind nicht angemeldet. Das ist in Ordnung: Der alte Shop bestellt auch ohne Kundenkonto. ' +
+          (konto.hinweis || ''),
+      konto.eingeloggt ? 'ok' : 'info');
+  }
+
+  $('loginForm').addEventListener('submit', function () {
+    var btn = $('loginBtn');
+    var email = $('loginEmail').value.trim();
+    var pass = $('loginPass').value;
+    if (!email || !pass) {
+      setMsg('loginMsg', 'Bitte E-Mail-Adresse und Passwort eingeben.', 'error');
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Wird geprüft …';
+    setMsg('loginMsg', '', 'info');
+    sende('/api/konto/login', { email: email, passwort: pass })
+      .then(function (res) {
+        var d = res.d;
+        if (d.ok && d.eingeloggt) {
+          setMsg('loginMsg', 'Angemeldet. Das Altsystem hat die Sitzung bestätigt.', 'ok');
+          zeigeKonto({ eingeloggt: true, hinweis: d.hinweis });
+        } else {
+          setMsg('loginMsg', d.fehler || 'Anmeldung nicht möglich.', 'error');
+        }
+      })
+      .catch(function (err) { setMsg('loginMsg', 'Fehler: ' + err.message, 'error'); })
+      .then(function () { btn.disabled = false; btn.textContent = 'Anmelden'; });
+  });
+
+  $('registerBtn').addEventListener('click', function () {
+    var btn = this;
+    btn.disabled = true; btn.textContent = 'Wird geprüft …';
+    sende('/api/konto/register', {})
+      .then(function (res) {
+        var d = res.d;
+        var meldungen = (d.fehler || []).map(function (f) {
+          return '<li>' + (f.feld ? '<strong>' + esc(f.feld) + ':</strong> ' : '') + esc(f.meldung) + '</li>';
+        }).join('');
+        if (!d.moeglich) {
+          setMsgHtml('registerMsg',
+            'Ergebnis der Live-Abfrage:<ul>' + meldungen + '</ul>' +
+            (d.seiteninhalt ? '<p style="margin:8px 0 0">Seiteninhalt des Altsystems: <em>' +
+              esc(d.seiteninhalt) + '</em></p>' : ''),
+            'warn');
+        } else {
+          setMsgHtml('registerMsg',
+            'Das Altsystem liefert ein Formular mit den Feldern: <code>' +
+            esc((d.felder || []).join(', ')) + '</code>.' +
+            (meldungen ? '<ul>' + meldungen + '</ul>' : ''), 'info');
+        }
+      })
+      .catch(function (err) { setMsg('registerMsg', 'Fehler: ' + err.message, 'error'); })
+      .then(function () { btn.disabled = false; btn.textContent = 'Registrierung im Altsystem prüfen'; });
+  });
+
+  $('zu2').addEventListener('click', function () { zeigeSchritt(2); });
+  $('zurueck2').addEventListener('click', function () { zeigeSchritt(1); });
+
+  /* ---------- Schritt 2: Adresse ---------- */
+  var ADR_FELDER = ['anrede','vorname','name','firma','strasse','plz','ort','land','email','telefon','bemerkungen','agb'];
+
+  function fehlerLeeren() {
+    ADR_FELDER.forEach(function (n) {
+      var p = $('e_' + n);
+      if (p) p.textContent = '';
+      var box = document.querySelector('.feld[data-feld="' + n + '"]');
+      if (box) box.setAttribute('data-fehler', 'false');
+    });
+  }
+
+  function fehlerZeigen(liste) {
+    var erste = null;
+    (liste || []).forEach(function (f) {
+      var p = $('e_' + f.feld);
+      if (p) p.textContent = f.meldung;
+      var box = document.querySelector('.feld[data-feld="' + f.feld + '"]');
+      if (box) box.setAttribute('data-fehler', 'true');
+      if (!erste) erste = $('f_' + f.feld);
+    });
+    if (erste && erste.focus) erste.focus();
+  }
+
+  $('adrForm').addEventListener('submit', function () {
+    var btn = $('adrBtn');
+    fehlerLeeren();
+    setMsg('adrMsg', '', 'info');
+    btn.disabled = true; btn.textContent = 'Wird geprüft …';
+
+    var payload = {
+      anrede: $('f_anrede').value,
+      vorname: $('f_vorname').value,
+      name: $('f_name').value,
+      firma: $('f_firma').value,
+      strasse: $('f_strasse').value,
+      plz: $('f_plz').value,
+      ort: $('f_ort').value,
+      land: $('f_land').value,
+      email: $('f_email').value,
+      telefon: $('f_telefon').value,
+      bemerkungen: $('f_bemerkungen').value,
+      agb: $('f_agb').checked
+    };
+
+    sende('/api/kasse/adresse', payload)
+      .then(function (res) {
+        var d = res.d;
+        if (d.gespeichert) {
+          setMsg('adrMsg', 'Das Altsystem hat die Adresse angenommen.', 'ok');
+          ladeOptionen().then(function () { zeigeSchritt(3); });
+        } else if (d.fehler && d.fehler.length) {
+          fehlerZeigen(d.fehler);
+          setMsg('adrMsg',
+            'Das Altsystem hat ' + d.fehler.length +
+            ' Feld(er) beanstandet. Die Meldungen stehen wörtlich an den Feldern.', 'error');
+        } else {
+          setMsg('adrMsg', d.fehler || 'Die Adresse konnte nicht gespeichert werden.', 'error');
+        }
+      })
+      .catch(function (err) { setMsg('adrMsg', 'Fehler: ' + err.message, 'error'); })
+      .then(function () { btn.disabled = false; btn.textContent = 'Adresse prüfen und speichern'; });
+  });
+
+  /* ---------- Schritt 3: Versand & Zahlung ---------- */
+  function renderOptionen(opt) {
+    if (!opt) return;
+
+    var vr = $('versandRow');
+    vr.innerHTML = '';
+    (opt.versandart.optionen || []).forEach(function (o) {
+      var l = document.createElement('label');
+      l.className = 'radio-opt';
+      l.innerHTML =
+        '<input type="radio" name="versandart" value="' + esc(o.wert) + '"' +
+        (o.gewaehlt ? ' checked' : '') + ' />' +
+        '<span class="radio-opt-text">' + esc(o.label) +
+        '<small>Wert im Altsystem: ' + esc(o.wert) + '</small></span>';
+      vr.appendChild(l);
+    });
+    if (!vr.children.length) vr.innerHTML = '<p class="lead">Das Altsystem bietet gerade keine Versandart an.</p>';
+
+    var zr = $('zahlungRow');
+    zr.innerHTML = '';
+    (opt.zahlungsart.optionen || []).forEach(function (o) {
+      var l = document.createElement('label');
+      l.className = 'radio-opt';
+      l.innerHTML =
+        '<input type="radio" name="zahlungsart" value="' + esc(o.wert) + '"' +
+        (o.gewaehlt ? ' checked' : '') + ' />' +
+        '<span class="radio-opt-text">' + esc(o.label) +
+        '<small>Kein Geldfluss &middot; Wert im Altsystem: ' + esc(o.wert) + '</small></span>';
+      zr.appendChild(l);
+    });
+    if (!zr.querySelector('input:checked') && zr.querySelector('input')) {
+      zr.querySelector('input').checked = true;
+    }
+
+    var gesperrt = opt.zahlungsart.abgelehnt || [];
+    $('gesperrtHinweis').innerHTML = gesperrt.length
+      ? '<strong>Gesperrt und darum nicht aufgeführt:</strong> ' +
+        gesperrt.map(function (g) { return esc(g.label) + ' (' + esc(g.wert) + ')'; }).join(', ') +
+        '. Diese Wege führen zum Zahlungsdienstleister.'
+      : '';
+  }
+
+  function ladeOptionen() {
+    return hole('/api/kasse/formular').then(function (res) {
+      var d = res.d;
+      renderOptionen(d.optionen);
+      renderSummary(d.warenkorb);
+      zeigeKonto(d.konto);
+      // Laenderliste des Altsystems ins Adressformular uebernehmen.
+      if (d.laender && d.laender.length) {
+        var sel = $('f_land');
+        var vorher = sel.value;
+        sel.innerHTML = '';
+        d.laender.forEach(function (l) {
+          var o = document.createElement('option');
+          o.value = l.wert; o.textContent = l.label;
+          if (l.wert === (vorher || 'de')) o.selected = true;
+          sel.appendChild(o);
+        });
+      }
+      return d;
+    });
+  }
+
+  $('zurueck3').addEventListener('click', function () { zeigeSchritt(2); });
+
+  $('optForm').addEventListener('submit', function () {
+    var btn = $('optBtn');
+    var v = document.querySelector('input[name="versandart"]:checked');
+    var z = document.querySelector('input[name="zahlungsart"]:checked');
+    if (!v || !z) {
+      setMsg('optMsg', 'Bitte Versandart und Zahlungsart wählen.', 'error');
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Wird gespeichert …';
+    setMsg('optMsg', '', 'info');
+
+    sende('/api/kasse/optionen', {
+      land: $('f_land').value || 'de',
+      versandart: v.value,
+      zahlungsart: z.value
+    })
+      .then(function (res) {
+        var d = res.d;
+        if (!res.ok || !d.ok) throw new Error(d.fehler || 'Das Altsystem hat die Auswahl abgelehnt.');
+        renderSummary(d);
+        renderOptionen(d.optionen);
+        setMsg('optMsg', 'Gespeichert. Der alte Shop hat neu gerechnet.', 'ok');
+        return ladeVorschau().then(function () { zeigeSchritt(4); });
+      })
+      .catch(function (err) { setMsg('optMsg', err.message, 'error'); })
+      .then(function () { btn.disabled = false; btn.textContent = 'Speichern und weiter'; });
+  });
+
+  /* ---------- Schritt 4: Pruefen ---------- */
+  function renderReview(v) {
+    var box = $('review');
+    box.innerHTML = '';
+    var u = v.uebersicht;
+
+    function block(titel, inhalt, schritt) {
+      var d = document.createElement('div');
+      d.className = 'review-block';
+      d.innerHTML =
+        '<h3>' + esc(titel) +
+        (schritt ? '<button type="button" class="aendern btn-link" data-schritt="' + schritt +
+          '" style="background:none;border:0;color:var(--blue);cursor:pointer;text-decoration:underline">ändern</button>' : '') +
+        '</h3><p>' + inhalt + '</p>';
+      box.appendChild(d);
+    }
+
+    if (!u) {
+      box.innerHTML = '<p class="msg" data-kind="warn">Das Altsystem gibt noch keine Bestellübersicht heraus.</p>';
+    } else {
+      block('Lieferadresse', esc(u.adresseText || '(keine Adresse)') +
+        (u.bemerkungen ? '\n\nBemerkungen: ' + esc(u.bemerkungen) : ''), 2);
+
+      var pos = (u.items || []).map(function (it) {
+        return esc(it.anzahl) + ' × ' + esc(it.name) +
+          (it.attribut ? ' (' + esc(it.attribut) + ')' : '') +
+          ' – ' + esc(it.summe) + ' netto';
+      }).join('\n');
+      block('Positionen', pos || '(leer)');
+
+      block('Beträge',
+        'Zwischensumme: ' + esc(u.zwischensumme) + '\n' +
+        'Versandkosten: ' + esc(u.versand) + '\n' +
+        'Umsatzsteuer' + (u.ustSatz != null ? ' (' + esc(u.ustSatz) + '%)' : '') + ': ' + esc(u.umsatzsteuer) + '\n' +
+        'Gesamtsumme: ' + esc(u.gesamt));
+
+      var vers = (v.optionen.versandart.optionen || []).filter(function (o) { return o.gewaehlt; })[0];
+      block('Versand und Zahlung',
+        'Versandart: ' + esc(vers ? vers.label : v.optionen.versandart.gewaehlt) + '\n' +
+        'Zahlungsart: ' + esc(u.zahlungsartText || v.optionen.zahlungsart.gewaehlt) +
+        '\nEs fließt kein Geld – es entsteht nur ein Datensatz.', 3);
+    }
+
+    Array.prototype.forEach.call(box.querySelectorAll('[data-schritt]'), function (b) {
+      b.addEventListener('click', function () { zeigeSchritt(Number(b.getAttribute('data-schritt'))); });
+    });
+
+    $('rawFinal').textContent = JSON.stringify(v.finalRequest, null, 2);
+
+    var frei = v.bereit === true;
+    $('scharf').disabled = !frei;
+    if (!frei) {
+      $('scharf').checked = false;
+      setMsgHtml('pruefMsg',
+        'Der Bestellabschluss ist noch nicht möglich:<ul>' +
+        (v.huerden || []).map(function (h) { return '<li>' + esc(h) + '</li>'; }).join('') + '</ul>',
+        'warn');
+    } else {
+      setMsg('pruefMsg',
+        'Das Altsystem zeigt den Absende-Knopf an – die Bestellung wäre jetzt möglich.', 'info');
+    }
+    pruefeScharf();
+  }
+
+  function ladeVorschau() {
+    return hole('/api/kasse/vorschau').then(function (res) {
+      vorschau = res.d;
+      renderReview(vorschau);
+      if (vorschau.warenkorb) {
+        renderSummary({
+          items: vorschau.warenkorb.items,
+          zwischensumme: vorschau.warenkorb.zwischensumme,
+          versand: vorschau.warenkorb.versand,
+          umsatzsteuer: vorschau.warenkorb.umsatzsteuer,
+          gesamt: vorschau.warenkorb.gesamt
+        });
+      }
+      return vorschau;
+    });
+  }
+
+  function pruefeScharf() {
+    var frei = vorschau && vorschau.bereit === true && $('scharf').checked;
+    $('bestellBtn').disabled = !frei;
+  }
+
+  $('scharf').addEventListener('change', pruefeScharf);
+  $('zurueck4').addEventListener('click', function () { zeigeSchritt(3); });
+  $('neuLaden').addEventListener('click', function () {
+    setMsg('pruefMsg', 'Wird neu gelesen …', 'info');
+    ladeVorschau();
+  });
+
+  $('bestellBtn').addEventListener('click', function () {
+    if (!$('scharf').checked) return;
+    var btn = this;
+    btn.disabled = true;
+    btn.textContent = 'Bestellung läuft …';
+    setMsg('bestellMsg', '', 'info');
+
+    sende('/api/kasse/bestellen', { bestaetigung: 'JA-BESTELLEN' })
+      .then(function (res) {
+        var d = res.d;
+        if (!res.ok || !d.ok) {
+          var extra = (d.huerden || []).map(function (h) { return '<li>' + esc(h) + '</li>'; }).join('');
+          setMsgHtml('bestellMsg',
+            esc(d.fehler || 'Das Altsystem hat die Bestellung nicht angenommen.') +
+            (extra ? '<ul>' + extra + '</ul>' : ''), 'error');
+          btn.disabled = false;
+          btn.textContent = 'Testbestellung verbindlich auslösen';
+          return;
+        }
+        zeigeErgebnis(d);
+        zeigeSchritt(5);
+      })
+      .catch(function (err) {
+        setMsg('bestellMsg', 'Fehler: ' + err.message, 'error');
+        btn.disabled = false;
+        btn.textContent = 'Testbestellung verbindlich auslösen';
+      });
+  });
+
+  /* ---------- Schritt 5: Ergebnis ---------- */
+  function zeigeErgebnis(d) {
+    var el = $('ergebnis');
+    el.innerHTML =
+      '<p class="msg" data-kind="ok" style="margin-top:0">' +
+        'Das Altsystem hat die Bestellung angenommen. Antwortseite: <code>' +
+        esc(d.finalUrl || '') + '</code> (HTTP ' + esc(d.status) + ').' +
+      '</p>' +
+      (d.bestellnummer
+        ? '<p style="margin:0;color:var(--muted);font-size:.875rem">Bestellnummer laut Altsystem</p>' +
+          '<p class="ergebnis-nr">' + esc(d.bestellnummer) + '</p>'
+        : '<div class="kasten"><strong>Keine Bestellnummer in der Antwort.</strong> ' +
+          'Der alte Shop zeigt nach dem Absenden nur eine Dankseite ohne Nummer. ' +
+          'Die Bestellung finden Sie im Admin-Backend unter <em>Bestellungen</em>, ' +
+          'erkennbar an der Firma &bdquo;TESTBESTELLUNG&ldquo;.</div>') +
+      '<h3 style="margin-top:20px">Antwort des Altsystems im Wortlaut</h3>' +
+      '<div class="kasten" style="white-space:pre-line">' + esc(d.rohantwort || '(leer)') + '</div>' +
+      '<div class="actions">' +
+        '<a class="btn btn-secondary" href="/api/kasse/raw" target="_blank" rel="noopener">' +
+          'Rohe Antwortseite als Beweis öffnen ↗</a>' +
+        '<a class="btn btn-secondary" href="/">Zurück zum Produkt</a>' +
+      '</div>' +
+      '<div class="msg" data-kind="warn" style="margin-top:18px">' +
+        'Diese Bestellung erscheint jetzt im Admin-Backend unter <strong>Bestellungen</strong>. ' +
+        'Nach der Prüfung dort löschen.' +
+      '</div>' +
+      '<details class="raw" style="margin-top:16px"><summary>Was abgeschickt wurde</summary>' +
+        '<div class="raw-body"><pre>' + esc(JSON.stringify(d.gesendet, null, 2)) + '</pre></div>' +
+      '</details>';
+  }
+
+  /* ---------- Start ---------- */
+  hole('/api/konto')
+    .then(function (res) {
+      zeigeKonto({ eingeloggt: res.d.eingeloggt, hinweis: res.d.hinweis });
+      // Gespeicherte Adresse des Altsystems uebernehmen, aber die
+      // Testvorbelegung fuer Name/Firma nicht ueberschreiben, wenn dort
+      // noch nichts steht.
+      var a = res.d.adresse;
+      if (a) {
+        ['strasse', 'plz', 'ort', 'email', 'telefon'].forEach(function (n) {
+          if (a[n]) $('f_' + n).value = a[n];
+        });
+        ['anrede', 'vorname', 'name', 'firma'].forEach(function (n) {
+          if (a[n]) $('f_' + n).value = a[n];
+        });
+        if (a.bemerkungen) $('f_bemerkungen').value = a.bemerkungen;
+      }
+      return ladeOptionen();
+    })
+    .catch(function (err) {
+      setMsg('kontoStatus', 'Der Proxy antwortet nicht: ' + err.message +
+        ' Bitte prüfen, ob node server.mjs läuft.', 'error');
+    });
+})();
+</script>
+</body>
+</html>
