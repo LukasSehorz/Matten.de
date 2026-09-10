@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schmutzfangmatten, Logomatten und Eingangsmatten nach Maß | Mattenfuchs</title>
+<meta name="description" content="Mattenfuchs — Fußmatten, Logomatten, Kokos-, Aluminium- und Gummimatten nach Maß. Beratung, Muster, Lieferung. Seit über 35 Jahren.">
+<!-- Vorschau der Modernisierung: noch nicht fuer Suchmaschinen. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="icon" href="assets/img/favicon.ico" sizes="16x16">
+<link rel="stylesheet" href="assets/css/net.css">
+<link rel="stylesheet" href="assets/css/seiten-katalog.css">
+</head>
+<body data-aktiv="/">
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Kopf und Navigation baut assets/js/net-shell.js hier ein. -->
+<div id="kopf"></div>
+
+<main id="inhalt">
+
+  <!-- ====================================================================
+       1  Datenschutzhinweis
+       Steht auf matten.net an genau dieser Stelle, direkt ueber dem
+       Karussell. Text woertlich aus spec/texte/startseite.md.
+       ==================================================================== -->
+  <section class="abschnitt abschnitt--flach abschnitt--grau" aria-label="Datenschutzhinweis">
+    <div class="container container--eng">
+      <p class="klein text-mitte" style="margin:0;color:var(--muted)">
+        <strong>Datenschutzerklärung der FUCHSIUS multi-media GmbH.</strong>
+        Als Betreiber dieser Seite nutzen wir Cookies. Wir behandeln Ihre Daten sehr
+        sorgsam und vertraulich, entsprechend der EU-Datenschutz-Grundverordnung (DSGVO)
+        und unserer Datenschutzerklärung.
+        <a href="seite.html?seite=data-protection">Mehr Information</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       2  Karussell (Buehne)
+       11 Folien, Titel und Untertitel woertlich von matten.net. Die Bilder
+       kommen aus dem Live-Katalog von matten.de ueber /api/img/ — es wird
+       keine Datei von matten.net oder matten.de direkt geladen.
+       ==================================================================== -->
+  <section class="buehne" aria-labelledby="buehne-titel">
+    <div class="container">
+      <div style="padding-block:var(--sp-6)">
+        <p class="label label--invers">Direkt vom Hersteller · seit über 35 Jahren</p>
+        <h1 class="titel-buehne" id="buehne-titel">Die Matte, die zu Ihrem Eingang passt</h1>
+        <p class="vorspann">Jede Größe, jede Farbe, Ihr Logo. Wir fertigen Schmutzfang- und
+          Logomatten nach Maß und liefern sie einbaufertig.</p>
+
+        <div class="karussell mt-6">
+          <div class="karussell__spur" id="karussell" role="region"
+               aria-label="Bildstrecke: Ausschnitte aus dem Sortiment" tabindex="0">
+            <!-- Folien setzt assets/js/seite-start.js ein. -->
+          </div>
+          <ul class="karussell__punkte" id="karussell-punkte"></ul>
+        </div>
+
+        <ul class="kennwerte mt-7" id="kennwerte">
+          <li class="kennwert"><span class="kennwert__zahl" data-kennwert="gruppen">–</span><span class="kennwert__text">Warengruppen</span></li>
+          <li class="kennwert"><span class="kennwert__zahl" data-kennwert="artikel">–</span><span class="kennwert__text">Artikel im Katalog</span></li>
+          <li class="kennwert"><span class="kennwert__zahl">66</span><span class="kennwert__text">Farben zur Wahl</span></li>
+          <li class="kennwert"><span class="kennwert__zahl">700</span><span class="kennwert__text">cm maximale Länge</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       3  Warengruppen-Kacheln
+       Auf matten.net heisst dieser Abschnitt "Featured Category (German)"
+       und zeigt genau eine Kachel. Hier stehen alle Warengruppen, damit
+       kein Bereich des Katalogs von matten.de unerreichbar bleibt.
+       ==================================================================== -->
+  <section class="abschnitt" aria-labelledby="gruppen-titel">
+    <div class="container">
+      <div class="abschnitt-kopf">
+        <div>
+          <p class="label">Sortiment</p>
+          <h2 id="gruppen-titel">Nach Warengruppe suchen</h2>
+          <p>Von der einfarbigen Schmutzfangmatte über die Logomatte bis zur
+            Aluminium-Profilmatte für den Eingangsbereich.</p>
+        </div>
+        <a class="weiterlink" href="kategorie.html?kat=%2Flogomatten">Größte Warengruppe ansehen</a>
+      </div>
+
+      <!-- Die Statusmeldung steht ausserhalb des Rasters: seite-start.js
+           ersetzt dessen Inhalt vollstaendig und wuerde sie sonst
+           mitloeschen, bevor sie je vorgelesen wurde. -->
+      <p class="nur-sr" id="warengruppen-status" role="status" aria-live="polite">Die Warengruppen werden geladen.</p>
+
+      <!-- Die Platzhalter stehen fest im Dokument, nicht erst im Skript:
+           bis net-shell.js und seite-start.js geladen sind, stuende hier
+           sonst eine leere Flaeche. Sie werden ersetzt, sobald die
+           Warengruppen stehen. -->
+      <div class="raster raster--4 raster--produkte" id="warengruppen" aria-busy="true">
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       4  Hervorgehobene Produkte
+       Auf matten.net "TOP-ANGEBOTE" mit fuenf Karten. Dieselben fuenf
+       Artikel, aufgeloest auf ihre echten Gegenstuecke bei matten.de
+       (Grundlage: spec/texte/zuordnung-matten-de.md).
+       ==================================================================== -->
+  <section class="abschnitt abschnitt--grau" aria-labelledby="top-titel">
+    <div class="container">
+      <div class="abschnitt-kopf">
+        <div>
+          <p class="label">Top-Angebote</p>
+          <h2 id="top-titel">Was am häufigsten bestellt wird</h2>
+          <p>Fünf Artikel, die auf matten.net seit Jahren auf der Startseite stehen —
+            hier mit den Live-Daten und Live-Preisen von matten.de.</p>
+        </div>
+      </div>
+
+      <p class="nur-sr" role="status" aria-live="polite">Die Artikel werden geladen.</p>
+
+      <!-- Auch hier stehen die Platzhalter fest im Dokument. -->
+      <div class="raster raster--4 raster--produkte" id="top-angebote" aria-busy="true">
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+        <article class="karte karte--laedt" aria-hidden="true"><div class="skel skel--bild"></div><div class="karte__koerper"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--titel"></span><span class="skel skel--zeile skel--voll"></span><span class="skel skel--zeile skel--mittel"></span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       5  Vertrauensabschnitt "Der Mattenfuchs"
+       Fliesstext woertlich aus spec/texte/startseite.md. Die Vorteilsleiste
+       von matten.net ("Best Price", "International shipping") ist hier auf
+       Deutsch und um zwei Punkte ergaenzt.
+       ==================================================================== -->
+  <section class="abschnitt" aria-labelledby="fuchs-titel">
+    <div class="container">
+      <div class="abschnitt-kopf">
+        <div>
+          <p class="label">Über uns</p>
+          <h2 id="fuchs-titel">Der Mattenfuchs</h2>
+        </div>
+      </div>
+
+      <div class="mit-leiste mit-leiste--rechts">
+        <div class="fliesstext">
+          <p>Seit mehr als 35 Jahren liefern wir Fussmatten in einer Vielzahl von Standardmaßen
+            und nahezu beliebigen Wunschmaßen in mehr als 100 verschiedenen Farben, einfarbig und
+            individuell nach Kundenwunsch gestaltet.</p>
+          <p>Wir haben in dieser Zeit weltweit in vielen namhaften Firmen, Top-Handelshäusern und
+            Filialunternehmen, Hotels, Verwaltungen, Ladengeschäften und Privathaushalten für
+            saubere Eingangsbereiche und den Schutz der angrenzenden Böden gesorgt.</p>
+          <p>Unsere Angebotspalette ist in den zurückliegenden Jahren stetig gewachsen und wurde
+            den permanent steigenden Anforderungen laufend angepasst. So haben wir für jedes
+            Schmutzproblem — und auch für die passende Werbung für Ihr Haus — immer eine
+            hervorragende Lösung parat. „Nichts“ gibt es nicht bei uns.</p>
+          <p>Wir sind stets für Sie unter <a href="mailto:info@matten.de">info@matten.de</a>
+            erreichbar und freuen uns über Ihre Anfrage. Ihr Mattenfuchs-Team</p>
+        </div>
+
+        <div class="stapel">
+          <article class="karte karte--kante"><div class="karte__koerper">
+            <h3 class="karte__titel">Darauf können Sie sich verlassen</h3>
+            <ul class="merkmale mt-4">
+              <li><span aria-hidden="true">✓</span><span><strong>Bester Preis.</strong> Direkt vom Hersteller, ohne Zwischenhandel.</span></li>
+              <li><span aria-hidden="true">✓</span><span><strong>Weltweiter Versand.</strong> Auch Speditionsware und Sammelsendungen.</span></li>
+              <li><span aria-hidden="true">✓</span><span><strong>Zuschnitt auf den Zentimeter.</strong> Freie Maße bis 700&nbsp;cm Länge.</span></li>
+              <li><span aria-hidden="true">✓</span><span><strong>Muster vorab.</strong> Farb- und Qualitätsmuster kostenlos.</span></li>
+            </ul>
+          </div></article>
+
+          <article class="karte karte--navy"><div class="karte__koerper">
+            <h3 class="karte__titel">Beratung am Telefon</h3>
+            <p class="karte__text">Sie wissen nicht, welche Qualität zu Ihrem Eingang passt?
+              Rufen Sie an — wir gehen es mit Ihnen durch.</p>
+            <p class="mt-4" style="margin-bottom:0">
+              <a class="btn btn--invers" href="tel:+498954558264">+49 89 54 55 82 64</a>
+            </p>
+          </div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       6  Mattendesigner-Teaser
+       ==================================================================== -->
+  <section class="abschnitt abschnitt--navy" aria-labelledby="designer-titel">
+    <div class="container">
+      <div class="duo" style="align-items:center">
+        <div>
+          <p class="label label--invers">Mattendesigner</p>
+          <h2 id="designer-titel">Ihre Matte, im Browser entworfen</h2>
+          <p class="vorspann">Größe wählen, Grundfarbe setzen, Text und Logo platzieren —
+            und sofort sehen, was das kostet. Der Preis kommt dabei live aus unserem
+            Kalkulationssystem, nicht aus einer Tabelle im Browser.</p>
+          <div class="btn-gruppe mt-6">
+            <a class="btn btn--invers btn--gross" href="mattendesigner.html">Matte selbst gestalten</a>
+            <a class="btn btn--gross" href="kategorie.html?kat=%2Flogomatten%2Fwunschdesign-matten"
+               style="--btn-bg:transparent;--btn-rand:rgba(255,255,255,.3);--btn-fg:#fff">Wunschdesign-Matten ansehen</a>
+          </div>
+        </div>
+        <div class="bildflaeche bildflaeche--breit" id="designer-bild" role="img"
+             aria-label="Beispiel einer gestalteten Logomatte">Beispielbild wird geladen</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-api.js"></script>
+<script src="assets/js/net-shell.js" defer></script>
+<script src="assets/js/seite-start.js" defer></script>
+</body>
+</html>

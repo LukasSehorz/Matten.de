@@ -2764,6 +2764,94 @@ function baueAddBodyAusFormular(artikel, { anzahl, kommentar, werte }) {
   return { body: buildForm(paare), paare, abgelehnt };
 }
 
+/* ------------------------------------------------------------------ */
+/* Herkunft der Warenkorbpositionen                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Das Altsystem nennt zu einer Warenkorbzeile nur den Namen -- keinen Pfad
+ * und kein Bild. Beides ist aber genau in dem Augenblick bekannt, in dem
+ * wir die Zeile selbst anlegen (POST /api/cart/add mit `pfad`). Also wird
+ * es dort gemerkt, und zwar unter dem `key`, den das Altsystem der Position
+ * gibt: ein stabiler Hash ueber Artikel und Ausfuehrung. Der aendert sich
+ * weder beim Neuladen der Seite noch beim Setzen der Menge, und er ist je
+ * Position eindeutig -- damit haelt die Zuordnung ueber die ganze Sitzung
+ * und ueber beliebig viele Positionen.
+ *
+ * Die Ablage haengt an der Besucher-Sitzung (dieselbe, die auch die
+ * Upstream-Cookies traegt), nicht an einem globalen Speicher: zwei Besucher
+ * sehen sich gegenseitig nie. Positionen, die ohne unser Zutun im Warenkorb
+ * des Altsystems liegen, stehen nicht darin -- die bekommen `pfad: null`,
+ * statt dass ueber den Namen ein Treffer geraten wird.
+ */
+const HERKUNFT_MAX = 200;
+
+function herkunftAblage(session) {
+  if (!session || typeof session !== 'object') return null;
+  if (!(session.herkunft instanceof Map)) session.herkunft = new Map();
+  return session.herkunft;
+}
+
+/** Merkt Pfad (und, wenn vorhanden, Bild) zu einem Positionsschluessel. */
+function merkeHerkunft(session, key, { pfad, bild }) {
+  const ablage = herkunftAblage(session);
+  if (!ablage || !key || !pfad) return;
+  ablage.delete(key);                     // ans Ende, damit Altes zuerst faellt
+  ablage.set(key, {
+    pfad,
+    // Bilder duerfen nur als /api/img/-Pfad herausgehen, nie als Adresse
+    // bei matten.de. mediaZuApiPfad() hat das schon geleistet -- hier wird
+    // es nur noch einmal nachgeprueft.
+    bild: typeof bild === 'string' && bild.startsWith('/api/img/') ? bild : null,
+  });
+  while (ablage.size > HERKUNFT_MAX) ablage.delete(ablage.keys().next().value);
+}
+
+function herkunftVon(session, key) {
+  const ablage = herkunftAblage(session);
+  if (!ablage || !key) return null;
+  return ablage.get(key) || null;
+}
+
+/**
+ * Was nicht mehr im Warenkorb liegt, muss auch nicht gemerkt bleiben.
+ *
+ * Aufgeraeumt wird nur, wenn die Warenkorbseite auch wirklich gelesen werden
+ * konnte: entweder stehen Positionen darin, oder der Zaehler des Altsystems
+ * sagt ausdruecklich 0. Hat der Parser gar nichts gefunden (Zaehler null),
+ * bleibt die Ablage stehen -- ein voruebergehender Aussetzer soll nicht die
+ * Verweise aller Positionen loeschen.
+ */
+function putzeHerkunft(session, cart) {
+  const ablage = herkunftAblage(session);
+  if (!ablage || !ablage.size) return;
+  const items = (cart && cart.items) || [];
+  if (!items.length && cart.count !== 0) return;
+  const da = new Set(items.map((i) => i.key).filter(Boolean));
+  for (const key of [...ablage.keys()]) if (!da.has(key)) ablage.delete(key);
+}
+
+/**
+ * Welche Position ist bei diesem Hinzufuegen entstanden?
+ *
+ * Verglichen wird der Warenkorb vor und nach dem POST -- ueber die
+ * Schluessel des Altsystems, nicht ueber Namen. Normalfall: genau ein
+ * Schluessel ist neu. Legt jemand dieselbe Ausfuehrung ein zweites Mal,
+ * vergibt das Altsystem keinen neuen Schluessel, sondern erhoeht die Menge
+ * der vorhandenen Zeile -- dann ist es die eine Zeile, deren Menge gewachsen
+ * ist. Ist beides nicht eindeutig, wird nichts gemerkt: lieber `pfad: null`
+ * als eine falsche Zuordnung.
+ */
+function neuePositionKey(vorher, items) {
+  const neu = (items || []).filter((i) => i.key && !vorher.has(i.key));
+  if (neu.length === 1) return neu[0].key;
+  if (neu.length > 1) return null;
+  const gewachsen = (items || []).filter(
+    (i) => i.key && Number(i.anzahl || 0) > Number(vorher.get(i.key) || 0)
+  );
+  return gewachsen.length === 1 ? gewachsen[0].key : null;
+}
+
 /** Legt einen beliebigen Katalogartikel in den Warenkorb der Besucher-Sitzung. */
 async function addToCartPfad(session, pfad, { anzahl, kommentar, werte }) {
   const r = await holeArtikel(pfad);
@@ -2781,16 +2869,34 @@ async function addToCartPfad(session, pfad, { anzahl, kommentar, werte }) {
   const gebaut = baueAddBodyAusFormular(a, { anzahl, kommentar, werte });
   const ziel = normalisierePfad(a.formular.upstreamAktion) || CART_PATH;
   const logs = await ensureUpstreamSession(session);
+
+  /* Der Warenkorb VOR dem Hinzufuegen. Nur so laesst sich die neue Position
+     hinterher eindeutig benennen -- ohne ueber den Artikelnamen zu raten. */
+  const vorher = new Map();
+  const vorLogs = [];
+  try {
+    const stand = await readCart(session);
+    vorLogs.push(...stand.logs);
+    for (const i of stand.cart.items) if (i.key) vorher.set(i.key, Number(i.anzahl || 0));
+  } catch (err) {
+    // Kein Vorher-Bild: dann wird eben nichts gemerkt (pfad bleibt null).
+    console.error('  [herkunft] Warenkorb vor dem Hinzufuegen nicht lesbar:', err.message);
+  }
+
   const res = await upstream('POST', `${UPSTREAM_ORIGIN}${ziel}`, { session, body: gebaut.body });
+  const cart = parseCart(decodeBody(res.buffer));
+
+  const key = neuePositionKey(vorher, cart.items);
+  if (key) merkeHerkunft(session, key, { pfad: a.pfad || pfad, bild: a.hauptbild });
 
   return {
     ok: true,
-    cart: parseCart(decodeBody(res.buffer)),
+    cart,
     artikelId: a.artikelId,
     modus: a.modus,
     gesendet: gebaut.paare.map(([name, wert]) => ({ name, wert })),
     abgelehnt: gebaut.abgelehnt,
-    logs: [...logs, ...res.logs],
+    logs: [...logs, ...vorLogs, ...res.logs],
   };
 }
 
@@ -3303,22 +3409,36 @@ function mediaZuApiPfad(src) {
   return '/api/img/' + rein.split('/').map(encodeURIComponent).join('/');
 }
 
-/** Antwortformat fuer alle Warenkorb-Endpunkte. */
-function cartResponse(cart, logs, extra = {}) {
+/**
+ * Antwortformat fuer alle Warenkorb-Endpunkte.
+ *
+ * `session` ist freiwillig und dient nur der Herkunft: liegt sie vor, traegt
+ * jede Position zusaetzlich `pfad` und `bild` -- also den Weg zurueck zur
+ * Produktseite und das Bild aus den Produktdaten, die beim Hinzufuegen ohnehin
+ * gelesen wurden. Beides steht nur fuer Positionen zur Verfuegung, die ueber
+ * diese Bruecke angelegt wurden; alle anderen bekommen ehrlich `null`.
+ */
+function cartResponse(cart, logs, extra = {}, session = null) {
+  if (session) putzeHerkunft(session, cart);
   return {
     ok: true,
     count: cart.count ?? (cart.items.length ? cart.items.reduce((a, i) => a + (i.anzahl || 0), 0) : 0),
-    items: cart.items.map((i) => ({
-      key: i.key,
-      name: i.name,
-      attribut: i.attribut,
-      kommentar: i.kommentar,
-      anzahl: i.anzahl,
-      preis: i.preis,
-      preisNum: i.preisNum,
-      summe: i.summe,
-      summeNum: i.summeNum,
-    })),
+    items: cart.items.map((i) => {
+      const h = session ? herkunftVon(session, i.key) : null;
+      return {
+        key: i.key,
+        name: i.name,
+        attribut: i.attribut,
+        kommentar: i.kommentar,
+        anzahl: i.anzahl,
+        preis: i.preis,
+        preisNum: i.preisNum,
+        summe: i.summe,
+        summeNum: i.summeNum,
+        pfad: h ? h.pfad : null,
+        bild: h ? h.bild : null,
+      };
+    }),
     gesamt: cart.gesamt,
     gesamtNum: cart.gesamtNum,
     zwischensumme: cart.zwischensumme,

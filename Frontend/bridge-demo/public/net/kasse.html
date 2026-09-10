@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kasse | Mattenfuchs</title>
+<meta name="description" content="Bestellung abschliessen. Adresse, Versand und Zahlung werden vom Bestellsystem matten.de geprueft.">
+<!-- Angeschlossen an das Altsystem, aber noch nicht oeffentlich. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="stylesheet" href="assets/css/net.css">
+<link rel="stylesheet" href="assets/css/seiten-kasse.css">
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any">
+</head>
+<body data-aktiv="/order/checkout">
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Kopf und Navigation baut assets/js/net-shell.js hier ein. -->
+<div id="kopf"></div>
+
+<nav class="brotkrumen" aria-label="Sie sind hier">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Startseite</a></li>
+      <li><a href="warenkorb.html">Warenkorb</a></li>
+      <li><span aria-current="page">Kasse</span></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="inhalt">
+
+<section class="abschnitt abschnitt--eng">
+  <div class="container">
+    <p class="label">Bestellung</p>
+    <h1>Kasse</h1>
+    <p class="vorspann">Jeder Schritt geht an das Bestellsystem von matten.de und wird dort geprüft.
+      Was hier steht, hat das Altsystem geantwortet.</p>
+
+    <p class="hinweis hinweis--warnung mt-5" role="note">
+      <span class="hinweis__symbol" aria-hidden="true">!</span>
+      <span><span class="hinweis__titel">Livesystem</span>
+        Der letzte Schritt legt eine <strong>echte Bestellung</strong> im laufenden Betrieb an.
+        Wählbar sind nur <strong>Vorkasse</strong> und <strong>Rechnung</strong> — dabei fließt
+        kein Geld, es entsteht nur ein Datensatz. PayPal und Kreditkarte sind gesperrt.</span>
+    </p>
+  </div>
+</section>
+
+<section class="abschnitt abschnitt--flach">
+  <div class="container">
+
+    <ol class="schritte kasse-fortschritt" id="fortschritt" aria-label="Bestellablauf">
+      <li data-erledigt="ja">Warenkorb</li>
+      <li data-schritt="1" aria-current="step">Adresse</li>
+      <li data-schritt="2">Versand &amp; Zahlung</li>
+      <li data-schritt="3">Prüfen</li>
+      <li data-schritt="4">Bestätigung</li>
+    </ol>
+
+    <div class="mit-leiste mit-leiste--rechts">
+
+      <!-- ================================================================
+           Die Schritte
+           ================================================================ -->
+      <div>
+
+        <!-- ============================================================
+             Schritt 1 — Adresse
+             ============================================================ -->
+        <section class="kasse-schritt" id="schritt-1" aria-labelledby="schritt-1-titel">
+          <h2 id="schritt-1-titel" tabindex="-1">Lieferadresse</h2>
+          <p class="gedeckt">Das Altsystem prüft die Felder selbst. Beanstandete Felder bekommen
+            die Meldung des Altsystems wörtlich darunter.</p>
+
+          <!-- Anmeldung ist freiwillig: der alte Shop bestellt auch als Gast. -->
+          <div class="karte karte--flach mt-5">
+            <div class="karte__koerper">
+              <h3 class="karte__titel">Anmeldung</h3>
+              <p class="konto-status" id="konto-status" aria-live="polite">
+                <span class="skel skel--zeile skel--mittel"></span>
+              </p>
+              <p class="karte__text">Ein Konto ist nicht nötig — der Shop nimmt auch Gastbestellungen an.
+                <a class="weiterlink" href="login.html">Zur Anmeldung</a></p>
+            </div>
+          </div>
+
+          <form id="adress-form" class="mt-6" novalidate>
+            <div class="adress-raster" id="adress-felder" aria-busy="true">
+              <p class="nur-sr">Die Adressfelder werden aus dem Altsystem geladen.</p>
+              <div class="feld"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--feld"></span></div>
+              <div class="feld"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--feld"></span></div>
+              <div class="feld"><span class="skel skel--zeile skel--kurz"></span><span class="skel skel--feld"></span></div>
+            </div>
+
+            <fieldset class="feldgruppe mt-5">
+              <legend>Rechnungsanschrift</legend>
+              <label class="wahl">
+                <input type="checkbox" id="abweichende-rechnung">
+                <span>Die Rechnung geht an eine andere Anschrift</span>
+              </label>
+              <div class="adress-raster mt-4" id="rechnung-felder" hidden></div>
+            </fieldset>
+
+            <fieldset class="feldgruppe mt-5">
+              <legend>Bedingungen</legend>
+              <div class="feld" data-feld="agb">
+                <label class="wahl">
+                  <input type="checkbox" id="f-agb">
+                  <span>Ich habe die <a href="seite.html?seite=agb">AGB</a> und die
+                    <a href="seite.html?seite=widerruf">Widerrufsbelehrung</a> gelesen und stimme zu.
+                    <span class="feld-pflicht" aria-hidden="true">*</span></span>
+                </label>
+                <p class="feld-fehler" id="e-agb" hidden></p>
+              </div>
+            </fieldset>
+
+            <div class="melder" id="adress-melder" role="status" aria-live="polite"></div>
+
+            <div class="kasse-knopfzeile">
+              <a class="btn btn--dezent" href="warenkorb.html">Zurück zum Warenkorb</a>
+              <button class="btn btn--gross" type="submit" id="adress-knopf">
+                Adresse prüfen und weiter
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================
+             Schritt 2 — Versand und Zahlung
+             ============================================================ -->
+        <section class="kasse-schritt" id="schritt-2" aria-labelledby="schritt-2-titel" hidden>
+          <h2 id="schritt-2-titel" tabindex="-1">Versand und Zahlung</h2>
+          <p class="gedeckt">Die Auswahl geht sofort an das Altsystem — es rechnet die Versandkosten
+            und die Summen neu.</p>
+
+          <form id="optionen-form" class="mt-5" novalidate>
+
+            <div class="feld">
+              <label for="f-lieferland">Lieferland</label>
+              <select id="f-lieferland" name="land" aria-describedby="lieferland-hinweis">
+                <option value="de">Deutschland</option>
+              </select>
+              <p class="feld-hinweis" id="lieferland-hinweis">Die Liste stammt aus dem Bestellsystem
+                von matten.de und ist dort teilweise unsauber gepflegt.</p>
+            </div>
+
+            <fieldset class="feldgruppe mt-5">
+              <legend>Versandart</legend>
+              <div class="stapel stapel--eng" id="versand-auswahl">
+                <span class="skel skel--feld"></span>
+              </div>
+            </fieldset>
+
+            <fieldset class="feldgruppe mt-5">
+              <legend>Zahlungsart</legend>
+              <div class="stapel stapel--eng" id="zahlung-auswahl">
+                <span class="skel skel--feld"></span>
+              </div>
+
+              <p class="hinweis mt-4">
+                <span class="hinweis__symbol" aria-hidden="true">i</span>
+                <span><span class="hinweis__titel">Kein Geldfluss</span>
+                  Bei Vorkasse und Rechnung wird nichts abgebucht und nichts eingezogen. Es entsteht
+                  nur ein Bestelldatensatz im Altsystem.</span>
+              </p>
+
+              <div id="gesperrt-block" hidden>
+                <p class="label label--gedeckt mt-5">Nicht wählbar</p>
+                <p class="klein gedeckt">Diese Wege führen zu einem Zahlungsdienstleister. Der Server
+                  lehnt sie ab; sie erscheinen darum auch hier nicht als Auswahl.</p>
+                <ul class="gesperrt-liste" id="gesperrt-liste"></ul>
+              </div>
+            </fieldset>
+
+            <div class="melder" id="optionen-melder" role="status" aria-live="polite"></div>
+
+            <div class="kasse-knopfzeile">
+              <button class="btn btn--dezent" type="button" data-zurueck="1">Zurück zur Adresse</button>
+              <button class="btn btn--gross" type="submit" id="optionen-knopf">Speichern und weiter</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============================================================
+             Schritt 3 — Prüfen
+             ============================================================ -->
+        <section class="kasse-schritt" id="schritt-3" aria-labelledby="schritt-3-titel" hidden>
+          <h2 id="schritt-3-titel" tabindex="-1">Bestellung prüfen</h2>
+          <p class="gedeckt">Das ist der Stand, den das Altsystem gerade führt. Er wird bei jedem
+            Aufruf frisch gelesen.</p>
+
+          <div class="mt-5" id="pruef-blocks" aria-busy="true">
+            <span class="skel skel--zeile skel--voll"></span>
+            <span class="skel skel--zeile skel--mittel"></span>
+            <span class="skel skel--zeile skel--voll"></span>
+          </div>
+
+          <!-- Der Nachweis: was genau an das Altsystem gehen wuerde. -->
+          <details class="roh" id="roh-block">
+            <summary>Was genau abgeschickt wird</summary>
+            <div class="roh__koerper">
+              <p>Die Anfrage, die der Server beim letzten Schritt an
+                <code>matten.de</code> sendet — Rohfassung aus
+                <code>GET /api/kasse/vorschau</code>, Feld <code>finalRequest</code>.
+                Nichts davon wurde hier zusammengesetzt.</p>
+              <pre id="roh-inhalt">wird geladen …</pre>
+            </div>
+          </details>
+
+          <div class="melder" id="pruef-melder" role="status" aria-live="polite"></div>
+
+          <!-- Scharfschaltung. Der Knopf bleibt disabled, bis das Kästchen sitzt. -->
+          <div class="scharf">
+            <h3>Verbindlich bestellen</h3>
+            <p>Der nächste Klick legt eine echte Bestellung im Livesystem von matten.de an und
+              löst dort eine Auftragsbestätigung per E-Mail aus.</p>
+            <label class="wahl">
+              <input type="checkbox" id="scharf-schalter">
+              <span>Mir ist bewusst, dass dies eine echte Bestellung im Livesystem erzeugt.</span>
+            </label>
+            <button class="btn btn--gross btn--signal btn--voll" type="button"
+                    id="bestell-knopf" disabled>
+              Bestellung verbindlich abschicken
+            </button>
+            <div class="melder" id="bestell-melder" role="status" aria-live="assertive"></div>
+          </div>
+
+          <div class="kasse-knopfzeile">
+            <button class="btn btn--dezent" type="button" data-zurueck="2">Zurück zu Versand &amp; Zahlung</button>
+            <button class="btn btn--sekundaer" type="button" id="pruef-neu">Stand neu lesen</button>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             Schritt 4 — Ergebnis
+             ============================================================ -->
+        <section class="kasse-schritt" id="schritt-4" aria-labelledby="schritt-4-titel" hidden>
+          <h2 id="schritt-4-titel" tabindex="-1">Bestellung angenommen</h2>
+          <div id="ergebnis"></div>
+        </section>
+
+      </div>
+
+      <!-- ================================================================
+           Bestellübersicht — steht in jedem Schritt daneben
+           ================================================================ -->
+      <aside aria-labelledby="uebersicht-titel">
+        <div class="mit-leiste__leiste--klebt">
+          <div class="karte karte--kante">
+            <div class="karte__koerper">
+              <h2 class="karte__titel" id="uebersicht-titel">Ihre Bestellung</h2>
+
+              <ul class="korb-liste mt-4" id="uebersicht-positionen" aria-busy="true">
+                <li class="korb-pos" aria-hidden="true">
+                  <span class="skel skel--bild korb-pos__bild"></span>
+                  <div><span class="skel skel--titel"></span>
+                    <span class="skel skel--zeile skel--kurz"></span></div>
+                </li>
+              </ul>
+
+              <dl class="summen mt-4" id="uebersicht-summen" aria-live="polite" aria-busy="true">
+                <div class="summen__zeile"><dt>Gesamt</dt><dd class="zahl">wird geladen</dd></div>
+              </dl>
+
+              <p class="meta mt-4">Alle Beträge rechnet das Altsystem. Im Frontend wird kein Betrag
+                gebildet oder verändert.</p>
+              <p class="meta"><a href="warenkorb.html">Warenkorb ändern</a></p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Fussbereich baut assets/js/net-shell.js hier ein. -->
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-shell.js"></script>
+<script src="assets/js/seite-kasse.js"></script>
+</body>
+</html>

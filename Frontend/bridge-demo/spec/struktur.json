@@ -1,0 +1,3180 @@
+{
+  "meta": {
+    "quelle": "https://www.matten.net (deutsche Fassung, /de)",
+    "erfasstAm": "2026-08-31",
+    "hinweis": "Entwicklungswebsite. Symfony/Twig serverseitig gerendert, Bootstrap 4, jQuery. Vue 2 nur fuer den Mattendesigner (#mat-editor) und die Warenkorb-Teilansicht.",
+    "warnbanner": "⚠️ Entwicklungswebsite — diese Website entspricht möglicherweise nicht den geltenden Gesetzen und Vorschriften.",
+    "sprachen": [
+      "de",
+      "en"
+    ],
+    "build": {
+      "runtime": "/build/runtime.a6ba3cf9.js",
+      "vendor": [
+        "/build/576.a55b98e3.js",
+        "/build/814.30d0226b.js"
+      ],
+      "app": "/build/js/app.f1a77904.js",
+      "css": [
+        "/build/837.96782462.css",
+        "/build/css/style.747cc104.css"
+      ]
+    }
+  },
+  "kopfzeile": {
+    "warnbanner": "⚠️ Entwicklungswebsite — diese Website entspricht möglicherweise nicht den geltenden Gesetzen und Vorschriften.",
+    "logo": {
+      "href": "/de",
+      "img": "/images/logo_german.png",
+      "breite": 1024,
+      "hoehe": 197
+    },
+    "sprachwahl": {
+      "aktuell": "Deutsch",
+      "optionen": [
+        {
+          "label": "English",
+          "href": "/en",
+          "flagge": "/images/flags/united-kingdom.png"
+        },
+        {
+          "label": "Deutsch",
+          "href": "/de",
+          "flagge": "/images/flags/german.png"
+        }
+      ]
+    },
+    "links": [
+      {
+        "label": "Gästebuch",
+        "href": "/de/guest-book"
+      },
+      {
+        "label": "Login",
+        "href": "/de/login"
+      },
+      {
+        "label": "Registrieren",
+        "href": "/de/account/register"
+      }
+    ],
+    "warenkorbKnopf": {
+      "label": "Cart",
+      "wirkung": "oeffnet Modal #cart-modal"
+    },
+    "checkoutKnopf": {
+      "label": "Auschecken",
+      "href": "/de/order/checkout"
+    },
+    "suche": {
+      "formAction": "/de/products",
+      "methode": "get",
+      "feld": "keyword",
+      "platzhalter": "Produkt suchen"
+    }
+  },
+  "navigation": {
+    "hinweis": "Zwei Navigationsleisten: mobil (d-lg-none, Bootstrap-Dropdowns) und Desktop (main-navbar, Bild-Dropdowns mit Kategoriebildern in 6 Spalten col-2). Beide fuehren dieselben Kategorien in derselben Reihenfolge.",
+    "eintraege": [
+      {
+        "typ": "link",
+        "label": "Mattendesigner",
+        "href": "/de/custom-mat/create"
+      },
+      {
+        "typ": "gruppe",
+        "label": "Fussmatten",
+        "kategorien": [
+          {
+            "label": "JetPrint-einfarbig",
+            "slug": "jetprint-einfarbig",
+            "href": "/de/product-categories/jetprint-einfarbig",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c785fa38931b.jpeg"
+          },
+          {
+            "label": "IronHorse",
+            "slug": "ironhorse",
+            "href": "/de/product-categories/ironhorse",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fa2b5364ejpeg"
+          },
+          {
+            "label": "IronHorse XL",
+            "slug": "ironhorse-xl",
+            "href": "/de/product-categories/ironhorse-xl",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fa5a8109ejpeg"
+          }
+        ]
+      },
+      {
+        "typ": "gruppe",
+        "label": "Logomatten",
+        "kategorien": [
+          {
+            "label": "Designmatten",
+            "slug": "designmatten",
+            "href": "/de/product-categories/designmatten",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/JPL-621-aubergine_0.jpg"
+          },
+          {
+            "label": "Jet Print light",
+            "slug": "jet-print-light",
+            "href": "/de/product-categories/jet-print-light",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/JPrint-light.jpg"
+          },
+          {
+            "label": "Katzen Willk",
+            "slug": "katzen-willk",
+            "href": "/de/product-categories/katzen-willk",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c45865f923d2jpeg"
+          },
+          {
+            "label": "JetPrint-Design",
+            "slug": "jetprint-design",
+            "href": "/de/product-categories/jetprint-design",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/JetPrint-Design.jpg"
+          }
+        ]
+      },
+      {
+        "typ": "gruppe",
+        "label": "OS-REHA-Physio-Matten",
+        "kategorien": [
+          {
+            "label": "OS-REHAB-Physio-Matten",
+            "slug": "os-rehab-physio-matten",
+            "href": "/de/product-categories/os-rehab-physio-matten",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c4cc9df3e243jpeg"
+          },
+          {
+            "label": "OS-Y-Matte, Wide Balance",
+            "slug": "os-y-matte-wide-balance",
+            "href": "/de/product-categories/os-y-matte-wide-balance",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c899bca0f1ab.jpeg"
+          },
+          {
+            "label": "OS-REHAB Basis-Matte",
+            "slug": "os-rehab-basis-matte",
+            "href": "/de/product-categories/os-rehab-basis-matte",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5cca3e65b5598.jpeg"
+          },
+          {
+            "label": "OS-REHAB-Bahnmatte",
+            "slug": "os-rehab-bahnmatte",
+            "href": "/de/product-categories/os-rehab-bahnmatte",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c899da8bc245.jpeg"
+          },
+          {
+            "label": "OS-REHAB-Stern-Matte",
+            "slug": "os-rehab-stern-matte",
+            "href": "/de/product-categories/os-rehab-stern-matte",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c899f0b48969.jpeg"
+          },
+          {
+            "label": "OS-REHAB-Gitter-Matte",
+            "slug": "os-rehab-gitter-matte",
+            "href": "/de/product-categories/os-rehab-gitter-matte",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c899e468cda6.jpeg"
+          },
+          {
+            "label": "OS-REHAB-5-Punkt-Matte",
+            "slug": "os-rehab-5-punkt-matte",
+            "href": "/de/product-categories/os-rehab-5-punkt-matte",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5cca325ee6c13.jpeg"
+          },
+          {
+            "label": "OS-REHAB Quadrat-Matte",
+            "slug": "os-rehab-quadrat-matte",
+            "href": "/de/product-categories/os-rehab-quadrat-matte",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5cce29fead941.jpeg"
+          }
+        ]
+      },
+      {
+        "typ": "gruppe",
+        "label": "Kokosmatten",
+        "kategorien": [
+          {
+            "label": "Kokos Farbig",
+            "slug": "kokos-farbig",
+            "href": "/de/product-categories/kokos-farbig",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fa829d279jpeg"
+          },
+          {
+            "label": "Kokos naturfarbig",
+            "slug": "kokos-naturfarbig",
+            "href": "/de/product-categories/kokos-naturfarbig",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/kokos-natur_512x340.jpg"
+          },
+          {
+            "label": "Kokos-Logomatte",
+            "slug": "kokos-logomatte",
+            "href": "/de/product-categories/kokos-logomatte",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fafe5a2a8jpeg"
+          }
+        ]
+      },
+      {
+        "typ": "gruppe",
+        "label": "Aluminium-Matten",
+        "kategorien": [
+          {
+            "label": "MARSCHALL",
+            "slug": "marschall",
+            "href": "/de/product-categories/marschall",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47f8cfcc5b7jpeg"
+          },
+          {
+            "label": "Diplomat",
+            "slug": "diplomat",
+            "href": "/de/product-categories/diplomat",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47f937b4f5fjpeg"
+          }
+        ]
+      },
+      {
+        "typ": "gruppe",
+        "label": "Gummimatten",
+        "kategorien": [
+          {
+            "label": "Cushion Coil",
+            "slug": "cushion-coil",
+            "href": "/de/product-categories/cushion-coil",
+            "bild": "https://via.placeholder.com/150x100"
+          },
+          {
+            "label": "Scraper",
+            "slug": "scraper",
+            "href": "/de/product-categories/scraper",
+            "bild": "https://via.placeholder.com/150x100"
+          },
+          {
+            "label": "Struktura",
+            "slug": "struktura",
+            "href": "/de/product-categories/struktura",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fd1c6e5f7jpeg"
+          }
+        ]
+      },
+      {
+        "typ": "gruppe",
+        "label": "Outdoor-Matten",
+        "kategorien": [
+          {
+            "label": "Turf",
+            "slug": "turf",
+            "href": "/de/product-categories/turf",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fbd86c22fjpeg"
+          }
+        ]
+      },
+      {
+        "typ": "gruppe",
+        "label": "Mietmatten",
+        "kategorien": [
+          {
+            "label": "IRON-HORSE-Mietmatten",
+            "slug": "iron-horse-mietmatten",
+            "href": "/de/product-categories/iron-horse-mietmatten",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c4cc0ab6bb26jpeg"
+          }
+        ]
+      },
+      {
+        "typ": "gruppe",
+        "label": "Was ist neu",
+        "kategorien": [
+          {
+            "label": "Waschbecken",
+            "slug": "waschbecken",
+            "href": "/de/product-categories/waschbecken",
+            "bild": "https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c773ded137fb.jpeg"
+          }
+        ]
+      },
+      {
+        "typ": "link",
+        "label": "Alle Produkte",
+        "href": "/de/products"
+      },
+      {
+        "typ": "link",
+        "label": "Blog",
+        "href": "/de/blog"
+      }
+    ],
+    "unterschiedMobilDesktop": "In der mobilen Leiste steht zusaetzlich \"Home\" -> /de an erster Stelle, und \"Mattendesigner\" steht zwischen den Gruppen \"Fussmatten\" und \"Logomatten\" statt an erster Stelle. Die mobile Leiste hat am Ende eine zweite, funktionslose Sprachauswahl (English/German/French/Spanish, alle href=\"#\")."
+  },
+  "fusszeile": {
+    "spalten": [
+      {
+        "titel": "Find us",
+        "links": [
+          {
+            "label": "Facebook",
+            "href": "https://m.facebook.com/Fuchsius-multi-media-GmbH-329921957172415/"
+          },
+          {
+            "label": "Twitter",
+            "href": "https://twitter.com/mattenfuchs"
+          },
+          {
+            "label": "LinkedIn"
+          },
+          {
+            "label": "Instagram"
+          }
+        ]
+      },
+      {
+        "titel": "Information",
+        "links": [
+          {
+            "label": "Home",
+            "href": "/de"
+          },
+          {
+            "label": "Produktliste",
+            "href": "/de/products"
+          },
+          {
+            "label": "Registrieren",
+            "href": "/de/account/register"
+          },
+          {
+            "label": "datenschutz",
+            "href": "/de/pages/data-protection"
+          },
+          {
+            "label": "Datenschutzerklärung (DSGVO)",
+            "href": "/de/pages/datenschutzerklarung-dsgvo"
+          },
+          {
+            "label": "AGB",
+            "href": "/de/pages/agb"
+          },
+          {
+            "label": "Impressum",
+            "href": "/de/pages/impressum"
+          }
+        ]
+      },
+      {
+        "titel": "Kontakt",
+        "inhalt": [
+          "Mail: info@matten.net",
+          "Tel.: +49 89 5455 8264",
+          "Fax: +49 89 5455 8333",
+          "Mobil: +49 171 77 55 400"
+        ]
+      }
+    ],
+    "copyright": "© 2026 Mattenfuchs",
+    "newsletterWidget": {
+      "label": "Newsletter abonnieren",
+      "platzhalter": "eMail-Adresse",
+      "knopf": "Abonnieren",
+      "hinweis": "Formular ohne action/method - ohne Funktion."
+    }
+  },
+  "seiten": [
+    {
+      "pfad": "/de",
+      "typ": "startseite",
+      "status": 200
+    },
+    {
+      "pfad": "/de/products",
+      "typ": "produktliste",
+      "status": 200,
+      "paginierung": "?page=n, 2 Seiten"
+    },
+    {
+      "pfad": "/de/product-categories/<slug>",
+      "typ": "kategorie",
+      "status": 200,
+      "anzahl": 27
+    },
+    {
+      "pfad": "/de/products/<slug>",
+      "typ": "produkt",
+      "status": 200,
+      "anzahl": 19
+    },
+    {
+      "pfad": "/de/custom-mat/create",
+      "typ": "mattendesigner",
+      "status": 200
+    },
+    {
+      "pfad": "/de/custom-mat/checkout",
+      "typ": "designer-bestellformular",
+      "status": 200
+    },
+    {
+      "pfad": "/de/order/checkout",
+      "typ": "checkout",
+      "status": 302,
+      "hinweis": "Leitet bei leerem Warenkorb auf /de um. Nur ueber POST /de/order/add-to-cart erreichbar - im Rahmen dieser Erfassung nicht aufgerufen (nur lesende Zugriffe)."
+    },
+    {
+      "pfad": "/de/login",
+      "typ": "login",
+      "status": 200
+    },
+    {
+      "pfad": "/de/account/register",
+      "typ": "registrierung",
+      "status": 200
+    },
+    {
+      "pfad": "/de/blog",
+      "typ": "blog",
+      "status": 200,
+      "anzahlBeitraege": 2
+    },
+    {
+      "pfad": "/de/guest-book",
+      "typ": "gaestebuch",
+      "status": 200,
+      "hinweis": "Inhaltsbereich rendert nichts - Feature tot, aber in der Kopfzeile verlinkt."
+    },
+    {
+      "pfad": "/de/pages/agb",
+      "typ": "infoseite",
+      "status": 200
+    },
+    {
+      "pfad": "/de/pages/impressum",
+      "typ": "infoseite",
+      "status": 200
+    },
+    {
+      "pfad": "/de/pages/data-protection",
+      "typ": "infoseite",
+      "status": 200
+    },
+    {
+      "pfad": "/de/pages/datenschutzerklarung-dsgvo",
+      "typ": "infoseite",
+      "status": 200
+    }
+  ],
+  "nichtVorhanden": [
+    "/sitemap.xml (404)",
+    "/robots.txt (404)",
+    "/de/order/cart (404)",
+    "/de/order/inquiry-cart (404)",
+    "/de/account (404)",
+    "/de/contact (404)",
+    "/de/pages/kontakt (404)",
+    "/de/ajax/simulation-price (404 - im JS aufgerufen, Route fehlt)"
+  ],
+  "ajaxEndpunkte": [
+    {
+      "pfad": "/de/ajax/demo-price",
+      "methode": "GET",
+      "parameter": [
+        "length",
+        "width",
+        "quantity",
+        "productId",
+        "singleColor",
+        "attributeValueIds[]"
+      ],
+      "antwort": "HTML-Debug-Tabelle",
+      "status": 200,
+      "hinweis": "Nur aufgerufen, wenn #price_calculator_demo im DOM existiert. Auf keiner der 19 Produktseiten vorhanden - reines Entwicklerwerkzeug, direkt aufrufbar."
+    },
+    {
+      "pfad": "/de/ajax/product-price",
+      "methode": "GET",
+      "parameter": [
+        "length",
+        "width",
+        "quantity",
+        "productId",
+        "singleColor",
+        "attributeValueIds[]"
+      ],
+      "antwort": "JSON {length,width,quantity,price,result,taxRate,singleColor,total,shippingCost,shippingCostHtml,pricePlusVatHtml}",
+      "status": 200
+    },
+    {
+      "pfad": "/de/ajax/simulation-price",
+      "methode": "GET",
+      "antwort": "404 Not Found",
+      "status": 404
+    },
+    {
+      "pfad": "/de/ajax/custom-mat-materials",
+      "methode": "GET",
+      "antwort": "JSON-Array der Designer-Materialien",
+      "status": 200
+    },
+    {
+      "pfad": "/de/ajax/attribute-images/<attributeValueId>",
+      "methode": "GET",
+      "antwort": "Bilder zum Attributwert",
+      "hinweis": "Nur als data-attribute-image-url referenziert, nicht geprueft."
+    }
+  ],
+  "kategorien": [
+    {
+      "slug": "jetprint-einfarbig",
+      "name": "JetPrint-einfarbig",
+      "gruppe": "Fussmatten",
+      "pfad": "/de/product-categories/jetprint-einfarbig",
+      "beschreibung": "Fußmatten, einfarbig. Wahl aus 150 Farben Nach Ihren Wünschen gefertigt",
+      "titelbild": "/uploads/5ccf40e26130a.jpeg",
+      "anzahlProdukte": 2,
+      "produkte": [
+        {
+          "slug": "mjplit-jetprint-light-1-farbig",
+          "name": "JetPrint light 1-farbig"
+        },
+        {
+          "slug": "jetprint-premium-1-farbig",
+          "name": "JetPrint Premium 1-farbig"
+        }
+      ]
+    },
+    {
+      "slug": "ironhorse",
+      "name": "IronHorse",
+      "gruppe": "Fussmatten",
+      "pfad": "/de/product-categories/ironhorse",
+      "beschreibung": "Die schön&sauber-Iron-Horse®-Fussmatte ist eine robuste Matte, zur Aufnahme von Schmutz und Nässe. Die schön&sauber-Fussmatte ist eine waschbare Schmutzfangmatte. Die schön&sauber-Iron-Horse®-Fussmatte ist das \"Arbeitspferd\" unter den textilen Eingangsmatten. Die Matte wurde geschaffen um höchsten Schmutz-Rückhalte-Anforderungen zu entsprechen. Sie überzeugt durch extreme Schmutz-Halte-Kapazität und Strapazierfähigkeit und stellt mit 8 harmonisch abgestimmten melierten Farben für jeden Eingangsbereich und Raum eine optische Aufwertung dar. Die zu 100% voll durchgefärbte Polyamid- Nylonfaser (solution-dyed) nimmt bis zu 4 kg/qm Schmutz und Feuchtigkeit auf. Sie hält den Schmutz zwischen den Fasern fest und senkt damit den Reinigungsaufwand in Gebäuden erheblich. Die Rückenbeschichtung ist ein 100% bis zu 80°C maschinenwaschbarer Nitrilgummi.",
+      "titelbild": "/uploads/5c47fa2b58b3djpeg",
+      "anzahlProdukte": 3,
+      "produkte": [
+        {
+          "slug": "iron-horse-matte-2",
+          "name": "IRON-HORSE-2"
+        },
+        {
+          "slug": "iron-horse-matte",
+          "name": "IRON-HORSE-Mietmatte"
+        },
+        {
+          "slug": "iron-horse-1-farbige-und-melierte-schmutzfangmatten",
+          "name": "IRON-HORSE 1-farbige und melierte Schmutzfangmatten"
+        }
+      ]
+    },
+    {
+      "slug": "ironhorse-xl",
+      "name": "IronHorse XL",
+      "gruppe": "Fussmatten",
+      "pfad": "/de/product-categories/ironhorse-xl",
+      "beschreibung": null,
+      "titelbild": "/uploads/5c47fa5a8336bjpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "designmatten",
+      "name": "Designmatten",
+      "gruppe": "Logomatten",
+      "pfad": "/de/product-categories/designmatten",
+      "beschreibung": null,
+      "titelbild": "/uploads/JPL-613-königsblau_0.jpg",
+      "anzahlProdukte": 5,
+      "produkte": [
+        {
+          "slug": "designmatten-jetprint-velour",
+          "name": "Designmatten JetPrint-Velour"
+        },
+        {
+          "slug": "designmatten-jetprint-light",
+          "name": "Designmatten JetPrint-light"
+        },
+        {
+          "slug": "hinweismatten",
+          "name": "Hinweismatten"
+        },
+        {
+          "slug": "designmatten-jetprint",
+          "name": "Designmatten JetPrint"
+        },
+        {
+          "slug": "jetprint-premium",
+          "name": "JetPrint-Premium"
+        }
+      ]
+    },
+    {
+      "slug": "jet-print-light",
+      "name": "Jet Print light",
+      "gruppe": "Logomatten",
+      "pfad": "/de/product-categories/jet-print-light",
+      "beschreibung": null,
+      "titelbild": "/uploads/5c7730c15903b.jpeg",
+      "anzahlProdukte": 1,
+      "produkte": [
+        {
+          "slug": "jetprint-light-logo",
+          "name": "JetPrint light Logo"
+        }
+      ]
+    },
+    {
+      "slug": "katzen-willk",
+      "name": "Katzen Willk",
+      "gruppe": "Logomatten",
+      "pfad": "/de/product-categories/katzen-willk",
+      "beschreibung": null,
+      "titelbild": "/uploads/5bcf6fe4d7960jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "jetprint-design",
+      "name": "JetPrint-Design",
+      "gruppe": "Logomatten",
+      "pfad": "/de/product-categories/jetprint-design",
+      "beschreibung": null,
+      "titelbild": "/uploads/SL-1024x170-JetPrint.JPG",
+      "anzahlProdukte": 1,
+      "produkte": [
+        {
+          "slug": "jetprint-matten-design",
+          "name": "JetPrint Matten, Design"
+        }
+      ]
+    },
+    {
+      "slug": "os-rehab-physio-matten",
+      "name": "OS-REHAB-Physio-Matten",
+      "gruppe": "OS-REHA-Physio-Matten",
+      "pfad": "/de/product-categories/os-rehab-physio-matten",
+      "beschreibung": "OS-Physio-REHA-Matten nach Ihren Angaben designed",
+      "titelbild": "/uploads/5c4cc9df43aabjpeg",
+      "anzahlProdukte": 3,
+      "produkte": [
+        {
+          "slug": "os-5-punkt-rehab-trainingsmatte-c",
+          "name": "OS-5-Punkt-REHAB-Trainingsmatte-c"
+        },
+        {
+          "slug": "os-stern-rehab-trainingsmatte",
+          "name": "OS-Stern-REHAB-Trainingsmatte"
+        },
+        {
+          "slug": "os-quadrat-rehab-trainingsmatte",
+          "name": "OS-Quadrat-REHAB-Trainingsmatte"
+        }
+      ]
+    },
+    {
+      "slug": "os-y-matte-wide-balance",
+      "name": "OS-Y-Matte, Wide Balance",
+      "gruppe": "OS-REHA-Physio-Matten",
+      "pfad": "/de/product-categories/os-y-matte-wide-balance",
+      "beschreibung": "OS-Physio-REHAB-Y-Matte, Wide Balance",
+      "titelbild": "/uploads/5c899f57088f7.jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "os-rehab-basis-matte",
+      "name": "OS-REHAB Basis-Matte",
+      "gruppe": "OS-REHA-Physio-Matten",
+      "pfad": "/de/product-categories/os-rehab-basis-matte",
+      "beschreibung": "OS-REHAB Basis-Matte",
+      "titelbild": "/uploads/5cca3e65c6da1.jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "os-rehab-bahnmatte",
+      "name": "OS-REHAB-Bahnmatte",
+      "gruppe": "OS-REHA-Physio-Matten",
+      "pfad": "/de/product-categories/os-rehab-bahnmatte",
+      "beschreibung": "OS-Physio-REHAB-Bahnmatte",
+      "titelbild": "/uploads/5c89a4d3827c1.jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "os-rehab-stern-matte",
+      "name": "OS-REHAB-Stern-Matte",
+      "gruppe": "OS-REHA-Physio-Matten",
+      "pfad": "/de/product-categories/os-rehab-stern-matte",
+      "beschreibung": "OS-Physio-REHAB-Stern-Matte",
+      "titelbild": "/uploads/5c899fcaea079.jpeg",
+      "anzahlProdukte": 1,
+      "produkte": [
+        {
+          "slug": "os-stern-rehab-trainingsmatte",
+          "name": "OS-Stern-REHAB-Trainingsmatte"
+        }
+      ]
+    },
+    {
+      "slug": "os-rehab-gitter-matte",
+      "name": "OS-REHAB-Gitter-Matte",
+      "gruppe": "OS-REHA-Physio-Matten",
+      "pfad": "/de/product-categories/os-rehab-gitter-matte",
+      "beschreibung": "OS-Physio-REHAB-Gitter-Matte",
+      "titelbild": "/uploads/5c899f359ba7d.jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "os-rehab-5-punkt-matte",
+      "name": "OS-REHAB-5-Punkt-Matte",
+      "gruppe": "OS-REHA-Physio-Matten",
+      "pfad": "/de/product-categories/os-rehab-5-punkt-matte",
+      "beschreibung": "OS-REHAB-5-Punkt-Matte",
+      "titelbild": "/uploads/5c89a066994bd.jpeg",
+      "anzahlProdukte": 1,
+      "produkte": [
+        {
+          "slug": "os-5-punkt-rehab-trainingsmatte-c",
+          "name": "OS-5-Punkt-REHAB-Trainingsmatte-c"
+        }
+      ]
+    },
+    {
+      "slug": "os-rehab-quadrat-matte",
+      "name": "OS-REHAB Quadrat-Matte",
+      "gruppe": "OS-REHA-Physio-Matten",
+      "pfad": "/de/product-categories/os-rehab-quadrat-matte",
+      "beschreibung": "OS-REHAB Quadrat-Matte",
+      "titelbild": "/uploads/5cccd534814b3.jpeg",
+      "anzahlProdukte": 1,
+      "produkte": [
+        {
+          "slug": "os-quadrat-rehab-trainingsmatte",
+          "name": "OS-Quadrat-REHAB-Trainingsmatte"
+        }
+      ]
+    },
+    {
+      "slug": "kokos-farbig",
+      "name": "Kokos Farbig",
+      "gruppe": "Kokosmatten",
+      "pfad": "/de/product-categories/kokos-farbig",
+      "beschreibung": null,
+      "titelbild": "/uploads/SL-1024x170-Kokos-farb.JPG",
+      "anzahlProdukte": 1,
+      "produkte": [
+        {
+          "slug": "kokos-farbig",
+          "name": "Kokos, farbig"
+        }
+      ]
+    },
+    {
+      "slug": "kokos-naturfarbig",
+      "name": "Kokos naturfarbig",
+      "gruppe": "Kokosmatten",
+      "pfad": "/de/product-categories/kokos-naturfarbig",
+      "beschreibung": null,
+      "titelbild": "/uploads/SL-1024x170-Kokos-natur.jpg",
+      "anzahlProdukte": 1,
+      "produkte": [
+        {
+          "slug": "kokosmatten-naturfarbig",
+          "name": "Kokos, natur"
+        }
+      ]
+    },
+    {
+      "slug": "kokos-logomatte",
+      "name": "Kokos-Logomatte",
+      "gruppe": "Kokosmatten",
+      "pfad": "/de/product-categories/kokos-logomatte",
+      "beschreibung": "Kokos-Logomatte einfarbig und mehrfarbig gestaltet",
+      "titelbild": "/uploads/SL-1024x170-Kokos-gest.JPG",
+      "anzahlProdukte": 1,
+      "produkte": [
+        {
+          "slug": "kokos-gestaltet",
+          "name": "Kokos, Logomatten"
+        }
+      ]
+    },
+    {
+      "slug": "marschall",
+      "name": "MARSCHALL",
+      "gruppe": "Aluminium-Matten",
+      "pfad": "/de/product-categories/marschall",
+      "beschreibung": null,
+      "titelbild": "/uploads/5c6c8e7112268.jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "diplomat",
+      "name": "Diplomat",
+      "gruppe": "Aluminium-Matten",
+      "pfad": "/de/product-categories/diplomat",
+      "beschreibung": null,
+      "titelbild": "/uploads/5c6c8e3dcd9bb.jpeg",
+      "anzahlProdukte": 1,
+      "produkte": [
+        {
+          "slug": "aluminium-profilmatte-typ-diplomat-r",
+          "name": "Aluminium-Profilmatte, Typ Diplomat R"
+        }
+      ]
+    },
+    {
+      "slug": "cushion-coil",
+      "name": "Cushion Coil",
+      "gruppe": "Gummimatten",
+      "pfad": "/de/product-categories/cushion-coil",
+      "beschreibung": null,
+      "titelbild": "/uploads/SL-1024x170-Kushion.jpg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "scraper",
+      "name": "Scraper",
+      "gruppe": "Gummimatten",
+      "pfad": "/de/product-categories/scraper",
+      "beschreibung": null,
+      "titelbild": "/uploads/SL-1024x170-Scraper.jpg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "struktura",
+      "name": "Struktura",
+      "gruppe": "Gummimatten",
+      "pfad": "/de/product-categories/struktura",
+      "beschreibung": "Gummi-Wabenmatte mit und ohne Bürsteneinsätze Höhen 13,5 und 22mm",
+      "titelbild": "/uploads/5c6c8e1ae39da.jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "turf",
+      "name": "Turf",
+      "gruppe": "Outdoor-Matten",
+      "pfad": "/de/product-categories/turf",
+      "beschreibung": null,
+      "titelbild": "/uploads/5c47fbd86f17cjpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "iron-horse-mietmatten",
+      "name": "IRON-HORSE-Mietmatten",
+      "gruppe": "Mietmatten",
+      "pfad": "/de/product-categories/iron-horse-mietmatten",
+      "beschreibung": null,
+      "titelbild": "/uploads/5c4cc0ab73be2jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "waschbecken",
+      "name": "Waschbecken",
+      "gruppe": "Was ist neu",
+      "pfad": "/de/product-categories/waschbecken",
+      "beschreibung": "Natursteinwaschbecken aus Flußstein, Marmor, Onyx, Fossil",
+      "titelbild": "/uploads/5c788150c5ece.jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    },
+    {
+      "slug": "was-ist-neu",
+      "name": "Was ist neu",
+      "gruppe": "(nur Startseite: Featured Category)",
+      "pfad": "/de/product-categories/was-ist-neu",
+      "beschreibung": "Natursteinwaschbecken aus Flußstein, Marmor, Onyx, Fossil",
+      "titelbild": "/uploads/5c787ff38c28b.jpeg",
+      "anzahlProdukte": 0,
+      "produkte": []
+    }
+  ],
+  "produkte": [
+    {
+      "productId": 40,
+      "slug": "os-5-punkt-rehab-trainingsmatte-c",
+      "name": "OS-5-Punkt-REHAB-Trainingsmatte-c",
+      "pfad": "/de/products/os-5-punkt-rehab-trainingsmatte-c",
+      "artikelnummer": 6027003,
+      "preisdaten": {
+        "einkaufProQm": 0,
+        "hinweis": "Kein Einkaufspreis hinterlegt - der Preis ist immer 0,00 €."
+      },
+      "fixgroessen": [],
+      "standardbreitenSelect": [],
+      "customOption": null,
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/5cca325ee6c13.jpeg"
+      ],
+      "nameLautPreisdienst": "OS-5-Punkt-REHAB-Trainingsmatte-c",
+      "gewichtProQm": 0
+    },
+    {
+      "productId": 39,
+      "slug": "os-stern-rehab-trainingsmatte",
+      "name": "OS-Stern-REHAB-Trainingsmatte",
+      "pfad": "/de/products/os-stern-rehab-trainingsmatte",
+      "artikelnummer": 6027004,
+      "preisdaten": {
+        "einkaufProQm": 52.67,
+        "salesFactor": 1.931,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "415",
+          "price": null,
+          "width": 115,
+          "length": 130,
+          "label": "130 cm x 115 cm"
+        },
+        {
+          "sizeId": "416",
+          "price": null,
+          "width": 130,
+          "length": 130,
+          "label": "130 cm x 130 cm"
+        },
+        {
+          "sizeId": "417",
+          "price": null,
+          "width": 150,
+          "length": 130,
+          "label": "130 cm x 150 cm"
+        }
+      ],
+      "standardbreitenSelect": [],
+      "customOption": "FIXED+CUSTOM_SIZE",
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/Stern-601-605.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/601-zitronengelb.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/JPrint-005.jpg"
+      ],
+      "nameLautPreisdienst": "OS-Stern-REHAB-Trainingsmatte",
+      "gewichtProQm": 2.48
+    },
+    {
+      "productId": 34,
+      "slug": "aluminium-profilmatte-typ-diplomat-r",
+      "name": "Aluminium-Profilmatte, Typ Diplomat R",
+      "pfad": "/de/products/aluminium-profilmatte-typ-diplomat-r",
+      "artikelnummer": 652601,
+      "preisdaten": {
+        "einkaufProQm": 265.09,
+        "salesFactor": 1.317,
+        "standardbreiten": [
+          100
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0
+      },
+      "fixgroessen": [],
+      "standardbreitenSelect": [],
+      "customOption": null,
+      "attribute": [
+        {
+          "formularname": "attributes[0]",
+          "beschriftung": "Höhe",
+          "optionen": [
+            {
+              "value": "1825",
+              "label": "12mm"
+            },
+            {
+              "value": "1826",
+              "label": "17mm"
+            },
+            {
+              "value": "1827",
+              "label": "22mm"
+            }
+          ]
+        },
+        {
+          "formularname": "attributes[1]",
+          "beschriftung": "Profilbreite",
+          "optionen": [
+            {
+              "value": "1828",
+              "label": "27,5mm - Standard"
+            },
+            {
+              "value": "1829",
+              "label": "44mm - L = Large"
+            }
+          ]
+        },
+        {
+          "formularname": "attributes[2]",
+          "beschriftung": "Format",
+          "optionen": [
+            {
+              "value": "1830",
+              "label": "Querformat"
+            },
+            {
+              "value": "1831",
+              "label": "Hochformat"
+            }
+          ]
+        },
+        {
+          "formularname": "attributes[4]",
+          "beschriftung": "430",
+          "optionen": [
+            {
+              "value": "1837",
+              "label": "ohne Kratzkante"
+            },
+            {
+              "value": "1838",
+              "label": "mit Kratzkante"
+            }
+          ]
+        }
+      ],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/Dip-R.jpg"
+      ],
+      "nameLautPreisdienst": "Aluminium-Profilmatte, Typ Diplomat R",
+      "gewichtProQm": 0
+    },
+    {
+      "productId": 33,
+      "slug": "designmatten-jetprint-velour",
+      "name": "Designmatten JetPrint-Velour",
+      "pfad": "/de/products/designmatten-jetprint-velour",
+      "artikelnummer": "4711003N",
+      "preisdaten": {
+        "einkaufProQm": 39.06,
+        "salesFactor": 1.931,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "369",
+          "price": null,
+          "width": 60,
+          "length": 40,
+          "label": "40 cm x 60 cm"
+        },
+        {
+          "sizeId": "370",
+          "price": null,
+          "width": 75,
+          "length": 50,
+          "label": "50 cm x 75 cm"
+        },
+        {
+          "sizeId": "371",
+          "price": null,
+          "width": 85,
+          "length": 75,
+          "label": "75 cm x 85 cm"
+        },
+        {
+          "sizeId": "372",
+          "price": null,
+          "width": 115,
+          "length": 85,
+          "label": "85 cm x 115 cm"
+        },
+        {
+          "sizeId": "373",
+          "price": null,
+          "width": 150,
+          "length": 85,
+          "label": "85 cm x 150 cm"
+        },
+        {
+          "sizeId": "374",
+          "price": null,
+          "width": 300,
+          "length": 85,
+          "label": "85 cm x 300 cm"
+        },
+        {
+          "sizeId": "375",
+          "price": null,
+          "width": 175,
+          "length": 115,
+          "label": "115 cm x 175 cm"
+        },
+        {
+          "sizeId": "376",
+          "price": null,
+          "width": 200,
+          "length": 150,
+          "label": "150 cm x 200 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        60,
+        75,
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": "FIXED+CUSTOM_SIZE",
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/JPL-601-zitronengelb_0.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/601-zitronengelb.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/005-jet-print-light-5eb35cd44d2e3268777520.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/5c47fb75ede37jpeg"
+      ],
+      "nameLautPreisdienst": "Designmatten JetPrint-Velour",
+      "gewichtProQm": 1.8
+    },
+    {
+      "productId": 32,
+      "slug": "designmatten-jetprint-light",
+      "name": "Designmatten JetPrint-light",
+      "pfad": "/de/products/designmatten-jetprint-light",
+      "artikelnummer": "4711001 MJPLIT",
+      "preisdaten": {
+        "einkaufProQm": 38.54,
+        "salesFactor": 1.931,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "248",
+          "price": null,
+          "width": 60,
+          "length": 40,
+          "label": "40 cm x 60 cm"
+        },
+        {
+          "sizeId": "249",
+          "price": null,
+          "width": 75,
+          "length": 50,
+          "label": "50 cm x 75 cm"
+        },
+        {
+          "sizeId": "250",
+          "price": null,
+          "width": 85,
+          "length": 60,
+          "label": "60 cm x 85 cm"
+        },
+        {
+          "sizeId": "251",
+          "price": null,
+          "width": 120,
+          "length": 85,
+          "label": "85 cm x 120 cm"
+        },
+        {
+          "sizeId": "252",
+          "price": null,
+          "width": 150,
+          "length": 85,
+          "label": "85 cm x 150 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        60,
+        75,
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": "FIXED+CUSTOM_SIZE",
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/JPL-601-zitronengelb_0.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/601-zitronengelb.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/JPrint-light.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/JetPrint-light-colors.jpg"
+      ],
+      "nameLautPreisdienst": "Designmatten JetPrint-light",
+      "gewichtProQm": 0
+    },
+    {
+      "productId": 28,
+      "slug": "hinweismatten",
+      "name": "Hinweismatten",
+      "pfad": "/de/products/hinweismatten",
+      "artikelnummer": "6390202 MJPRNT",
+      "preisdaten": {
+        "einkaufProQm": 40.85,
+        "salesFactor": 1.931,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "397",
+          "price": null,
+          "width": 60,
+          "length": 40,
+          "label": "40 cm x 60 cm"
+        },
+        {
+          "sizeId": "398",
+          "price": null,
+          "width": 70,
+          "length": 50,
+          "label": "50 cm x 70 cm"
+        },
+        {
+          "sizeId": "399",
+          "price": null,
+          "width": 90,
+          "length": 75,
+          "label": "75 cm x 90 cm"
+        },
+        {
+          "sizeId": "400",
+          "price": null,
+          "width": 120,
+          "length": 85,
+          "label": "85 cm x 120 cm"
+        },
+        {
+          "sizeId": "401",
+          "price": null,
+          "width": 150,
+          "length": 85,
+          "label": "85 cm x 150 cm"
+        },
+        {
+          "sizeId": "402",
+          "price": null,
+          "width": 175,
+          "length": 115,
+          "label": "115 cm x 175 cm"
+        },
+        {
+          "sizeId": "403",
+          "price": null,
+          "width": 200,
+          "length": 150,
+          "label": "150 cm x 200 cm"
+        },
+        {
+          "sizeId": "404",
+          "price": null,
+          "width": 300,
+          "length": 200,
+          "label": "200 cm x 300 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        60,
+        75,
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": "FIXED+CUSTOM_SIZE",
+      "attribute": [
+        {
+          "formularname": "attributes[2]",
+          "beschriftung": "601",
+          "optionen": [
+            {
+              "value": "1781",
+              "label": "Herzlich Willkommen"
+            },
+            {
+              "value": "1782",
+              "label": "Bitte Abstand halten"
+            },
+            {
+              "value": "1783",
+              "label": ""
+            }
+          ]
+        },
+        {
+          "formularname": "attributes[3]",
+          "beschriftung": "602",
+          "optionen": [
+            {
+              "value": "1784",
+              "label": "Querformat"
+            },
+            {
+              "value": "1785",
+              "label": "Hochformat"
+            }
+          ]
+        }
+      ],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/Herzlich%20Willkommen_512x340.JPG",
+        "https://www.matten.net/media/cache/single_product_image/uploads/JPL-601-zitronengelb_0.jpg"
+      ],
+      "nameLautPreisdienst": "Hinweismatten",
+      "gewichtProQm": 1.9
+    },
+    {
+      "productId": 26,
+      "slug": "kokos-gestaltet",
+      "name": "Kokos, Logomatten",
+      "pfad": "/de/products/kokos-gestaltet",
+      "artikelnummer": 6920003,
+      "preisdaten": {
+        "einkaufProQm": 0,
+        "hinweis": "Kein Einkaufspreis hinterlegt - der Preis ist immer 0,00 €."
+      },
+      "fixgroessen": [],
+      "standardbreitenSelect": [],
+      "customOption": null,
+      "attribute": [],
+      "bilder": [],
+      "nameLautPreisdienst": "Kokos, Logomatten",
+      "gewichtProQm": 0
+    },
+    {
+      "productId": 25,
+      "slug": "iron-horse-matte-2",
+      "name": "IRON-HORSE-2",
+      "pfad": "/de/products/iron-horse-matte-2",
+      "artikelnummer": 630001,
+      "preisdaten": {
+        "einkaufProQm": 50,
+        "salesFactor": 1.6,
+        "standardbreiten": [
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [],
+      "standardbreitenSelect": [],
+      "customOption": null,
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/5c47fa2b58b3djpeg"
+      ],
+      "nameLautPreisdienst": "IRON-HORSE-2",
+      "gewichtProQm": 0
+    },
+    {
+      "productId": 22,
+      "slug": "jetprint-light-logo",
+      "name": "JetPrint light Logo",
+      "pfad": "/de/products/jetprint-light-logo",
+      "artikelnummer": "6300202N",
+      "preisdaten": {
+        "einkaufProQm": 43.39,
+        "salesFactor": 1.97,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "360",
+          "price": null,
+          "width": 60,
+          "length": 40,
+          "label": "40 cm x 60 cm"
+        },
+        {
+          "sizeId": "361",
+          "price": null,
+          "width": 75,
+          "length": 50,
+          "label": "50 cm x 75 cm"
+        },
+        {
+          "sizeId": "362",
+          "price": null,
+          "width": 85,
+          "length": 75,
+          "label": "75 cm x 85 cm"
+        },
+        {
+          "sizeId": "363",
+          "price": null,
+          "width": 115,
+          "length": 85,
+          "label": "85 cm x 115 cm"
+        },
+        {
+          "sizeId": "364",
+          "price": null,
+          "width": 300,
+          "length": 85,
+          "label": "85 cm x 300 cm"
+        },
+        {
+          "sizeId": "365",
+          "price": null,
+          "width": 175,
+          "length": 115,
+          "label": "115 cm x 175 cm"
+        },
+        {
+          "sizeId": "366",
+          "price": null,
+          "width": 200,
+          "length": 150,
+          "label": "150 cm x 200 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        60,
+        75,
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": "FIXED+CUSTOM_SIZE",
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/JPL-601-zitronengelb_0.jpg"
+      ],
+      "nameLautPreisdienst": "JetPrint light Logo",
+      "gewichtProQm": 1.9
+    },
+    {
+      "productId": 19,
+      "slug": "kokos-farbig",
+      "name": "Kokos, farbig",
+      "pfad": "/de/products/kokos-farbig",
+      "artikelnummer": 6920002,
+      "preisdaten": {
+        "einkaufProQm": 53.88,
+        "salesFactor": 1.375,
+        "standardbreiten": [
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 1
+      },
+      "fixgroessen": [],
+      "standardbreitenSelect": [],
+      "customOption": null,
+      "attribute": [
+        {
+          "formularname": "attributes[0]",
+          "beschriftung": "Höhe",
+          "optionen": [
+            {
+              "value": "179",
+              "label": "schwarz - Mattenhöhe: 17mm"
+            },
+            {
+              "value": "195",
+              "label": "grau - Mattenhöhe: 17mm"
+            },
+            {
+              "value": "199",
+              "label": "rot - Mattenhöhe: 17mm"
+            },
+            {
+              "value": "201",
+              "label": "blau - Mattenhöhe: 17mm"
+            }
+          ]
+        }
+      ],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/5c47fa829d279jpeg"
+      ],
+      "nameLautPreisdienst": "Kokos, farbig",
+      "gewichtProQm": 3
+    },
+    {
+      "productId": 18,
+      "slug": "kokosmatten-naturfarbig",
+      "name": "Kokos, natur",
+      "pfad": "/de/products/kokosmatten-naturfarbig",
+      "artikelnummer": "6920001N",
+      "preisdaten": {
+        "einkaufProQm": 41.84,
+        "salesFactor": 1.375,
+        "standardbreiten": [
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 1
+      },
+      "fixgroessen": [],
+      "standardbreitenSelect": [],
+      "customOption": null,
+      "attribute": [
+        {
+          "formularname": "attributes[0]",
+          "beschriftung": "Mattenhöhe",
+          "optionen": [
+            {
+              "value": "148",
+              "label": "13/14mm"
+            },
+            {
+              "value": "158",
+              "label": "16/17mm"
+            },
+            {
+              "value": "161",
+              "label": "20mm"
+            },
+            {
+              "value": "163",
+              "label": "22mm"
+            },
+            {
+              "value": "164",
+              "label": "24mm"
+            },
+            {
+              "value": "165",
+              "label": "27mm"
+            },
+            {
+              "value": "166",
+              "label": "30mm"
+            }
+          ]
+        }
+      ],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/kokos-natur_512x340.jpg"
+      ],
+      "nameLautPreisdienst": "Kokos, natur",
+      "gewichtProQm": 3
+    },
+    {
+      "productId": 12,
+      "slug": "os-quadrat-rehab-trainingsmatte",
+      "name": "OS-Quadrat-REHAB-Trainingsmatte",
+      "pfad": "/de/products/os-quadrat-rehab-trainingsmatte",
+      "artikelnummer": 6027001,
+      "preisdaten": {
+        "einkaufProQm": 0,
+        "hinweis": "Kein Einkaufspreis hinterlegt - der Preis ist immer 0,00 €."
+      },
+      "fixgroessen": [],
+      "standardbreitenSelect": [],
+      "customOption": null,
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/5cce29fead941.jpeg"
+      ],
+      "nameLautPreisdienst": "OS-Quadrat-REHAB-Trainingsmatte",
+      "gewichtProQm": 0
+    },
+    {
+      "productId": 10,
+      "slug": "designmatten-jetprint",
+      "name": "Designmatten JetPrint",
+      "pfad": "/de/products/designmatten-jetprint",
+      "artikelnummer": "4711000N",
+      "preisdaten": {
+        "einkaufProQm": 52.67,
+        "salesFactor": 1.931,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "273",
+          "price": null,
+          "width": 60,
+          "length": 40,
+          "label": "40 cm x 60 cm"
+        },
+        {
+          "sizeId": "274",
+          "price": null,
+          "width": 75,
+          "length": 50,
+          "label": "50 cm x 75 cm"
+        },
+        {
+          "sizeId": "275",
+          "price": null,
+          "width": 85,
+          "length": 60,
+          "label": "60 cm x 85 cm"
+        },
+        {
+          "sizeId": "276",
+          "price": null,
+          "width": 120,
+          "length": 85,
+          "label": "85 cm x 120 cm"
+        },
+        {
+          "sizeId": "277",
+          "price": null,
+          "width": 150,
+          "length": 85,
+          "label": "85 cm x 150 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        60,
+        75,
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": "FIXED+CUSTOM_SIZE",
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/JPL-601-zitronengelb_0.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/601-zitronengelb.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/005-jet-print-light-5eb35cd44d2e3268777520.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/5c47fb75ede37jpeg"
+      ],
+      "nameLautPreisdienst": "Designmatten JetPrint",
+      "gewichtProQm": 0
+    },
+    {
+      "productId": 9,
+      "slug": "jetprint-matten-design",
+      "name": "JetPrint Matten, Design",
+      "pfad": "/de/products/jetprint-matten-design",
+      "artikelnummer": "6320011N",
+      "preisdaten": {
+        "einkaufProQm": 54.63,
+        "salesFactor": 1.931,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "377",
+          "price": null,
+          "width": 60,
+          "length": 40,
+          "label": "40 cm x 60 cm"
+        },
+        {
+          "sizeId": "378",
+          "price": null,
+          "width": 75,
+          "length": 50,
+          "label": "50 cm x 75 cm"
+        },
+        {
+          "sizeId": "379",
+          "price": null,
+          "width": 85,
+          "length": 75,
+          "label": "75 cm x 85 cm"
+        },
+        {
+          "sizeId": "380",
+          "price": null,
+          "width": 115,
+          "length": 85,
+          "label": "85 cm x 115 cm"
+        },
+        {
+          "sizeId": "381",
+          "price": null,
+          "width": 150,
+          "length": 85,
+          "label": "85 cm x 150 cm"
+        },
+        {
+          "sizeId": "382",
+          "price": null,
+          "width": 300,
+          "length": 85,
+          "label": "85 cm x 300 cm"
+        },
+        {
+          "sizeId": "383",
+          "price": null,
+          "width": 175,
+          "length": 115,
+          "label": "115 cm x 175 cm"
+        },
+        {
+          "sizeId": "418",
+          "price": null,
+          "width": 200,
+          "length": 150,
+          "label": "150 cm x 200 cm"
+        },
+        {
+          "sizeId": "419",
+          "price": null,
+          "width": 240,
+          "length": 150,
+          "label": "150 cm x 240 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        60,
+        75,
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": "FIXED+CUSTOM_SIZE",
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/601-zitronengelb.jpg",
+        "https://www.matten.net/media/cache/single_product_image/uploads/Eing-Logo-512x340.jpg"
+      ],
+      "nameLautPreisdienst": "JetPrint Matten, Design",
+      "gewichtProQm": 0
+    },
+    {
+      "productId": 8,
+      "slug": "mjplit-jetprint-light-1-farbig",
+      "name": "JetPrint light 1-farbig",
+      "pfad": "/de/products/mjplit-jetprint-light-1-farbig",
+      "artikelnummer": "6300001N",
+      "preisdaten": {
+        "einkaufProQm": 40.85,
+        "salesFactor": 1.87,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "351",
+          "price": 18.1,
+          "width": 60,
+          "length": 40,
+          "label": "40 cm x 60 cm"
+        },
+        {
+          "sizeId": "352",
+          "price": 27.85,
+          "width": 75,
+          "length": 50,
+          "label": "50 cm x 75 cm"
+        },
+        {
+          "sizeId": "353",
+          "price": 40.6,
+          "width": 90,
+          "length": 60,
+          "label": "60 cm x 90 cm"
+        },
+        {
+          "sizeId": "354",
+          "price": 73.6,
+          "width": 115,
+          "length": 85,
+          "label": "85 cm x 115 cm"
+        },
+        {
+          "sizeId": "355",
+          "price": 96.5,
+          "width": 150,
+          "length": 85,
+          "label": "85 cm x 150 cm"
+        },
+        {
+          "sizeId": "356",
+          "price": 228.1,
+          "width": 200,
+          "length": 150,
+          "label": "150 cm x 200 cm"
+        },
+        {
+          "sizeId": "357",
+          "price": 448.3,
+          "width": 300,
+          "length": 200,
+          "label": "200 cm x 300 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        60,
+        75,
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": null,
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/JP-601.jpg"
+      ],
+      "nameLautPreisdienst": "JetPrint light 1-farbig",
+      "gewichtProQm": 1.8
+    },
+    {
+      "productId": 7,
+      "slug": "jetprint-premium-1-farbig",
+      "name": "JetPrint Premium 1-farbig",
+      "pfad": "/de/products/jetprint-premium-1-farbig",
+      "artikelnummer": "6301000N",
+      "preisdaten": {
+        "einkaufProQm": 52.67,
+        "salesFactor": 1.931,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "3",
+          "price": 24.2,
+          "width": 60,
+          "length": 40,
+          "label": "40 cm x 60 cm"
+        },
+        {
+          "sizeId": "4",
+          "price": 39,
+          "width": 75,
+          "length": 50,
+          "label": "50 cm x 75 cm"
+        },
+        {
+          "sizeId": "5",
+          "price": 41.75,
+          "width": 85,
+          "length": 60,
+          "label": "60 cm x 85 cm"
+        },
+        {
+          "sizeId": "392",
+          "price": 67.95,
+          "width": 90,
+          "length": 75,
+          "label": "75 cm x 90 cm"
+        },
+        {
+          "sizeId": "393",
+          "price": 98.4,
+          "width": 115,
+          "length": 85,
+          "label": "85 cm x 115 cm"
+        },
+        {
+          "sizeId": "394",
+          "price": 128.6,
+          "width": 150,
+          "length": 85,
+          "label": "85 cm x 150 cm"
+        },
+        {
+          "sizeId": "395",
+          "price": 203.6,
+          "width": 175,
+          "length": 115,
+          "label": "115 cm x 175 cm"
+        },
+        {
+          "sizeId": "396",
+          "price": 304.1,
+          "width": 200,
+          "length": 150,
+          "label": "150 cm x 200 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        60,
+        75,
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": null,
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/601-zitronengelb.jpg"
+      ],
+      "nameLautPreisdienst": "JetPrint Premium 1-farbig",
+      "gewichtProQm": 2.48
+    },
+    {
+      "productId": 6,
+      "slug": "jetprint-premium",
+      "name": "JetPrint-Premium",
+      "pfad": "/de/products/jetprint-premium",
+      "artikelnummer": "6300000N",
+      "preisdaten": {
+        "einkaufProQm": 52.67,
+        "salesFactor": 1.931,
+        "standardbreiten": [
+          60,
+          75,
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 0.9
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "343",
+          "price": 24.2,
+          "width": 60,
+          "length": 40,
+          "label": "40 cm x 60 cm"
+        },
+        {
+          "sizeId": "344",
+          "price": 37.5,
+          "width": 75,
+          "length": 50,
+          "label": "50 cm x 75 cm"
+        },
+        {
+          "sizeId": "345",
+          "price": 54.1,
+          "width": 90,
+          "length": 60,
+          "label": "60 cm x 90 cm"
+        },
+        {
+          "sizeId": "346",
+          "price": 98.6,
+          "width": 115,
+          "length": 85,
+          "label": "85 cm x 115 cm"
+        },
+        {
+          "sizeId": "347",
+          "price": 128.5,
+          "width": 150,
+          "length": 85,
+          "label": "85 cm x 150 cm"
+        },
+        {
+          "sizeId": "348",
+          "price": 258.2,
+          "width": 300,
+          "length": 85,
+          "label": "85 cm x 300 cm"
+        },
+        {
+          "sizeId": "349",
+          "price": 203.2,
+          "width": 175,
+          "length": 115,
+          "label": "115 cm x 175 cm"
+        },
+        {
+          "sizeId": "350",
+          "price": 304.1,
+          "width": 200,
+          "length": 150,
+          "label": "150 cm x 200 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        60,
+        75,
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": "FIXED+CUSTOM_SIZE",
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/601-zitronengelb.jpg"
+      ],
+      "nameLautPreisdienst": "JetPrint-Premium",
+      "gewichtProQm": 2.48
+    },
+    {
+      "productId": 4,
+      "slug": "iron-horse-matte",
+      "name": "IRON-HORSE-Mietmatte",
+      "pfad": "/de/products/iron-horse-matte",
+      "artikelnummer": 64000121,
+      "preisdaten": {
+        "einkaufProQm": 0,
+        "hinweis": "Kein Einkaufspreis hinterlegt - der Preis ist immer 0,00 €."
+      },
+      "fixgroessen": [
+        {
+          "sizeId": "23",
+          "price": null,
+          "width": 85,
+          "length": 50,
+          "label": "50 cm x 85 cm"
+        },
+        {
+          "sizeId": "24",
+          "price": null,
+          "width": 85,
+          "length": 60,
+          "label": "60 cm x 85 cm"
+        },
+        {
+          "sizeId": "25",
+          "price": null,
+          "width": 115,
+          "length": 85,
+          "label": "85 cm x 115 cm"
+        },
+        {
+          "sizeId": "26",
+          "price": null,
+          "width": 300,
+          "length": 85,
+          "label": "85 cm x 300 cm"
+        },
+        {
+          "sizeId": "27",
+          "price": null,
+          "width": 175,
+          "length": 115,
+          "label": "115 cm x 175 cm"
+        },
+        {
+          "sizeId": "407",
+          "price": null,
+          "width": 200,
+          "length": 150,
+          "label": "150 cm x 200 cm"
+        },
+        {
+          "sizeId": "408",
+          "price": null,
+          "width": 250,
+          "length": 150,
+          "label": "150 cm x 250 cm"
+        }
+      ],
+      "standardbreitenSelect": [
+        85,
+        115,
+        150,
+        200
+      ],
+      "customOption": null,
+      "attribute": [],
+      "bilder": [],
+      "nameLautPreisdienst": "IRON-HORSE-Mietmatte",
+      "gewichtProQm": 0
+    },
+    {
+      "productId": 1,
+      "slug": "iron-horse-1-farbige-und-melierte-schmutzfangmatten",
+      "name": "IRON-HORSE 1-farbige und melierte Schmutzfangmatten",
+      "pfad": "/de/products/iron-horse-1-farbige-und-melierte-schmutzfangmatten",
+      "artikelnummer": 63000,
+      "preisdaten": {
+        "einkaufProQm": 27.89,
+        "salesFactor": 1.8,
+        "standardbreiten": [
+          85,
+          115,
+          150,
+          200
+        ],
+        "sondermassFaktor": 1.25,
+        "singleColorFaktor": 1
+      },
+      "fixgroessen": [],
+      "standardbreitenSelect": [],
+      "customOption": null,
+      "attribute": [],
+      "bilder": [
+        "https://www.matten.net/media/cache/single_product_image/uploads/2-Black%20Pearl%20646.png"
+      ],
+      "nameLautPreisdienst": "IRON-HORSE 1-farbige und melierte Schmutzfangmatten",
+      "gewichtProQm": 0
+    }
+  ],
+  "mattendesigner": {
+    "pfad": "/de/custom-mat/create",
+    "mountPunkt": "<div id=\"mat-editor\"></div>",
+    "technik": "Vue-2-Komponente \"mat-editor\", Zeichenflaeche mit fabric.js, Farbwaehler vue-swatches, Schriften ueber FontFaceObserver von Google Fonts.",
+    "materialien": [
+      {
+        "id": 1,
+        "name": "JetPrint",
+        "beschreibung": "Individuell angefertigte Hochleistungsmatten hinterlassen einen bleibenden Eindruck. Entwerfen Sie Ihre persönliche Matte, bis 32-farbig.\r\nDie JetPrint-Matte mit sehr hoher Schmutzaufnahmekapazität.\r\nEinsatz: Eingänge, Corporate Identity, Point of Sale",
+        "preisProQm": 101.71,
+        "anzahlFarben": 47,
+        "groessen": [
+          {
+            "id": 1,
+            "breite": 40,
+            "hoehe": 60,
+            "gewicht": 600,
+            "verfuegbar": true
+          },
+          {
+            "id": 2,
+            "breite": 50,
+            "hoehe": 75,
+            "gewicht": 940,
+            "verfuegbar": true
+          },
+          {
+            "id": 3,
+            "breite": 60,
+            "hoehe": 90,
+            "gewicht": 1350,
+            "verfuegbar": true
+          },
+          {
+            "id": 4,
+            "breite": 85,
+            "hoehe": 120,
+            "gewicht": 2550,
+            "verfuegbar": true
+          },
+          {
+            "id": 5,
+            "breite": 85,
+            "hoehe": 150,
+            "gewicht": 3190,
+            "verfuegbar": true
+          },
+          {
+            "id": 6,
+            "breite": 115,
+            "hoehe": 175,
+            "gewicht": 5000,
+            "verfuegbar": true
+          },
+          {
+            "id": 7,
+            "breite": 115,
+            "hoehe": 240,
+            "gewicht": 6900,
+            "verfuegbar": true
+          },
+          {
+            "id": 8,
+            "breite": 150,
+            "hoehe": 200,
+            "gewicht": 7500,
+            "verfuegbar": true
+          },
+          {
+            "id": 9,
+            "breite": 150,
+            "hoehe": 300,
+            "gewicht": 11250,
+            "verfuegbar": true
+          },
+          {
+            "id": 10,
+            "breite": 200,
+            "hoehe": 200,
+            "gewicht": 10000,
+            "verfuegbar": true
+          },
+          {
+            "id": 11,
+            "breite": 200,
+            "hoehe": 300,
+            "gewicht": 11500,
+            "verfuegbar": true
+          },
+          {
+            "id": 12,
+            "breite": 200,
+            "hoehe": 400,
+            "gewicht": 20000,
+            "verfuegbar": true
+          },
+          {
+            "id": 13,
+            "breite": 200,
+            "hoehe": 600,
+            "gewicht": 30000,
+            "verfuegbar": true
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "JetPrint_light",
+        "beschreibung": "Individuell angefertigte JetPrint-Light-Matten im selben Verfahren bedruckt wie JetPrint-Matten, Herstellung jedoch mit geringerer Flordicke und Gummistärke. Sehr gute Schmutzaufnahme.\r\nEinsatz: Eingänge, Corporate identity, Point of Sale, Give-Away",
+        "preisProQm": 78.88,
+        "anzahlFarben": 15,
+        "groessen": [
+          {
+            "id": 14,
+            "breite": 60,
+            "hoehe": 40,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 15,
+            "breite": 75,
+            "hoehe": 50,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 16,
+            "breite": 90,
+            "hoehe": 60,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 17,
+            "breite": 120,
+            "hoehe": 85,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 18,
+            "breite": 150,
+            "hoehe": 85,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 19,
+            "breite": 175,
+            "hoehe": 115,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 20,
+            "breite": 200,
+            "hoehe": 115,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 21,
+            "breite": 200,
+            "hoehe": 150,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 22,
+            "breite": 300,
+            "hoehe": 150,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 23,
+            "breite": 400,
+            "hoehe": 200,
+            "gewicht": 1,
+            "verfuegbar": true
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "JetPrint-Velour",
+        "beschreibung": "Glatte und gleichmäßige Oberfläche für präzisen und detailreichen Druck und erstaunlicher Farbqualität.\r\nEinsatz: Messen, Point of Sale, Werbung",
+        "preisProQm": 75.42,
+        "anzahlFarben": 1,
+        "groessen": [
+          {
+            "id": 24,
+            "breite": 60,
+            "hoehe": 40,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 25,
+            "breite": 75,
+            "hoehe": 50,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 26,
+            "breite": 90,
+            "hoehe": 60,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 27,
+            "breite": 115,
+            "hoehe": 85,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 28,
+            "breite": 175,
+            "hoehe": 115,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 29,
+            "breite": 200,
+            "hoehe": 115,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 30,
+            "breite": 200,
+            "hoehe": 150,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 31,
+            "breite": 250,
+            "hoehe": 150,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 32,
+            "breite": 300,
+            "hoehe": 150,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 33,
+            "breite": 300,
+            "hoehe": 200,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 34,
+            "breite": 400,
+            "hoehe": 200,
+            "gewicht": 1,
+            "verfuegbar": true
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "ColorStar",
+        "beschreibung": "ca. 1 Woche Lieferzeit a.W.\r\nIndividuell angefertigte Hochleistungsmatten. Entwerfen Sie Ihre persönliche Matte.\r\nDie Matte mit sehr hoher Schmutzaufnahmekapazität.\r\nFür Eingänge, Corporate Identity, Point of Sale",
+        "preisProQm": 101.71,
+        "anzahlFarben": 1,
+        "groessen": [
+          {
+            "id": 35,
+            "breite": 75,
+            "hoehe": 50,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 36,
+            "breite": 90,
+            "hoehe": 60,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 37,
+            "breite": 100,
+            "hoehe": 75,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 38,
+            "breite": 115,
+            "hoehe": 85,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 39,
+            "breite": 150,
+            "hoehe": 85,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 40,
+            "breite": 200,
+            "hoehe": 115,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 41,
+            "breite": 200,
+            "hoehe": 150,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 42,
+            "breite": 300,
+            "hoehe": 200,
+            "gewicht": 1,
+            "verfuegbar": true
+          },
+          {
+            "id": 43,
+            "breite": 400,
+            "hoehe": 200,
+            "gewicht": 1,
+            "verfuegbar": true
+          }
+        ]
+      }
+    ],
+    "schriften": [
+      "Amatic SC",
+      "Anton",
+      "Arial (Arimo)",
+      "Brush (Caveat Brush)",
+      "Dancing Script",
+      "Finger Paint",
+      "Ubuntu",
+      "Vast Shadow"
+    ],
+    "preisformel": "preis = groesse.breite * groesse.hoehe * material.preisProQm / 10000   (reine Client-Rechnung, kein Serveraufruf)",
+    "gesamtpreis": "preis * menge, ausgewiesen als \"inkl. MWSt. plus Versandkosten\""
+  },
+  "preismodellProdukte": {
+    "formel": "VKjeStueck = qm * EKproQm(Staffel) * SalesFactor * fSondermass * fSingleColor + summeExtraCost",
+    "qm": "breite * laenge / 10000",
+    "fSondermass": "1.00 wenn breite ODER laenge exakt einer Standardbreite des Produkts entspricht, sonst 1.25",
+    "fSingleColor": "produktabhaengig: 0.90, 1.00 oder (nur Produkt 34) 0.00",
+    "staffel": {
+      "bezugsgroesse": "Gesamtflaeche in m2 = qm * menge",
+      "schwellen": [
+        {
+          "bisQm": 25,
+          "stufe": 1
+        },
+        {
+          "bisQm": 50,
+          "stufe": 2
+        },
+        {
+          "bisQm": 100,
+          "stufe": 3
+        },
+        {
+          "ueberQm": 100,
+          "stufe": 4
+        }
+      ],
+      "hinweis": "Streng groesser: 25 m2 -> Stufe 1, 25,5 m2 -> Stufe 2. Nur wenige Produkte haben ueberhaupt mehr als eine Stufe hinterlegt."
+    },
+    "extraCost": "absoluter Aufschlag je Stueck aus den gewaehlten attributeValueIds, wird ganz am Ende addiert, skaliert nicht mit Flaeche",
+    "nettoGesamt": "VKjeStueck * menge",
+    "bruttoGesamt": "nettoGesamt * 1.19",
+    "steuersatz": 19,
+    "versand": "fester Betrag je Produkt, unabhaengig von Gewicht und Menge (Produkt 6: 10,00 €; Produkt 34: 0,00 €)"
+  },
+  "zuordnungMattenDe": {
+    "stand": "2026-08-31",
+    "quelleMattenDe": "Lokaler Bruecken-Proxy auf http://localhost:8788 (server.mjs). Tatsaechlich genutzt: /api/katalog (24 Kategorien, 8 Ober- + 16 Unterkategorien), /shop/assets/js/catalog.js (window.CATALOG, 365 Produkte mit Feld 'artikelnummer'), /api/suche?alle=1 (gemeldeteTreffer 384, geblaettert 200+184 -> 375 eindeutige Produktpfade), /api/suche?q=<nummer|name> (Volltextsuche des Altsystems ueber Namen UND Beschreibungen, verknuepft Woerter mit ODER), /api/produkt?pfad=... (Detailseite mit artikelnummer/artikelId) und /api/katalog/diagnose (384 Artikel gemeldet, Ampel gruen). Alle Endpunkte haben geantwortet; keiner musste ersetzt werden.",
+    "methodik": {
+      "artikelnummernAufMattenDe": "matten.de fuehrt seine Artikelnummer als letztes Pfadsegment der Produkt-URL (z. B. /fussmatten/standard-schmutzfangmatten/6300000 -> '6300000'). Daneben gibt es eine rein interne numerische 'artikelId' (z. B. 459), die mit keiner der matten.net-Nummern korrespondiert. Von 375 de-Artikeln haben 161 eine mit einer Ziffer beginnende Artikelnummer; die uebrigen 214 tragen sprechende Schluessel (z. B. 'kokosmatte-natur-kauf', 'mietmatten').",
+      "kernbefund": "Die beiden Kataloge benutzen ZWEI VERSCHIEDENE NUMMERNKREISE. Die auf matten.de vergebenen numerischen Basen liegen in den Bereichen 18/50xx-55xx/61xxxxx/63xxxxx/64xxxxx/670xxx/69xxxxx. Die matten.net-Nummernkreise 4711xxx, 6027xxx, 6920xxx, 6390xxx sowie 652601 existieren auf matten.de ueberhaupt nicht. Nur eine einzige Nummer stimmt in der Basis exakt ueberein: 6300000 (matten.net '6300000N').",
+      "zusatzsignalRedirect": "Die Suche des Altsystems loest bekannte interne Nummern per HTTP-302 auf eine Zielseite auf. Das wurde als zweites, unabhaengiges Signal genutzt. Kontrollversuche mit erfundenen Nummern (6920000, 6920009, 6027009, 9999999) lieferten 0 Treffer und keinen Redirect -- der Resolver ist also trennscharf. Positive Auflösungen: 6920002 -> 302 /home/info-kokosmatten; 6300202 -> 302 /home/info-designmatten; 6920003 -> 2 Treffer (beflockte_kokosmatte-a, info-kokosmatten). Diese drei Nummern kennt matten.de also noch, loest sie aber (ausser bei 6920003) nur auf Kategorie-/Landingpage-Ebene auf, nicht auf einen einzelnen Artikel.",
+      "sicherheitsstufenKategorien": "Fuer Kategorien ist die Stufe 'sicher' grundsaetzlich nicht erreichbar: die beiden Systeme teilen keinen gemeinsamen Kategorieschluessel. 'wahrscheinlich' bedeutet hier: Name praktisch deckungsgleich ODER der gesamte Produktinhalt der matten.net-Kategorie liegt auf matten.de eindeutig in genau dieser Kategorie."
+    },
+    "kategorien": [
+      {
+        "netSlug": "jetprint-einfarbig",
+        "netName": "JetPrint-einfarbig",
+        "netGruppe": "Fussmatten",
+        "deSchluessel": "fussmatten/fussmatten",
+        "deName": "Einfarbige und Logo Fußmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Beide matten.net-Produkte der Kategorie ('JetPrint Premium 1-farbig', 'JetPrint light 1-farbig') haben auf matten.de ihr Gegenstueck genau hier: 6300000 'JetPrint(TM)HD-Fussmatten, einfarbig' und 'jetprint_matten-light-einfarbig' 'JetPrint(TM)light-Matte, einfarbig'. Auch der de-Kategoriename ('Einfarbige ... Fußmatten') deckt sich mit 'einfarbig'."
+      },
+      {
+        "netSlug": "ironhorse",
+        "netName": "IronHorse",
+        "netGruppe": "Fussmatten",
+        "deSchluessel": "fussmatten/standard-schmutzfangmatten",
+        "deName": "Baumwollmatten, Nylon-Fussmatten",
+        "sicherheit": "unsicher",
+        "begruendung": "Der de-Kategoriename hat mit 'IronHorse' nichts gemein. Zuordnung nur ueber den Inhalt: die kanonischen Pfade aller IRON-HORSE-Artikel (64000121, 64000122, 64000161) liegen in dieser Unterkategorie. Stoerend: das dritte net-Produkt der Kategorie ist die IRON-HORSE-Mietmatte, die auf matten.de in einer voellig anderen Oberkategorie (miet-mattenservice) steht -- die net-Kategorie buendelt also Artikel, die matten.de trennt."
+      },
+      {
+        "netSlug": "ironhorse-xl",
+        "netName": "IronHorse XL",
+        "netGruppe": "Fussmatten",
+        "deSchluessel": null,
+        "deName": null,
+        "sicherheit": "keine",
+        "begruendung": "Auf matten.de gibt es keine Kategorie 'Iron-Horse XL', sondern nur den EINZELNEN Artikel 64000161 'schoen&sauber-Iron-Horse XL, melierte Fussmatten' in fussmatten/standard-schmutzfangmatten. Die matten.net-Kategorie ist ausserdem leer (0 Produkte)."
+      },
+      {
+        "netSlug": "designmatten",
+        "netName": "Designmatten",
+        "netGruppe": "Logomatten",
+        "deSchluessel": "logomatten/wunschdesign-matten",
+        "deName": "Wunschdesign-Matten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Inhaltlich die beste Deckung: die net-Kategorie enthaelt JetPrint-Velour, JetPrint-light und JetPrint-Designmatten; genau diese drei Bauarten liegen auf matten.de in wunschdesign-matten (6400201-velourmatte, jetprint_light-matten, 6300201-logomatte). Nicht deckungsgleich: das net-Produkt 'Hinweismatten' gehoert auf matten.de nach logomatten/sicherheits_symbol_matten."
+      },
+      {
+        "netSlug": "jet-print-light",
+        "netName": "Jet Print light",
+        "netGruppe": "Logomatten",
+        "deSchluessel": null,
+        "deName": null,
+        "sicherheit": "keine",
+        "begruendung": "matten.de fuehrt JetPrint-light nicht als Kategorie, sondern als zwei einzelne Artikel: 'jetprint_light-matten' (Jet-Print(TM)-Light-Fussmatte, Wunschgroessen) in logomatten/wunschdesign-matten und 'jetprint_matten-light-einfarbig' in fussmatten/fussmatten."
+      },
+      {
+        "netSlug": "katzen-willk",
+        "netName": "Katzen Willk",
+        "netGruppe": "Logomatten",
+        "deSchluessel": "logomatten/matten_fuer_haus_und_heim",
+        "deName": "Matten für Haus und Heim",
+        "sicherheit": "unsicher",
+        "begruendung": "Reine Themenvermutung. Die net-Kategorie ist leer, es gibt also keinen Produktinhalt zum Abgleich. Auf matten.de existiert der thematisch passende Einzelartikel 6303103 'Art-Design, Kaetzchengruppe' in dieser Unterkategorie; eine Kategorie 'Katzen' gibt es dort nicht."
+      },
+      {
+        "netSlug": "jetprint-design",
+        "netName": "JetPrint-Design",
+        "netGruppe": "Logomatten",
+        "deSchluessel": "logomatten/wunschdesign-matten",
+        "deName": "Wunschdesign-Matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Geraten. 'JetPrint-Design' ist auf matten.de kein Kategoriebegriff, sondern ein Namenspraefix von rund 30 Einzelartikeln ('jetprint-designs-*'), die ueber logomatten/sicherheits_symbol_matten, logomatten/matten_fuer_haus_und_heim und logomatten/werbematten-dekomatten verstreut sind. wunschdesign-matten ist nur der naechstliegende Sammelort, keine echte Entsprechung."
+      },
+      {
+        "netSlug": "os-rehab-physio-matten",
+        "netName": "OS-REHAB-Physio-Matten",
+        "netGruppe": "OS-REHA-Physio-Matten",
+        "deSchluessel": "logomatten/os-physio-rehab-matten",
+        "deName": "OS-Physio REHAB Trainings-Matten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Name praktisch identisch (nur Wortstellung), und alle drei net-Produkte der Kategorie (Quadrat, Stern, 5-Punkt) haben hier ihr de-Gegenstueck (6320301-quadrat, 6320304, 6320307-5punkt). Zweitkandidat waere die de-Kategorie was-ist-neu/neue-artikel ('OS-Physio REHA-Matten'), die aber nur 4 Artikel fuehrt und eine Neuheiten-Ablage ist."
+      },
+      {
+        "netSlug": "os-y-matte-wide-balance",
+        "netName": "OS-Y-Matte, Wide Balance",
+        "netGruppe": "OS-REHA-Physio-Matten",
+        "deSchluessel": "logomatten/os-physio-rehab-matten",
+        "deName": "OS-Physio REHAB Trainings-Matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Strukturbruch: auf matten.net eine eigene (leere) Kategorie, auf matten.de nur der Einzelartikel 6320302 'RTA-Y-REHA-JetPrint(TM)Matte, individuell gestaltet'. Die Zuordnung zeigt auf dessen Kategorie, nicht auf eine gleichwertige de-Kategorie."
+      },
+      {
+        "netSlug": "os-rehab-basis-matte",
+        "netName": "OS-REHAB Basis-Matte",
+        "netGruppe": "OS-REHA-Physio-Matten",
+        "deSchluessel": "logomatten/os-physio-rehab-matten",
+        "deName": "OS-Physio REHAB Trainings-Matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Strukturbruch wie oben: auf matten.de nur der Einzelartikel 6320308 'OS-Basis-REHAB-Matte-Matte'. Die net-Kategorie ist leer."
+      },
+      {
+        "netSlug": "os-rehab-bahnmatte",
+        "netName": "OS-REHAB-Bahnmatte",
+        "netGruppe": "OS-REHA-Physio-Matten",
+        "deSchluessel": "was-ist-neu/neue-artikel",
+        "deName": "OS-Physio REHA-Matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Strukturbruch: auf matten.de nur der Einzelartikel 6320309 'OS-REHAB-Bahnen-Matte, bis 32-farbig'. Dieser liegt (anders als seine Geschwister) in der Neuheiten-Unterkategorie was-ist-neu/neue-artikel. Die net-Kategorie ist leer."
+      },
+      {
+        "netSlug": "os-rehab-stern-matte",
+        "netName": "OS-REHAB-Stern-Matte",
+        "netGruppe": "OS-REHA-Physio-Matten",
+        "deSchluessel": "logomatten/os-physio-rehab-matten",
+        "deName": "OS-Physio REHAB Trainings-Matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Strukturbruch: auf matten.de nur der Einzelartikel 6320304 'OS-Stern-REHAB-Matte nach Kundenangaben' (Namensgleichheit ist hier hoch, aber es ist eben ein Artikel, keine Kategorie)."
+      },
+      {
+        "netSlug": "os-rehab-gitter-matte",
+        "netName": "OS-REHAB-Gitter-Matte",
+        "netGruppe": "OS-REHA-Physio-Matten",
+        "deSchluessel": "logomatten/os-physio-rehab-matten",
+        "deName": "OS-Physio REHAB Trainings-Matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Strukturbruch: auf matten.de nur der Einzelartikel 6320306 'OS-Gitter-REHAB-Matte nach Kundenangaben'. Die net-Kategorie ist leer."
+      },
+      {
+        "netSlug": "os-rehab-5-punkt-matte",
+        "netName": "OS-REHAB-5-Punkt-Matte",
+        "netGruppe": "OS-REHA-Physio-Matten",
+        "deSchluessel": "logomatten/os-physio-rehab-matten",
+        "deName": "OS-Physio REHAB Trainings-Matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Strukturbruch: auf matten.de nur der Einzelartikel 6320307-5punkt '5-Punkt-REHAB-JetPrint(TM)-Matten'."
+      },
+      {
+        "netSlug": "os-rehab-quadrat-matte",
+        "netName": "OS-REHAB Quadrat-Matte",
+        "netGruppe": "OS-REHA-Physio-Matten",
+        "deSchluessel": "was-ist-neu/neue-artikel",
+        "deName": "OS-Physio REHA-Matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Strukturbruch: auf matten.de nur der Einzelartikel 6320301-quadrat 'RTA-Quadrat-REHAB-JetPrint-Matte mit Kunden-Design'. Er ist in was-ist-neu/neue-artikel gelistet, sein kanonischer Pfad liegt aber unter logomatten/os-physio-rehab-matten."
+      },
+      {
+        "netSlug": "kokos-farbig",
+        "netName": "Kokos Farbig",
+        "netGruppe": "Kokosmatten",
+        "deSchluessel": "kokosmatten",
+        "deName": "Kokosmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "matten.de hat genau eine Kokos-Kategorie ohne Unterteilung nach Farbe; das net-Produkt 'Kokos, farbig' entspricht dort dem Artikel 'kokosmatte-farbig-k' (Kokosvelourmatten, farbig). Die drei net-Kokos-Kategorien fallen auf matten.de also auf eine einzige Kategorie zusammen."
+      },
+      {
+        "netSlug": "kokos-naturfarbig",
+        "netName": "Kokos naturfarbig",
+        "netGruppe": "Kokosmatten",
+        "deSchluessel": "kokosmatten",
+        "deName": "Kokosmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Entsprechung ist der Artikel 'kokosmatte-natur-kauf' (Kokosvelour, Naturfaser, naturfarbig). Eine eigene de-Unterkategorie fuer naturfarbig gibt es nicht."
+      },
+      {
+        "netSlug": "kokos-logomatte",
+        "netName": "Kokos-Logomatte",
+        "netGruppe": "Kokosmatten",
+        "deSchluessel": "kokosmatten",
+        "deName": "Kokosmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Entsprechung ist der Artikel 'beflockte_kokosmatte-a' (Kokosmatte gestaltet, Logobeflockung), der direkt in der de-Oberkategorie kokosmatten liegt."
+      },
+      {
+        "netSlug": "marschall",
+        "netName": "MARSCHALL",
+        "netGruppe": "Aluminium-Matten",
+        "deSchluessel": "aluminium_profilmatten",
+        "deName": "Aluminium-Matten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Der Kategoriename der net-Gruppe ('Aluminium-Matten') ist mit dem de-Namen identisch. 'MARSCHALL' selbst ist auf matten.de keine Kategorie, sondern eine Produktlinie mit den Artikeln 5420, 5430 und 5440 ('Marschall-Aluminium-Profilmatte ...') in dieser Oberkategorie. Die net-Kategorie ist leer (0 Produkte)."
+      },
+      {
+        "netSlug": "diplomat",
+        "netName": "Diplomat",
+        "netGruppe": "Aluminium-Matten",
+        "deSchluessel": "aluminium_profilmatten",
+        "deName": "Aluminium-Matten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Ebenfalls Produktlinie statt Kategorie: matten.de fuehrt 'diplomat-original', 'diplomat-premium', 52601 'Diplomat / Diplomat-Color-Edition', 5261 'Diplomat Typ RCB', 5270 'Diplomat Typ G' und 522RN-Ma-a 'Diplomat Typ 522 R Norm' -- alle in aluminium_profilmatten."
+      },
+      {
+        "netSlug": "cushion-coil",
+        "netName": "Cushion Coil",
+        "netGruppe": "Gummimatten",
+        "deSchluessel": "gummi_und_kunststoffmatten",
+        "deName": "Gummi-/Kunststoffmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Auf matten.de kein Kategoriename, aber der Artikel 'cushioncoil' 'CushionCoil-Matte' existiert und liegt in gummi_und_kunststoffmatten (Volltextsuche 'CushionCoil' -> genau 2 Treffer: cushioncoil und sein Sondermass-Zwilling). Die net-Kategorie ist leer."
+      },
+      {
+        "netSlug": "scraper",
+        "netName": "Scraper",
+        "netGruppe": "Gummimatten",
+        "deSchluessel": "gummi_und_kunststoffmatten",
+        "deName": "Gummi-/Kunststoffmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Entsprechung ist der Artikel 6900012 'Scraper-Matte' in gummi_und_kunststoffmatten (Suche 'Scraper' -> 6900012 + Zwilling). Keine eigene de-Kategorie. Die net-Kategorie ist leer."
+      },
+      {
+        "netSlug": "struktura",
+        "netName": "Struktura",
+        "netGruppe": "Gummimatten",
+        "deSchluessel": "gummi_und_kunststoffmatten",
+        "deName": "Gummi-/Kunststoffmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Vom Altsystem selbst aufgeloest: die Suche nach 'Struktura' antwortet mit HTTP-302 auf /gummi_und_kunststoffmatten/s_und_s-gummiwabenmatten ('Gummi-Wabenmatten, in Standardgroesse oder Sondergroessen und Sonderformen'). matten.de kennt den Begriff also noch als Synonym, fuehrt ihn aber nicht mehr als Kategorie. Die net-Kategorie ist leer."
+      },
+      {
+        "netSlug": "turf",
+        "netName": "Turf",
+        "netGruppe": "Outdoor-Matten",
+        "deSchluessel": "fussmatten/matten_fuer_aussenbereiche",
+        "deName": "Matten für Außenbereiche",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Die net-Gruppe 'Outdoor-Matten' und die de-Kategorie 'Matten fuer Aussenbereiche' decken sich; dort liegen sechs 'K-Turf'-Artikel (k-turf_outdoor-matte, ...-welcome, ...-flower, ...-willkommen, ...-ind, ...-kundendesign). Die net-Kategorie selbst ist leer."
+      },
+      {
+        "netSlug": "iron-horse-mietmatten",
+        "netName": "IRON-HORSE-Mietmatten",
+        "netGruppe": "Mietmatten",
+        "deSchluessel": "miet-mattenservice/service_miet-mattenservice",
+        "deName": "Miet-Fußmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Der de-Artikel 'mietmatten' heisst 'Iron-Horse-Mietmattenservice' und liegt in dieser Unterkategorie; Ober- und Unterkategoriename ('Miet-Mattenservice' / 'Miet-Fussmatten') decken sich mit der net-Gruppe 'Mietmatten'. Die net-Kategorie selbst ist leer."
+      },
+      {
+        "netSlug": "waschbecken",
+        "netName": "Waschbecken",
+        "netGruppe": "Was ist neu",
+        "deSchluessel": "was-ist-neu/terrazzo",
+        "deName": "Terrazzo- Stein-Wannen, Waschbecken",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Der de-Kategoriename enthaelt 'Waschbecken' woertlich, und beide Artikel der Kategorie sind Waschbecken (waschbecken_marmor_mo45 'Marmor Waschbecken Sabi', fossil_shirley 'Fossil Natural Aufsatzwaschbecken Shirley'). Auch die uebergeordnete net-Gruppe 'Was ist neu' entspricht der de-Oberkategorie was-ist-neu. Die net-Kategorie ist leer."
+      },
+      {
+        "netSlug": "was-ist-neu",
+        "netName": "Was ist neu",
+        "netGruppe": "(nur Startseite: Featured Category)",
+        "deSchluessel": "was-ist-neu",
+        "deName": "Artikelsuche",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Der Schluessel ist auf beiden Seiten woertlich identisch ('was-ist-neu'), und die de-Oberkategorie liegt unter /was-ist-neu. Der Anzeigename weicht ab: matten.de beschriftet sie inzwischen mit 'Artikelsuche'. Die net-Kategorie ist leer."
+      }
+    ],
+    "produkte": [
+      {
+        "netPid": 1,
+        "netSlug": "iron-horse-1-farbige-und-melierte-schmutzfangmatten",
+        "netName": "IRON-HORSE 1-farbige und melierte Schmutzfangmatten",
+        "netArtikelnummer": "63000",
+        "deArtikelnummer": "64000121",
+        "deName": "melierte Eingangsmatten, IRON-HORSE™ in Standardgrößen und Sondergrößen",
+        "deKategorie": "fussmatten/standard-schmutzfangmatten",
+        "sicherheit": "unsicher",
+        "begruendung": "Nummernabgleich scheitert: '63000' ist auf matten.de nur ein Praefix zweier voellig anderer Artikel (6300000 JetPrint-HD, 63000111 MONOTON-Sonderangebot) -- die IRON-HORSE-Artikel liegen im 64000xxx-Kreis. Zuordnung daher nur ueber den Namen, und dort konkurrieren drei Kandidaten: 64000121 (Standard-/Sondergroessen), 64000122 (bis 150cm Breite) und 64000161 (Iron-Horse XL). 64000121 gewaehlt, weil es die allgemeinste Variante ist. Das net-Attribut '1-farbige' hat auf keinem der drei de-Artikel eine Entsprechung."
+      },
+      {
+        "netPid": 4,
+        "netSlug": "iron-horse-matte",
+        "netName": "IRON-HORSE-Mietmatte",
+        "netArtikelnummer": "640001211",
+        "deArtikelnummer": "mietmatten",
+        "deName": "Iron-Horse-Mietmattenservice",
+        "deKategorie": "miet-mattenservice/service_miet-mattenservice",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Name praktisch deckungsgleich (IRON-HORSE + Mietmatte). ACHTUNG Nummernkonflikt, der bewusst nicht aufgeloest wurde: '640001211' sieht aus wie '64000121' + '1', und 64000121 ist auf matten.de die MELIERTE Eingangsmatte, nicht die Mietmatte. Die Suche nach 640001211 liefert auf matten.de 0 Treffer. Der de-Mietmatten-Artikel traegt gar keine numerische Nummer, sondern den Schluessel 'mietmatten'."
+      },
+      {
+        "netPid": 6,
+        "netSlug": "jetprint-premium",
+        "netName": "JetPrint-Premium",
+        "netArtikelnummer": "6300000N",
+        "deArtikelnummer": "6300000",
+        "deName": "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben",
+        "deKategorie": "fussmatten/fussmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Die einzige Nummer im ganzen Vergleich, deren Basis exakt uebereinstimmt: matten.net '6300000N' ohne das Suffix 'N' ist matten.de '6300000'. Nicht auf 'sicher' gestuft, weil die Namen auseinandergehen ('JetPrint-Premium' vs. 'JetPrint(TM)HD-Fussmatten, einfarbig') und weil das net-Produkt pid 7 ('JetPrint Premium 1-farbig') namentlich besser auf denselben de-Artikel passt -- zwei net-Produkte konkurrieren also um einen de-Artikel."
+      },
+      {
+        "netPid": 7,
+        "netSlug": "jetprint-premium-1-farbig",
+        "netName": "JetPrint Premium 1-farbig",
+        "netArtikelnummer": "6301000N",
+        "deArtikelnummer": null,
+        "deName": null,
+        "deKategorie": null,
+        "sicherheit": "unsicher",
+        "begruendung": "Die Nummer 6301000 ist auf matten.de unbekannt (Volltextsuche: 0 Treffer; im 6301xxx-Kreis liegen dort ausschliesslich 'I Love ...'-Art-Designs). Namentlich passt am besten 6300000 'JetPrint(TM)HD-Fussmatten, einfarbig' -- der ist aber schon per Nummer an pid 6 vergeben. Wahrscheinlich sind pid 6 und pid 7 auf matten.net eine Aufspaltung eines einzigen de-Artikels; das ist aber nicht belegbar, daher keine Zuordnung eingetragen."
+      },
+      {
+        "netPid": 8,
+        "netSlug": "mjplit-jetprint-light-1-farbig",
+        "netName": "JetPrint light 1-farbig",
+        "netArtikelnummer": "6300001N",
+        "deArtikelnummer": "jetprint_matten-light-einfarbig",
+        "deName": "JetPrint™light-Matte, einfarbig > Auswahl aus 66 Standardfarben.",
+        "deKategorie": "fussmatten/fussmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Name praktisch deckungsgleich ('JetPrint light' + '1-farbig' / 'einfarbig'). Die Nummer half nicht: 6300001 liefert auf matten.de 0 Treffer, und der de-Artikel hat gar keine numerische Nummer."
+      },
+      {
+        "netPid": 9,
+        "netSlug": "jetprint-matten-design",
+        "netName": "JetPrint Matten, Design",
+        "netArtikelnummer": "6320011N",
+        "deArtikelnummer": null,
+        "deName": null,
+        "deKategorie": null,
+        "sicherheit": "unsicher",
+        "begruendung": "Nummer 6320011 auf matten.de unbekannt (0 Treffer); der de-Kreis 632xxxx ist dort komplett von den REHAB-Matten belegt (6320301-6320309). Der Name ist zu generisch: als Kandidaten kaemen 6320303 'JetPrint-Vision(TM), in Wunschgroesse, individuell gestaltet', 6300201-logomatte 'JetPrint(TM)-Matten in Wunschgroesse' und rund 30 'jetprint-designs-*'-Artikel infrage. Kein Kandidat sticht heraus -- bewusst nicht geraten."
+      },
+      {
+        "netPid": 10,
+        "netSlug": "designmatten-jetprint",
+        "netName": "Designmatten JetPrint",
+        "netArtikelnummer": "4711000N",
+        "deArtikelnummer": "6300201-logomatte",
+        "deName": "JetPrint™-Matten, in Wunschgröße, individuell gestaltet, Auswahl aus 66 Farben",
+        "deKategorie": "logomatten/wunschdesign-matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Der gesamte Nummernkreis 4711xxx existiert auf matten.de nicht (4711000, 4711001 und 4711003 liefern je 0 Treffer) -- '4711' wirkt wie eine Platzhalternummer im matten.net-Datenbestand. Zuordnung daher rein thematisch: 6300201-logomatte ist der de-Standardartikel fuer individuell gestaltete JetPrint-Logomatten."
+      },
+      {
+        "netPid": 12,
+        "netSlug": "os-quadrat-rehab-trainingsmatte",
+        "netName": "OS-Quadrat-REHAB-Trainingsmatte",
+        "netArtikelnummer": "6027001",
+        "deArtikelnummer": "6320301-quadrat",
+        "deName": "RTA-Quadrat-REHAB-JetPrint-Matte mit Kunden-Design",
+        "deKategorie": "logomatten/os-physio-rehab-matten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Die Volltextsuche nach 'Quadrat-REHAB' liefert auf matten.de genau diesen Artikel (plus seinen Anfrage-Zwilling 6320301-quadrat-ang) -- eindeutig. Die Nummer half nicht: der gesamte net-Kreis 6027xxx ist auf matten.de unbekannt (6027001/6027003/6027004 je 0 Treffer)."
+      },
+      {
+        "netPid": 18,
+        "netSlug": "kokosmatten-naturfarbig",
+        "netName": "Kokos, natur",
+        "netArtikelnummer": "6920001N",
+        "deArtikelnummer": "kokosmatte-natur-kauf",
+        "deName": "Kokosvelour, Naturfaser, naturfarbig, mit flexiblem Vinylrücken",
+        "deKategorie": "kokosmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Name praktisch deckungsgleich (Kokos + natur/naturfarbig) und in der de-Kokoskategorie der einzige naturfarbige Kauf-Artikel. Die Nummer 6920001 liefert auf matten.de 0 Treffer -- auffaellig, weil die Nachbarnummern 6920002 und 6920003 dort noch aufgeloest werden (siehe pid 19 und 26)."
+      },
+      {
+        "netPid": 19,
+        "netSlug": "kokos-farbig",
+        "netName": "Kokos, farbig",
+        "netArtikelnummer": "6920002",
+        "deArtikelnummer": "kokosmatte-farbig-k",
+        "deName": "Kokosvelourmatten, farbig, mit flexiblem Vinylrücken",
+        "deKategorie": "kokosmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Doppelt gestuetzt: (a) die Suche von matten.de nach '6920002' antwortet mit HTTP-302 auf /home/info-kokosmatten -- das Altsystem kennt die Nummer also noch und ordnet sie den Kokosmatten zu; (b) der Name ist praktisch deckungsgleich (Kokos + farbig). Nicht 'sicher', weil der Redirect nur auf die Kokos-Landingpage zeigt, nicht auf diesen einzelnen Artikel, und der de-Artikel keine numerische Nummer traegt."
+      },
+      {
+        "netPid": 22,
+        "netSlug": "jetprint-light-logo",
+        "netName": "JetPrint light Logo",
+        "netArtikelnummer": "6300202N",
+        "deArtikelnummer": "jetprint_light-matten",
+        "deName": "Jet-Print™-Light-Fussmatte, Wunschgrößen*, bis 32-farbig individuell gestaltet",
+        "deKategorie": "logomatten/wunschdesign-matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Die Suche nach '6300202' laeuft auf matten.de per HTTP-302 auf /home/info-designmatten -- die Nummer ist also bekannt, wird aber nur auf die Designmatten-Landingpage aufgeloest, nicht auf einen Artikel. Der naechstliegende Artikel ist jetprint_light-matten (JetPrint-light + individuell gestaltet = Logo). Gleicher Kandidat wie bei pid 32 -- zwei net-Produkte konkurrieren um denselben de-Artikel, deshalb 'unsicher'. Achtung: 6300202 ist NICHT identisch mit der de-Nummer 6300201 (Ziffernabstand 1, aber anderer Artikel)."
+      },
+      {
+        "netPid": 25,
+        "netSlug": "iron-horse-matte-2",
+        "netName": "IRON-HORSE-2",
+        "netArtikelnummer": "630001",
+        "deArtikelnummer": "64000122",
+        "deName": "Eingangsmatten, meliert, IRON-HORSE™- bis 150cm Breite und bis 700cm Länge - 4 Farben",
+        "deKategorie": "fussmatten/standard-schmutzfangmatten",
+        "sicherheit": "unsicher",
+        "begruendung": "Geraten. Der Name 'IRON-HORSE-2' nennt kein Merkmal, an dem sich unterscheiden liesse; die '2' wurde als Verweis auf die zweite Iron-Horse-Bauform (64000122) gelesen. Die Nummer '630001' passt nicht: sie ist auf matten.de nur zufaellig Praefix von 63000111 (MONOTON-Sonderangebot). 64000161 (Iron-Horse XL) waere ein gleichwertiger Kandidat."
+      },
+      {
+        "netPid": 26,
+        "netSlug": "kokos-gestaltet",
+        "netName": "Kokos, Logomatten",
+        "netArtikelnummer": "6920003",
+        "deArtikelnummer": "beflockte_kokosmatte-a",
+        "deName": "Kokosmatte gestaltet, Logobeflockung",
+        "deKategorie": "kokosmatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Die staerkste Produktzuordnung im ganzen Abgleich: die Volltextsuche von matten.de nach der net-Nummer '6920003' liefert genau zwei Treffer, und der erste ist dieser Artikel ('Kokosmatte gestaltet, Logobeflockung'); der zweite ist die Kokos-Landingpage. Kontrollsuchen mit erfundenen Nachbarnummern (6920000, 6920009) ergaben 0 Treffer, der Resolver ist also trennscharf. Zusaetzlich stimmt der Name (Kokos + Logo). Nicht 'sicher', weil der de-Artikel selbst keine Artikelnummer 6920003 fuehrt -- die Verknuepfung liegt nur in der Suchlogik des Altsystems."
+      },
+      {
+        "netPid": 28,
+        "netSlug": "hinweismatten",
+        "netName": "Hinweismatten",
+        "netArtikelnummer": "6390202 MJPRNT",
+        "deArtikelnummer": "jetprint-designs-hinweise",
+        "deName": "Corona-Hinweismatten und Gebotsmatten, Corona-Warnhinweise",
+        "deKategorie": "logomatten",
+        "sicherheit": "unsicher",
+        "begruendung": "Die Nummer 6390202 liefert auf matten.de 0 Treffer (der Kreis 639xxxx existiert dort nicht); das Namenssuffix 'MJPRNT' ist ein matten.net-interner Code ohne Gegenstueck. Zuordnung nur ueber das Stichwort 'Hinweismatten' -- und dem entspricht auf matten.de eher eine ganze Kategorie (logomatten/sicherheits_symbol_matten, 53 Artikel: Bitte Abstand halten, Raucherzone, STOP, Rutschgefahr ...) als ein einzelner Artikel. jetprint-designs-hinweise ist davon der Sammelartikel."
+      },
+      {
+        "netPid": 32,
+        "netSlug": "designmatten-jetprint-light",
+        "netName": "Designmatten JetPrint-light",
+        "netArtikelnummer": "4711001 MJPLIT",
+        "deArtikelnummer": "jetprint_light-matten",
+        "deName": "Jet-Print™-Light-Fussmatte, Wunschgrößen*, bis 32-farbig individuell gestaltet",
+        "deKategorie": "logomatten/wunschdesign-matten",
+        "sicherheit": "unsicher",
+        "begruendung": "Nummer 4711001 auf matten.de unbekannt (0 Treffer, Platzhalterkreis 4711xxx). Der Name passt gut auf jetprint_light-matten, aber genau derselbe de-Artikel ist auch der beste Kandidat fuer pid 22 ('JetPrint light Logo'). Eine der beiden Zuordnungen muss falsch sein; welche, laesst sich aus den vorliegenden Daten nicht entscheiden."
+      },
+      {
+        "netPid": 33,
+        "netSlug": "designmatten-jetprint-velour",
+        "netName": "Designmatten JetPrint-Velour",
+        "netArtikelnummer": "4711003N",
+        "deArtikelnummer": "6400201-velourmatte",
+        "deName": "JetPrint™-Velourmatten, in Wunschgröße, fotorealistisch, individuell gestaltet",
+        "deKategorie": "logomatten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Name praktisch deckungsgleich: 'JetPrint-Velour' + 'Designmatten' vs. 'JetPrint(TM)-Velourmatten, individuell gestaltet'. Die Suche nach 'Velourmatten' liefert auf matten.de nur diesen einen JetPrint-Velour-Artikel (plus Sondermass-Zwilling), die Zuordnung ist damit eindeutig. Die Nummer half nicht (4711003: 0 Treffer)."
+      },
+      {
+        "netPid": 34,
+        "netSlug": "aluminium-profilmatte-typ-diplomat-r",
+        "netName": "Aluminium-Profilmatte, Typ Diplomat R",
+        "netArtikelnummer": "652601",
+        "deArtikelnummer": "52601",
+        "deName": "Diplomat / Diplomat-Color-Edition",
+        "deKategorie": "aluminium_profilmatten",
+        "sicherheit": "unsicher",
+        "begruendung": "Verlockend, aber nicht belastbar: '652601' enthaelt die de-Nummer '52601' als Teilzeichenkette, und 52601 heisst dort 'Diplomat'. Gegen die Zuordnung sprechen zwei Dinge: (a) die Suche nach 652601 liefert auf matten.de 0 Treffer, ein vorangestelltes '6' ist bei keiner anderen der 19 Nummern zu beobachten, das koennte also Zufall sein; (b) das net-Merkmal 'Typ R' (Ripseinlage) passt besser auf 52603 'Classic Typ R - Aluminium-Profilmatte mit Ripseinlage' oder auf 522RN-Ma-a 'Diplomat Typ 522 R Norm'. Drei plausible Kandidaten, keiner belegt."
+      },
+      {
+        "netPid": 39,
+        "netSlug": "os-stern-rehab-trainingsmatte",
+        "netName": "OS-Stern-REHAB-Trainingsmatte",
+        "netArtikelnummer": "6027004",
+        "deArtikelnummer": "6320304",
+        "deName": "OS-Stern-REHAB-Matte nach Kundenangaben",
+        "deKategorie": "logomatten/os-physio-rehab-matten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Name bis auf 'Trainings-' identisch ('OS-Stern-REHAB-'), und die Suche nach 'Stern-REHAB' liefert auf matten.de genau diesen Artikel plus seinen Zwilling 6320304a -- eindeutig. Nummer 6027004 dort unbekannt (0 Treffer)."
+      },
+      {
+        "netPid": 40,
+        "netSlug": "os-5-punkt-rehab-trainingsmatte-c",
+        "netName": "OS-5-Punkt-REHAB-Trainingsmatte-c",
+        "netArtikelnummer": "6027003",
+        "deArtikelnummer": "6320307-5punkt",
+        "deName": "5-Punkt-REHAB-JetPrint™-Matten, bis 20-farbig individuell gestaltet",
+        "deKategorie": "logomatten/os-physio-rehab-matten",
+        "sicherheit": "wahrscheinlich",
+        "begruendung": "Die Suche nach '5-Punkt-REHAB' liefert auf matten.de genau diesen Artikel plus seinen Anfrage-Zwilling -- eindeutig. Nummer 6027003 dort unbekannt (0 Treffer). Das net-Suffix '-c' hat auf matten.de keine Entsprechung."
+      }
+    ],
+    "luecken": {
+      "nurAufMattenDe": {
+        "kategorien": [
+          {
+            "schluessel": "logomatten/sicherheits_symbol_matten",
+            "name": "Sicherheits-und Symbol-Matten",
+            "anzahlProdukte": 56
+          },
+          {
+            "schluessel": "logomatten/bierbankmatten",
+            "name": "Biergartenbank-Matten",
+            "anzahlProdukte": 33
+          },
+          {
+            "schluessel": "logomatten/werbematten-dekomatten",
+            "name": "Werbematten - Dekomatten",
+            "anzahlProdukte": 9
+          },
+          {
+            "schluessel": "logomatten/welcome-holzdesign",
+            "name": "Art-Designs Welcome-Holzdesigns",
+            "anzahlProdukte": 0
+          },
+          {
+            "schluessel": "aluminium_profilmatten/rahmen_und_zubehoer",
+            "name": "Aluminiumrahmen, Schmutzfangmatten, Messingrahmen, Edelstahlrahmen, Zubehör",
+            "anzahlProdukte": 56
+          },
+          {
+            "schluessel": "gummi_und_kunststoffmatten/bodenschutzmatten",
+            "name": "Bodenschutzmatten",
+            "anzahlProdukte": 2
+          },
+          {
+            "schluessel": "miet-mattenservice/reinigungsprodukte",
+            "name": "Teppich-Reinigungsprodukte",
+            "anzahlProdukte": 2
+          },
+          {
+            "schluessel": "schnaeppchen",
+            "name": "Schnaeppchen",
+            "anzahlProdukte": 4
+          }
+        ],
+        "anzahlProdukte": 359,
+        "bemerkung": "matten.de fuehrt 375 eindeutige Produktpfade (die Diagnose meldet 384; die Differenz sind 9 Artikel, die unter zwei Pfaden gelistet sind). Davon konnten 16 eindeutige de-Artikel den 19 matten.net-Produkten zugeordnet werden. Es bleiben 359 de-Artikel ohne jede Entsprechung auf matten.net. Diese Zahl enthaelt 109 technische Zwillinge ('...-a' / '...-ang': die namenlosen Sondermass- bzw. Anfrage-Geschwister, die matten.de zu fast jedem Kaufartikel fuehrt). Rechnet man die heraus, bleiben rund 250 echte, eigenstaendige matten.de-Artikel, die auf matten.net vollstaendig fehlen. Groesste inhaltliche Luecken: 8 vollstaendig fehlende Kategorien (siehe oben), darunter die Bierbankmatten (33 Artikel), die Sicherheits- und Symbolmatten (56), das komplette Rahmen- und Zubehoersortiment (56) sowie 40 Artikel 'Matten fuer Haus und Heim' und 44 Anti-Ermuedungs-/Baumwollmatten."
+      },
+      "nurAufMattenNet": {
+        "kategorien": [
+          {
+            "slug": "ironhorse-xl",
+            "name": "IronHorse XL",
+            "bemerkung": "auf matten.de nur ein einzelner Artikel (64000161), keine Kategorie"
+          },
+          {
+            "slug": "jet-print-light",
+            "name": "Jet Print light",
+            "bemerkung": "auf matten.de nur Einzelartikel (jetprint_light-matten, jetprint_matten-light-einfarbig), keine Kategorie"
+          },
+          {
+            "slug": "os-y-matte-wide-balance",
+            "name": "OS-Y-Matte, Wide Balance",
+            "bemerkung": "auf matten.de nur Artikel 6320302"
+          },
+          {
+            "slug": "os-rehab-basis-matte",
+            "name": "OS-REHAB Basis-Matte",
+            "bemerkung": "auf matten.de nur Artikel 6320308"
+          },
+          {
+            "slug": "os-rehab-bahnmatte",
+            "name": "OS-REHAB-Bahnmatte",
+            "bemerkung": "auf matten.de nur Artikel 6320309"
+          },
+          {
+            "slug": "os-rehab-stern-matte",
+            "name": "OS-REHAB-Stern-Matte",
+            "bemerkung": "auf matten.de nur Artikel 6320304"
+          },
+          {
+            "slug": "os-rehab-gitter-matte",
+            "name": "OS-REHAB-Gitter-Matte",
+            "bemerkung": "auf matten.de nur Artikel 6320306"
+          },
+          {
+            "slug": "os-rehab-5-punkt-matte",
+            "name": "OS-REHAB-5-Punkt-Matte",
+            "bemerkung": "auf matten.de nur Artikel 6320307-5punkt"
+          },
+          {
+            "slug": "os-rehab-quadrat-matte",
+            "name": "OS-REHAB Quadrat-Matte",
+            "bemerkung": "auf matten.de nur Artikel 6320301-quadrat"
+          },
+          {
+            "slug": "marschall",
+            "name": "MARSCHALL",
+            "bemerkung": "auf matten.de Produktlinie (5420, 5430, 5440), keine Kategorie"
+          },
+          {
+            "slug": "diplomat",
+            "name": "Diplomat",
+            "bemerkung": "auf matten.de Produktlinie (52601, 5261, 5270, 522RN-Ma-a), keine Kategorie"
+          },
+          {
+            "slug": "cushion-coil",
+            "name": "Cushion Coil",
+            "bemerkung": "auf matten.de nur Artikel 'cushioncoil'"
+          },
+          {
+            "slug": "scraper",
+            "name": "Scraper",
+            "bemerkung": "auf matten.de nur Artikel 6900012"
+          },
+          {
+            "slug": "struktura",
+            "name": "Struktura",
+            "bemerkung": "auf matten.de nur noch Suchsynonym; Redirect auf s_und_s-gummiwabenmatten"
+          },
+          {
+            "slug": "turf",
+            "name": "Turf",
+            "bemerkung": "auf matten.de Produktlinie 'K-Turf' in fussmatten/matten_fuer_aussenbereiche"
+          },
+          {
+            "slug": "iron-horse-mietmatten",
+            "name": "IRON-HORSE-Mietmatten",
+            "bemerkung": "auf matten.de Artikel 'mietmatten' in einer gleichnamigen Kategorie -- Kategorie existiert, aber unter anderem Namen"
+          },
+          {
+            "slug": "waschbecken",
+            "name": "Waschbecken",
+            "bemerkung": "auf matten.de Teil der Kategorie was-ist-neu/terrazzo"
+          },
+          {
+            "slug": "katzen-willk",
+            "name": "Katzen Willk",
+            "bemerkung": "auf matten.de kein Gegenstueck ausser dem Artikel 6303103 'Art-Design, Kaetzchengruppe'"
+          }
+        ],
+        "produkte": [],
+        "bemerkung": "KEIN einziges der 19 matten.net-Produkte ist auf matten.de voellig unbekannt -- fuer jedes liess sich mindestens ein thematischer Kandidat finden, bei 10 davon ein belastbarer. Die eigentliche Asymmetrie liegt auf Kategorieebene: von den 27 matten.net-Kategorien sind 18 auf matten.de KEINE Kategorie, sondern nur ein einzelner Artikel oder eine Produktlinie. matten.net hat den Katalog also feiner in Kategorien zerlegt und dabei viel weniger Artikel gefuellt: 19 Produkte gegen 375. 15 der 27 net-Kategorien sind vollstaendig leer (0 Produkte)."
+      }
+    },
+    "nichtErfassbar": [
+      "Ein belastbarer Artikelnummern-Abgleich war fuer 18 der 19 Produkte NICHT moeglich: matten.de und matten.net benutzen zwei verschiedene Nummernkreise. Die matten.net-Kreise 4711xxx (Designmatten), 6027xxx (OS-REHAB), 6920xxx (Kokos) und 6390xxx (Hinweismatten) sowie 652601 kommen auf matten.de an keiner Stelle vor -- weder als Artikelnummer noch im Volltext. Nur 6300000N/6300000 stimmt in der Basis ueberein. Deshalb steht bei keinem einzigen Produkt die Stufe 'sicher'.",
+      "Die von matten.net verwendeten Namenssuffixe 'MJPRNT' (pid 28) und 'MJPLIT' (pid 32) sind matten.net-interne Codes; auf matten.de gibt es dafuer kein Feld und keinen Treffer. Ihre Bedeutung liess sich nicht ermitteln.",
+      "Die interne numerische 'artikelId' von matten.de (z. B. 459 fuer 6300000) ist ueber /api/produkt zwar abrufbar, hat aber mit den matten.net-Nummern nachweislich nichts zu tun. Ein Abgleich ueber diese ID ist nicht moeglich.",
+      "Die 302-Redirects der matten.de-Suche (6920002 -> /home/info-kokosmatten, 6300202 -> /home/info-designmatten) belegen, dass das Altsystem eine interne Nummern-Synonymtabelle fuehrt. Diese Tabelle selbst ist ueber die vorhandenen Endpunkte NICHT auslesbar -- es liess sich nur einzeln abfragen, ob eine konkrete Nummer aufgeloest wird. Eine vollstaendige Nummern-Bruecke waere damit nur durch Ausprobieren aller Nummern zu gewinnen.",
+      "pid 6 vs. pid 7 und pid 22 vs. pid 32 konkurrieren jeweils um denselben matten.de-Artikel. Welches net-Produkt das echte Gegenstueck ist, laesst sich aus Katalog- und Suchdaten allein nicht entscheiden; dafuer waeren die Preis-/Attributdaten beider Systeme noetig.",
+      "Die de-Unterkategorie 'kokosmatten/rahmen_und_zubehoer' taucht in den Produktdaten von catalog.js auf, wird von /api/katalog aber nicht als Unterkategorie von kokosmatten gemeldet (dort hat kokosmatten keine Unterkategorien). Welche der beiden Sichten stimmt, war nicht zu klaeren.",
+      "Die Zahl der matten.de-Artikel ist nicht eindeutig: /api/katalog/diagnose meldet 384, /api/suche?alle=1 meldet ebenfalls 384 Treffer, liefert ueber die Blaetterung aber nur 375 eindeutige Pfade, und die aufbereitete catalog.js kennt 365 ('Stufe 1 von 2'). Fuer die Lueckenrechnung wurden die 375 eindeutigen Pfade verwendet."
+    ]
+  }
+}

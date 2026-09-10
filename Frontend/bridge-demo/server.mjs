@@ -234,7 +234,10 @@ function serveStatic(req, res, pathname) {
     return;
   }
 
+  // Verzeichnisaufrufe auf index.html abbilden: "/" ebenso wie "/net" und "/net/".
   if (rel === '/' || rel === '') rel = '/index.html';
+  else if (rel.endsWith('/')) rel += 'index.html';
+  else if (!path.basename(rel).includes('.')) rel += '/index.html';
   const filePath = path.join(PUBLIC_DIR, path.normalize(rel).replace(/^([/\\])+/, ''));
 
   // Kein Ausbrechen aus public/. Der Trenner muss mitgeprueft werden,
@@ -446,7 +449,7 @@ const server = http.createServer(async (req, res) => {
           hinzugefuegt: { pfad, artikelId: r.artikelId, anzahl, modus: r.modus },
           gesendet: r.gesendet,
           abgelehnt: r.abgelehnt,
-        }), sid);
+        }, session), sid);
       }
 
       /* Weg B -- der urspruengliche Demo-Artikel 278 mit genau einem Attribut.
@@ -454,7 +457,7 @@ const server = http.createServer(async (req, res) => {
       const attribut = normalizeAttribut(body.attribut);
       const artikel = Number(body.artikel) || DEMO.artikel;
       const { cart, logs } = await addToCart(session, { artikel, anzahl, attribut, kommentar });
-      return sendJson(res, 200, cartResponse(cart, logs, { hinzugefuegt: { artikel, anzahl, attribut } }), sid);
+      return sendJson(res, 200, cartResponse(cart, logs, { hinzugefuegt: { artikel, anzahl, attribut } }, session), sid);
     }
 
     // Menge einer Warenkorbposition setzen. 0 entfernt die Position -- so
@@ -480,12 +483,12 @@ const server = http.createServer(async (req, res) => {
       const r = await setQuantity(session, key, anzahl);
       return sendJson(res, 200, cartResponse(r.cart, [...logs, ...r.logs], {
         gesetzt: { key, anzahl },
-      }), sid);
+      }, session), sid);
     }
 
     if (pathname === '/api/cart' && req.method === 'GET') {
       const { cart, logs } = await readCart(session);
-      return sendJson(res, 200, cartResponse(cart, logs), sid);
+      return sendJson(res, 200, cartResponse(cart, logs, {}, session), sid);
     }
 
     // Beweis-Endpunkt: liefert die ROHE Warenkorb-Seite, die matten.de fuer
@@ -504,7 +507,7 @@ const server = http.createServer(async (req, res) => {
 
     if (pathname === '/api/cart/clear' && req.method === 'POST') {
       const { cart, logs } = await clearCart(session);
-      return sendJson(res, 200, cartResponse(cart, logs), sid);
+      return sendJson(res, 200, cartResponse(cart, logs, {}, session), sid);
     }
 
     /* --- Kundenkonto ---------------------------------------------- */
@@ -605,7 +608,7 @@ const server = http.createServer(async (req, res) => {
 
       return sendJson(res, 200, {
         ok: true,
-        warenkorb: cartResponse(stand.cart, []),
+        warenkorb: cartResponse(stand.cart, [], {}, session),
         optionen: stand.optionen,
         konto: stand.konto,
         adressfelder: ADRESS_FELDER,
@@ -664,7 +667,7 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 200, cartResponse(r.cart, r.logs, {
         optionen: r.optionen,
         gesendet: r.gesendet,
-      }), sid);
+      }, session), sid);
     }
 
     if (pathname === '/api/kasse/adresse' && req.method === 'POST') {

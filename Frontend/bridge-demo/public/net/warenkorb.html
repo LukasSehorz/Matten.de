@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warenkorb | Mattenfuchs</title>
+<meta name="description" content="Ihr Warenkorb im Mattenfuchs-Shop. Positionen, Mengen und Summen kommen unveraendert aus dem Bestellsystem von matten.de.">
+<!-- Angeschlossen an das Altsystem, aber noch nicht oeffentlich. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="stylesheet" href="assets/css/net.css">
+<link rel="stylesheet" href="assets/css/seiten-kasse.css">
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any">
+</head>
+<body data-aktiv="/order/cart">
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Kopf und Navigation baut assets/js/net-shell.js hier ein. -->
+<div id="kopf"></div>
+
+<nav class="brotkrumen" aria-label="Sie sind hier">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Startseite</a></li>
+      <li><span aria-current="page">Warenkorb</span></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="inhalt">
+
+<section class="abschnitt abschnitt--eng">
+  <div class="container">
+    <p class="label">Bestellung</p>
+    <h1>Warenkorb</h1>
+    <p class="vorspann">Positionen, Mengen und alle Beträge kommen direkt aus dem Bestellsystem
+      von matten.de. Hier wird nichts nachgerechnet.</p>
+
+    <ol class="schritte mt-5" aria-label="Bestellablauf">
+      <li aria-current="step">Warenkorb</li>
+      <li>Adresse</li>
+      <li>Versand &amp; Zahlung</li>
+      <li>Prüfen</li>
+      <li>Bestätigung</li>
+    </ol>
+  </div>
+</section>
+
+<section class="abschnitt abschnitt--flach">
+  <div class="container">
+    <div class="mit-leiste mit-leiste--rechts">
+
+      <!-- ================================================================
+           Positionen
+           ================================================================ -->
+      <div>
+        <h2 class="label" id="korb-liste-titel">Positionen</h2>
+
+        <!-- Meldungen zu Aktionen (Menge geändert, Fehler, …). -->
+        <div class="melder" id="korb-melder" role="status" aria-live="polite"></div>
+
+        <!-- Ladeplatzhalter: bleibt stehen, bis /api/cart geantwortet hat. -->
+        <div id="korb-laedt" aria-busy="true">
+          <p class="nur-sr">Der Warenkorb wird geladen.</p>
+          <div class="korb-pos" aria-hidden="true">
+            <span class="skel skel--bild korb-pos__bild"></span>
+            <div>
+              <span class="skel skel--titel"></span>
+              <span class="skel skel--zeile skel--mittel"></span>
+              <span class="skel skel--zeile skel--kurz"></span>
+            </div>
+            <div class="korb-pos__betraege"><span class="skel skel--zeile skel--kurz"></span></div>
+          </div>
+          <div class="korb-pos" aria-hidden="true">
+            <span class="skel skel--bild korb-pos__bild"></span>
+            <div>
+              <span class="skel skel--titel"></span>
+              <span class="skel skel--zeile skel--kurz"></span>
+            </div>
+            <div class="korb-pos__betraege"><span class="skel skel--zeile skel--kurz"></span></div>
+          </div>
+        </div>
+
+        <!-- Die echten Positionen. -->
+        <ul class="korb-liste" id="korb-liste" aria-labelledby="korb-liste-titel" hidden></ul>
+
+        <div class="korb-fuss" id="korb-fuss" hidden>
+          <a class="btn btn--dezent" href="index.html">Weiter einkaufen</a>
+          <button class="btn btn--signal btn--klein" type="button" id="korb-leeren">Warenkorb leeren</button>
+        </div>
+
+        <!-- Leerzustand. -->
+        <div class="leer mt-7" id="korb-leer" hidden>
+          <span class="leer__symbol" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h2.2l2.3 10.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1.4"/><circle cx="17.5" cy="20" r="1.4"/></svg>
+          </span>
+          <h2>Noch nichts im Warenkorb</h2>
+          <p>Suchen Sie eine Warengruppe aus oder gestalten Sie Ihre Matte selbst.</p>
+          <div class="btn-gruppe">
+            <a class="btn" href="index.html">Sortiment ansehen</a>
+            <a class="btn btn--sekundaer" href="mattendesigner.html">Matte gestalten</a>
+          </div>
+        </div>
+
+        <!-- Fehlerzustand: die Brücke antwortet nicht. -->
+        <div class="leer mt-7" id="korb-fehler" hidden>
+          <span class="leer__symbol" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10"/><circle cx="12" cy="18.5" r="1.2"/></svg>
+          </span>
+          <h2>Der Warenkorb lässt sich gerade nicht lesen</h2>
+          <p id="korb-fehler-text">Das Bestellsystem antwortet nicht.</p>
+          <div class="btn-gruppe">
+            <button class="btn" type="button" id="korb-neu">Erneut versuchen</button>
+            <a class="btn btn--sekundaer" href="index.html">Zur Startseite</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           Summen
+           ================================================================ -->
+      <aside aria-labelledby="summe-titel">
+        <div class="mit-leiste__leiste--klebt">
+          <div class="karte karte--kante">
+            <div class="karte__koerper">
+              <h2 id="summe-titel" class="karte__titel">Summe</h2>
+
+              <dl class="summen mt-4" id="korb-summen" aria-live="polite" aria-busy="true">
+                <div class="summen__zeile"><dt>Zwischensumme</dt><dd class="zahl">wird geladen</dd></div>
+                <div class="summen__zeile"><dt>Versand</dt><dd class="zahl">wird geladen</dd></div>
+                <div class="summen__zeile"><dt>Umsatzsteuer</dt><dd class="zahl">wird geladen</dd></div>
+                <div class="summen__zeile summen__zeile--gesamt"><dt>Gesamt</dt><dd class="zahl">wird geladen</dd></div>
+              </dl>
+
+              <a class="btn btn--gross btn--voll mt-5" href="kasse.html" id="zur-kasse"
+                 aria-disabled="true">Zur Kasse</a>
+              <p class="meta mt-4">Alle Beträge stammen aus dem Bestellsystem von matten.de —
+                Zwischensumme, Versand, Umsatzsteuer und Gesamt werden dort gerechnet.</p>
+            </div>
+          </div>
+
+          <p class="hinweis mt-5">
+            <span class="hinweis__symbol" aria-hidden="true">i</span>
+            <span><span class="hinweis__titel">Nachprüfbar</span>
+              Was das Altsystem auf diese Sitzung antwortet, steht ungefiltert unter
+              <a href="/api/cart/raw" target="_blank" rel="noopener">Rohantwort des Altsystems</a>.</span>
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Fussbereich baut assets/js/net-shell.js hier ein. -->
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-shell.js"></script>
+<script src="assets/js/seite-warenkorb.js"></script>
+</body>
+</html>

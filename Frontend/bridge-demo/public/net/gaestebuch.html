@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gästebuch | Mattenfuchs</title>
+<meta name="description" content="Das Gaestebuch des Mattenfuchs-Shops. Zurzeit sind keine Eintraege vorhanden.">
+<!-- Noch ohne Funktion, darum nicht fuer Suchmaschinen. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="stylesheet" href="assets/css/net.css">
+<link rel="stylesheet" href="assets/css/seiten-kasse.css">
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any">
+</head>
+<body data-aktiv="/guest-book">
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Kopf und Navigation baut assets/js/net-shell.js hier ein. -->
+<div id="kopf"></div>
+
+<nav class="brotkrumen" aria-label="Sie sind hier">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Startseite</a></li>
+      <li><span aria-current="page">Gästebuch</span></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="inhalt">
+
+<section class="abschnitt abschnitt--eng">
+  <div class="container container--eng">
+    <p class="label">Rückmeldungen</p>
+    <h1>Gästebuch</h1>
+    <p class="vorspann">Hier sollen Rückmeldungen von Kundinnen und Kunden stehen.</p>
+
+    <p class="hinweis hinweis--warnung mt-5" role="note">
+      <span class="hinweis__symbol" aria-hidden="true">i</span>
+      <span><span class="hinweis__titel">Noch ohne Funktion</span>
+        Die Vorlage matten.net verlinkt das Gästebuch im Seitenkopf, liefert dort aber weder
+        Einträge noch ein Formular aus — die Seite ist dort vollständig leer. Ein Eintragsformular
+        an dieser Stelle sähe zwar richtig aus, könnte aber nichts speichern. Es steht darum
+        keines hier.</span>
+    </p>
+  </div>
+</section>
+
+<section class="abschnitt abschnitt--flach">
+  <div class="container container--eng">
+
+    <!-- Wird von seite-inhalt.js gefüllt oder ausgeblendet. -->
+    <div id="gb-liste" aria-busy="true" data-laedt="true">
+      <p class="nur-sr">Die Einträge werden geladen.</p>
+      <article class="karte karte--kante" aria-hidden="true"><div class="karte__koerper">
+        <span class="skel skel--zeile skel--kurz"></span>
+        <span class="skel skel--zeile skel--voll"></span>
+        <span class="skel skel--zeile skel--mittel"></span>
+      </div></article>
+    </div>
+
+    <!-- Leeransicht. -->
+    <div class="leer" id="gb-leer" hidden>
+      <span class="leer__symbol" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>
+      </span>
+      <h2>Noch kein Eintrag</h2>
+      <p>Es liegen keine Rückmeldungen vor. Bis das Gästebuch angeschlossen ist, erreichen uns
+        Rückmeldungen am schnellsten telefonisch oder per E-Mail — beides steht im Fußbereich.</p>
+      <div class="btn-gruppe">
+        <a class="btn" href="index.html">Zum Sortiment</a>
+        <a class="btn btn--sekundaer" href="blog.html">Zum Blog</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- Fussbereich baut assets/js/net-shell.js hier ein. -->
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-shell.js"></script>
+<script src="assets/js/seite-inhalt.js"></script>
+</body>
+</html>

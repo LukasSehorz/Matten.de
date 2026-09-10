@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Musterseite — Designsystem | Mattenfuchs</title>
+<meta name="description" content="Alle Bausteine des Designsystems von matten.net auf einer Seite.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="stylesheet" href="assets/css/net.css">
+<style>
+  /* Nur fuer die Musterseite — gehoert nicht ins Designsystem. */
+  .sg-farbe { display: grid; gap: var(--sp-2); }
+  .sg-farbe__flaeche {
+    height: 72px;
+    border-radius: var(--r-2);
+    border: 1px solid var(--lines);
+  }
+  .sg-farbe code { font-size: var(--fs-200); color: var(--muted); }
+  .sg-farbe strong { font-family: var(--font-display); font-size: var(--fs-300); color: var(--navy); }
+
+  .sg-block { padding: var(--sp-5); border: 1px dashed var(--lines); border-radius: var(--r-3); background: var(--surface); }
+  .sg-block + .sg-block { margin-top: var(--sp-4); }
+
+  .sg-typo > * { margin: 0 0 var(--sp-3); }
+  .sg-typo code { font-size: var(--fs-200); color: var(--muted); font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+
+  .sg-nav { position: sticky; top: 7rem; align-self: start; }
+  .sg-nav ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: sg; }
+  .sg-nav a {
+    display: block;
+    padding: var(--sp-2) var(--sp-3);
+    border-left: 3px solid var(--lines);
+    color: var(--muted);
+    font-size: var(--fs-300);
+    text-decoration: none;
+  }
+  .sg-nav a:hover { border-left-color: var(--cyan); background: var(--surface-2); color: var(--navy); }
+
+  .sg-abstand { display: grid; gap: var(--sp-2); }
+  .sg-abstand div { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-200); color: var(--muted); }
+  .sg-abstand span { height: 14px; background: var(--cyan); border-radius: var(--r-1); }
+</style>
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any">
+</head>
+<body data-aktiv="/styleguide">
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<div id="kopf"></div>
+
+<nav class="brotkrumen" aria-label="Sie sind hier">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Startseite</a></li>
+      <li><span aria-current="page">Musterseite</span></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="inhalt">
+
+<section class="abschnitt abschnitt--eng">
+  <div class="container">
+    <p class="label">Designsystem</p>
+    <h1>Musterseite</h1>
+    <p class="vorspann">Alle Bausteine an einem Ort — Farben, Schrift, Knöpfe, Formulare, Karten,
+      Tabellen, Hinweise, Ladeplatzhalter und Leerzustände. So lässt sich das Design beurteilen,
+      ohne durch den Shop zu klicken.</p>
+
+    <p class="hinweis mt-5">
+      <span class="hinweis__symbol" aria-hidden="true">i</span>
+      <span><span class="hinweis__titel">Gestaltungsidee „Die Kante“</span>
+        Eine Matte ist ein Rechteck mit sauber umketteltem Rand. Diese Kante — 3 px in Cyan
+        oder im Verlauf nach Blau — kehrt an Karten, Abschnittsköpfen, Hinweisen und am aktiven
+        Menüpunkt wieder. Sie ist das einzige auffällige Mittel; alles andere bleibt ruhig.</span>
+    </p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="mit-leiste">
+
+    <!-- ============ Inhaltsverzeichnis ============ -->
+    <aside class="sg-nav" aria-labelledby="sg-nav-titel">
+      <h2 class="label" id="sg-nav-titel">Bausteine</h2>
+      <nav aria-labelledby="sg-nav-titel"><ol>
+        <li><a href="#farben">Farben</a></li>
+        <li><a href="#typo">Schrift</a></li>
+        <li><a href="#raster">Abstände und Radien</a></li>
+        <li><a href="#knoepfe">Knöpfe</a></li>
+        <li><a href="#formulare">Formulare</a></li>
+        <li><a href="#menge">Mengensteuerung</a></li>
+        <li><a href="#karten">Karten</a></li>
+        <li><a href="#tabellen">Tabellen</a></li>
+        <li><a href="#hinweise">Hinweisboxen</a></li>
+        <li><a href="#abzeichen">Abzeichen</a></li>
+        <li><a href="#krumen">Brotkrumen</a></li>
+        <li><a href="#blaettern">Seitenblätterung</a></li>
+        <li><a href="#skelette">Ladeplatzhalter</a></li>
+        <li><a href="#leer">Leerzustände</a></li>
+        <li><a href="#weiteres">Weitere Bausteine</a></li>
+      </ol></nav>
+    </aside>
+
+    <div>
+
+    <!-- ============ Farben ============ -->
+    <section class="abschnitt abschnitt--eng" id="farben">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">01</p>
+        <h2>Farben</h2>
+        <p>Navy trägt die Struktur, Blau die Interaktion, Cyan den Akzent. Rot bleibt Aktionen
+          mit Folgen vorbehalten und kommt sonst nirgends vor.</p>
+      </div></div>
+
+      <div class="raster raster--4">
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#050a40"></div><strong>Navy</strong><code>#050a40</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#000080"></div><strong>Tiefblau</strong><code>#000080</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#0072b8"></div><strong>Blau</strong><code>#0072b8</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#00a8e0"></div><strong>Cyan</strong><code>#00a8e0</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#d0021b"></div><strong>Signalrot</strong><code>#d0021b</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#15181d"></div><strong>Ink</strong><code>#15181d</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#5c636e"></div><strong>Muted</strong><code>#5c636e</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#dfe3e8"></div><strong>Lines</strong><code>#dfe3e8</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#ffffff"></div><strong>Surface</strong><code>#ffffff</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:#f4f6f8"></div><strong>Surface&nbsp;2</strong><code>#f4f6f8</code></div>
+        <div class="sg-farbe"><div class="sg-farbe__flaeche" style="background:linear-gradient(180deg,#00a8e0,#0072b8)"></div><strong>Kante</strong><code>--kante</code></div>
+      </div>
+    </section>
+
+    <!-- ============ Schrift ============ -->
+    <section class="abschnitt abschnitt--eng" id="typo">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">02</p>
+        <h2>Schrift</h2>
+        <p>Archivo für Überschriften und Beschriftungen, Barlow für den Fließtext.
+          Beide liegen lokal unter <code>/fonts/</code> — es wird keine fremde Schriftquelle geladen.</p>
+      </div></div>
+
+      <div class="sg-block sg-typo">
+        <!-- Schriftmuster: bewusst keine echten Ueberschriften, damit die
+             Gliederung dieser Seite nicht durcheinandergerät. -->
+        <p class="titel-buehne">Bühnenzeile <code>.titel-buehne</code></p>
+        <p class="t-h1">Überschrift 1 <code>h1</code></p>
+        <p class="t-h2">Überschrift 2 <code>h2</code></p>
+        <p class="t-h3">Überschrift 3 <code>h3</code></p>
+        <p class="t-h4">Überschrift 4 <code>h4</code></p>
+        <p class="vorspann">Vorspann: eine ruhige Zeile, die die Überschrift erklärt und nicht länger
+          als drei Zeilen wird. <code>.vorspann</code></p>
+        <p>Fließtext in Barlow. Der Zeilenabstand ist auf 1,6 gesetzt, die Zeilenlänge auf 68 Zeichen
+          begrenzt, damit das Auge beim Umbruch die nächste Zeile findet.</p>
+        <p class="klein">Kleiner Text <code>.klein</code></p>
+        <p class="meta">Meta-Angabe <code>.meta</code></p>
+        <p class="label">Beschriftung im Stil einer Bodenmarkierung <code>.label</code></p>
+        <p><span class="preis preis--gross">129,90&nbsp;€</span>
+           <span class="preis--alt">149,00&nbsp;€</span> — tabellarische Ziffern, damit Beträge
+           in Spalten untereinander stehen.</p>
+      </div>
+    </section>
+
+    <!-- ============ Abstände ============ -->
+    <section class="abschnitt abschnitt--eng" id="raster">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">03</p>
+        <h2>Abstände und Radien</h2>
+        <p>Abstände folgen einem 4-px-Raster. Radien bleiben zwischen 2 und 6 px — eine Matte
+          hat Kanten, keine Rundungen.</p>
+      </div></div>
+
+      <div class="duo">
+        <div class="sg-block">
+          <p class="label label--gedeckt">Abstände</p>
+          <div class="sg-abstand">
+            <div><span style="width:4px"></span>--sp-1 · 4px</div>
+            <div><span style="width:8px"></span>--sp-2 · 8px</div>
+            <div><span style="width:12px"></span>--sp-3 · 12px</div>
+            <div><span style="width:16px"></span>--sp-4 · 16px</div>
+            <div><span style="width:24px"></span>--sp-5 · 24px</div>
+            <div><span style="width:32px"></span>--sp-6 · 32px</div>
+            <div><span style="width:48px"></span>--sp-7 · 48px</div>
+            <div><span style="width:64px"></span>--sp-8 · 64px</div>
+            <div><span style="width:96px"></span>--sp-9 · 96px</div>
+          </div>
+        </div>
+        <div class="sg-block">
+          <p class="label label--gedeckt">Radien und Schatten</p>
+          <div class="reihe">
+            <span style="width:72px;height:56px;background:var(--surface-2);border:1px solid var(--lines);border-radius:2px"></span>
+            <span style="width:72px;height:56px;background:var(--surface-2);border:1px solid var(--lines);border-radius:4px"></span>
+            <span style="width:72px;height:56px;background:var(--surface-2);border:1px solid var(--lines);border-radius:6px"></span>
+          </div>
+          <p class="meta">2&nbsp;px · 4&nbsp;px · 6&nbsp;px</p>
+          <div class="reihe mt-5">
+            <span style="width:72px;height:56px;background:#fff;border-radius:6px;box-shadow:var(--sh-1)"></span>
+            <span style="width:72px;height:56px;background:#fff;border-radius:6px;box-shadow:var(--sh-2)"></span>
+            <span style="width:72px;height:56px;background:#fff;border-radius:6px;box-shadow:var(--sh-3)"></span>
+          </div>
+          <p class="meta">--sh-1 · --sh-2 · --sh-3</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Knöpfe ============ -->
+    <section class="abschnitt abschnitt--eng" id="knoepfe">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">04</p>
+        <h2>Knöpfe</h2>
+        <p>Ein primärer Knopf je Abschnitt. Alles Weitere ist sekundär oder dezent.
+          Signalrot nur, wenn etwas verschwindet.</p>
+      </div></div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Arten</p>
+        <div class="btn-gruppe">
+          <button class="btn" type="button">Primär</button>
+          <button class="btn btn--sekundaer" type="button">Sekundär</button>
+          <button class="btn btn--dezent" type="button">Dezent</button>
+          <button class="btn btn--signal" type="button">Entfernen</button>
+        </div>
+      </div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Größen</p>
+        <div class="btn-gruppe" style="align-items:center">
+          <button class="btn btn--klein" type="button">Klein</button>
+          <button class="btn" type="button">Normal</button>
+          <button class="btn btn--gross" type="button">Groß</button>
+        </div>
+      </div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Zustände</p>
+        <p class="meta">Zeigen mit der Maus darauf oder springen Sie mit der Tabulatortaste hin —
+          Hover, Fokusring, gedrückt, deaktiviert und ladend sind alle definiert.</p>
+        <div class="btn-gruppe">
+          <button class="btn" type="button">Normal</button>
+          <button class="btn" type="button" disabled>Deaktiviert</button>
+          <button class="btn" type="button" aria-busy="true">Wird gespeichert</button>
+          <button class="btn btn--sekundaer" type="button" disabled>Deaktiviert</button>
+          <button class="btn btn--sekundaer" type="button" aria-busy="true">Lädt</button>
+        </div>
+        <p class="mt-4"><button class="btn btn--sekundaer btn--klein" type="button" id="sg-laden">Ladezustand zwei Sekunden vorführen</button></p>
+      </div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Auf dunklem Grund</p>
+        <div style="background:var(--navy);padding:var(--sp-5);border-radius:var(--r-3)" class="auf-navy">
+          <div class="btn-gruppe">
+            <button class="btn btn--invers" type="button">Invers</button>
+            <button class="btn" type="button" style="--btn-bg:transparent;--btn-rand:rgba(255,255,255,.3);--btn-fg:#fff">Umrandet</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Weiterführender Link</p>
+        <p><a class="weiterlink" href="#knoepfe">Alle Warengruppen ansehen</a></p>
+      </div>
+    </section>
+
+    <!-- ============ Formulare ============ -->
+    <section class="abschnitt abschnitt--eng" id="formulare">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">05</p>
+        <h2>Formulare</h2>
+        <p>Jedes Feld hat eine sichtbare Beschriftung. Fehlertexte sagen, was zu tun ist —
+          nicht, dass etwas falsch war.</p>
+      </div></div>
+
+      <div class="duo">
+        <div class="sg-block">
+          <p class="label label--gedeckt">Felder</p>
+
+          <div class="feld">
+            <label for="sg-text">Textfeld</label>
+            <input type="text" id="sg-text" placeholder="Platzhaltertext">
+          </div>
+
+          <div class="feld">
+            <label for="sg-hilfe">Mit Hinweis</label>
+            <input type="text" id="sg-hilfe" aria-describedby="sg-hilfe-text">
+            <p class="feld-hinweis" id="sg-hilfe-text">Ein Hinweis erklärt das Format, bevor jemand danebengreift.</p>
+          </div>
+
+          <div class="feld feld--fehler">
+            <label for="sg-fehler">Mit Fehler <span class="feld-pflicht" aria-hidden="true">*</span></label>
+            <input type="text" id="sg-fehler" value="90x" aria-invalid="true" aria-describedby="sg-fehler-text">
+            <p class="feld-fehler" id="sg-fehler-text">Breite in ganzen Zentimetern angeben, zwischen 40 und 200.</p>
+          </div>
+
+          <div class="feld feld--gut">
+            <label for="sg-gut">Geprüft</label>
+            <input type="text" id="sg-gut" value="90">
+          </div>
+
+          <div class="feld">
+            <label for="sg-aus">Deaktiviert</label>
+            <input type="text" id="sg-aus" value="Wird nachgeladen" disabled>
+          </div>
+
+          <div class="feld">
+            <label for="sg-select">Auswahlfeld</label>
+            <select id="sg-select">
+              <option>Bitte wählen</option>
+              <option>60 × 90 cm</option>
+              <option>90 × 150 cm</option>
+              <option>120 × 200 cm</option>
+              <option>Sondermaß</option>
+            </select>
+          </div>
+
+          <div class="feld">
+            <label for="sg-textarea">Mehrzeiliges Feld</label>
+            <textarea id="sg-textarea" placeholder="Anlieferung nur vormittags, Tor 2 …"></textarea>
+          </div>
+        </div>
+
+        <div class="sg-block">
+          <p class="label label--gedeckt">Auswahl</p>
+
+          <fieldset class="feldgruppe">
+            <legend>Kästchen</legend>
+            <label class="wahl"><input type="checkbox" checked><span>Angemeldet bleiben</span></label>
+            <label class="wahl"><input type="checkbox"><span>Newsletter erhalten</span></label>
+            <label class="wahl"><input type="checkbox" disabled><span>Noch nicht verfügbar</span></label>
+          </fieldset>
+
+          <fieldset class="feldgruppe">
+            <legend>Radioknöpfe</legend>
+            <label class="wahl"><input type="radio" name="sg-r" checked><span>Standardversand</span></label>
+            <label class="wahl"><input type="radio" name="sg-r"><span>Spedition</span></label>
+          </fieldset>
+
+          <fieldset class="feldgruppe">
+            <legend>Wahlkarten</legend>
+            <div class="stapel stapel--eng">
+              <label class="wahlkarte">
+                <input type="radio" name="sg-wk" checked>
+                <span><span class="wahlkarte__titel">Rechnung</span>
+                  <span class="wahlkarte__text">Für Firmen und öffentliche Auftraggeber.</span></span>
+                <span class="zahl">0,00 €</span>
+              </label>
+              <label class="wahlkarte">
+                <input type="radio" name="sg-wk">
+                <span><span class="wahlkarte__titel">Vorkasse</span>
+                  <span class="wahlkarte__text">Produktion startet nach Zahlungseingang.</span></span>
+                <span class="zahl">0,00 €</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="feldgruppe">
+            <legend>Farbmuster</legend>
+            <div class="muster-reihe" role="group" aria-label="Farbe wählen">
+              <button class="muster" type="button" aria-pressed="true" style="background:#050a40" aria-label="Anthrazit"></button>
+              <button class="muster" type="button" aria-pressed="false" style="background:#0072b8" aria-label="Blau"></button>
+              <button class="muster" type="button" aria-pressed="false" style="background:#8b1f2b" aria-label="Rot"></button>
+              <button class="muster" type="button" aria-pressed="false" style="background:#3f4a3a" aria-label="Grün"></button>
+              <button class="muster" type="button" aria-pressed="false" style="background:#8a7a63" aria-label="Beige"></button>
+              <button class="muster" type="button" aria-pressed="false" style="background:#2b2b2b" aria-label="Schwarz"></button>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Mengensteuerung ============ -->
+    <section class="abschnitt abschnitt--eng" id="menge">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">06</p>
+        <h2>Mengensteuerung</h2>
+        <p>Alle Flächen sind mindestens 44 px hoch, damit sie sich auch am Handy treffen lassen.</p>
+      </div></div>
+
+      <div class="sg-block">
+        <div class="reihe" style="gap:var(--sp-6)">
+          <div>
+            <p class="label label--gedeckt">Normal</p>
+            <div class="menge">
+              <button class="menge__knopf" type="button" aria-label="Menge verringern" data-menge="-1">−</button>
+              <input class="menge__feld" type="number" value="1" min="1" max="999" aria-label="Menge" id="sg-menge">
+              <button class="menge__knopf" type="button" aria-label="Menge erhöhen" data-menge="1">+</button>
+            </div>
+          </div>
+          <div>
+            <p class="label label--gedeckt">Untergrenze erreicht</p>
+            <div class="menge">
+              <button class="menge__knopf" type="button" aria-label="Menge verringern" disabled>−</button>
+              <input class="menge__feld" type="number" value="1" min="1" aria-label="Menge">
+              <button class="menge__knopf" type="button" aria-label="Menge erhöhen">+</button>
+            </div>
+          </div>
+          <div>
+            <p class="label label--gedeckt">Wird gespeichert</p>
+            <div class="menge" aria-busy="true">
+              <button class="menge__knopf" type="button" aria-label="Menge verringern">−</button>
+              <input class="menge__feld" type="number" value="3" min="1" aria-label="Menge">
+              <button class="menge__knopf" type="button" aria-label="Menge erhöhen">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Karten ============ -->
+    <section class="abschnitt abschnitt--eng" id="karten">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">07</p>
+        <h2>Karten</h2>
+        <p>Beim Überfahren erscheint die Kante an der Oberseite. Die ganze Karte ist anklickbar,
+          Ziel für die Tastatur bleibt der Titellink.</p>
+      </div></div>
+
+      <div class="raster raster--3">
+        <article class="karte">
+          <div class="karte__bild bildflaeche" role="img" aria-label="Platzhalter">Produktbild</div>
+          <div class="karte__koerper">
+            <p class="label label--gedeckt mb-0">Fussmatten</p>
+            <h3 class="karte__titel"><a href="#karten">IronHorse Schmutzfangmatte</a></h3>
+            <p class="karte__text">Robuste Eingangsmatte für stark begangene Bereiche.</p>
+            <div class="karte__fuss">
+              <span class="preis">ab 89,00 €</span>
+              <span class="abzeichen abzeichen--erfolg">Lieferbar</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="karte">
+          <div class="karte__bild bildflaeche" role="img" aria-label="Platzhalter">
+            <span class="abzeichen abzeichen--neu">Neu</span>
+            Produktbild
+          </div>
+          <div class="karte__koerper">
+            <p class="label label--gedeckt mb-0">Logomatten</p>
+            <h3 class="karte__titel"><a href="#karten">JetPrint Design mit Logo</a></h3>
+            <p class="karte__text">Vollflächiger Druck, jede Farbe, ab einem Stück.</p>
+            <div class="karte__fuss">
+              <span class="preis">ab 149,00 €</span>
+              <a class="btn btn--klein btn--sekundaer" href="#karten">Ansehen</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="karte karte--kante">
+          <div class="karte__koerper">
+            <h3 class="karte__titel">Karte mit fester Kante</h3>
+            <p class="karte__text">Für Merkmale, Hinweise und alles, was neben dem Hauptinhalt steht.
+              <code>.karte--kante</code></p>
+            <ul class="merkmale mt-4">
+              <li>Zuschnitt auf den Zentimeter</li>
+              <li>Umkettelt geliefert</li>
+              <li>Muster vorab kostenlos</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="raster raster--2 mt-5">
+        <article class="karte karte--flach"><div class="karte__koerper">
+          <h3 class="karte__titel">Flache Karte</h3>
+          <p class="karte__text">Ohne Rahmen, nur als abgesetzte Fläche. <code>.karte--flach</code></p>
+        </div></article>
+        <article class="karte karte--navy"><div class="karte__koerper">
+          <h3 class="karte__titel">Karte auf Navy</h3>
+          <p class="karte__text">Für Hervorhebungen in dunklen Abschnitten. <code>.karte--navy</code></p>
+        </div></article>
+      </div>
+    </section>
+
+    <!-- ============ Tabellen ============ -->
+    <section class="abschnitt abschnitt--eng" id="tabellen">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">08</p>
+        <h2>Tabellen</h2>
+        <p>Breite Tabellen scrollen in ihrem eigenen Rahmen. Die Seite selbst scrollt nie waagerecht.</p>
+      </div></div>
+
+      <div class="tabelle-rahmen">
+        <table class="tabelle">
+          <caption>Beispiel: Positionen eines Warenkorbs</caption>
+          <thead>
+            <tr>
+              <th scope="col">Artikel</th>
+              <th scope="col">Ausführung</th>
+              <th scope="col">Menge</th>
+              <th scope="col" class="rechts">Einzelpreis</th>
+              <th scope="col" class="rechts">Summe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IronHorse Schmutzfangmatte</td>
+              <td>90 × 150 cm, Anthrazit</td>
+              <td class="zahl">2</td>
+              <td class="rechts zahl">89,00 €</td>
+              <td class="rechts zahl">178,00 €</td>
+            </tr>
+            <tr>
+              <td>JetPrint Design</td>
+              <td>120 × 200 cm, Logodruck</td>
+              <td class="zahl">1</td>
+              <td class="rechts zahl">249,00 €</td>
+              <td class="rechts zahl">249,00 €</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row" colspan="4" class="rechts">Gesamt</th>
+              <td class="rechts zahl">427,00 €</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="tabelle-rahmen mt-5">
+        <table class="tabelle tabelle--daten">
+          <caption>Beispiel: technische Daten</caption>
+          <tbody>
+            <tr><th scope="row">Material Oberfläche</th><td>Polyamid, 100 %</td></tr>
+            <tr><th scope="row">Material Rücken</th><td>Nitrilgummi</td></tr>
+            <tr><th scope="row">Gesamthöhe</th><td class="zahl">9 mm</td></tr>
+            <tr><th scope="row">Gewicht je m²</th><td class="zahl">4 100 g</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ Hinweisboxen ============ -->
+    <section class="abschnitt abschnitt--eng" id="hinweise">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">09</p>
+        <h2>Hinweisboxen</h2>
+        <p>Vier Stufen. Der Fehlertext sagt, was zu tun ist.</p>
+      </div></div>
+
+      <div class="stapel">
+        <p class="hinweis">
+          <span class="hinweis__symbol" aria-hidden="true">i</span>
+          <span><span class="hinweis__titel">Information</span>
+            Ab 250 € Warenwert liefern wir versandkostenfrei innerhalb Deutschlands.</span>
+        </p>
+        <p class="hinweis hinweis--erfolg">
+          <span class="hinweis__symbol" aria-hidden="true">✓</span>
+          <span><span class="hinweis__titel">Gespeichert</span>
+            Ihre Adresse ist hinterlegt. Beim nächsten Einkauf steht sie schon da.</span>
+        </p>
+        <p class="hinweis hinweis--warnung">
+          <span class="hinweis__symbol" aria-hidden="true">!</span>
+          <span><span class="hinweis__titel">Längere Lieferzeit</span>
+            Für dieses Sondermaß rechnen wir mit 10 bis 12 Werktagen statt der üblichen 5.</span>
+        </p>
+        <p class="hinweis hinweis--fehler" role="alert">
+          <span class="hinweis__symbol" aria-hidden="true">!</span>
+          <span><span class="hinweis__titel">Bestellung nicht abgeschickt</span>
+            Die Lieferadresse fehlt. Tragen Sie sie ein und schicken Sie die Bestellung erneut ab.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Abzeichen ============ -->
+    <section class="abschnitt abschnitt--eng" id="abzeichen">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">10</p>
+        <h2>Abzeichen</h2>
+      </div></div>
+      <div class="sg-block reihe">
+        <span class="abzeichen">Standard</span>
+        <span class="abzeichen abzeichen--neu">Neu</span>
+        <span class="abzeichen abzeichen--blau">Nach Maß</span>
+        <span class="abzeichen abzeichen--navy">Mietmatte</span>
+        <span class="abzeichen abzeichen--erfolg">Lieferbar</span>
+        <span class="abzeichen abzeichen--signal">Nur noch 2</span>
+        <span class="abzeichen abzeichen--rand">Art.-Nr. 41207</span>
+      </div>
+    </section>
+
+    <!-- ============ Brotkrumen ============ -->
+    <section class="abschnitt abschnitt--eng" id="krumen">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">11</p>
+        <h2>Brotkrumen</h2>
+        <p>Sitzen auf jeder Unterseite direkt unter dem Kopf, hier zum Vergleich im Block.</p>
+      </div></div>
+      <nav class="brotkrumen" aria-label="Beispiel" style="border-radius:var(--r-3);border:1px solid var(--lines)">
+        <div class="container" style="padding-inline:var(--sp-4)">
+          <ol>
+            <li><a href="index.html">Startseite</a></li>
+            <li><a href="kategorie.html">Logomatten</a></li>
+            <li><a href="kategorie.html">JetPrint-Design</a></li>
+            <li><span aria-current="page">JetPrint Design mit Logo</span></li>
+          </ol>
+        </div>
+      </nav>
+    </section>
+
+    <!-- ============ Blätterung ============ -->
+    <section class="abschnitt abschnitt--eng" id="blaettern">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">12</p>
+        <h2>Seitenblätterung</h2>
+      </div></div>
+      <nav class="blaetterung" aria-label="Beispiel" style="margin-top:0">
+        <span class="blatt blatt--aus" aria-hidden="true">Zurück</span>
+        <ol>
+          <li><span class="blatt" aria-current="page">1</span></li>
+          <li><a href="#blaettern" aria-label="Seite 2">2</a></li>
+          <li><a href="#blaettern" aria-label="Seite 3">3</a></li>
+          <li><span class="blatt blatt--luecke" aria-hidden="true">…</span></li>
+          <li><a href="#blaettern" aria-label="Seite 12">12</a></li>
+        </ol>
+        <a href="#blaettern">Weiter</a>
+      </nav>
+    </section>
+
+    <!-- ============ Ladeplatzhalter ============ -->
+    <section class="abschnitt abschnitt--eng" id="skelette">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">13</p>
+        <h2>Ladeplatzhalter</h2>
+        <p>Die Wellenbewegung hält an, wenn im Betriebssystem weniger Bewegung eingestellt ist —
+          dann bleibt eine ruhige graue Fläche.</p>
+      </div></div>
+
+      <div class="duo">
+        <div class="sg-block">
+          <p class="label label--gedeckt">Textblock</p>
+          <div aria-busy="true">
+            <span class="skel skel--titel"></span>
+            <span class="skel skel--zeile skel--voll"></span>
+            <span class="skel skel--zeile skel--voll"></span>
+            <span class="skel skel--zeile skel--mittel"></span>
+            <span class="skel skel--zeile skel--kurz"></span>
+          </div>
+          <div class="reihe mt-5">
+            <span class="skel skel--knopf"></span>
+            <span class="skel skel--abzeichen"></span>
+          </div>
+        </div>
+        <div class="sg-block">
+          <p class="label label--gedeckt">Karte</p>
+          <article class="karte karte--laedt" aria-hidden="true">
+            <div class="skel skel--bild"></div>
+            <div class="karte__koerper">
+              <span class="skel skel--zeile skel--kurz"></span>
+              <span class="skel skel--titel"></span>
+              <span class="skel skel--zeile skel--voll"></span>
+              <span class="skel skel--zeile skel--mittel"></span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Leerzustände ============ -->
+    <section class="abschnitt abschnitt--eng" id="leer">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">14</p>
+        <h2>Leerzustände</h2>
+        <p>Ein leerer Bereich ist eine Aufforderung, nicht eine Entschuldigung.</p>
+      </div></div>
+
+      <div class="leer">
+        <span class="leer__symbol" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h2.2l2.3 10.5a2 2 0 0 0 2 1.5h7.6a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1.4"/><circle cx="17.5" cy="20" r="1.4"/></svg>
+        </span>
+        <h3>Noch nichts im Warenkorb</h3>
+        <p>Suchen Sie eine Warengruppe aus oder gestalten Sie Ihre Matte selbst.</p>
+        <div class="btn-gruppe">
+          <a class="btn" href="kategorie.html">Sortiment ansehen</a>
+          <a class="btn btn--sekundaer" href="mattendesigner.html">Matte gestalten</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Weiteres ============ -->
+    <section class="abschnitt abschnitt--eng" id="weiteres">
+      <div class="abschnitt-kopf"><div>
+        <p class="label">15</p>
+        <h2>Weitere Bausteine</h2>
+      </div></div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Reiter</p>
+        <div class="reiter-liste" role="tablist" aria-label="Beispiel">
+          <button class="reiter" type="button" role="tab" aria-selected="true">Beschreibung</button>
+          <button class="reiter" type="button" role="tab" aria-selected="false">Technische Daten</button>
+          <button class="reiter" type="button" role="tab" aria-selected="false">Pflege</button>
+          <button class="reiter" type="button" role="tab" aria-selected="false">Versand</button>
+        </div>
+      </div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Schritte</p>
+        <ol class="schritte" style="margin-bottom:0">
+          <li data-erledigt="ja">Warenkorb</li>
+          <li aria-current="step">Adresse und Versand</li>
+          <li>Prüfen</li>
+          <li>Bestätigung</li>
+        </ol>
+      </div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Kennwerte</p>
+        <ul class="kennwerte">
+          <li class="kennwert"><span class="kennwert__zahl">11</span><span class="kennwert__text">Warengruppen</span></li>
+          <li class="kennwert"><span class="kennwert__zahl">5</span><span class="kennwert__text">Werktage Lieferzeit</span></li>
+          <li class="kennwert"><span class="kennwert__zahl">200</span><span class="kennwert__text">cm maximale Breite</span></li>
+          <li class="kennwert"><span class="kennwert__zahl">1</span><span class="kennwert__text">Stück Mindestmenge</span></li>
+        </ul>
+      </div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Summenblock</p>
+        <dl class="summen" style="max-width:360px">
+          <div class="summen__zeile"><dt>Zwischensumme</dt><dd class="zahl">427,00 €</dd></div>
+          <div class="summen__zeile"><dt>Versand</dt><dd class="zahl">0,00 €</dd></div>
+          <div class="summen__zeile"><dt>enthaltene MwSt. (19 %)</dt><dd class="zahl">68,17 €</dd></div>
+          <div class="summen__zeile summen__zeile--gesamt"><dt>Gesamt</dt><dd class="zahl">427,00 €</dd></div>
+        </dl>
+      </div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Bildflächen</p>
+        <p class="meta">Bis echte Bilder über <code>/api/img/</code> kommen, steht hier ein Raster,
+          das an die Struktur einer Mattenoberfläche erinnert.</p>
+        <div class="raster raster--3 mt-4">
+          <div class="bildflaeche" role="img" aria-label="Platzhalter 4 zu 3">4 : 3</div>
+          <div class="bildflaeche bildflaeche--breit" role="img" aria-label="Platzhalter 16 zu 9">16 : 9</div>
+          <div class="bildflaeche bildflaeche--quadrat" role="img" aria-label="Platzhalter quadratisch">1 : 1</div>
+        </div>
+      </div>
+
+      <div class="sg-block">
+        <p class="label label--gedeckt">Trennleiste</p>
+        <hr class="kantenlinie">
+      </div>
+    </section>
+
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-shell.js"></script>
+<script>
+/* Nur fuer die Musterseite: kleine Vorfuehrungen, damit sich die
+   Zustaende ausprobieren lassen. Gehoert nicht ins Designsystem. */
+(function () {
+  'use strict';
+
+  /* Ladezustand eines Knopfes vorfuehren. */
+  var knopf = document.getElementById('sg-laden');
+  if (knopf) {
+    knopf.addEventListener('click', function () {
+      knopf.setAttribute('aria-busy', 'true');
+      window.setTimeout(function () { knopf.removeAttribute('aria-busy'); }, 2000);
+    });
+  }
+
+  /* Mengensteuerung. */
+  var feld = document.getElementById('sg-menge');
+  document.querySelectorAll('[data-menge]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (!feld) return;
+      var n = Number(feld.value) + Number(b.getAttribute('data-menge'));
+      feld.value = Math.min(999, Math.max(1, n));
+    });
+  });
+
+  /* Farbmuster: nur eines ist gewaehlt. */
+  document.querySelectorAll('.muster-reihe').forEach(function (reihe) {
+    reihe.addEventListener('click', function (ev) {
+      var m = ev.target.closest('.muster');
+      if (!m) return;
+      reihe.querySelectorAll('.muster').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      m.setAttribute('aria-pressed', 'true');
+    });
+  });
+
+  /* Reiter umschalten (nur die Beschriftung, ohne Inhalte). */
+  document.querySelectorAll('.reiter-liste').forEach(function (liste) {
+    liste.addEventListener('click', function (ev) {
+      var r = ev.target.closest('.reiter');
+      if (!r) return;
+      liste.querySelectorAll('.reiter').forEach(function (x) { x.setAttribute('aria-selected', 'false'); });
+      r.setAttribute('aria-selected', 'true');
+    });
+  });
+})();
+</script>
+</body>
+</html>

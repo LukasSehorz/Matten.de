@@ -1,0 +1,489 @@
+@charset "utf-8";
+/* ==========================================================================
+   matten.net — Seitenregeln fuer Warenkorb, Kasse, Konto und Inhalte
+   --------------------------------------------------------------------------
+   Ergaenzung zu assets/css/net.css. Diese Datei wird NACH net.css geladen
+   und aendert dort nichts — sie fuegt nur Bausteine hinzu, die es nur auf
+   diesen Seiten gibt:
+
+     01  Statusmeldungen (aria-live)
+     02  Warenkorb: Positionsliste
+     03  Kasse: Schrittleiste und Spalten
+     04  Kasse: Wahlkarten fuer Versand und Zahlung
+     05  Kasse: Pruefen, Rohansicht, Scharfschaltung
+     06  Kasse: Ergebnis
+     07  Konto: Anmelden und Registrieren
+     08  Inhalte: Blog, Gaestebuch, Infoseiten
+
+   Alle Farben, Abstaende und Radien kommen aus den Tokens von net.css.
+   Es werden keine eigenen Farbwerte erfunden.
+   ========================================================================== */
+
+/* ==========================================================================
+   01  STATUSMELDUNGEN
+   --------------------------------------------------------------------------
+   Ein Bereich, in den der Zustand einer Aktion geschrieben wird. Er ist
+   immer im DOM (damit aria-live greift) und faellt zusammen, solange er
+   leer ist. Kein alert(), nirgends.
+   ========================================================================== */
+
+/* Ladeplatzhalter in Feldbreite — ergaenzt die .skel-Familie aus net.css. */
+.skel--feld { display: block; width: 100%; height: 2.75rem; }
+
+.melder:empty { display: none; }
+
+.melder {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  margin-top: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--lines);
+  border-left: var(--kante-breite) solid var(--muted);
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--fs-300);
+}
+.melder[data-art="laedt"]   { border-left-color: var(--cyan);      background: var(--cyan-hell); }
+.melder[data-art="gut"]     { border-left-color: var(--gruen);     background: var(--gruen-hell); }
+.melder[data-art="warnung"] { border-left-color: var(--gelb);      background: var(--gelb-hell); }
+.melder[data-art="fehler"]  { border-left-color: var(--signalrot); background: var(--rot-hell); color: var(--rot-dunkel); }
+
+.melder ul { margin: var(--sp-2) 0 0; padding-left: 1.15rem; }
+.melder li + li { margin-top: var(--sp-1); }
+.melder p { margin: 0; }
+.melder p + p { margin-top: var(--sp-2); }
+
+/* Der kleine Kreisel im Ladezustand. */
+.melder__dreher {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: .15rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: melder-dreht .8s linear infinite;
+}
+@keyframes melder-dreht { to { transform: rotate(360deg); } }
+
+/* ==========================================================================
+   02  WARENKORB
+   --------------------------------------------------------------------------
+   Bewusst eine Liste, keine Tabelle: eine Position hat ein Bild, mehrere
+   Textzeilen und ein Bedienelement — das laesst sich am Handy nicht sinnvoll
+   in Spalten pressen. Ab 720px stehen Bild, Text und Betraege nebeneinander.
+   ========================================================================== */
+
+.korb-liste { list-style: none; margin: 0; padding: 0; }
+
+.korb-pos {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: start;
+  padding: var(--sp-5) 0;
+  border-top: 1px solid var(--lines);
+}
+.korb-pos:last-child { border-bottom: 1px solid var(--lines); }
+.korb-pos[data-arbeitet="ja"] { opacity: .55; }
+
+@media (min-width: 720px) {
+  .korb-pos { grid-template-columns: 104px minmax(0, 1fr) auto; gap: var(--sp-5); }
+}
+
+/* --- Bild ----------------------------------------------------------------
+   Bis das Altsystem ein Bild zur Warenkorbzeile liefert, steht hier die
+   Platzhalterflaeche des Designsystems. Wird eines gefunden, ersetzt es sie. */
+.korb-pos__bild {
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  border: 1px solid var(--lines);
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.korb-pos__bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.korb-pos__bild .bildflaeche {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  font-size: var(--fs-100);
+}
+
+.korb-pos__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-500);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--navy);
+}
+
+.korb-pos__name a {
+  color: inherit;
+  text-decoration-color: var(--lines);
+  text-underline-offset: .18em;
+}
+.korb-pos__name a:hover { color: var(--blau); text-decoration-color: currentColor; }
+
+.korb-pos__merkmale { margin: var(--sp-2) 0 0; padding: 0; font-size: var(--fs-300); color: var(--muted); }
+.korb-pos__merkmale div + div { margin-top: var(--sp-1); }
+.korb-pos__merkmale dt { display: inline; font-weight: 600; color: var(--ink); }
+.korb-pos__merkmale dt::after { content: ": "; }
+.korb-pos__merkmale dd { display: inline; margin: 0; }
+
+/* Mehrzeilige Angaben — vor allem die Kalkulation, die der Mattendesigner
+   als Kommentar mitgibt. Die Zeilenumbrueche und die Einrueckungen stehen im
+   Text selbst; pre-wrap zeigt sie, ohne dass dafuer Markup eingesetzt wird. */
+.korb-pos__merkmale .korb-pos__merkmal--lang { margin-top: var(--sp-2); }
+.korb-pos__merkmale .korb-pos__merkmal--lang dt { display: block; }
+.korb-pos__merkmale .korb-pos__merkmal--lang dt::after { content: ""; }
+.korb-pos__merkmale .korb-pos__merkmal--lang dd {
+  display: block;
+  margin-top: var(--sp-1);
+  padding: var(--sp-2) var(--sp-3);
+  border-left: 2px solid var(--lines);
+  border-radius: 0 var(--r-1) var(--r-1) 0;
+  background: var(--surface-2);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--fs-200);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Der Hinweis zu Anfragepositionen im Summenblock. Er steht bewusst unter
+   der Gesamtsumme: dort faellt die Zahl, die er einordnet, ins Auge.
+   Als dt/dd-Paar bleibt er ein gueltiges Kind der <dl class="summen">. */
+.summen__zeile--anfrage {
+  display: block;
+  margin-top: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-left: var(--kante-breite) solid var(--gelb);
+  border-radius: 0 var(--r-2) var(--r-2) 0;
+  background: var(--gelb-hell);
+  font-size: var(--fs-200);
+  line-height: 1.5;
+}
+.summen__zeile--anfrage dt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+}
+.summen__zeile--anfrage dd {
+  margin: var(--sp-1) 0 0;
+  font-weight: 400;
+  font-variant-numeric: normal;
+  color: var(--ink);
+}
+
+.korb-pos__steuerung {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-4);
+}
+
+/* Betraege. Mobil unter dem Text, ab 720px in einer eigenen rechten Spalte. */
+.korb-pos__betraege {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding-top: var(--sp-3);
+  border-top: 1px dashed var(--lines);
+}
+@media (min-width: 720px) {
+  .korb-pos__betraege {
+    grid-column: auto;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    min-width: 8.5rem;
+    padding-top: 0;
+    border-top: 0;
+    text-align: right;
+  }
+}
+.korb-pos__einzel { font-size: var(--fs-300); color: var(--muted); }
+.korb-pos__summe {
+  font-family: var(--font-display);
+  font-size: var(--fs-500);
+  font-weight: 700;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Schmale Fassung fuer die Seitenspalte der Kasse: nur Text, kein Bild,
+   keine Bedienelemente. */
+.korb-pos--schmal { grid-template-columns: 1fr; gap: var(--sp-2); padding: var(--sp-4) 0; }
+.korb-pos--schmal .korb-pos__name { font-size: var(--fs-400); }
+.korb-pos--schmal p { margin: var(--sp-1) 0 0; }
+
+/* Der Fuss unter der Liste: weiter einkaufen / leeren. */
+.korb-fuss {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--sp-5);
+}
+
+/* ==========================================================================
+   03  KASSE — SCHRITTE UND SPALTEN
+   ========================================================================== */
+
+/* Die Schrittleiste aus net.css (.schritte) bekommt hier nur Abstand. */
+.kasse-fortschritt { margin-bottom: var(--sp-6); }
+
+/* Ein Schritt ist ein eigener Abschnitt; nur einer ist sichtbar. */
+.kasse-schritt[hidden] { display: none; }
+.kasse-schritt > h2 { margin-top: 0; }
+.kasse-schritt > h2:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+
+.kasse-knopfzeile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--lines);
+}
+
+/* Adressfelder: mobil untereinander, ab 560px teilweise nebeneinander. */
+.adress-raster { display: grid; gap: 0 var(--sp-4); grid-template-columns: 1fr; }
+@media (min-width: 560px) {
+  .adress-raster { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .adress-raster > .feld { grid-column: span 6; }
+  .adress-raster > .feld[data-breite="halb"]   { grid-column: span 3; }
+  .adress-raster > .feld[data-breite="drittel"]{ grid-column: span 2; }
+  .adress-raster > .feld[data-breite="zwei"]   { grid-column: span 4; }
+}
+
+/* ==========================================================================
+   04  VERSAND UND ZAHLUNG
+   ========================================================================== */
+
+/* Zusatzzeile in einer Wahlkarte, z. B. der Wert im Altsystem. */
+.wahlkarte__technik {
+  display: block;
+  margin-top: var(--sp-1);
+  font-size: var(--fs-100);
+  color: var(--muted);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+/* Was der Server gar nicht erst annimmt — sichtbar, aber nicht waehlbar. */
+.gesperrt-liste { list-style: none; margin: var(--sp-3) 0 0; padding: 0; }
+.gesperrt-liste li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  align-items: baseline;
+  padding: var(--sp-2) 0;
+  color: var(--muted);
+  font-size: var(--fs-300);
+}
+.gesperrt-liste li + li { border-top: 1px dashed var(--lines); }
+.gesperrt-liste strong { color: var(--ink); text-decoration: line-through; }
+
+/* ==========================================================================
+   05  PRUEFEN, ROHANSICHT, SCHARFSCHALTUNG
+   ========================================================================== */
+
+.pruef-block + .pruef-block { margin-top: var(--sp-4); }
+.pruef-block {
+  padding: var(--sp-4);
+  border: 1px solid var(--lines);
+  border-radius: var(--r-3);
+  background: var(--surface);
+}
+.pruef-block h3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-400);
+}
+.pruef-block__text {
+  margin: 0;
+  white-space: pre-line;
+  font-size: var(--fs-300);
+  color: var(--ink);
+}
+
+/* Knopf, der aussieht wie ein Link — fuer "ändern". */
+.textknopf {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blau);
+  font: inherit;
+  font-size: var(--fs-300);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.textknopf:hover { color: var(--blau-dunkel); }
+
+/* --- "Was genau abgeschickt wird" --------------------------------------- */
+.roh {
+  margin-top: var(--sp-5);
+  border: 1px solid var(--lines);
+  border-radius: var(--r-3);
+  background: var(--surface-2);
+}
+.roh > summary {
+  padding: var(--sp-3) var(--sp-4);
+  font-family: var(--font-display);
+  font-size: var(--fs-300);
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  list-style-position: inside;
+}
+.roh > summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
+.roh[open] > summary { border-bottom: 1px solid var(--lines); }
+.roh__koerper { padding: var(--sp-4); }
+.roh__koerper > p { margin-top: 0; font-size: var(--fs-300); color: var(--muted); }
+.roh pre {
+  margin: 0;
+  max-height: 26rem;
+  overflow: auto;
+  padding: var(--sp-3);
+  border: 1px solid var(--lines);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: var(--fs-200);
+  line-height: 1.5;
+  white-space: pre;
+  tab-size: 2;
+}
+
+/* --- Der scharfe Bereich ------------------------------------------------- */
+.scharf {
+  margin-top: var(--sp-6);
+  padding: var(--sp-5);
+  border: 2px solid var(--signalrot);
+  border-radius: var(--r-3);
+  background: var(--rot-hell);
+}
+.scharf h3 { margin: 0 0 var(--sp-3); font-size: var(--fs-500); color: var(--rot-dunkel); }
+.scharf p { font-size: var(--fs-300); }
+.scharf .wahl { align-items: flex-start; font-weight: 600; }
+.scharf .btn { margin-top: var(--sp-4); }
+
+/* ==========================================================================
+   06  ERGEBNIS
+   ========================================================================== */
+
+.ergebnis-nummer {
+  margin: var(--sp-2) 0 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-700);
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+.ergebnis-antwort {
+  margin: 0;
+  padding: var(--sp-4);
+  border: 1px solid var(--lines);
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+  white-space: pre-line;
+  font-size: var(--fs-300);
+}
+
+/* ==========================================================================
+   07  KONTO
+   ========================================================================== */
+
+.konto-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  align-items: center;
+  font-size: var(--fs-300);
+  color: var(--muted);
+}
+
+/* Feldliste des Altsystems (Registrierung) — reine Auskunft. */
+.feldliste { list-style: none; margin: var(--sp-3) 0 0; padding: 0; font-size: var(--fs-300); }
+.feldliste li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  justify-content: space-between;
+  padding: var(--sp-2) 0;
+  border-bottom: 1px dashed var(--lines);
+}
+.feldliste li:last-child { border-bottom: 0; }
+.feldliste code { font-size: var(--fs-200); color: var(--muted); }
+
+/* ==========================================================================
+   08  INHALTE — BLOG, GAESTEBUCH, INFOSEITEN
+   ========================================================================== */
+
+.beitrag { padding-bottom: var(--sp-6); border-bottom: 1px solid var(--lines); }
+.beitrag + .beitrag { margin-top: var(--sp-6); }
+.beitrag:last-child { border-bottom: 0; }
+.beitrag__titel { margin: 0; }
+.beitrag__datum {
+  margin: var(--sp-2) 0 var(--sp-4);
+  font-family: var(--font-display);
+  font-size: var(--fs-200);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.beitrag__text > * + * { margin-top: var(--sp-4); }
+.beitrag__text p { max-width: 68ch; }
+
+/* Inhaltsverzeichnis der Infoseiten. */
+.inhalt-nav ol { list-style: none; margin: 0; padding: 0; }
+.inhalt-nav a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  border-left: var(--kante-breite) solid var(--lines);
+  color: var(--muted);
+  font-size: var(--fs-300);
+  line-height: 1.35;
+  text-decoration: none;
+}
+.inhalt-nav a:hover { border-left-color: var(--cyan); background: var(--surface-2); color: var(--navy); }
+.inhalt-nav a:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
+
+/* Ein Fliesstext aus uebernommenen Quellen: Zwischenueberschriften des
+   Altsystems standen dort nur als fetter Absatz. Hier werden sie zu echten
+   Ueberschriften — die Reihenfolge und der Wortlaut bleiben unveraendert. */
+.fliesstext h2 { scroll-margin-top: 7rem; }
+.fliesstext h3 { scroll-margin-top: 7rem; }
+.fliesstext p { max-width: 68ch; }
+
+/* Quellenangabe unter einem uebernommenen Text. */
+.quelle {
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--lines);
+  font-size: var(--fs-200);
+  color: var(--muted);
+}

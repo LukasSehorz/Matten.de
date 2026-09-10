@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anmelden | Mattenfuchs</title>
+<meta name="description" content="Im Mattenfuchs-Konto anmelden. Die Anmeldung geht an das Kundenkonto von matten.de.">
+<!-- Angeschlossen an das Altsystem, aber noch nicht oeffentlich. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="stylesheet" href="assets/css/net.css">
+<link rel="stylesheet" href="assets/css/seiten-kasse.css">
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any">
+</head>
+<body data-aktiv="/login">
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Kopf und Navigation baut assets/js/net-shell.js hier ein. -->
+<div id="kopf"></div>
+
+<nav class="brotkrumen" aria-label="Sie sind hier">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Startseite</a></li>
+      <li><span aria-current="page">Anmelden</span></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="inhalt">
+
+<section class="abschnitt">
+  <div class="container container--schmal">
+    <p class="label">Konto</p>
+    <h1>Anmelden</h1>
+
+    <!-- Wie bei matten.net stehen die beiden Wege direkt unter der Überschrift. -->
+    <p class="gedeckt">Haben Sie noch kein Konto?
+      <a href="registrieren.html">Klick hier zur Registrierung.</a><br>
+      Passwort vergessen? <a href="seite.html?s=kontakt">Klick hier zum Reset.</a></p>
+
+    <!-- Anmeldestatus dieser Sitzung, aus GET /api/konto. -->
+    <div class="melder" id="status-melder" role="status" aria-live="polite"></div>
+
+    <form class="mt-5" id="login-form" novalidate>
+      <div class="feld" data-feld="email">
+        <label for="l-email">eMail <span class="feld-pflicht" aria-hidden="true">*</span></label>
+        <input type="email" id="l-email" name="email" autocomplete="email"
+               placeholder="eMail-Adresse eingeben" required autofocus>
+        <p class="feld-fehler" id="e-email" hidden></p>
+      </div>
+
+      <div class="feld" data-feld="passwort">
+        <label for="l-pass">Passwort <span class="feld-pflicht" aria-hidden="true">*</span></label>
+        <input type="password" id="l-pass" name="passwort" autocomplete="current-password"
+               placeholder="Passwort eingeben" required>
+        <p class="feld-fehler" id="e-passwort" hidden></p>
+      </div>
+
+      <label class="wahl">
+        <input type="checkbox" id="l-merken" name="merken">
+        <span>mich erinnern</span>
+      </label>
+
+      <div class="melder" id="login-melder" role="status" aria-live="polite"></div>
+
+      <button class="btn btn--gross btn--voll mt-5" type="submit" id="login-knopf">Login</button>
+    </form>
+
+    <hr class="kantenlinie">
+
+    <div class="karte karte--kante">
+      <div class="karte__koerper">
+        <h2 class="karte__titel">Auch ohne Konto bestellen</h2>
+        <p class="karte__text">Der Shop nimmt Gastbestellungen an. Sie tragen die Lieferadresse
+          direkt in der Kasse ein — ein Konto ist dafür nicht nötig.</p>
+        <p class="mt-4"><a class="btn btn--sekundaer" href="warenkorb.html">Zum Warenkorb</a></p>
+      </div>
+    </div>
+
+    <p class="hinweis hinweis--warnung mt-6" role="note">
+      <span class="hinweis__symbol" aria-hidden="true">i</span>
+      <span><span class="hinweis__titel">Passwort zurücksetzen läuft noch nicht</span>
+        Das Altsystem hat dafür eine eigene Seite, die von hier aus noch nicht bedient wird.
+        Bis dahin hilft ein Anruf oder eine E-Mail weiter.</span>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- Fussbereich baut assets/js/net-shell.js hier ein. -->
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-shell.js"></script>
+<script src="assets/js/seite-konto.js"></script>
+</body>
+</html>
