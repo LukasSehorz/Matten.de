@@ -47,8 +47,14 @@
   status = 200
   force = true
 
-# Wer die nackte Adresse aufruft, soll im Shop landen und nicht auf der
-# Entwickler-Demoseite. Darum die Startseite direkt auf /shop/.
+# Wer die nackte Adresse aufruft, soll im aktuellen Shop landen und nicht auf
+# der Entwickler-Demoseite. Seit 16.09.2026 ist das der 1:1-Nachbau von
+# matten.net unter /net-neu/ (Stand 10.09.2026).
+#
+# Die aelteren Staende bleiben unter ihren Adressen erreichbar und sind damit
+# jederzeit vergleichbar:
+#   /shop/  Mattenfuchs-Entwurf aus dem Erstgespraech
+#   /net/   erster net-Stand vor dem 1:1-Nachbau
 #
 # force = true ist hier zwingend: im Publish-Verzeichnis liegt eine
 # index.html (die Entwickler-Demoseite), und eine vorhandene Datei gewinnt
@@ -57,7 +63,7 @@
 # nachgemessen: HTTP 200 statt 302.
 [[redirects]]
   from = "/"
-  to = "/shop/"
+  to = "/net-neu/"
   status = 302
   force = true
 
