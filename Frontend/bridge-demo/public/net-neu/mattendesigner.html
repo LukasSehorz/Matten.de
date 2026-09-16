@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mattenfuchs</title>
+<meta name="keywords" content="e-commerce, matten">
+<meta name="description" content="Matten.de e-commerce">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="matten.de">
+<meta property="og:description" content="Matten.de e-commerce">
+<link rel="icon" type="image/png" href="assets/img/sonstige/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="assets/img/sonstige/favicon-16x16.png" sizes="16x16">
+<link rel="stylesheet" href="assets/css/matten-net.css">
+<link rel="stylesheet" href="assets/css/animate.css">
+<link rel="stylesheet" href="assets/fonts/nunito.css">
+<link rel="stylesheet" href="assets/fontawesome/css/all.css">
+<link rel="stylesheet" href="assets/css/net-neu.css">
+<!-- Die 8 Designer-Schriften lokal (Spec 9.3) und die Designer-Ergaenzungen -->
+<link rel="stylesheet" href="assets/fonts/designer.css">
+<link rel="stylesheet" href="assets/css/designer.css">
+</head>
+<body id="">
+<div style="background: #fff;">
+<div id="net-kopf"></div>
+
+<div style="min-height: 500px;">
+    <div class="mx-3">
+
+        <div class="alert alert-primary m-1 d-touch-block" role="alert">
+            Für die besten Design-Ergebnisse empfehlen wir die Verwendung eines Computers.
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>wählen Sie die Mattengröße aus.</li>
+                            <li>wählen Sie die Mattengrundfarbe.</li>
+                            <li>entwerfen Sie mithilfe der Rechtecke, Kreise, Schriften und Ihrer Bilder Ihr eigenes Design.</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Einhaengepunkt der Vue-Komponente im Original; hier baut seite-designer.js
+             dasselbe Markup (div.mt-2.mat-editor mit drei Spalten, Spec 9.3) hinein. -->
+        <div id="mat-editor"></div>
+    </div>
+</div>
+
+<div id="net-fuss"></div>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/vendor/jquery.min.js"></script>
+<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/vendor/fabric.min.js"></script>
+<script type="text/javascript">
+    /* Wie im Original (Spec 9.1/9.2): Ziel des Bestellmodals und das Woerterbuch,
+       aus dem seite-designer.js alle Beschriftungen liest. Wortlaut 1:1 —
+       einschliesslich der unuebersetzten Eintraege (Line spacing, Letter spacing)
+       und der falschen Uebersetzung "Schriftgroesse" fuer die Schriftstaerke.
+       Hoch-/Querformat sind hier richtig herum zugeordnet (Spec 17.5), siehe
+       seite-designer.js, Formularzeile "Format". */
+    window.submitURL = 'designer-checkout.html';
+    window.translations = {
+        'label.preferences': 'Auswahl',
+        'label.material': 'Mattenart',
+        'label.size': 'Größe',
+        'label.jetprint': 'JetPrint',
+        'label.jetprint_light': 'JetPrint light',
+        'label.leather': 'Velour',
+        'label.vision': 'Vision',
+        'label.toolbox': 'Werkzeuge',
+        'label.add_text': 'Text einfügen',
+        'label.add_rectangle': 'Rechteck einfügen',
+        'label.add_circle': 'Kreis einfügen',
+        'label.add_image': 'Bild einfügen',
+        'label.design_elements': 'Designelemente',
+        'label.base_rect': 'Grundfarbe',
+        'label.textbox': 'A Textbox',
+        'label.circle': 'Kreis',
+        'label.image': 'Bild',
+        'label.selected': 'ausgewählt',
+        'label.font_weight': 'Schriftgröße',
+        'label.normal': 'normal',
+        'label.bold': 'fett',
+        'label.font': 'Schriftart',
+        'label.attributes': 'Design-details',
+        'label.color': 'Farbe',
+        'label.stroke_color': 'Linienfarbe',
+        'label.stroke_width': 'Linienbreite',
+        'label.position': 'Elementreihenfolge',
+        'label.additional_info': 'zusätzliche Informationen',
+        'label.notes': 'Bemerkungen',
+        'label.order_mat': 'Matte bestellen',
+        'label.quantity': 'Menge',
+        'label.rectangle': 'Rechteck',
+        'label.text': 'Text',
+        'label.new_design': 'Neues Design',
+        'label.portrait': 'Hochformat',
+        'label.horizontal': 'Querformat',
+        'label.price': 'Preis',
+        'label.total': 'Total',
+        'label.order_this_mat': 'Diese Matte ordern',
+        'label.select_size': 'Größe',
+        'label.select_material': 'Material',
+        'label.including_tax_plus_shipping_cost': 'inkl. MWSt. plus Versandkosten',
+        'label.please_check_spelling': 'Bitte prüfen Sie Mattenmaße, Mattenformat, Design, Texte, Farben und Spezifikationen vor dem Absenden des Auftrages. Weitere Wünsche schreiben Sie bitte unter ”Anmerkungen"',
+        'label.base_color': 'Grundfarbe',
+        'label.design_color': 'Design-Farbe',
+        'title.order_custom_mat': 'Kundenmatten-Bestellung',
+        'label.delete_object': 'Objekt entfernen',
+        'label.text_align': 'Textausrichtung',
+        'label.line_height': 'Line spacing',
+        'label.letter_spacing': 'Letter spacing'
+    };
+</script>
+<script type="module" src="assets/js/seite-designer.js"></script>
+<script type="text/javascript">
+    /* Wie im Original: das Hilfe-Modal oeffnet sich beim Laden der Seite. */
+    $('#helpModal').modal('show');
+</script>
+</body>
+</html>

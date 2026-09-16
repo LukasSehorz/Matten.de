@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artikel | Mattenfuchs</title>
+<meta name="description" content="Matte aussuchen: Farbe, Größe oder Wunschmaß, Menge — der Endpreis inklusive Mehrwertsteuer und Versand steht sofort daneben.">
+<!-- Vorschau der Modernisierung: noch nicht fuer Suchmaschinen. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="icon" href="assets/img/favicon.ico" sizes="16x16">
+<link rel="stylesheet" href="assets/css/net.css">
+<link rel="stylesheet" href="assets/css/seiten-katalog.css">
+</head>
+<body class="hat-preisleiste">
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Kopf und Navigation baut assets/js/net-shell.js hier ein. -->
+<div id="kopf"></div>
+
+<nav class="brotkrumen" aria-label="Sie sind hier">
+  <div class="container">
+    <ol id="brotkrumen">
+      <li><a href="index.html">Startseite</a></li>
+      <li><span aria-current="page">Artikel</span></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="inhalt">
+
+  <!-- ================================================================
+       Artikel und Konfigurator
+       ----------------------------------------------------------------
+       Links das Produktbild, das sich mit der Farbwahl aendert.
+       Rechts, in dieser Reihenfolge und in keiner anderen:
+         Farbe · Groesse (mit Preis je Karte) · Wunschmass · Sonderwuensche
+         · Menge · Endpreis brutto · In den Warenkorb / Angebot anfordern
+
+       Alles darin baut assets/js/seite-produkt.js. Bis dahin steht hier
+       ein Ladeplatzhalter.
+       ================================================================ -->
+  <section class="abschnitt abschnitt--eng">
+    <div class="container">
+      <div class="pdp" id="pdp" aria-busy="true">
+        <div>
+          <span class="skel skel--bild" style="aspect-ratio:4/3"></span>
+        </div>
+        <div>
+          <span class="skel skel--zeile skel--kurz"></span>
+          <span class="skel skel--titel"></span>
+          <span class="skel skel--zeile skel--voll"></span>
+          <span class="skel skel--block" style="height:96px;margin-top:1.5rem"></span>
+          <span class="skel skel--block" style="height:220px;margin-top:1.5rem"></span>
+          <span class="skel skel--knopf" style="margin-top:1.5rem"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Beschreibung, Artikeldaten, Versand ============ -->
+  <section class="abschnitt abschnitt--flach" id="pdp-details" hidden>
+    <div class="container">
+      <div class="reiter-liste" role="tablist" aria-label="Weitere Angaben zum Artikel" id="reiter"></div>
+      <div id="reiter-inhalte"></div>
+    </div>
+  </section>
+
+  <!-- ============ Weitere Artikel der Warengruppe ============ -->
+  <section class="abschnitt abschnitt--grau" id="pdp-mehr" hidden>
+    <div class="container">
+      <div class="abschnitt-kopf">
+        <div>
+          <p class="label">Aus derselben Warengruppe</p>
+          <h2 id="mehr-titel">Weitere Artikel</h2>
+        </div>
+        <a class="weiterlink" id="mehr-link" href="index.html">Ganze Warengruppe ansehen</a>
+      </div>
+      <div class="raster raster--4 raster--produkte" id="mehr-raster" aria-busy="true"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ====================================================================
+     Angeheftete Preisleiste — nur unter 1024 px sichtbar.
+     Damit bleibt der Endpreis auf dem Handy beim Scrollen im Blick.
+     Der Betrag ist eine Wiederholung; angesagt wird er im Kaufbereich,
+     deshalb steht hier aria-hidden.
+     ==================================================================== -->
+<div class="preisleiste auf-navy" id="preisleiste">
+  <div class="preisleiste__preis" aria-hidden="true">
+    <span class="preisleiste__label">Endpreis inkl. MwSt. und Versand</span>
+    <span class="preisleiste__wert" id="leiste-betrag">—</span>
+  </div>
+  <button class="btn btn--invers" type="button" id="leiste-kaufen">In den Warenkorb</button>
+</div>
+
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-api.js"></script>
+<script src="assets/js/net-shell.js" defer></script>
+<script type="module" src="assets/js/seite-produkt.js"></script>
+</body>
+</html>

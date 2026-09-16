@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mattendesigner | Mattenfuchs</title>
+<meta name="description" content="Matte nach Maß: Farbe wählen, Größe eintragen oder eine Standardgröße nehmen, Menge festlegen. Der Endpreis inklusive Mehrwertsteuer und Versand steht sofort daneben.">
+<!-- Bruecken-Demo: noch nicht fuer Suchmaschinen. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="icon" href="assets/img/favicon.ico" sizes="any">
+<link rel="stylesheet" href="assets/css/net.css">
+<!-- Die Bausteine des Konfigurators (Farbfelder, Groessenliste, Wunschmass,
+     Kaufbox, Preisleiste) stehen in seiten-katalog.css und werden hier
+     unveraendert wiederverwendet. seiten-designer.css ergaenzt nur das,
+     was es allein auf dieser Seite gibt. -->
+<link rel="stylesheet" href="assets/css/seiten-katalog.css">
+<link rel="stylesheet" href="assets/css/seiten-designer.css">
+</head>
+<body data-aktiv="/custom-mat/create" class="hat-preisleiste">
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Kopf und Navigation baut assets/js/net-shell.js hier ein. -->
+<div id="kopf"></div>
+
+<nav class="brotkrumen" aria-label="Sie sind hier">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Startseite</a></li>
+      <li><span aria-current="page">Mattendesigner</span></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="inhalt">
+
+<section class="abschnitt abschnitt--eng">
+  <div class="container">
+    <p class="label">Nach Maß</p>
+    <h1>Ihre Matte, Ihr Maß</h1>
+    <p class="vorspann">Farbe aussuchen, Maß eintragen, Menge festlegen — mehr braucht es
+      nicht. Der Preis steht sofort daneben, inklusive Mehrwertsteuer und Versand.</p>
+  </div>
+</section>
+
+<!-- ====================================================================
+     Der Konfigurator
+     --------------------------------------------------------------------
+     Links das Produktbild in der gewaehlten Farbe und eine massstabs-
+     getreue Skizze; rechts die Auswahl in genau vier Bloecken:
+     Farbe · Groesse (mit Wunschmass) · Sonderwuensche · Menge.
+
+     Gefragt wird nur, was der Kunde weiss. Die Mattenqualitaet
+     (Colortype), der Salesfactor, der Einkaufspreis je Quadratmeter, die
+     Standardmasse und die Rabattstaffel sind Artikelstammdaten und
+     stehen nirgends als Frage.
+
+     Alles darin baut assets/js/seite-designer.js.
+     ==================================================================== -->
+<section class="abschnitt abschnitt--flach">
+  <div class="container">
+    <div class="pdp" id="dz" aria-busy="true">
+      <div>
+        <span class="skel skel--bild" style="aspect-ratio:4/3"></span>
+      </div>
+      <div>
+        <span class="skel skel--block" style="height:96px"></span>
+        <span class="skel skel--block" style="height:260px;margin-top:1.5rem"></span>
+        <span class="skel skel--knopf" style="margin-top:1.5rem"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Rechenweg ============ -->
+<section class="abschnitt abschnitt--flach" id="dz-details" hidden>
+  <div class="container container--eng">
+    <details class="dz-klapp" id="dz-rechenweg">
+      <summary>
+        <span class="dz-klapp__pfeil" aria-hidden="true"></span>
+        <span>Rechenweg — jeder Schritt mit seiner Zelle in der Kalkulationstabelle</span>
+      </summary>
+      <div class="dz-klapp__koerper">
+        <p class="meta mt-0">Gerechnet wird ausschließlich mit dem geprüften Modul
+          <code>preisformel.js</code>, dem Abbild der Arbeitsmappe <code>PREISE-Brian</code>,
+          Blatt&nbsp;1. Umsatzsteuer und Versand stehen nicht in der Mappe; sie kommen erst
+          nach dem Nettobetrag dazu.</p>
+        <div class="tabelle-rahmen">
+          <table class="tabelle">
+            <caption class="nur-sr">Alle Zwischenschritte der Preisformel mit Zellbezug</caption>
+            <thead>
+              <tr>
+                <th scope="col">Zelle</th>
+                <th scope="col">Schritt</th>
+                <th scope="col" class="rechts">Wert</th>
+              </tr>
+            </thead>
+            <tbody id="dz-schritte"></tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<!-- Angeheftete Preisleiste — nur unter 1024 px sichtbar. -->
+<div class="preisleiste auf-navy" id="preisleiste">
+  <div class="preisleiste__preis" aria-hidden="true">
+    <span class="preisleiste__label">Endpreis inkl. MwSt. und Versand</span>
+    <span class="preisleiste__wert" id="leiste-betrag">—</span>
+  </div>
+  <button class="btn btn--invers" type="button" id="leiste-kaufen">Übernehmen</button>
+</div>
+
+<!-- Fussbereich baut assets/js/net-shell.js hier ein. -->
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-api.js"></script>
+<script src="assets/js/net-shell.js" defer></script>
+<script type="module" src="assets/js/seite-designer.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+/* ==========================================================================
+   net-neu.css — eigene Ergaenzungen zum Original-Stylesheet matten-net.css
+   --------------------------------------------------------------------------
+   matten-net.css ist das unveraenderte Stylesheet von matten.net. Alles, was
+   der Nachbau zusaetzlich braucht, steht hier — und nur das:
+
+     1  Cookie-Hinweis (cookieconsent, Thema "edgeless", Farben laut Spec 1)
+     2  Warenkorb-Modal: Zeilen des gefuellten Korbs (im Original nicht erfasst)
+     3  Produktseite: Farbfelder mit Bildmuster, Zusatzzeilen (Endpreis,
+        Anfragehinweis, Sonderform/Sonderfarbe), Meldungen
+     4  Kasse (auf matten.net nicht erfassbar) im Bootstrap-Stil der Seite
+     5  Kleinigkeiten: Karten ohne Bild, Rechtstext-Hinweis, Ladezustaende
+   ========================================================================== */
+
+/* --- 1  Cookie-Hinweis --------------------------------------------------- */
+.cc-window {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 9999;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  padding: 1em 1.8em; background: #2579d3; color: #ffffff;
+  font-family: Helvetica, Calibri, Arial, sans-serif; font-size: 16px; line-height: 1.5em;
+}
+.cc-window[hidden] { display: none; }
+.cc-window .cc-message { flex: 1 1 auto; margin-right: 1em; }
+.cc-window .cc-link { color: #ffffff; text-decoration: underline; opacity: .8; padding: .2em; }
+.cc-window .cc-link:hover { opacity: 1; }
+.cc-window .cc-btn {
+  display: block; padding: .4em .8em; min-width: 140px; text-align: center;
+  background: #cbf1ff; color: #000000; border: 2px solid transparent; font-size: .9em; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+}
+.cc-window .cc-btn:hover { background: #b7ebff; }
+
+/* --- 2  Warenkorb-Modal: Zeilen ------------------------------------------ */
+#cart-modal .cart-pos-bild { width: 72px; height: auto; }
+#cart-modal .cart-pos-attribut { display: block; font-size: .8rem; color: #6c757d; }
+#cart-modal .cart-pos-kommentar { display: block; font-size: .75rem; color: #6c757d; white-space: pre-wrap; }
+#cart-modal .cart-menge { width: 4.5em; display: inline-block; text-align: right; }
+#cart-modal .cart-entfernen { color: #dc3545; padding: 0 .25rem; }
+#cart-modal .cart-hinweis { font-size: .8rem; color: #6c757d; }
+#cart-modal .cart-fehler { margin: 0 1rem; }
+
+/* --- 3  Produktseite ----------------------------------------------------- */
+/* Farbfelder, fuer die kein Hexwert bekannt ist, aber ein Farbmuster-Bild des
+   Altsystems (…_farboption.jpg) — das Bild wird als Hintergrund gezeigt. */
+.color-input label.color-muster { background-size: cover; background-position: center; color: #fff; text-shadow: 0 0 3px #000; }
+.color-input label.color-unbekannt { background-color: #9a9a9a; }
+/* Vorschau-Bild fuer die gewaehlte Grundfarbe (aus dem Altsystem, ueber /api/img/) */
+#variety-images .product-image-container img { width: 100%; height: auto; }
+#variety-images .product-image-nav-item img { width: 100%; height: auto; }
+/* Kundenwunsch: Endpreis inkl. MwSt. und Versand direkt unter dem Preis */
+#endpreis { display: block; margin-top: .25rem; font-weight: 700; }
+/* Zeile unter dem Preis: was beim Klick geschieht (Anfrage statt Kauf) */
+#weg-hinweis { display: block; font-size: .8rem; color: #856404; }
+#weg-hinweis:empty { display: none; }
+/* Sonderform / Sonderfarbe: drei unaufdringliche Kreuze */
+.sonder-kreuze { margin: -.25rem 0 .5rem; }
+.sonder-kreuze .custom-control-label { font-size: .875rem; }
+.sonder-kreuze .custom-control-label small { color: #6c757d; }
+/* Meldung nach "In den Warenkorb" / "Make an offer" */
+#produkt-meldung:empty { display: none; }
+#produkt-meldung .alert { margin-top: .75rem; margin-bottom: 0; font-size: .875rem; }
+/* Preisfeld: Fehlertexte von berechne() in Rot, aber nicht fett */
+#price .preis-fehler { color: #dc3545; font-weight: 400; font-size: .875rem; }
+/* Tooltip-Hinweise zu den Massfeldern stehen als Text darunter (Kundenwunsch 7.2) */
+.mass-hinweis { display: block; font-size: .8rem; color: #dc3545; }
+.mass-hinweis:empty { display: none; }
+/* Die Beschreibung des Original-Markups enthaelt Inline-Verweise auf
+   matten.de-Pfade ("produkte/aluminium_profilmatten") — sie fuehren hier
+   nirgendwohin und werden wie Text dargestellt. */
+.description-content a[href^="produkte/"] { pointer-events: none; color: inherit; text-decoration: none; }
+
+/* --- 4  Kasse ------------------------------------------------------------- */
+.kasse-schritte { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1rem; }
+.kasse-schritte li { flex: 1 1 160px; padding: .5rem .75rem; border: 1px solid #dee2e6; background: #f8f9fa; font-size: .875rem; color: #6c757d; }
+.kasse-schritte li[aria-current="step"] { border-color: #007bff; background: #e7f1ff; color: #004085; font-weight: 700; }
+.kasse-schritte li[data-erledigt] { border-color: #28a745; color: #155724; }
+.kasse-roh pre { background: #f8f9fa; border: 1px solid #dee2e6; padding: .75rem; font-size: .75rem; max-height: 320px; overflow: auto; white-space: pre-wrap; word-break: break-word; }
+.kasse-tabelle td, .kasse-tabelle th { vertical-align: middle; }
+.kasse-tabelle img { width: 64px; height: auto; }
+#kasse-adresse .form-group label.required::after,
+#register-form label.required::after { content: " *"; color: #dc3545; }
+.kasse-ergebnis-nummer { font-size: 1.75rem; font-weight: 700; }
+.kasse-rohantwort { white-space: pre-wrap; background: #f8f9fa; border: 1px solid #dee2e6; padding: .75rem; font-size: .875rem; }
+
+/* --- 5  Kleinigkeiten ---------------------------------------------------- */
+/* Produktkarte ohne lokales Bild: gleiche Hoehe wie ein Kartenbild, leer */
+.product-card .card-img-leer { display: block; width: 100%; height: 170px; background: #e9ecef; }
+/* Kategorie-Kachel im Bildmenue ohne Bild (im Original ein via.placeholder.com-Bild) */
+.category-dropdown-link .kachel-leer { display: block; width: 100%; padding-top: 66.6%; background: #e9ecef; }
+/* Vorteilsleiste: die beiden Icons liegen nicht lokal vor — die Flaeche bleibt in Bildgroesse leer */
+.info-col .info-bild-leer { display: inline-block; width: 120px; height: 120px; background: #f1f3f5; }
+/* Hinweis ueber den Rechtstexten (bewusste Abweichung, siehe LIESMICH.md) */
+.rechtstext-hinweis { font-size: .875rem; padding: .375rem .75rem; margin-bottom: 1rem; }
+/* Ladezustand von Listen */
+[aria-busy="true"] { opacity: .6; }
+/* Filter-Gruppen der Produktliste: Knopf statt Inline-onclick, sieht aus wie das Original-<span> */
+.filter button.filter-category-parent { background: none; border: 0; padding: 0; text-align: left; }
+.filter .filter-category-parent:focus { outline: 2px solid #007bff; outline-offset: 2px; }
+/* Mobile Navigation: die Text-Dropdowns des Originals (bg-blue) */
+.navbar .dropdown-item.bg-blue { background: #0062cc; color: #fff; }
+.navbar .dropdown-item.bg-blue:hover { background: #007bff; color: #fff; }
+/* Suchfeld: die Adresszeile ?keyword= soll auch im Kopf sichtbar bleiben */
+.search-box input::placeholder { color: #6c757d; }
+/* Gaestebuch / leere Zustaende */
+.leer-hinweis { color: #6c757d; padding: 1rem 0; }

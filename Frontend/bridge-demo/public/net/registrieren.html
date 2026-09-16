@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registrieren | Mattenfuchs</title>
+<meta name="description" content="Kundenkonto bei Mattenfuchs. Warum das Altsystem gerade kein Konto anlegen kann und wie Sie trotzdem bestellen.">
+<!-- Angeschlossen an das Altsystem, aber noch nicht oeffentlich. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="stylesheet" href="assets/css/net.css">
+<link rel="stylesheet" href="assets/css/seiten-kasse.css">
+  <link rel="icon" href="assets/img/favicon.ico" sizes="any">
+</head>
+<body data-aktiv="/account/register">
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Kopf und Navigation baut assets/js/net-shell.js hier ein. -->
+<div id="kopf"></div>
+
+<nav class="brotkrumen" aria-label="Sie sind hier">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Startseite</a></li>
+      <li><span aria-current="page">Registrieren</span></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="inhalt">
+
+<section class="abschnitt abschnitt--eng">
+  <div class="container container--eng">
+    <p class="label">Konto</p>
+    <h1>Registrieren</h1>
+    <p class="gedeckt">Haben Sie schon ein Konto? <a href="login.html">Klick hier zum Login.</a></p>
+
+    <!-- Kein vorgetäuschtes Formular. Der Grund steht offen da. -->
+    <p class="hinweis hinweis--warnung mt-5" role="note">
+      <span class="hinweis__symbol" aria-hidden="true">!</span>
+      <span><span class="hinweis__titel">Ein Konto lässt sich hier zurzeit nicht anlegen</span>
+        Das Bestellsystem von matten.de liefert unter <code>/register</code> kein Formular aus,
+        sondern nur einen Begrüßungstext. Ein Anmeldeformular an dieser Stelle sähe zwar richtig
+        aus, könnte aber nichts speichern — deshalb steht hier keines.</span>
+    </p>
+  </div>
+</section>
+
+<section class="abschnitt abschnitt--flach">
+  <div class="container container--eng">
+
+    <div class="karte karte--kante">
+      <div class="karte__koerper">
+        <h2 class="karte__titel">So bestellen Sie trotzdem</h2>
+        <p class="karte__text">Der Shop nimmt Gastbestellungen an. Die Lieferadresse tragen Sie
+          direkt in der Kasse ein; sie wird vom Bestellsystem geprüft wie bei einem Konto auch.</p>
+        <ul class="merkmale mt-4">
+          <li>Artikel in den Warenkorb legen</li>
+          <li>In der Kasse Adresse, Versand und Zahlung angeben</li>
+          <li>Bestellung abschließen — ohne Konto</li>
+        </ul>
+        <div class="btn-gruppe mt-5">
+          <a class="btn" href="warenkorb.html">Zum Warenkorb</a>
+          <a class="btn btn--sekundaer" href="index.html">Weiter einkaufen</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nachprüfbarkeit: der Zustand wird live abgefragt, nicht behauptet. -->
+    <div class="karte karte--flach mt-6">
+      <div class="karte__koerper">
+        <h2 class="karte__titel">Selbst nachsehen</h2>
+        <p class="karte__text">Der Knopf fragt das Altsystem in diesem Moment, ob es ein
+          Registrierungsformular ausliefert. Was hier danach steht, ist dessen Antwort.</p>
+        <p class="mt-4"><button class="btn btn--sekundaer" type="button" id="register-pruefen">
+          Registrierung im Altsystem prüfen</button></p>
+        <div class="melder" id="register-melder" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="karte karte--flach mt-5">
+      <div class="karte__koerper">
+        <h2 class="karte__titel">Was ein Konto später enthalten soll</h2>
+        <p class="karte__text">Diese Felder führt die Vorlage matten.net auf ihrer
+          Registrierungsseite. Sie stehen hier als Plan für den späteren Ausbau — noch
+          nimmt sie niemand entgegen.</p>
+        <ul class="feldliste">
+          <li><span>eMail</span><code>Pflicht</code></li>
+          <li><span>Passwort</span><code>Pflicht</code></li>
+          <li><span>Anrede</span><code>Pflicht</code></li>
+          <li><span>Vorname</span><code>freiwillig</code></li>
+          <li><span>Nachname</span><code>Pflicht</code></li>
+          <li><span>Firmenname</span><code>freiwillig</code></li>
+          <li><span>USt-ID</span><code>freiwillig</code></li>
+          <li><span>Straße</span><code>Pflicht</code></li>
+          <li><span>Stadt</span><code>Pflicht</code></li>
+          <li><span>Bundesland</span><code>Pflicht</code></li>
+          <li><span>PLZ</span><code>Pflicht</code></li>
+          <li><span>Land</span><code>Auswahl, Deutschland vorbelegt</code></li>
+          <li><span>Telefon</span><code>Pflicht</code></li>
+          <li><span>Mobil</span><code>Pflicht</code></li>
+          <li><span>Fax</span><code>freiwillig</code></li>
+        </ul>
+        <p class="meta mt-4">In der Vorlage fehlen Passwortwiederholung, Zustimmung zu AGB und
+          Datenschutz sowie ein Schutz gegen automatisierte Anmeldungen. Bevor die Registrierung
+          in Betrieb geht, muss das ergänzt werden.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- Fussbereich baut assets/js/net-shell.js hier ein. -->
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-shell.js"></script>
+<script src="assets/js/seite-konto.js"></script>
+</body>
+</html>

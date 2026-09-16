@@ -187,6 +187,33 @@ Versandarten: `7` = DHL, `11` = pauschal, `12` = DPD, `13` = Spedition.
 Zahlungsarten: `VorkassePayment`, `RechnungPayment` (erlaubt) sowie
 `OgonePpPayment`, `OgoneCcPayment` (gesperrt).
 
+### Der Anfrage-Weg
+
+Artikel mit dem Knopf „in den Anfragenkorb" (statt „In den Warenkorb")
+laufen denselben Weg, aber das Altsystem schaltet ihn um – belegt am
+10.09.2026, Rohseiten unter `fixtures/`:
+
+- `/warenkorb` zeigt **keine Zahlungsart-Radios**, führt aber ein verstecktes
+  Feld `zahlungsart=RechnungPayment` mit; die Versandart bleibt wählbar.
+- `/bestellen` heißt **„Anfragenkorb"**, listet die Positionen mit Preis
+  „auf Anfrage", zeigt **keine Summen und keine Zahlungsart** und endet mit
+  `anfrage_abschicken` = **„Anfrage abschicken"** statt `bestellung_abschicken`.
+- Liegt **auch nur ein** Anfrageartikel im Korb, wird der **ganze Korb** zum
+  Anfragenkorb – Kaufartikel darin werden nicht bestellt, sondern mit
+  angefragt (in beiden Reihenfolgen geprüft, nur bis zur Vorschau).
+
+Die Brücke meldet das in `GET /api/kasse/vorschau` als `art: "anfrage"` bzw.
+`"bestellung"` (`null`, wenn kein Knopf da ist), nennt die Beschriftung
+wörtlich (`uebersicht.absendeknopfText`) und sendet bei
+`POST /api/kasse/bestellen` genau das Feld, das die Seite anbietet. Für den
+Anfragenkorb gibt es keine Hürde „Unbekannte Zahlungsart" – das Altsystem
+bietet dort keine an; **Ogone bleibt in jedem Fall gesperrt**, `JA-BESTELLEN`
+bleibt Pflicht. `GET /api/kasse/formular` liefert dann
+`optionen.zahlungsart.optionen: []` (kein Fehler) und `warenkorb.modus:
+"anfrage"` bzw. `"gemischt"`. Was das Altsystem **nach** „Anfrage abschicken"
+tut (Mail, Zielseite), ist nicht live geprüft – dieser Abschluss wurde nie
+ausgelöst. Prüfung ohne Netz: `node pruefe-anfrage.mjs`.
+
 **Wo sitzt das Konto-Gate? Nirgends.** Der alte Shop verlangt für eine
 Bestellung *kein* Kundenkonto – die Adresse wird direkt im Bestellvorgang
 erfasst. `/login` funktioniert für vorhandene Konten, aber `/register`
@@ -233,7 +260,10 @@ jedem Klick live geholt, nicht aus dieser Datei zitiert.
   dem ersten Aufruf ans Altsystem), beim Erzeugen der Vorschau, dort ein
   zweites Mal gegen den Klartext der Übersichtsseite, und noch einmal
   unmittelbar vor dem Absenden. Erlaubt ist dabei immer nur, was auf der
-  Positivliste steht – nicht alles, was nicht verboten ist.
+  Positivliste steht – nicht alles, was nicht verboten ist. Beim
+  Anfragenkorb, für den das Altsystem keine Zahlungsart anbietet, entfällt
+  nur die Pflicht; jeder Wert, den das Altsystem dort dennoch führt (auch
+  das versteckte Feld), muss die Positivliste bestehen.
 - Der Proxy spricht ausschließlich mit `matten.de`. Eine Umleitung auf
   einen fremden Host (etwa zu einem Zahlungsdienstleister) wird abgelehnt,
   statt die Sitzungsdaten dorthin mitzunehmen.

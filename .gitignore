@@ -7,3 +7,36 @@ Frontend.zip
 
 # Node
 node_modules/
+
+# Server-Backup von matten.de (18,6 GB Archiv + entpackter Quellcode mit
+# Zugangsdaten) — gehoert nie ins Repository.
+Backup/
+
+# macOS
+.DS_Store
+
+# Sondier-Material aus dem Altsystem, im Projektwurzel abgelegt.
+# ENTHAELT ECHTE KUNDENDATEN (Namen, Telefonnummern, E-Mail-Adressen aus dem
+# Adminbereich) bzw. eine Admin-Sitzungskennung — darf nicht ins Repository.
+adm.html
+uma.html
+det.html
+t.html
+y2025.html
+hist.json
+hist.py
+
+# Uebrige Sondier-Dateien: gespeicherte Seiten und Rohantworten des Altsystems,
+# Arbeitsmaterial ohne Wert fuer das Repository.
+cm.html
+mn.html
+kat.html
+u.html
+app.js
+cat.js
+jp.json
+p459.json
+pl.mjs
+pl2.mjs
+dp.txt
+o.txt

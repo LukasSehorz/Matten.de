@@ -1,0 +1,113 @@
+[
+ {
+  "schritt": "Mehr Farben",
+  "vor": 30,
+  "nach": {
+   "sichtbar": 44,
+   "knopfText": "Weniger Farben",
+   "klasse": "color-input-container show-all"
+  },
+  "wieder": 30
+ },
+ {
+  "schritt": "Reiter",
+  "aktiv": "Bewertungen",
+  "reviewsSichtbar": true,
+  "reviewsLeer": true
+ },
+ {
+  "schritt": "375 Produktseite",
+  "sw": 375,
+  "iw": 375,
+  "mobilNav": "flex",
+  "desktopNav": "none"
+ },
+ {
+  "schritt": "375 Start",
+  "sw": 375,
+  "iw": 375
+ },
+ {
+  "schritt": "Blog",
+  "artikel": [
+   "FUCHSIUS multi-media GmbH | February 1, 2019 08:06 | Continue reading -> blog.html#der-mattenfuchs",
+   "Eine neue Mattengeneration | August 17, 2019 09:05 | Continue reading -> blog.html#eine-neue-mattengeneration"
+  ]
+ },
+ {
+  "schritt": "Blog einzeln",
+  "n": 1,
+  "titel": "FUCHSIUS multi-media GmbH"
+ },
+ {
+  "schritt": "Gästebuch",
+  "text": "Das Gästebuch hat noch keinen Inhalt."
+ },
+ {
+  "schritt": "Seite agb",
+  "titel": "AGB",
+  "laenge": 16631,
+  "hinweis": "Dieser Text ist eine Kopie von matten.net und anwaltlich nicht geprüft.",
+  "docTitle": "AGB"
+ },
+ {
+  "schritt": "Seite impressum",
+  "titel": "Impressum",
+  "laenge": 7348,
+  "hinweis": "Dieser Text ist eine Kopie von matten.net und anwaltlich nicht geprüft.",
+  "docTitle": "Impressum"
+ },
+ {
+  "schritt": "Seite data-protection",
+  "titel": "datenschutz",
+  "laenge": 9493,
+  "hinweis": "Dieser Text ist eine Kopie von matten.net und anwaltlich nicht geprüft.",
+  "docTitle": "datenschutz"
+ },
+ {
+  "schritt": "Seite datenschutzerklarung-dsgvo",
+  "titel": "Datenschutzerklärung (DSGVO)",
+  "laenge": 9654,
+  "hinweis": "Dieser Text ist eine Kopie von matten.net und anwaltlich nicht geprüft.",
+  "docTitle": "Datenschutzerklärung (DSGVO)"
+ },
+ {
+  "schritt": "Seite gibtsnicht",
+  "titel": "Seite nicht gefunden",
+  "laenge": 73,
+  "hinweis": "(versteckt)",
+  "docTitle": "Mattenfuchs"
+ },
+ {
+  "schritt": "Kasse leer",
+  "meldung": "Ihr Warenkorb ist leer. Zur Startseite",
+  "link": "index.html",
+  "schritte": false,
+  "korb": "Your cart is empty."
+ },
+ {
+  "schritt": "Kategorie unbekannt",
+  "h1": "Kategorie nicht gefunden",
+  "p": "Diese Kategorie gibt es nicht. Alle Produkte"
+ },
+ {
+  "schritt": "Produkt unbekannt",
+  "h2": "Produkt nicht gefunden",
+  "m": "Dieses Produkt gibt es nicht. Alle Produkte"
+ },
+ {
+  "schritt": "Newsletter",
+  "hinweis": "Der Newsletter ist in Vorbereitung — es wurde nichts gesendet.",
+  "url": "http://localhost:8787/net-neu/index.html"
+ },
+ {
+  "schritt": "Cookie",
+  "vor": true,
+  "nachKlickUndNeuladen": false
+ },
+ {
+  "schritt": "Ende",
+  "konsole": [],
+  "netz": []
+ }
+]

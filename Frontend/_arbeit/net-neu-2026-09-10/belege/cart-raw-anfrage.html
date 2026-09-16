@@ -1,0 +1,1075 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="">
+<!--<![endif]-->
+	<head><base href="https://matten.de/">
+		<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Warenkorb</title>
+<meta name="keywords" content=""/>
+<meta name="Description" content="Der Mattenfuchs"/>
+<meta name="Robots" content="INDEX,FOLLOW" />
+<meta name="dcterms.rightsHolder" content="FUCHSIUS multi-media GmbH" />
+<meta name="author" content="FUCHSIUS multi-media GmbH" />
+<meta content="index, follow, noodp" name="Robots" />
+<link rel="SHORTCUT ICON" href="/favicon.ico" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+<script type="text/javascript" src="/components/jquery/jquery.min.js"></script>
+
+<script type="text/javascript" src="/components/jquery-ui/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/components/jquery-ui/themes/ui-lightness/jquery-ui.min.css" />
+
+<link rel="stylesheet" type="text/css" href="/components/colorbox/example1/colorbox.css"/>
+<script type="text/javascript" src="/components/colorbox/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="/components/colorbox/i18n/jquery.colorbox-de.js"></script>
+
+
+<script type="text/javascript">
+
+
+	$(document).ready(function() {
+		$("a[rel=lightbox], a.lightbox").colorbox();
+		$('a[href*=youtu]').each(
+			function(){
+				var $a = $(this);
+
+				var href = $a.attr('href');
+
+				var vid = null;
+				var match = href.match(/v=([^&]*)(&|$)/);
+				if(match){
+					vid = match[1];
+				} else {
+					match = href.match(/embed\/([^\/?]+)/);
+					if(match){
+						vid = match[1];
+					} else {
+						match = href.match(/youtu.be\/([^\/?]+)/);
+						if(match){
+							vid = match[1];
+						}
+					}
+				}
+				if(!vid){
+					return;
+				}
+
+				href = "//www.youtube-nocookie.com/embed/"+vid + "?rel=0&autoplay=1&iv_load_policy=3";
+				
+				$a.colorbox({
+					iframe:true,
+					width:640,
+					height:480,
+					href: href
+				});
+			}
+		);		
+	});
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158029157-1"></script>
+
+<script>
+
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+
+
+ 
+  gtag('config', 'UA-158029157-1');
+
+</script>
+
+<script type="text/javascript" src="/js/slick-master/slick/slick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/js/slick-master/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/js/slick-master/slick/slick-theme.css"/>
+
+<script type="text/javascript" src="/master/js/init.shoplogic2.js"></script>
+
+
+<link  href="/js/fancybox-master/dist/jquery.fancybox.min.css" rel="stylesheet">
+<script src="/js/fancybox-master/dist/jquery.fancybox.min.js"></script>
+
+<link rel='stylesheet' type='text/css' href='/css/bootstrap.less.css' />
+<link rel='stylesheet' type='text/css' href='/css/site.less.css' />
+<link rel='stylesheet' type='text/css' href='/css/print.less.css' media="print" />
+<link rel='stylesheet' type='text/css' href='/css/PaymentFont/css/paymentfont.min.css' media="print" />
+
+<script type="text/javascript">
+	var baseurl = "/";
+	
+</script>
+<script type="text/javascript" src="/js/artikel.form.js"></script>
+<script type="text/javascript" src="/js/menu.js"></script>
+
+<style>
+@media all and (min-width: 768px) {
+  .fancybox-thumbs {
+    top: auto;
+    width: auto;
+    bottom: 0;
+    left: 0;
+    right : 0;
+    height: 95px;
+    padding: 10px 10px 5px 10px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  .fancybox-show-thumbs .fancybox-inner {
+    right: 0;
+    bottom: 95px;
+  }
+}
+
+#cookie-bar-button-no {
+  background-color: #c85252!important;
+}
+</style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&customize=1&tracking=1&thirdparty=1&always=1&noGeoIp=1&refreshPage=1&showNoConsent=1&showPolicyLink=1&privacyPage=https%3A%2F%2Fmatten.de%2Fdatenschutz"></script>
+
+	</head>
+
+	<body class='page_warenkorb class_warenkorbpage'><div style="position:sticky;top:0;z-index:99999;background:#050a40;color:#fff;font:600 14px/1.5 system-ui,sans-serif;padding:10px 16px">ROHANTWORT von matten.de/warenkorb fuer die Proxy-Sitzung &mdash; unveraendert durchgereicht, nichts von uns gerendert.<br><span style="font-weight:400;color:#9fb0e8">Diese Beweis-Ansicht ist die einzige Stelle der Demo, an der Ihr Browser Bilder, Stile und Skripte <em>direkt</em> von matten.de laedt &ndash; anders liesse sich die Originalseite nicht zeigen. Alle Formulare und Knoepfe darin sind abgeschaltet.</span></div>
+		<div class="wrapper">
+			
+	<div class="header no-print">   
+	<div class='post_navigation'>
+	<ul class="nav nav-pills pull-left">
+		<li>
+						<a class="brand" href='/'>Home</a>
+		</li>
+	</ul>
+
+	<ul class="nav nav-pills pull-right">
+		<li class="warenkorb_mini_wrapper"><a href='/warenkorb' class="btn btn-xs btn-warning-light">
+	Warenkorb (1)
+	-
+	<span class='betrag' title='Preis inkl. Versandkosten.'>147,48 EUR</span>
+</a>
+</li>
+					<li>
+				<li><a href='/guestbook'>Gästebuch</a></li>
+			</li>
+		 		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mein Konto<span class="caret"></span></a>
+			<ul class="dropdown-menu" style="padding: 5px;" role="menu">
+						<li><a href="/login">Einloggen</a></li>
+	
+	<li class="divider"></li>
+		<li><a style="font-size:10px;" href="/register">Noch kein Kundenkonto?</a></li>
+	
+			<li><a style="font-size:10px;" href="/request-password">Passwort vergessen</a></li>
+		
+			</ul>
+		</li>
+	</ul>
+</div>
+</div>
+
+
+<nav id="main_navigation" class="navbar navbar-default no-print">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button disabled  type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav nav_main navbar-nav">
+				<!--  Hauptnavigation -->
+															<li class='dropdown active-button'>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href='/was-ist-neu'>
+								Artikelsuche								<span class="caret"></span>
+							</a>
+							
+							 <ul class="dropdown-menu row" role="menu">
+								<li class="dropdown-menu-products"><div class="col-xs-12 col-sm-4 col-md-3">
+<div class="thumbnail">
+<h2 class="text-center"><em><strong>Artikelsuche</strong></em></h2>
+<a title="Artikelauflistung, Alle Artikel von Matten.de" href="/logomatten/matten_fuer_haus_und_heim/6304001"><img title="Artikelauflistung, Alle Artikel von Matten.de" src="/media/bild/Kitchen1-512x154.jpg" alt="Artikelauflistung, Alle Artikel von Matten.de" width="512" height="154" /></a>
+<div class="caption" style="text-align: left;"><span style="color: #000080;"><strong><strong><span style="color: #000080;"><strong>&gt;&nbsp;<a title="Mattendesigner. Entwerfen Sie Ihr eigenes Wunsch-Mattendesign" href="https://www.matten.net/de/custom-mat/create">MATTENDESIGNER</a></strong><br /></span></strong></strong></span><span style="color: #000080;"><strong><strong><span>&gt;&nbsp;<a title="Ad-Mats, Advertisingmatten, Werbematten, Dekomatten" href="/logomatten/werbematten-dekomatten/">Ad-Mat</a>&nbsp;</span><span style="color: #000080;"><br />&gt; <a title="Aluminium-Profilmatte und Rahmen aus Aluminium. Messing, Edelstahl" href="/aluminium_profilmatten/Diplomat-Original">Aluminium-Profilmatten</a>&nbsp;&nbsp;</span><br /><span style="color: #000080;">&gt; <a title="Aluminium-Profilmatten R und LR (Large) breite Profile" href="/aluminium_profilmatten/Diplomat-Original">Alu-Profil 5- R, 5- LR</a>&nbsp;<br />&gt; <a title="Aluminium-Anlaufprofil" href="/kokosmatten/#artikel_randprofil">Anlaufprofil-Aluminium</a><br /><a href="/kokosmatten/#artikel_randprofil">&gt; Anlaufprofil-Kunststoff &nbsp;</a></span><span style="color: #000080;"><br />&gt; <a title="Antierm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_6910002">Anti-Erm&uuml;dungsmatten</a><br />&gt; <a title="Asssistent Eingnagsmatten" href="/gummi_und_kunststoffmatten/#artikel_Assistent1">Assistent</a><br />&gt; <a title="Attache Eingangsmatten" href="/gummi_und_kunststoffmatten/#artikel_Attache">Attache</a><br />&gt; Aura<br />&gt; <a title="Automatten f&uuml;r jedes Fahrzeug geketelt oder mit Bandeinfassung. Einfarbig oder beliebigem Aufdruck. Wir ben&ouml;tigen lediglich die Type und Seriennummer des Fahrzeuges" href="/Logomatten/#artikel_6304020">Automatten</a><br />&gt; <a title="Biergartenmatten, Matten f&uuml;r Biergartenb&auml;nke, Biergartenmatten mit Werbeaufdruck und individuellem Design" href="/logomatten/bierbankmatten">Biergartenmatten</a><br />&gt; Big-Size<br /></span></strong><a title="durchsichtige Schreibtischstuhl-Unterlagen f&uuml;r Teppiche und Hartb&ouml;den" href="/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten">&gt;&nbsp;</a><span style="color: #000080;"><a title="durchsichtige Schreibtischstuhl-Unterlagen f&uuml;r Teppiche und Hartb&ouml;den" href="/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten">Bodenschutzmatten<br /></a>&gt; <a title="Coronamatten. Hinweismatten, Gebotsmatten, Sicherheitsmatten, Unfallverh&uuml;tungs-Schutzmatten, Unfallschutzmatten" href="/logomatten/sicherheits_symbol_matten">Corona-Matte<br /></a>&gt;&nbsp;<strong><span><a title="Enter-Eingangsmatte, aufliegend oder in Rahmen verlegt" href="https://www.matten.de/fussmatten/standard-schmutzfangmatten/#artikel_ENTER">Enter-Matten</a></span></strong></span><br /><strong>&gt; Entrence-Matten</strong><br />&gt; <a title="Ersatz-Ripsstreifen f&uuml;r Aluminium-Profilmatten" href="/aluminium_profilmatten/#artikel_Dipl-r-ripsstreifen">Ersatz-Ripsstreifen</a><br />&gt; <a title="Eventmatten, EventmatteTM Werbematte f&uuml;r Events, Mesen, Austellungen und auch als Hinweismatten Messematten, L&auml;ufer, Bahnenware" href="/logomatten/#artikel_6600101">Event Mat</a><br />&gt; Flare<br />&gt; Green-Horse<br />&gt;&nbsp;<a title="Gummi-Matten, Kunstoffmatte, Bodenschutzmatten" href="#artikel_Gummiunterlage1"><span style="color: #000080;">Gummimatten<br />&gt; Gummiunterlagen<br /></span></a>&gt; <a title="Hinweismatten, Gebotsmatten, Verbotsmatten, Sicherheitsmatten" href="/logomatten/sicherheits_symbol_matten">Hinweismatten<br /></a>&gt; <a title="H&ouml;henausgleichsmatten, Hartfilzunterlagen zum H&ouml;henausgleich bei Kokosmatten. Fest verleimt oder lose mitgeliefert" href="#artikel_6920071">H&ouml;henausgleich</a><br />&gt;&nbsp;<a title="IRON-HORSE Schmutzfangmatten, Die Nr.1 als Eingangsmatte oder Mietmatte" href="/fussmatten/standard-schmutzfangmatten#artikel_64000121"><span style="color: #000080;">IronHorse-Matten<br /></span></a>&gt; <a title="IRON-HORSE XL-Schmutzfangmatten f&uuml;r extreme Beanspruchung und gro&szlig;e Schmutzaufnahme und Feuchte-Aufnahme" href="/fussmatten/standard-schmutzfangmatten#artikel_64000161">IRON-HORSE XL</a><br />&gt;&nbsp;<a title="JetPrint-Logomatten, JetPrint-Matten Individuell angefertigt Beliebige Ma&szlig;e, beliebige Formen. Riesige Farbauswahl, RGB-Farben, Pantone-Farben, Fotorealistische Reproduktion Ihrer Vorlagen" href="/logomatten#artikel_6300201-Logomatte"><span style="color: #000080;">JetPrint-Logo<br /></span></a>&gt; <a href="/fussmatten/standard-schmutzfangmatten">JetPrint 1-farbig</a><br />&gt;&nbsp;<a title="JetPrint light-Matten Individuell angefertigt Beliebige Ma&szlig;e, beliebige Formen. Riesige Farbauswahl, RGB-Farben, Pantone-Farben, Fotorealistische Reproduktion Ihrer Vorlagen" href="/logomatten/#artikel_6300202"><span style="color: #000080;">JetPrint-light Logo<br /></span></a><a title="JetPrint light-Matten Individuell angefertigt Beliebige Ma&szlig;e, beliebige Formen. Riesige Farbauswahl, RGB-Farben, Pantone-Farben, Fotorealistische Reproduktion Ihrer Vorlagen" href="/logomatten/#artikel_6300202">&gt; JetPrint-light 1-farbig</a><br />&gt; <a title="JetPrint-Velour-Matten" href="/logomatten/#artikel_6400201-Velourmatte">JetPrint Velour Logo</a><br />&gt; <a title="Jet-Print-Velour-Matten, einfarbig und mehrfarbig, nach Kundenwunsch gestalter" href="/logomatten/#artikel_6400201-Velourmatte">JetPrint Velour 1-farbig</a><br />&gt; JetPrint VIsion<br />&gt; JetPrint Vision Plus<br />&gt; <a title="Hinweismatte und Sicherheitsmatte, Schutzmatte f&uuml;r Kabelf&uuml;hrungen, Stolperschutz" href="/logomatten/sicherheits_symbol_matten/sicherheitsmatten3">Kable-Mat</a><br />&gt; Kable-Mat RubberTop<br />&gt; Kleen-Ergo<br />&gt; Kleen-Foam<br />&gt; Kleen-<a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_Komfort-soft"><span style="color: #000080;">Komfort<br /></span></a>&gt; <a title="Kokosmatten, naturfarbig 13mm, 16mm, 20mm, 22mm, 24mm, 27mm und 30mm hoch" href="/kokosmatten/#artikel_6920001">Kokos-naturfarbig</a><br />&gt; <a title="Kokosmatten, farbig: schwarz, grau, rot, blau, gr&uuml;n &gt;17mm und 24mm" href="/kokosmatten/#artikel_6920002">Kokos-farbig</a><br /><a title="Kokosmatten natur oder farbig individuell gestaltet" href="/kokosmatten/#artikel_6920003-a">&gt; Kokos-Design</a><br />&gt; <a title="Komfirt-Design Anti-Erm&uuml;dungsmatte mit beliebigem Kunden-Design" href="/fussmatten/standard-schmutzfangmatten/komfort-design">Komfort Design</a><br />&gt; <a title="Komfort-Office-Mattem Anti-Erm&uuml;dungsmatten" href="/fussmatten/standard-schmutzfangmatten/komfort-office">Komfort Office</a><br />&gt; <a title="Komfort-Soft-Matten einfarbige Anti-Erm&uuml;dungsmatten in 3 Standardgr&ouml;&szlig;en und verschiedenen Farben" href="/fussmatten/standard-schmutzfangmatten/komfort-soft">Komfort-Soft</a><br />&gt; Kleen-Kushion<br />&gt; <a title="Scrape-Matten, rutschfeste Gummimatten mit Scrape-Oberfl&auml;che" href="/fussmatten/standard-schmutzfangmatten/#artikel_6900012">Kleen-Scrape</a><br />&gt; <a title="Thru-Plus Gummimatte, speziell f&uuml;r Nassbereiche, rutschfest" href="/fussmatten/standard-schmutzfangmatten/#artikel_6910001">Kleen-Thru Plus</a><br />&gt; Kleen-Wave<br />&gt; <a title="Kleen-Way-Rubber Bahmenware bis 20m L&auml;nge in 4 Standardbreiten" href="/logomatten/#artikel_6600201">KleenWay Rubber</a><br />&gt; <a title="Kushion-Koil Anti-Erm&uuml;dungsmatten f&uuml;r den gewerblichen und privaten Einsatz" href="/gummi_und_kunststoffmatten/#artikel_6910002">Kushion-Koil</a><br /></strong><strong>&gt;&nbsp;<a title="Kunststoffmatten, Six-Form-Matten" href="/gummi_und_kunststoffmatten/#artikel_Sixform%20Star"><span style="color: #000080;">Kunststoffmatten</span></a><br /></strong><strong><strong><span style="color: #000080;">&gt; <a title="IRON-HORSE Mietmatten" href="/miet-mattenservice/service_miet-mattenservice">Mietmatten<br /></a></span>&gt; <a title="MONOTON-Matten" href="/fussmatten/standard-schmutzfangmatten#artikel_monoton-Standard">Monoton</a><br /></strong></strong><strong><strong><span style="color: #000080;">&gt; <a title="Naturstein-Waschbecken, Wannen, Onyx, Marmor, Flu&szlig;stein, Fossil" href="https://www.matten.de/was-ist-neu/terrazzo">NatursteinWaschbecken<br /></a></span></strong></strong><strong><strong><span style="color: #000080;">&gt; <a title="Naturstein-Waschwannen, Marmor, Onyx, Fossil" href="https://www.matten.de/was-ist-neu/terrazzo">Naturstein-Wannen<br /></a></span></strong></strong><strong><span style="color: #000080;">&gt; <a title="Optibrush Reinstreifer" href="/gummi_und_kunststoffmatten/#artikel_Optibrush1%207418">Optibrush Reinstreifer</a><br />&gt;&nbsp;<a title="OS-Physio und RTA REHAB-Matten auch mit individuellem Funktionsdesign und Kundenlogo" href="/logomatten/os-physio-rehab-matten">OS-Physio-REHAB</a><br /></span></strong><strong><span style="color: #000080;">&gt; Patio<br />&gt; <a title="Reinstreifer-Matten f&uuml;r aufliegende Verlegung und zum Verlegen in Mattenrahmen " href="/gummi_und_kunststoffmatten/#artikel_Assistent1">Reinstreifer-Matten</a><br />&gt;&nbsp;<a title="RTA OS-Physio REHAB-Matten mit Standard- und individuellem Funktionsdesign und Kundenlogo" href="/logomatten/os-physio-rehab-matten">REHAB-Matten<br /></a>&gt; <a title="Ersatz-Ripsstreifen f&uuml;r Aluminium-Profilmatten" href="/aluminium_profilmatten/#artikel_Dipl-r-ripsstreifen">Ripsstreifen</a><br />&gt; <a title="RTA-REHAB-und OS-Physio Matten " href="/logomatten/s_und_s-trainings-teppiche">RTA-REHAB-Matten<br /></a>&gt; <a title="Sicherheitsmatten. Unfallverh&uuml;tung, Unfallschutz, Verbotsmatten, Gebotsmatten" href="/logomatten/sicherheits_symbol_matten">Sicherheitsmatten<br /></a>&gt; <a href="http://www.matten.de/gummi_und_kunststoffmatten/#artikel_Sixform%20Star">Sixform</a><br />&gt; <a title="SUPER-Mat mit extra B&uuml;rsteffekt" href="/fussmatten/standard-schmutzfangmatten#artikel_6400031">Super-Mat</a></span><a title="Wash-Horse-Matten 100% Baumwoll-Flor. Ideal f&uuml;r den gewerblichen Einsatz, z.B. in Werkst&auml;tten, Tankstellen. H&auml;lt besonders gut &Ouml;le und Fette zur&uuml;ck. Geeignet f&uuml;r die W&auml;sche mit hohen Temperaturen" href="/fussmatten/standard-schmutzfangmatten/#artikel_6100200"><br /></a></strong></span><strong style="color: #000080; font-size: 14px;"><strong>&gt; <a title="Unfall-Verh&uuml;tungsmatten, Sicherheitsmatten, Gebotsmatten, Verbotsmatten, Hinweismatten, Stolperschutzmatten" href="/logomatten/sicherheits_symbol_matten">Unfallverh&uuml;tung<br /></a></strong></strong><strong style="color: #000080; font-size: 14px;"><strong><strong><a title="SUPER-Mat mit extra B&uuml;rsteffekt" href="/fussmatten/standard-schmutzfangmatten#artikel_6400031">&gt;</a>&nbsp;<a title="Wash-Horse-Matten 100% Baumwoll-Flor. Ideal f&uuml;r den gewerblichen Einsatz, z.B. in Werkst&auml;tten, Tankstellen. H&auml;lt besonders gut &Ouml;le und Fette zur&uuml;ck. Geeignet f&uuml;r die W&auml;sche mit hohen Temperaturen" href="/fussmatten/standard-schmutzfangmatten/#artikel_6100200">Wash-Horse<br /></a></strong></strong></strong><span style="color: #000080;"><strong>&gt; <a title="Water-Horse-Matten f&uuml;r den Einsatz in allen Na&szlig;bereichen: Schwimmb&auml;dern, Saunen, Fertgungsbetrieben" href="/fussmatten/standard-schmutzfangmatten/#artikel_Water_Horse">Water-Horse<br /></a></strong></span><span style="color: #000080;"><strong>&gt; <a title="WetStep - die Wasserbarriere f&uuml;r den Innenbereich und Au&szlig;enbereich! Ideal f&uuml;r Schwimmb&auml;der, Duschen, Saunen" href="/fussmatten/standard-schmutzfangmatten/#artikel_WetStep">WetStep</a></strong></span></div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="thumbnail"><a title="OS-Physio REHAB-Matten" href="/logomatten/os-physio-rehab-matten"><img title="OS-Physio-REHAB-Matten" src="/media/bild/OS-Physio-2.jpg" alt="OS-Physio-REHAB-Matten" width="512" height="340" /></a>
+<div class="caption" style="text-align: center;"><span><a title="OS-Physio REHAB-Matten" href="/logomatten/s_und_s-trainings-teppiche">OS-Physio REHA-Matten und Trainings-Teppiche</a></span></div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="thumbnail"><a title="Naturstein-Waschbecken, Naturstein-Wannen, Flu&szlig;stein, Marmor, Onyx, Fossil" href="/was-ist-neu/terrazzo"><img title="Naturstein-Waschbecken, Naturstein-Wannen, Flu&szlig;stein, Marmor, Onyx, Fossil" src="/media/bild/bathtube3.jpg" alt="Naturstein-Waschbecken, Naturstein-Wannen, Flu&szlig;stein, Marmor, Onyx, Fossil" width="590" height="340" /></a>
+<div class="caption" style="text-align: center;"><span><a title="Naturstein-Waschbecken, Naturstein-Wannen, Flu&szlig;stein, Marmor, Onyx, Fossil" href="/was-ist-neu/terrazzo">Naturstein Bad-Artikel<br />Wannen-Becken<br />Zubeh&ouml;r</a></span><span style="color: #000080;"><br /></span></div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="thumbnail"><a title="Bodenschutzmatten f&uuml;r B&uuml;ro und Heim" href="/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten"><img title="Bodenschutzmatten f&uuml;r B&uuml;ro und Heim" src="/media/bild/07-150.L_1600-512.jpg" alt="Bodenschutzmatten f&uuml;r B&uuml;ro und Heim" width="512" height="341" /></a>
+<div class="caption" style="text-align: center;"><a title="Bodenschutzmatte f&uuml;r B&uuml;ro und Heim" href="/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten"><span>Bodenschutzmatten <br />B&uuml;ro + Heim</span></a></div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="thumbnail"><a title="SUPER-Mat mit extra B&uuml;rsteffekt" href="/fussmatten/standard-schmutzfangmatten#artikel_6400031"><img title="SUPER-Mat mit extra B&uuml;rsteffekt" src="/media/bild/SuperMat_512x340.jpg" alt="SUPER-Mat mit extra B&uuml;rsteffekt" width="512" height="340" /></a>
+<div class="caption" style="text-align: center;"><span><a title="SUPER-Mat mit extra B&uuml;rsteffekt" href="/fussmatten/standard-schmutzfangmatten#artikel_6400031">SUPER-Mat<br />mit extra B&uuml;rsteffekt</a></span></div>
+</div>
+</div>
+<div class="elementHeadline">
+<h2><span style="color: #000080;"><br /><br /></span></h2>
+<h2>&nbsp;</h2>
+<h2><span style="color: #000080;">Die Super-Mat - mehr Leistung durch Extra B&uuml;rsteffekt&nbsp;</span></h2>
+</div>
+<div class="elementStandard">
+<div class="text"><span style="color: #000080;">Diese Hochleistungsmatte f&uuml;r extreme Beanspruchung ist an Pl&auml;tzen verwendbar, an denen fr&uuml;her der Einsatz von waschbaren Schmutzfangmatten nicht m&ouml;glich oder sinnvoll war. Sie leistet z.B. in nassen und schmutzigen Einsatzbereichen in Gewerbe und Industrie, K&uuml;chen, B&auml;ckereien, Fleischereien usw. gute Dienste. Der regelm&auml;&szlig;ige Austausch&nbsp; durch den Mattenservice-Waschbetrieb garantiert die optimale Reinigungsfunktion und wird Sie begeistern. Die SUPER-MAT ist in verschiedenen Farben und Gr&ouml;&szlig;en lieferbar. Die Fasern bestehen aus solution dyed Nylon, behalten daher die Farbintensit&auml;t und sehen bei entsprechender Waschpflege immer wie neu aus.</span></div>
+</div>
+<div class="elementStandard"><hr /></div>
+<div class="elementHeadline">
+<h3><span style="color: #000080;">Treten Sie drauf - f&uuml;hlen Sie die Reinigungswirkung.</span></h3>
+</div>
+<div class="elementStandard">
+<div class="text"><span style="color: #000080;">Grobe Borsten b&uuml;rsten den Schmutz von den Sohlen, feine Fasern nehmen Feuchtigkeit&nbsp; und Staub auf.</span></div>
+</div>
+<div class="elementStandard"><hr /></div>
+<div class="elementHeadline">
+<h3><span style="color: #000080;">Treten Sie drauf - h&ouml;ren Sie den B&uuml;rstvorgang.</span></h3>
+</div>
+<div class="elementStandard">
+<div class="text"><span style="color: #000080;">Wenn Sie auf die SUPER-MAT treten, h&ouml;ren Sie die groben Fasern kratzen. Eine st&auml;ndige Erinnerung, wie gut die SUPER-MAT reinigt.</span></div>
+</div>
+<div class="elementStandard"><hr /></div>
+<div class="elementHeadline">
+<h3><span style="color: #000080;">Treten Sie drauf - sehen Sie den sauberen Unterschied.</span></h3>
+</div>
+<div class="elementStandard">
+<div class="text"><span style="color: #000080;">Die einzigartige Kombination von gro&szlig;en und feinen Fasern entfernt den Schmutz in einem Doppelreinigungsvorgang. Sie sehen den Unterschied in allen R&auml;umen, in denen Sie die SUPER- MAT benutzen.</span></div>
+</div>
+<div class="elementStandard"><hr /></div>
+<div class="elementHeadline">
+<h3><span style="color: #000080;">Der Unterschied ist die Leistungsf&auml;higkeit.</span></h3>
+</div>
+<div class="elementStandard">
+<div class="text"><span style="color: #000080;">SUPER-MAT entfernt bis zu 50% mehr Schmutz im Vergleich zu anderen Schmutzfangmatten. Zwei spezielle Faserarten wirken gemeinsam. Harte, kr&auml;ftige Borsten und feine Fasern entfernen groben Schmutz, feinen Staub und ziehen die Feuchtigkeit von den Sohlen. <span style="font-weight: bold;">SUPER MAT &ndash; <span style="font-size: small;">The Best Mat Ever ! </span>&nbsp; &nbsp; </span></span><br /><br /><span style="color: #000080;">Falls Sie mehr Informationen oder ein Angebot w&uuml;nschen, k&ouml;nnen Sie uns <a style="font-weight: bold;" title="MAIL " href="http://www.matten.de/de/kontakt/index.php" target="_blank"><span style="color: #000080;">per MAIL erreichen.</span></a></span></div>
+</div>
+<div class="elementStandard"><hr /></div>
+<div class="elementHeadline">
+<h3><span style="color: #000080;">Auch das ist neu: Scantex</span></h3>
+</div>
+<div class="elementStandard">
+<div class="text"><span style="color: #000080;">Die Software f&uuml;r den Mattenservice-und W&auml;scherei-Betrieb. Mit Scantex-Anwendungsprogrammen nutzen Sie den kompletten Bedienungskomfort der Windows Technologie. Optimale Anbindung und Daten&uuml;bergabe an andere Windows-Anwendungen wie z.B. Exel und Word.</span><br /><br /><span style="color: #000080;">Softwarel&ouml;sungen zur Registrierung und Kontrolle des Warenflusses. Auf Wunsch senden wir Ihnen gern detailierte Programmbeschreibungen:</span><br /><br /><span style="color: #000080;">&Uuml;bersichtiche Eingabeoberfl&auml;che mit logischer Bedienerf&uuml;hrung&nbsp; * aussagef&auml;hige Listen und &Uuml;bersichten * schnelle Belieferung * reibungslose Verteilung * verst&auml;ndliche Kosten&uuml;bersicht * sinvolle Informationen am richtigen Ort zur richtigen Zeit.&nbsp;&nbsp;&nbsp; </span><br /><br /><span style="color: #000080;">Schmutzfangmatten * Berufskleider-Fremdw&auml;sche und -Leasing * OP-W&auml;sche * Container * Waage* Kundenverwaltung * Artikelverwaltung * Preisgruppen * Teileverfolgung Schrank- und Fachzuordnung * Barcode / Chiperfassung * Fehlteileerfassung / Nachlieferung * Tourenplanung * Lieferscheine * Fakturierung</span><strong style="text-align: center;"><span style="color: #000000;"><a title="Mietmatten-Waschservice - einfarbige und melierte Miet-Matten" href="/logomatten/s_und_s-trainings-teppiche"><span><br /></span></a></span></strong></div>
+</div>									<li class="col-sm-12">
+										         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/was-ist-neu/neue-artikel">OS-Physio REHA-Matten</a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/was-ist-neu/terrazzo">Terrazzo- Stein-Wannen, Waschbecken</a>
+			</div>
+		</div>
+	</li>
+        	
+		
+									</li>						
+								</li>
+								
+							</ul>
+							
+							
+						</li>
+											<li class='dropdown active-button'>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href='/fussmatten'>
+								Fussmatten								<span class="caret"></span>
+							</a>
+							
+							 <ul class="dropdown-menu row" role="menu">
+								<li class="dropdown-menu-products"><div class="elementStandard">
+<div class="text">
+<h4 style="text-align: center;"><span style="color: #ff0000;" data-mark="1"><span style="color: #ff0000;" data-mark="1"><span style="color: #ff0000;" data-mark="1">warum w&auml;hlen Sie Fussmatten und Fu&szlig;abtreter nicht passend zum Interieur? Es geht doch auch mit einer farbigen Fu&szlig;matte</span></span>!</span>&nbsp;</h4>
+</div>
+</div>
+
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="einfarbige und melierte Matten. Auswahl mehr als 100 verschiedenen Farben, aus verschiedenen Farbpaletten, 5 Jahre Garantie, teilweise 11 Jahre Farbgarantie. Viele Standardabmessungen und dar&uuml;berhinaus in individuellen Wunschgr&ouml;&szlig;en bis zu 200cm Breite und 7m L&auml;nge. Bahnenware  bis 20m L&auml;nge" href="/fussmatten/standard-schmutzfangmatten"><img title="einfarbige und melierte Matten. Auswahl mehr als 100 verschiedenen Farben, aus verschiedenen Farbpaletten, 5 Jahre Garantie, teilweise 11 Jahre Farbgarantie. Viele Standardabmessungen und dar&uuml;berhinaus in individuellen Wunschgr&ouml;&szlig;en bis zu 200cm Breite und 7m L&auml;nge. Bahnenware  bis 20m L&auml;nge" src="/media/bild/VierJahr2_512x340-farb.JPG" alt="einfarbige und melierte Matten. Auswahl mehr als 100 verschiedenen Farben, aus verschiedenen Farbpaletten, 5 Jahre Garantie, teilweise 11 Jahre Farbgarantie. Viele Standardabmessungen und dar&uuml;berhinaus in individuellen Wunschgr&ouml;&szlig;en bis zu 200cm Breite und 7m L&auml;nge. Bahnenware  bis 20m L&auml;nge" width="512" height="340" /></a>
+<div class="caption text-center"><a href="/fussmatten/standard-schmutzfangmatten"><span style="color: #000080;"><span style="color: #000080;">einfarbige und</span>&nbsp;<span style="color: #000080;"><br />melierte</span>&nbsp;<span style="color: #000080;">Matten</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Fu&szlig;matten, Schmutzfangmatten, Designmatten, Logomatten - Matten mit Standardlogos oder nach Ihren W&uuml;nschen individuell gestaltet in Ihrer Wunschgr&ouml;&szlig;e" href="/logomatten"> <img title="Fu&szlig;matten, Schmutzfangmatten, Designmatten, Logomatten - Matten mit Standardlogos oder nach Ihren W&uuml;nschen individuell gestaltet in Ihrer Wunschgr&ouml;&szlig;e" src="/media/bild/photo_startseite.jpg" alt="Fu&szlig;matten, Schmutzfangmatten, Designmatten, Logomatten - Matten mit Standardlogos oder nach Ihren W&uuml;nschen individuell gestaltet in Ihrer Wunschgr&ouml;&szlig;e" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Fu&szlig;matten, Schmutzfangmatten, Designmatten, Logomatten - Matten mit Standardlogos oder nach Ihren W&uuml;nschen individuell gestaltet in Ihrer Wunschgr&ouml;&szlig;e" href="/logomatten"><span style="color: #333399;"><span style="color: #333399;">Individuelle <br />Logomatten</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="OS-Physio-Matten, Matten f&uuml;r den REHA-Bereich, REHA-Praxismatten" href="/logomatten/os-physio-rehab-matten"> <img title="OS-Physio-Matten, Matten f&uuml;r den REHA-Bereich, REHA-Praxismatten" src="/media/bild/OS-Physio-2.jpg" alt="OS-Physio-Matten, Matten f&uuml;r den REHA-Bereich, REHA-Praxismatten" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><span style="color: #333399;"><a title="OS-Physio-Matten, Matten f&uuml;r den REHA-Bereich, REHA-Praxismatten" href="/logomatten/os-physio-rehab-matten">OS Reha +<br />Training</a></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Kokosmatten, schnittfest mit Vinyl-R&uuml;ckenbeschichtung, in 7 verschiedenen H&ouml;hen, natur, farbig oder gestaltet, beliebige Gr&ouml;&szlig;en oder Bahnenware." href="/kokosmatten"> <img title="Kokosmatten, schnittfest mit Vinyl-R&uuml;ckenbeschichtung, in 7 verschiedenen H&ouml;hen, natur, farbig oder gestaltet, beliebige Gr&ouml;&szlig;en oder Bahnenware." src="/media/bild/kokos_b1_q1.jpg" alt="Kokosmatten, schnittfest mit Vinyl-R&uuml;ckenbeschichtung, in 7 verschiedenen H&ouml;hen, natur, farbig oder gestaltet, beliebige Gr&ouml;&szlig;en oder Bahnenware." width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Kokosmatten, schnittfest mit Vinyl-R&uuml;ckenbeschichtung, in 7 verschiedenen H&ouml;hen, natur, farbig oder gestaltet, beliebige Gr&ouml;&szlig;en oder Bahnenware." href="/kokosmatten"><span style="color: #333399;"><span style="color: #333399;">Kokosmatten-<br />Verlour</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Aluminium- und Kunststoff- Profilmatten in verschiedenen H&ouml;hen mit unterschiedlicher Oberfl&auml;chengestaltung." href="/aluminium_profilmatten"> <img title="Aluminium- und Kunststoff- Profilmatten in verschiedenen H&ouml;hen mit unterschiedlicher Oberfl&auml;chengestaltung." src="/media/bild/Dip-RCB.jpg" alt="Aluminium- und Kunststoff- Profilmatten in verschiedenen H&ouml;hen mit unterschiedlicher Oberfl&auml;chengestaltung." width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Aluminium- und Kunststoff- Profilmatten in verschiedenen H&ouml;hen mit unterschiedlicher Oberfl&auml;chengestaltung." href="/aluminium_profilmatten"><span style="color: #333399;"><span style="color: #333399;">Aluminium-<br />Profil-Matten</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Profilrahmen aus Aluminium, Messing und Edelstahl nach Kundenwunsch rechtwinklig und in Sonderformen angefertigt" href="/aluminium_profilmatten/rahmen_und_zubehoer"> <img title="Profilrahmen aus Aluminium, Messing und Edelstahl nach Kundenwunsch rechtwinklig und in Sonderformen angefertigt" src="/media/bild/rahmen_ganz-2.jpg" alt="Profilrahmen aus Aluminium, Messing und Edelstahl nach Kundenwunsch rechtwinklig und in Sonderformen angefertigt" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Profilrahmen aus Aluminium, Messing und Edelstahl nach Kundenwunsch rechtwinklig und in Sonderformen angefertigt" href="/aluminium_profilmatten/rahmen_und_zubehoer"><span style="color: #333399;"><span style="color: #333399;">Rahmen und <br />Zubeh&ouml;r</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Matten f&uuml;r Au&szlig;enbereiche in Standargr&ouml;&szlig;en, als Bahnenware und Zuschnitten nach Kundenwunsch" href="/fussmatten/matten_fuer_aussenbereiche"> <img title="Matten f&uuml;r Au&szlig;enbereiche in Standargr&ouml;&szlig;en, als Bahnenware und Zuschnitten nach Kundenwunsch" src="/media/bild/nomad_aqua_verlege1.jpg" alt="Matten f&uuml;r Au&szlig;enbereiche in Standargr&ouml;&szlig;en, als Bahnenware und Zuschnitten nach Kundenwunsch" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><a title="Matten f&uuml;r Au&szlig;enbereiche in Standargr&ouml;&szlig;en, als Bahnenware und Zuschnitten nach Kundenwunsch" href="/fussmatten/matten_fuer_aussenbereiche"><span style="color: #333399;">Matten f&uuml;r <br />Au&szlig;enbereiche</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Anti-Erm&uuml;dungsmatten, Gummi-Eingangsmatten, Gummimatten f&uuml;r den Kassenbereich, Tresenbereich in Hotels und Gastronomie, Maschinenbereich" href="/gummi_und_kunststoffmatten"><img title="Anti-Erm&uuml;dungsmatten, Gummi-Eingangsmatten, Gummimatten f&uuml;r den Kassenbereich, Tresenbereich in Hotels und Gastronomie, Maschinenbereich" src="/media/bild/CushionCoil-kl.jpg" alt="Anti-Erm&uuml;dungsmatten, Gummi-Eingangsmatten, Gummimatten f&uuml;r den Kassenbereich, Tresenbereich in Hotels und Gastronomie, Maschinenbereich" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #000080;"><a title="Gummimatten und Kunststoffmatten" href="/gummi_und_kunststoffmatten">Gummi- und <br />Kunststoffmatte</a></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Fu&szlig;matten, Schmutzfangmatten, Designmatten, Logomatten - Matten mit Standardlogos oder nach Ihren W&uuml;nschen individuell gestaltet in Ihrer Wunschgr&ouml;&szlig;e" href="/logomatten/matten_fuer_haus_und_heim"><img title="Matten f&uuml;r Haus und Heim, dekorative Eingangsmatten, Logomatten speziell f&uuml;r Ihr Kinderzimmer" src="/media/bild/Morgensonne_50x75.jpg" alt="Matten f&uuml;r Haus und Heim, dekorative Eingangsmatten, Logomatten speziell f&uuml;r Ihr Kinderzimmer" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><a title="Matten f&uuml;r Haus und Heim, dekorative Eingangsmatten, Logomatten speziell f&uuml;r Ihr Kinderzimmer" href="/logomatten/matten_fuer_haus_und_heim"><span style="color: #333399;">Matten f&uuml;r <br />Haus+Heim</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Werbematten Dekomatten, Fu&szlig;matten, Schmutzfangmatten unifarbig oder meliert. Farben nach Ihren W&uuml;nschen mit einer Auswahl aus &uuml;ber 100 Standard-Farben" href="/logomatten/werbematten-dekomatten"><img title="Werbematten Dekomatten, Fu&szlig;matten, Schmutzfangmatten unifarbig oder meliert. Farben nach Ihren W&uuml;nschen mit einer Auswahl aus &uuml;ber 100 Standard-Farben" src="/media/bild/photo_logomatten-Baelle.jpg" alt="Werbematten Dekomatten, Fu&szlig;matten, Schmutzfangmatten unifarbig oder meliert. Farben nach Ihren W&uuml;nschen mit einer Auswahl aus &uuml;ber 100 Standard-Farben" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><a title="Werbematten-Dekomatten" href="/logomatten/werbematten-dekomatten"><span style="color: #333399;">Werbematten<br />Dekomatten</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Hinweismatten, Gebotsmatten,Symbolmatten" href="/logomatten/sicherheits_symbol_matten"><img title="Bitte Abstand halten, Hinweismatten, Gebotsmatten, Symbolmatten" src="/media/bild/Logo7.png" alt="Bitte Abstand halten, Hinweismatten, Gebotsmatten, Symbolmatten" width="190" height="129" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><span style="color: #333399;"><span style="color: #000080;"><a title="Hinweismatten, Gebotsmatten,Symbolmatten" href="/logomatten/sicherheits_symbol_matten"><span style="color: #000080;">Hinweis-<br />Gebotsmatten</span></a></span></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Sicherheits, Arbeitssicherheit, Unfallverh&uuml;tung,Arbeitsschutz- Symbolmatten" href="/logomatten/sicherheits_symbol_matten"><img title="Sicherheits, Arbeitssicherheit, Unfallverh&uuml;tung,Arbeitsschutz- Symbolmatten" src="/media/bild/Si-Feuergef&auml;hrlich.jpg" alt="Sicherheits, Arbeitssicherheit, Unfallverh&uuml;tung,Arbeitsschutz- Symbolmatten" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><span style="color: #333399;"><span style="color: #000080;"><a title="Sicherheits, Arbeitssicherheit, Unfallverh&uuml;tung,Arbeitsschutz- Symbolmatten" href="/logomatten/sicherheits_symbol_matten"><span style="color: #000080;">Sicherheits-<br />Symbolmatten</span></a></span></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Bierbankmatten mit Standarddesigns und mit beliebigem Kundeendesign" href="/logomatten/bierbankmatten"><img title="Bierbankmatten mit Standarddesigns und mit beliebigem Kundeendesign" src="/media/bild/Bierbank_0687_512x340.jpg" alt="Bierbankmatten mit Standarddesigns und mit beliebigem Kundeendesign" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Bierbankmatten mit Standarddesigns und mit beliebigem Kundeendesign" href="/logomatten/bierbankmatten"><span style="color: #333399;"><span style="color: #333399;">Bierbank-<br />Matten</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Automatten" href="/home/6304010"><img title="Automatten" src="/media/bild/Automatte-Band.jpg" alt="Automatten" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Automatten" href="/home/6304010"><span style="color: #333399;"><span style="color: #333399;">Automatten<br />uni + gestaltet</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Miet-Mattenservice, individueller Mattenservice, Mattenreinigung Ihrer Privatmatten, Mattenw&auml;sche" href="/miet-mattenservice/service_miet-mattenservice"><img title="Miet-Mattenservice, individueller Mattenservice, Mattenreinigung Ihrer Privatmatten, Mattenw&auml;sche" src="/media/bild/IH_008.jpg" alt="Miet-Mattenservice, individueller Mattenservice, Mattenreinigung Ihrer Privatmatten, Mattenw&auml;sche" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><a title="Miet-Mattenservice, individueller Mattenservice, Mattenreinigung Ihrer Privatmatten, Mattenw&auml;sche" href="/miet-mattenservice/service_miet-mattenservice"><span style="color: #333399;">Miet-Matten-<br />Service</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Teppich-Reinigungsprodukte und Hilfsmittel, Teppichreinigung" href="/miet-mattenservice/reinigungsprodukte"><img title="Teppich-Reinigungsprodukte und Hilfsmittel, Teppichreinigung" src="/media/bild/Fleckenset-2.jpg" alt="Teppich-Reinigungsprodukte und Hilfsmittel, Teppichreinigung" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><span style="color: #000080;"><a title="Teppich-Reinigungsprodukte und Hilfsmittel, Teppichreinigung" href="/miet-mattenservice/reinigungsprodukte"><span style="color: #000080;">Teppich<br />Reinigungsprodukte</span></a></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Terrazzo-Produkte, Terrazzo-Badewannen, Terazzo-Waschbecken, Auch Sonder-Anfertigung in individuelle Formen und Ma&szlig;en" href="/was-ist-neu/terrazzo"><img title="Terrazzo-Produkte, Terrazzo-Badewannen, Terazzo-Waschbecken, Auch Sonder-Anfertigung in individuelle Formen und Ma&szlig;en" src="/media/bild/Bathtubes-1.JPG" alt="Terrazzo-Produkte, Terrazzo-Badewannen, Terazzo-Waschbecken, Auch Sonder-Anfertigung in individuelle Formen und Ma&szlig;en" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><a title="Terrazzo-Produkte, Terrazzo-Badewannen, Terazzo-Waschbecken, Auch Sonder-Anfertigung in individuelle Formen und Ma&szlig;en" href="/was-ist-neu/terrazzo"><span style="color: #333399;">Terrazzo-<br />Produkt</span></a></span></div>
+</div>
+</li>
+									<li class="col-sm-12">
+										         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/fussmatten/fussmatten">Einfarbige und Logo Fußmatten</a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/fussmatten/standard-schmutzfangmatten">Baumwollmatten, Nylon-Fussmatten</a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/fussmatten/matten_fuer_aussenbereiche">Matten für Außenbereiche</a>
+			</div>
+		</div>
+	</li>
+        	
+		
+									</li>						
+								</li>
+								
+							</ul>
+							
+							
+						</li>
+											<li class='dropdown active-button'>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href='/logomatten'>
+								Logomatten								<span class="caret"></span>
+							</a>
+							
+							 <ul class="dropdown-menu row" role="menu">
+								<li class="dropdown-menu-products">
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a href="/logomatten/os-physio-rehab-matten"><img title="OS-Physio-2.jpg" src="/media/bild/OS-Physio-2.jpg" alt="OS-Physio-2.jpg" width="513" height="340" /></a>
+<div class="caption text-center"><span style="color: #333399;"><a title="Mietmatten-Waschservice - einfarbige und melierte Miet-Matten" href="/logomatten/os-physio-rehab-matten"><span style="color: #333399;">REHA-Matten<br />OS-Physio</span></a><a title="Mietmatten-Waschservice - einfarbige und melierte Miet-Matten" href="/logomatten/s_und_s-trainings-teppiche"><span style="color: #333399;"><br /></span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="schön&sauber Jet-Print Logo-Matten, Designmatten individuell gestaltet" href="/logomatten#artikel_6300201-Logomatte"><img title="schön&sauber Jet-Print Logo-Matten, Designmatten individuell gestaltet" src="/media/bild/Regent.jpg" alt="schön&sauber Jet-Print Logo-Matten, Designmatten individuell gestaltet" width="512" height="340" /></a>
+<div class="caption text-center"><a title="schön&sauber Jet-Print Logo-Matten, Designmatten individuell gestaltet" href="/logomatten/#artikel_6300201"><span style="color: #000080;"><span style="color: #000080;">LOGOMATTEN<br />JetPrint-Premium</span><br /></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Jet-Print Light Logo-Matten, Designmatten individuell gestaltet" href="/logomatten/#artikel_6300202"><img title="Jet-Print Light Logo-Matten, Designmatten individuell gestaltet" src="/media/bild/Jet-Print_Vision-512x340-Nr.jpg" alt="Jet-Print Light Logo-Matten, Designmatten individuell gestaltet" width="513" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #000080;"><a title="Jet-Print Light Logo-Matten, Designmatten individuell gestaltet" href="/logomatten/#artikel_6300202">LOGOMATTEN<br /></a></span></span><span style="color: #000080;"><span><a title="Jet-Print Light Logo-Matten, Designmatten individuell gestaltet" href="/logomatten/#artikel_6300202">JetPrint-light</a></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Jet-Print Velour Logo-Matten, Designmatten fotorealistisch gestaltet" href="/logomatten/#artikel_6400201-Velourmatte"><img title="Jet-Print Velour" src="/media/bild/Jet-Print%20Velour_512x340.jpg" alt="Jet-Print Velour" width="513" height="340" /></a>
+<div class="caption text-center"><a title="Jet-Print Velour Logo-Matten, Designmatten fotorealistisch gestaltet" href="/logomatten/#artikel_6400201-Velourmatte"><span style="color: #000080;"><span style="color: #000080;">LOGOMATTEN<br />JetPrint-Velour</span><br /></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Kleen-Way Designmatten als Bahnenware" href="/logomatten/#artikel_6600201"><img title="Kleen-Way_512x340.jpg" src="/media/bild/Kleen-Way_512x340.jpg" alt="Kleen-Way_512x340.jpg" width="512" height="340" /></a>
+<div class="caption text-center"><a title="Kleen-Way Designmatten als Bahnenware" href="/logomatten/#artikel_6600201"><span style="color: #000080;"><span style="color: #000080;">Bahnenware<br />Kleen-Way-Rubber</span><br /></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Magic-Mat Werbematten, Designmatten, Logomatten" href="/logomatten/#artikel_6600101"><img title="Event_Mat_512x340.jpg" src="/media/bild/Event_Mat_512x340.jpg" alt="Event_Mat_512x340.jpg" width="512" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><a href="/logomatten/#artikel_6600101"><span style="color: #000080;">EVENT-<br />Designmatten<br /></span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Magic-Mat Werbematten, Designmatten, Logomatten" href="/logomatten/#artikel_6600102"><img title="BigSize_512x340.jpg" src="/media/bild/BigSize_512x340.jpg" alt="BigSize_512x340.jpg" width="512" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #000080;"><a title="BigSize-Matten" href="/logomatten/#artikel_6600102">BIGSIZE-</a><br /><a title="BigSize-Matten" href="/logomatten/#artikel_6600102">matten</a><a href="/logomatten/#artikel_6600101"><br /></a></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Chromojet Werbematten, Patio-Werbematten, Designmatten, Advertising-mats" href="/logomatten/#artikel_6300203"><img title="Chromojet Werbematten, Patio-Werbematten, Designmatten, Advertising-mats" src="/media/bild/Patio-512x340.jpg" alt="Chromojet Werbematten, Patio-Werbematten, Designmatten, Advertising-mats" width="513" height="340" /></a>
+<div class="caption text-center"><a title="Chromojet Werbematten, Patio-Werbematten, Designmatten, Advertising-mats" href="/logomatten/#artikel_6300203"><span style="color: #000080;"><span style="color: #000080;">WERBEMATTEN<br />Patio-Ad-Mat</span><br /></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Barmatten, Bar.-Mats, Thekenmatten, Tresenmatten, Verkaufstresenmatten" href="/logomatten/#artikel_Barmatten"><img title="Barmatten, Bar.-Mats, Thekenmatten, Tresenmatten, Verkaufstresenmatten" src="/media/bild/Bar-Mats-512x340.jpg" alt="Barmatten, Bar.-Mats, Thekenmatten, Tresenmatten, Verkaufstresenmatten" width="512" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Barmatten, Bar.-Mats, Thekenmatten, Tresenmatten, Verkaufstresenmatten" href="/logomatten/werbematten-dekomatten/"><span style="color: #000080;">BARMATTEN<br />Thekenmatten</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="JetPrint Velour- Logomatten, Designmatten, Advertising-mats" href="/logomatten/werbematten-dekomatten/"><img title="JetPrint Velour- Logomatten, Designmatten, Advertising-mats" src="/media/bild/jp-promotion.jpg" alt="JetPrint Velour- Logomatten, Designmatten, Advertising-mats" width="512" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><a title="JetPrint Velour- Logomatten, Designmatten, Advertising-mats" href="/logomatten/werbematten-dekomatten/"><span style="color: #000080;">Advertising<br />Werbematten</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="K-Turf Aussenmatten JetPrint-Logomatten für den Außenbereich. Ideal als Bootsanleger-Matten und im Naßbereich" href="/fussmatten/matten_fuer_aussenbereiche"><img title="K-Turf Aussenmatten JetPrint-Logomatten für den Außenbereich. Ideal als Bootsanleger-Matten und im Naßbereich" src="/media/bild/K-Turf-7081-mi.jpg" alt="K-Turf Aussenmatten JetPrint-Logomatten für den Außenbereich. Ideal als Bootsanleger-Matten und im Naßbereich" /></a>
+<div class="caption text-center"><a title="Matten für Außenbereiche Outdoormatten" href="/fussmatten/matten_fuer_aussenbereiche"><span style="color: #000080;"><span style="color: #000080;"> OUT-DOOR<br />Aussenbereich</span></span><span style="color: #000080;"><br /></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="WELCOME-Matten im Holzdesign" href="/logomatten/welcome-holzdesign"><img title="welcome_holz" src="/media/bild/welcome_holz_8_512x340.jpg" alt="welcome_holz" width="513" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><a title="WELCOME-Matten im Holzdesign" href="/logomatten/welcome-holzdesign"><span style="color: #000080;">WELCOME<br />Holzdesign</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="I Love München -Matten, I Love mit individuellem Logo und Schrift nach Kundenwunsch" href="/logomatten/matten_fuer_haus_und_heim/#artikel_6301053"><img title="I Love München -Matten, I Love mit individuellem Logo und Schrift nach Kundenwunsch" src="/media/bild/I_love_Muenchen_var1_50x75.jpg" alt="I Love München -Matten, I Love mit individuellem Logo und Schrift nach Kundenwunsch" width="512" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><a title="I Love München -Matten, I Love mit individuellem Logo und Schrift nach Kundenwunsch" href="/logomatten/matten_fuer_haus_und_heim/#artikel_6301053"><span style="color: #000080;">I Love..<br />Matten</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Biergarten-Bankmatten in vielen verschiedenen Ausführungen  auch mit Aufdruck nach Kundenwunsch" href="/logomatten/bierbankmatten"><img title="Biergarten-Bankmatten in vielen verschiedenen Ausführungen  auch mit Aufdruck nach Kundenwunsch" src="/media/bild/Bierbank_0687_512x340.jpg" alt="Biergarten-Bankmatten in vielen verschiedenen Ausführungen  auch mit Aufdruck nach Kundenwunsch" width="512" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Biergarten-Bankmatten in vielen verschiedenen Ausführungen  auch mit Aufdruck nach Kundenwunsch" href="/logomatten/bierbankmatten"><span style="color: #000080;">Biergartenbank<br />Matten</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Sicherheits-Symbolmatten, Bitte Abstand halten, Gebotsmatten, Hinweismatten" href="/logomatten/jetprint-designs-hinweise"><img title="Bitte Abstand halten_512x340.JPG" src="/media/bild/Bitte%20Abstand%20halten_512x340.JPG" alt="Sicherheits-Symbolmatten, Bitte Abstand halten, Gebotsmatten, Hinweismatten" width="512" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Sicherheits-Symbolmatten, Bitte Abstand halten, Gebotsmatten, Hinweismatten" href="/logomatten/jetprint-designs-hinweise"><span style="color: #000080;">CORONA<br />Hinweismatten<br /></span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Sicherheits, Arbeitssicherheit, Unfallverhütung,Arbeitsschutz- Symbolmatten" href="/logomatten/sicherheits_symbol_matten"><img title="Sicherheits, Arbeitssicherheit, Unfallverhütung,Arbeitsschutz- Symbolmatten" src="/media/bild/Si-Feuergefährlich.jpg" alt="Sicherheits, Arbeitssicherheit, Unfallverhütung,Arbeitsschutz- Symbolmatten" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #333399;"><span style="color: #333399;"><span style="color: #000080;"><a title="Sicherheits, Arbeitssicherheit, Unfallverhütung,Arbeitsschutz- Symbolmatten" href="/logomatten/sicherheits_symbol_matten"><span style="color: #000080;">Sicherheits-<br />Symbolmatten</span></a></span></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Automatten für alle Fahrzeugmodelle und Fahrzeugtypen" href="/logomatten/#artikel_6304020"><img title="Automatten für alle Fahrzeugmodelle und Fahrzeugtypen, wir benötigen nur den Typ und die Nummer aus dem Krftfahzeugschein" src="/media/bild/Automatte-Band.jpg" alt="Automatten für alle Fahrzeugmodelle und Fahrzeugtypen, wir benötigen nur den Typ und die Nummer aus dem Krftfahzeugschein" width="512" height="340" /></a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Automatten für alle Fahrzeugmodelle und Fahrzeugtypen, wir benötigen nur den Typ und die Nummer aus dem Krftfahzeugschein" href="/logomatten/#artikel_6304020"><span style="color: #000080;">AUTO<br />Matten</span></a></span></div>
+</div>
+</li>
+									<li class="col-sm-12">
+										         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/logomatten/sicherheits_symbol_matten">Sicherheits-und Symbol-Matten</a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/logomatten/os-physio-rehab-matten">OS-Physio REHAB Trainings-Matten</a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/logomatten/werbematten-dekomatten">Werbematten - Dekomatten </a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/logomatten/welcome-holzdesign">Art-Designs Welcome-Holzdesigns</a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/logomatten/wunschdesign-matten">Wunschdesign-Matten</a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/logomatten/matten_fuer_haus_und_heim">Matten für Haus und Heim</a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/logomatten/bierbankmatten">Biergartenbank-Matten</a>
+			</div>
+		</div>
+	</li>
+        	
+		
+									</li>						
+								</li>
+								
+							</ul>
+							
+							
+						</li>
+											<li class='dropdown active-button'>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href='/kokosmatten'>
+								Kokosmatten								<span class="caret"></span>
+							</a>
+							
+							 <ul class="dropdown-menu row" role="menu">
+								<li class="dropdown-menu-products">
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Kokos-natur, beliebige Zuschnitte, Breiten bis 200cm " href="/kokosmatten/#artikel_6920003"> <img title="Kokos-natur, beliebige Zuschnitte, Breiten bis 200cm " src="/media/bild/kokos_natur_140.jpg" alt="Kokos-natur, beliebige Zuschnitte, Breiten bis 200cm " width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Kokos-natur, beliebige Zuschnitte, Breiten bis 200cm und L&auml;ngen bis 1200cm" href="/kokosmatten/#artikel_6920003"><span style="color: #000080;">Kokosmatte, natur</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="farbige Kokosmatten, beliebige Zuschnitte, Breiten bis 200cm und L&auml;ngen bis 1200cm" href="/kokosmatten/#artikel_6920002"> <img title="farbige Kokosmatten, beliebige Zuschnitte, Breiten bis 200cm und L&auml;ngen bis 1200cm" src="/media/bild/kokos_farbig_140.jpg" alt="farbige Kokosmatten, beliebige Zuschnitte, Breiten bis 200cm und L&auml;ngen bis 1200cm" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="farbige Kokosmatten, beliebige Zuschnitte, Breiten bis 200cm und L&auml;ngen bis 1200cm" href="/kokosmatten/#artikel_6920002"><span style="color: #000080;"><span>Kokosmatten, farbig</span></span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="naturfarbige oder farbige Kokosmatten in Standard oder Wunschgr&ouml;&szlig;en, gestaltet durch 1- oder 2-farbige Beflockung nach Kundenvorlage" href="/kokosmatten/#artikel_6920003-a"> <img title="naturfarbige oder farbige Kokosmatten in Standard oder Wunschgr&ouml;&szlig;en, gestaltet durch 1- oder 2-farbige Beflockung nach Kundenvorlage" src="/media/bild/Kokos-gestalt_140.jpg" alt="naturfarbige oder farbige Kokosmatten in Standard oder Wunschgr&ouml;&szlig;en, gestaltet durch 1- oder 2-farbige Beflockung nach Kundenvorlage" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="naturfarbige oder farbige Kokosmatten in Standard oder Wunschgr&ouml;&szlig;en, gestaltet durch 1- oder 2-farbige Beflockung nach Kundenvorlage" href="/kokosmatten/#artikel_6920004"><span style="color: #000080;">Design-Koko, beflockt</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Kokos, gestaltet, Intarsia. Hergestellt im Grafic-Inlay-Verfahren. Geeignet f&uuml;r Darstellungen mit Schrift- und Strichst&auml;rken von ca. 2cm St&auml;rke" href="/kokosmatten/#artikel_6920003-a"> <img title="Kokos, gestaltet, Intarsia. Hergestellt im Grafic-Inlay-Verfahren. Geeignet f&uuml;r Darstellungen mit Schrift- und Strichst&auml;rken von ca. 2cm St&auml;rke" src="/media/bild/kokos_intarsia_140.jpg" alt="Kokos, gestaltet, Intarsia. Hergestellt im Grafic-Inlay-Verfahren. Geeignet f&uuml;r Darstellungen mit Schrift- und Strichst&auml;rken von ca. 2cm St&auml;rke" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #000080;"><a href="/kokosmatten/#artikel_6920004">Kokos</a>&nbsp;</span></span><a href="/kokosmatten/#artikel_6920004"><span style="color: #000080;"><span>Design</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Randprofile f.Kokosmatten in verschiedenen H&ouml;hen und Ausf&uuml;hrungen, individuell auf Ma&szlig; zugeschnitten, Ecken auf Gehrung. 1-, 2-, 3- oder 4-seitig montiert" href="/kokosmatten/#artikel_6920080"> <img title="Randprofile f.Kokosmatten in verschiedenen H&ouml;hen und Ausf&uuml;hrungen, individuell auf Ma&szlig; zugeschnitten, Ecken auf Gehrung. 1-, 2-, 3- oder 4-seitig montiert" src="/media/bild/Kokos-mR-glatt-512.jpg" alt="Randprofile f.Kokosmatten in verschiedenen H&ouml;hen und Ausf&uuml;hrungen, individuell auf Ma&szlig; zugeschnitten, Ecken auf Gehrung. 1-, 2-, 3- oder 4-seitig montiert" width="513" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Randprofile f.Kokosmatten in verschiedenen H&ouml;hen und Ausf&uuml;hrungen, individuell auf Ma&szlig; zugeschnitten, Ecken auf Gehrung. 1-, 2-, 3- oder 4-seitig montiert" href="/kokosmatten/#artikel_6920080"><span style="color: #000080;"><span>Randprofile f. Kokosmatten</span></span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Aluminium-Anlaufprofile in  verschiedenen H&ouml;hen" href="/aluminium_profilmatten/#artikel_Aluminium-Anlaufprofil"> <img title="Aluminium-Anlaufprofile in  verschiedenen H&ouml;hen" src="/media/bild/Anlaufpofil-Alu-2.jpg" alt="Aluminium-Anlaufprofile in  verschiedenen H&ouml;hen" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Aluminium-Anlaufprofile in  verschiedenen H&ouml;hen" href="/aluminium_profilmatten/#artikel_Aluminium-Anlaufprofil"><span style="color: #000080;">Aluminum-Anlaufprofile</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="H&ouml;henausgleich f&uuml;r Kokosmatten, Hartfilz, 5mm oder 2x 5mm" href="/kokosmatten/#artikel_6920071"> <img title="H&ouml;henausgleich f&uuml;r Kokosmatten, Hartfilz, 5mm oder 2x 5mm" src="/media/bild/Hartfilzunterlage.JPG" alt="H&ouml;henausgleich f&uuml;r Kokosmatten, Hartfilz, 5mm oder 2x 5mm" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="H&ouml;henausgleich f&uuml;r Kokosmatten, Hartfilz, 5mm oder 2x 5mm" href="/kokosmatten/#artikel_6920071"><span style="color: #000080;"><span style="color: #000080;">H&ouml;henausgleich f&uuml;r Matten</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Gummimatten als Unterlagen f&uuml;r Aluminium-Profilmatten oder als H&ouml;henausgleich f&uuml;r Matten im Mattenbett" href="/kokosmatten/#artikel_Gummiunterlage1"> <img title="Gummiunterlage 512x340.jpg" src="/media/bild/Gummiunterlage%20512x340.jpg" alt="Gummiunterlage 512x340.jpg" width="513" height="340" /> </a>
+<div class="caption text-center"><a title="Gummimatten als Unterlagen f&uuml;r Aluminium-Profilmatten oder als H&ouml;henausgleich f&uuml;r Matten im Mattenbett" href="/kokosmatten/#artikel_Gummiunterlage1"><span style="color: #000080;"><span>Gummimatten</span></span></a></div>
+</div>
+</li>
+									<li class="col-sm-12">
+												
+									</li>						
+								</li>
+								
+							</ul>
+							
+							
+						</li>
+											<li class='dropdown active-button'>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href='/aluminium_profilmatten'>
+								Aluminium-Matten								<span class="caret"></span>
+							</a>
+							
+							 <ul class="dropdown-menu row" role="menu">
+								<li class="dropdown-menu-products">
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " href="/aluminium_profilmatten/Diplomat-Original"> <img title="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " src="/media/bild/Dip-R.jpg" alt="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " width="236" height="157" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " href="/aluminium_profilmatten/#artikel_Marschall-Premium-Aluminium"><span style="color: #000080;">DIPLOMAT-***<br />ALU-ORIGINAL</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="DIPLOMAT-ORIGINALin Standardgr&ouml;&szlig;en /aluminium_profilmatten" href="/aluminium_profilmatten/shop-alu-profil"> <img title="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " src="/media/bild/Dip-R.jpg" alt="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " width="236" height="157" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten in Standardgr&ouml;&szlig;en" href="/aluminium_profilmatten/shop-alu-profil"><span style="color: #000080;">DIPLOMAT-<br />STANDARGR&Ouml;SSEN</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="DIPLOMAT-PREMIUM-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " href="/aluminium_profilmatten/#artikel_53601"> <img title="DIPLOMAT-PREMIUM-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " src="/media/bild/Dip-R.jpg" alt="DIPLOMAT-PREMIUM-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " width="513" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #333399;"><span style="color: #000080;"><a title="DIPLOMAT-PREMIUM-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " href="/aluminium_profilmatten/#artikel_53601"><span style="color: #000080;">DIPLOMAT-<br />ALU-PREMIUM</span></a></span><br /></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="MARSCHALL-Aluminium-Profilmatten f&uuml;r extreme Belastungen, 2,5mm Profilst&auml;rke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereicherke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereiche" href="/aluminium_profilmatten/#artikel_5420"> <img title="MARSCHALL-Aluminium-Profilmatten f&uuml;r extreme Belastungen, 2,5mm Profilst&auml;rke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereiche" src="/media/bild/MARSCHALL_522S_R.jpg" alt="MARSCHALL-Aluminium-Profilmatten f&uuml;r extreme Belastungen, 2,5mm Profilst&auml;rke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereiche" width="512" height="290" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="MARSCHALL-Aluminium-Profilmatten f&uuml;r extreme Belastungen, 2,5mm Profilst&auml;rke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereiche" href="/aluminium_profilmatten/#artikel_5420"><span style="color: #000080;">MARSCHALL-<br />ALU-ORIGINAL</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="MARSCHALL-Aluminium-Profilmatten f&uuml;r extreme Belastungen, 2,5mm Profilst&auml;rke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereicherke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereiche" href="/aluminium_profilmatten/#artikel_5440"> <img title="MARSCHALL-Aluminium-Profilmatten f&uuml;r extreme Belastungen, 2,5mm Profilst&auml;rke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereiche" src="/media/bild/MARSCHALL_522S_R.jpg" alt="MARSCHALL-Aluminium-Profilmatten f&uuml;r extreme Belastungen, 2,5mm Profilst&auml;rke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereiche" width="512" height="290" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="MARSCHALL-Aluminium-Profilmatten f&uuml;r extreme Belastungen, 2,5mm Profilst&auml;rke, 17mm und 22mm H&ouml;he, teils auch geeignet f&uuml;r Au&szlig;enbereiche" href="/aluminium_profilmatten/#artikel_5440"><span style="color: #000080;">MARSCHALL-<br />ALU-PREMIUM</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="PLAZA_Aluminium-Profilmatten" href="/aluminium_profilmatten/#artikel_5561542"> <img title="PLAZA_Aluminium-Profilmatten" src="/media/bild/PLAZA_42R-512x340.jpg" alt="PLAZA_Aluminium-Profilmatten" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #333399;"><a title="PLAZA_Aluminium-Profilmatten" href="/aluminium_profilmatten/#artikel_5561542"><span style="color: #333399;">PLAZA-<br />ALUMINIUM_PROFIL</span></a></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Aluminium-Profilmatten in Normgr&ouml;&szlig;en" href="/aluminium_profilmatten/shop-alu-profil"> <img title="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " src="/media/bild/Dip-R.jpg" alt="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " width="236" height="157" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="DIPLOMAT-ORIGINAL-Aluminium-Profilmatten, 1mm Profilst&auml;rke, verschiedene H&ouml;hen, teils auch geeignet f&uuml;r Au&szlig;enbereiche " href="/aluminium_profilmatten/#artikel_Marschall-Premium-Aluminium"><span style="color: #000080;">ALU-PROFILMATTEN<br />NORMGR&Ouml;SSEN</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="TopClean" href="/aluminium_profilmatten/#artikel_TopClean-R"> <img title="TopClean-Rips" src="/media/bild/TopClean-Rips-512x340.jpg" alt="TopClean-Rips" width="513" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #333399;"><span style="color: #333399;"><a title="PLAZA_Aluminium-Profilmatten" href="/aluminium_profilmatten/#artikel_TopClean-R">TOP-CLEAN-<br />ALUMINIUM_PROFIL</a></span></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Aluminium-Anlaufprofil" href="/aluminium_profilmatten/#artikel_Aluminium-Anlaufprofil"> <img title="Aluminium-Anlaufprofil" src="/media/bild/Anlaufpofil-Alu-2.jpg" alt="Aluminium-Anlaufprofil" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #333399;"><a title="Aluminium-Anaufprofil" href="/aluminium_profilmatten/#artikel_Aluminium-Anlaufprofil"><span style="color: #333399;">ALUMINIUM_<br />ANLAUFPROFIL</span></a></span></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Aluminium-Winkelprofilrahmen, Messing-Winkelprofilrahm" href="/aluminium_profilmatten/rahmen_und_zubehoer"> <img title="Winkelprofilrahmen, Aluminium, Messing, Edelstahl" src="/media/bild/rahmen_ganz-2.jpg" alt="Winkelprofilrahmen, Aluminium, Messing, Edelstahl" width="513" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Aluminium-Winkelprofilrahmen, Messing-Winkelprofilrahm" href="/aluminium_profilmatten/rahmen_und_zubehoer"><span style="color: #000080;">RAHMEN u.<br />Zubeh&ouml;r</span></a>&nbsp;</span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Schmutzfangwanne" href="/aluminium_profilmatten/#artikel_schmutzfangwanne"><img title="Schmutzfangwanne-513x340.jpg" src="/media/bild/Schmutzfangwanne-513x340.jpg" alt="Schmutzfangwanne-513x340.jpg" width="513" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Schmutzfangwanne" href="/aluminium_profilmatten/#artikel_5022_CN"><span style="color: #000080;">SCHMUTZFANG-<br />WANNEN</span>&nbsp;</a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Spezialrahmen-Unterkonstruktion zur Abdeckung mit Aluminium-Profilmatten von begehbaren Lichtsch&auml;chten" href="/aluminium_profilmatten/#artikel_14301"><img title="Spezialrahmen-Unterkonstruktion zur Abdeckung mit Aluminium-Profilmatten von begehbaren Lichtsch&auml;chten" src="/media/bild/Unterkonstruktion-Ra_512x340.jpg" alt="Spezialrahmen-Unterkonstruktion zur Abdeckung mit Aluminium-Profilmatten von begehbaren Lichtsch&auml;chten" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Schmutzfangwanne" href="/aluminium_profilmatten/#artikel_5022_CN"><span style="color: #000080;">SPEZIALRAHMEN-<br />UNTERKONSTRUKTION</span>&nbsp;</a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Profilenlagen-Einlagen" href="/aluminium_profilmatten/#artikel_Profileinlagen"> <img title="rips_color Ripseinlagen" src="/media/bild/rips_color_512x340.jpg" alt="rips_color Ripseinlagen" width="513" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #000080;"><a title="Ripsstreifen-Profileinlagen" href="/aluminium_profilmatten/#artikel_Dipl-r-ripsstreifen">RIPSSTREIFEN u.<br /></a></span></span><a title="Ripsstreifen-Profileinlagen" href="/aluminium_profilmatten/#artikel_Profileinlagen"><span style="color: #000080;"><span>PROFIL-EINLAGEN</span>&nbsp;</span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Gummiunterlage als H&ouml;henausgleich" href="/aluminium_profilmatten/#artikel_Gummiunterlage1"> <img title="Gummiunterlage 512x340.jpg" src="/media/bild/Gummiunterlage%20512x340.jpg" alt="Gummiunterlage 512x340.jpg" width="513" height="340" /> </a>
+<div class="caption text-center"><a title="Gummiunterlagen-als H&ouml;henausgleich" href="/aluminium_profilmatten/#artikel_Gummiunterlage1"><span style="color: #000080;"><span style="color: #000080;">GUMMI-<br />UNTERLAGEN</span>&nbsp;</span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Normrost - Gitterrost" href="/aluminium_profilmatten/#artikel_Gitterrost"> <img title="Normrost Gitterrost" src="/media/bild/Normrost_512x340.jpg" alt="Normrost Gitterrost" width="513" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><span style="color: #333399;"><a title="Normrost -Gitterrsot" href="/aluminium_profilmatten/#artikel_Gitterrost"><span style="color: #333399;">GITTERROST-<br />verzinkt</span></a></span></span></div>
+</div>
+</li>
+									<li class="col-sm-12">
+										         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/aluminium_profilmatten/rahmen_und_zubehoer">Aluminiumrahmen, Schmutzfangmatten, Messingrahmen, Edelstahlrahmen, Zubehör</a>
+			</div>
+		</div>
+	</li>
+        	
+		
+									</li>						
+								</li>
+								
+							</ul>
+							
+							
+						</li>
+											<li class='dropdown active-button'>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href='/gummi_und_kunststoffmatten'>
+								Gummi-/Kunststoffmatten								<span class="caret"></span>
+							</a>
+							
+							 <ul class="dropdown-menu row" role="menu">
+								<li class="dropdown-menu-products">
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="ECO-Grip Bodenschutzmatte- Ecoblue-07" href="/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten"> <img title="ECO-Grip Bodenschutzmatte" src="/media/bild/07-150.L_1600-512.jpg" alt="ECO-Grip Bodenschutzmatte" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="ECO-Grip Bodenschutzmatte" href="/gummi_und_kunststoffmatten/bodenschutzmatten/#artikel_Bodenschutzmatten">Bodenschutz<br />Matten</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Komfort-Standard Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_komfort-standard"> <img title="Komfort-Standard_Anti-Erm&uuml;dungsmatten" src="/media/bild/Komfort-Standard_512x340.jpg" alt="Komfort-Standard_Anti-Erm&uuml;dungsmatten" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_komfort-standard">Komfort-Standard<br />Anti-Erm&uuml;dung</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_komfort-design"> <img title="Komfort-Design_512x340.jpg" src="/media/bild/Komfort-Design_512x340.jpg" alt="Komfort-Design_512x340.jpg" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_komfort-design">Komfort-Design<br />Anti-Erm&uuml;dung</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_Komfort-office"> <img title="Komfort-Office-512x340.jpg" src="/media/bild/Komfort-Office-512x340.jpg" alt="Komfort-Office-512x340.jpg" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_Komfort-office">Komfort-Office<br />Anti-Erm&uuml;dung</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_Komfort-soft"> <img title="Komfort_Soft_Anti-Erm&uuml;dungsmatten" src="/media/bild/Komfort_Soft_512x340.jpg" alt="Komfort_Soft_Anti-Erm&uuml;dungsmatten" width="513" height="340" /> </a>
+<div class="caption text-center"><a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_Komfort-soft">Komfort-Soft<br />Anti-Erm&uuml;dung</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Cushion-Coil Antierm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_6910002"> <img title="Cushion-Coil Antierm&uuml;dungsmatten" src="/media/bild/CushionCoil-512x340.jpg" alt="Cushion-Coil Antierm&uuml;dungsmatten" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Cushion-Coil Antierm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_6910002">Cushion-Coil<br />Anti-Erm&uuml;dung</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_6910003"> <img title="Complete-Comfort.JPG" src="/media/bild/Complete-Comfort.JPG" alt="Complete-Comfort.JPG" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Komfort-Soft Anti-Erm&uuml;dungsmatten" href="/gummi_und_kunststoffmatten/#artikel_6910003">Complete<br />Comfort</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Scraper-Matten, geeignet f&uuml;r Feuchtr&auml;ume, besonders f&uuml;r K&uuml;che und Pass" href="/gummi_und_kunststoffmatten/#artikel_6900012"> <img title="Scraper-Matten, geeignet f&uuml;r Feuchtr&auml;ume, besonders f&uuml;r K&uuml;che und Pass" src="/media/bild/Scraper_512x340.jpg" alt="Scraper-Matten, geeignet f&uuml;r Feuchtr&auml;ume, besonders f&uuml;r K&uuml;che und Pass" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Scraper-Matten, geeignet f&uuml;r Feuchtr&auml;ume, besonders f&uuml;r K&uuml;che und Pass" href="/gummi_und_kunststoffmatten/#artikel_6900012">Scraper<br />Matten</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Thru-Plus Gummimatten f&uuml;r den Na&szlig;bereich in B&auml;dern und besonders K&uuml;chen und am Pass" href="/gummi_und_kunststoffmatten/#artikel_6910001"> <img title="Thru-Plus Gummimatten f&uuml;r den Na&szlig;bereich in B&auml;dern und besonders K&uuml;chen und am Pass" src="/media/bild/Thru%20PLUS_512x340.jpg" alt="Thru-Plus Gummimatten f&uuml;r den Na&szlig;bereich in B&auml;dern und besonders K&uuml;chen und am Pass" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Thru-Plus Gummimatten f&uuml;r den Na&szlig;bereich in B&auml;dern und besonders K&uuml;chen und am Pass" href="/gummi_und_kunststoffmatten/#artikel_6910001">Thru-Plus<br />Matten</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Gummiwabenmatten mit und ohne Einsatzb&uuml;rsten" href="/gummi_und_kunststoffmatten/#artikel_Gummiwabenmatten"> <img title="Gummiwabenmatten mit und ohne Einsatzb&uuml;rsten" src="/media/bild/Struktura-220_512x340.jpg" alt="Gummiwabenmatten mit und ohne Einsatzb&uuml;rsten" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Gummiwabenmatten mit und ohne Einsatzb&uuml;rsten" href="/gummi_und_kunststoffmatten/#artikel_Gummiwabenmatten">Gummi<br /></a><a title="Gummiwabenmatten mit und ohne Einsatzb&uuml;rsten" href="/gummi_und_kunststoffmatten/#artikel_Gummiwabenmatten">Wabenmatten</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Kunstoffmatten, Eingangsmatten, Reinstreifer, Feinstreifer, Grobstreifer" href="/gummi_und_kunststoffmatten/#artikel_Attache"> <img title="Kunststoffmatten, Eingangsmatten, Feinstreifer und Grobstreifer" src="/media/bild/attache-512x340.jpg" alt="Kunststoffmatten, Eingangsmatten, Feinstreifer und Grobstreifer" width="513" height="340" /> </a>
+<div class="caption text-center"><a title="Nomad-Matten" href="/gummi_und_kunststoffmatten/#artikel_Nomad-Matten">Kunststoff<br />Reinstreifer</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Winkelprofilrahmen aus Aluminium, Messing und Edelstahl" href="/gummi_und_kunststoffmatten/#artikel_Nomad-Matten"> <img title="Nomad-Matten" src="/media/bild/nomad_extra_512x340.jpg" alt="Nomad-Matten" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Nomad-Matten" href="/gummi_und_kunststoffmatten/#artikel_Nomad-Matten">NOMAD<br />Spaghetti</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Fu&szlig;matten, Schmutzfangmatten unifarbig oder meliert. Farben nach Ihren W&uuml;nschen mit einer Auswahl aus &uuml;ber 100 Standard-Farben" href="/gummi_und_kunststoffmatten/#artikel_Mitwell-Matten"> <img title="Mitwell-Matten" src="/media/bild/mitwell_super_512x340.jpg" alt="Mitwell-Matten" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Mitwell-Matten" href="/gummi_und_kunststoffmatten/#artikel_Mitwell-Matten">Mitwell<br />Matten</a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Aluminium- und Kunststoff- Profilmatten in verschiedenen H&ouml;hen mit unterschiedlicher Oberfl&auml;chengestaltung." href="/gummi_und_kunststoffmatten/#artikel_Sixform%20Star"> <img title="Sixform Star" src="/media/bild/sixform_star_512x340.jpg" alt="Sixform Star" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="Sixform Star" href="/gummi_und_kunststoffmatten/#artikel_Sixform%20Star"><span style="color: #000080;"><span style="color: #000080;">Sixform<br />Kunststoff&nbsp;</span></span></a></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Kokosmatten, schnittfest mit Vinyl-R&uuml;ckenbeschichtung, in 7 verschiedenen H&ouml;hen, natur, farbig oder gestaltet, beliebige Gr&ouml;&szlig;en oder Bahnenware." href="/gummi_und_kunststoffmatten/#artikel_STEWELL-Front-Tex"> <img title="STEWELL" src="/media/bild/stewell_512x340.jpg" alt="sSTEWELL" width="512" height="340" /> </a>
+<div class="caption text-center"><a title="STEWELL" href="/gummi_und_kunststoffmatten/#artikel_STEWELL-Front-Tex"><span style="color: #000080;">Stewell<br />Kunststoff</span></a></div>
+</div>
+</li>
+									<li class="col-sm-12">
+										         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/gummi_und_kunststoffmatten/bodenschutzmatten">Bodenschutzmatten</a>
+			</div>
+		</div>
+	</li>
+        	
+		
+									</li>						
+								</li>
+								
+							</ul>
+							
+							
+						</li>
+											<li class='dropdown active-button'>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href='/miet-mattenservice'>
+								Miet-Mattenservice								<span class="caret"></span>
+							</a>
+							
+							 <ul class="dropdown-menu row" role="menu">
+								<li class="dropdown-menu-products">
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="einfarbige und melierte Miet-Matten" href="/miet-mattenservice/service_miet-mattenservice/#artikel_6400111"> <img title="Mietmatten-Waschservice - einfarbige und melierte Miet-Matten" src="/media/bild/IH_008.jpg" alt="Mietmatten-Waschservice - einfarbige und melierte Miet-Matten" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Mietmatten-Waschservice - einfarbige und melierte Miet-Matten" href="/miet-mattenservice/service_miet-mattenservice/#artikel_6400111"><span style="color: #000080;">einfarbige + melierte Miet-Matten</span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="gestaltete Matten / Miet-Waschservice" href="/miet-mattenservice/service_miet-mattenservice/#artikel_6400111"> <img title="gestaltete Matten / Miet-Waschservice" src="/media/bild/HerzWillkommen_512x340.jpg" alt="gestaltete Matten / Miet-Waschservice" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="gestaltete Matten / Miet-Waschservice" href="/miet-mattenservice/service_miet-mattenservice/#artikel_6400111"><span style="color: #000080;"><span>gestaltete Miet-Matten</span></span></a></span></div>
+</div>
+</li>
+<li class="dropdown-menu-products-item col-xs-6 col-sm-4 col-md-2">
+<div class="dropdown-menu-products-item-thumbnail thumbnail"><a title="Teppichboden-Reinigung" href="/miet-mattenservice/reinigungsprodukte"> <img title="Teppichboden-Reinigung" src="/media/bild/VierJahr1_512x340.jpg" alt="Teppichboden-Reinigung" width="512" height="340" /> </a>
+<div class="caption text-center"><span style="color: #000080;"><a title="Teppichboden-Reinigung" href="/miet-mattenservice/reinigungsprodukte"><span style="color: #000080;"><span>Teppichboden-Reinigung</span></span></a></span></div>
+</div>
+</li>
+									<li class="col-sm-12">
+										         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/miet-mattenservice/service_miet-mattenservice">Miet-Fußmatten</a>
+			</div>
+		</div>
+	</li>
+        	
+         <li class="dropdown-menu-products-item col-sm-4 col-md-3 col-lg-2">
+		<div class="dropdown-menu-products-item-thumbnail thumbnail">
+			<div class="caption text-center">
+				<a
+					href="/miet-mattenservice/reinigungsprodukte">Teppich-Reinigungsprodukte</a>
+			</div>
+		</div>
+	</li>
+        	
+		
+									</li>						
+								</li>
+								
+							</ul>
+							
+							
+						</li>
+											<li class='dropdown active-button'>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href='/schnaeppchen'>
+								Schnaeppchen								<span class="caret"></span>
+							</a>
+							
+							 <ul class="dropdown-menu row" role="menu">
+								<li class="dropdown-menu-products">									<li class="col-sm-12">
+												
+									</li>						
+								</li>
+								
+							</ul>
+							
+							
+						</li>
+													
+								
+							</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="logo-banner">
+    <div id="sprachwahl" class='no-print'>
+			<a class='de active'
+			title="Deutsch"
+			href="/warenkorb?lang=de">
+			<img  src='/media/de.jpg' alt='de' />		</a>
+			<a class='en inactive'
+			title="english"
+			href="/warenkorb?lang=en">
+			<img  src='/media/en_inactive.jpg' alt='en' />		</a>
+			<a class='id inactive'
+			title="id"
+			href="/warenkorb?lang=id">
+			<img  src='/media/id_inactive.jpg' alt='id' />		</a>
+		<a href="javascript:window.print();"><img  src="/media/printer.png"></a>
+</div>
+    
+	<a href="/">
+		<img class="logoimage" alt="" src="/media/logo.png" />
+		<img class="logoimage-print" style="display: none" alt="" src="/media/logo_print.png" />
+	</a>
+	
+	<div class="logo-text">
+		<div class="companyname-head">
+			über 35 Jahre Erfahrung		</div>
+		<div class="companyname">
+			Der Mattenfuchs-Shop		</div>
+		<div class="telenumber" style="font-size: 120%;">
+			hotline +49 171 7755400		</div>
+		<div class="companytext hidden-xs">
+			<div class="companytext-1">individuell, werbewirksam, sauber</div>
+			<div class="companytext-2">Werbe-Design-Matten</div>
+		</div>
+	</div>
+</div>
+
+	
+	<div class='container'>
+		<div id="content">
+						<div class='text_container warenkorb'>
+	<table class='table'>
+		<tr>
+			<th class='beschreibung'>Beschreibung</th>
+			<th class='preis'>Preis</th>
+			<th class='menge'>Menge</th>
+			<th class='summe' align='right'>Summe</th>
+		</tr>
+					<tr style='vertical-align: top;' class='collapse-bottom'>
+				<td>
+																<br/>- Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig																	<br/>- Designfarbe: 639-kirschrot																	<br/>- Format: quer - horizontal																					<br /><img src="/media/bild/quer.png" alt="Quer" />
+																								<br/>- Grundfarbe: 630-mittelgrau																	<br/>- Standardgröße: 40cm x 60cm																																					<br/> - Mattengröße: 90cm × 120cm																											</td>
+									<td class='nowrap'>auf Anfrage</td>
+								<td class='nowrap'>
+										<form onsubmit="return false" data-entschaerft="1" method='post'>
+						<input type='hidden' name='settocart[key]' value='5d7d30b98ca6bdf98901c45bb1933782e97e32a4' />
+					
+						<div class='anzahlselect input-group'>
+							<span class="input-group-btn">
+				                <button disabled  class="anzahlminus btn btn-default" type="button">-</button>
+							</span>
+							<input onchange='this.form.submit();' autocomplete='off' class='anzahlselect form-control input-md' size='2' name='settocart[anzahl]' type="text" value='1' />
+							<span class="input-group-btn">
+				                <button disabled  class="anzahlplus btn btn-default" type="button">+</button>
+							</span>
+						</div>
+						<noscript>
+							<input type='submit' class="btn btn-default" value='Ok' disabled>
+						</noscript>
+					</form>
+									</td>
+			   						<td align='right' class='nowrap'>auf Anfrage</td>
+								
+			</tr>
+			<tr class='collapse-top'>
+				<td colspan="4">
+					<form onsubmit="return false" data-entschaerft="1" method='post' class="form-inline">
+						- Ihr Kommentar:						<input class="form-control" type="text" onkeydown="$('#fid6aa2f07ceb509').show();" name='setkommentar[5d7d30b98ca6bdf98901c45bb1933782e97e32a4]' value="TEST Anfrage-Weg Sehorz - bitte ignorieren" size="35" />
+						<input style="display: none;" id="fid6aa2f07ceb509" class="btn btn-default" type='submit' value='Speichern' disabled>
+						<noscript>
+							<input type='submit' value='Speichern' disabled>
+						</noscript>
+					</form>
+				</td>
+			</tr>
+								   <tr>
+							</tr>
+						
+					</table>
+		
+		<form onsubmit="return false" data-entschaerft="1" method='post' class="form-horizontal">
+										<div class="form-group">
+					<label class="control-label col-sm-2">Versand nach:</label>
+					<div class='col-sm-4'>
+						<select class="form-control col-md" name='adresse[land]' class='select_land' onchange='this.form.submit()'>
+													<option  value='at' >Österreich</option>													<option  value='be' >Belgien</option>													<option  value='ch' >Schweiz</option>													<option  value='de' selected='selected'>Deutschland</option>													<option  value='dk' >Dänemark</option>													<option  value='ee' >Estland</option>													<option  value='es' >Spanien</option>													<option  value='it' >Italien</option>													<option  value='jo' >Jordanien</option>													<option  value='Jorda' >Jorda</option>													<option  value='li' >Lichtenstein</option>													<option  value='lu' >Luxemburg</option>													<option  value='Luxem' >Luxem</option>													<option  value='Malta' >Malta</option>													<option  value='nl' >Niederlande</option>													<option  value='Portu' >Portu</option>													<option  value='ro' >Rumänien</option>													<option  value='Schwe' >Schwe</option>													<option  value='se' >Schweden</option>													<option  value='sk' >Slowakei</option>													<option  value='Slowa' >Slowa</option>												</select>
+					</div>
+				</div>
+						
+							<div class="form-group">
+					<label class="control-label col-sm-2">Versandart:</label> 
+					<div class='col-sm-4'>
+						<select class="form-control" name='versandart' class='select_versandart' onchange='this.form.submit()'>
+															<option  value='7' selected='selected'>DHL</option>															<option  value='11' >pauschal</option>															<option  value='12' >DPD</option>															<option  value='13' >Spedition</option>													</select>
+					</div>
+				</div>
+						
+			
+							<input type="hidden" name='zahlungsart' value="RechnungPayment" checked="checked" />
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2"></label>
+				<div class='col-sm-10'>
+					<a class="btn btn-primary btn-lg pull-right btn-cart-next" href="/adresse">Weiter zur Adresse</a>
+				</div>
+			</div>
+		</form>
+	</div>		</div>
+	</div>	    	<div class="derfooter">
+	<footer>
+		<div class="post_navigation row no-print">
+			<ul class="nav nav-pills col-md-6">
+								<li class='active-button'><a href='/agb'>AGB</a></li>
+								<li class='active-button'><a href='/kontakt'>Kontakt</a></li>
+												<li class='active-button'><a href='/impressum'>Impressum</a></li>
+									<li class='active-button'><a href='/datenschutz'>Datenschutzerklärung</a></li>
+									<li class='active-button'><a href='/service'>Service</a></li>
+									<li class='active-button'><a href='/unternehmen'>Unternehmen</a></li>
+							</ul>
+			<div class="col-md-6">
+
+					
+	    		<div class="social_navi">
+	<a href='https://www.facebook.com/pages/Fuchsius-multi-media-GmbH/384190261772286?_rdr=p&business_id=860474924013963&edited=email&sk=info&tab=page_info' target="_blank"><img src="https://de.facebook.com/favicon.ico" alt="facebook" class="bookmarkicon"></a>
+	<a href="https://twitter.com/mattenfuchs">Twitter</a>
+</div>
+	    	</div>
+		</div>
+		
+		<div class="payments no-print">
+			<img src="/media/payment/paypal.png" />
+			<img src="/media/payment/mastercard.png" />
+			<img src="/media/payment/visa.png" />
+			<img style="height: 30px;" src="/media/payment/amex.png" />
+		</div>
+	
+		
+	    	        <p style="text-align: center;"><strong><a title="AGB" href="https://www.matten.de/AGB">AGB</a> &nbsp; &nbsp; &nbsp; &nbsp;<a title="Kontakt" href="https://www.matten.de/Kontakt">Kontakt &nbsp;</a> &nbsp; &nbsp; &nbsp; &nbsp;<a title="Impressum" href="https://www.matten.de/Impressum">Impressum </a>&nbsp; &nbsp; &nbsp; &nbsp;<a title="Datenschutz" href="https://www.matten.de/Datenschutz"> Datenschutzerkl&auml;rung</a> &nbsp; &nbsp; &nbsp; &nbsp; <a title="Service" href="https://www.matten.de/Service">Service</a> &nbsp; &nbsp; &nbsp; &nbsp; <a title="Unternehmen" href="https://www.matten.de/Unternehmen">Unternehmen</a> &nbsp; &nbsp; &nbsp; &nbsp; <a title="Widerruf" href="http://www.matten.de/Widerruf">Widerruf-Button</a></strong></p>
+<p style="text-align: center;"><strong>&copy; Copyright 1985 - 2026</strong>&nbsp;&nbsp;|&nbsp; <strong>www.matten.de</strong>&nbsp;|&nbsp; FUCHSIUS multi-media GmbH&nbsp;|&nbsp; <strong>Alle Rechte vorbehalten.</strong>&nbsp;|&nbsp; <a title="Datenschutzerkl&auml;rung DSGVO" href="https://www.matten.de/datenschutz"><strong>Datenschutz (DSGVO)</strong></a></p>
+<p style="text-align: center;">sch&ouml;n&amp;sauber, Werbe-Design-Matten, Der Mattenfuchs, Fischerstra&szlig;e 2, D-85737 Ismaning bei M&uuml;nchen <br /> Tel.: +49 89 5455 8264&nbsp;|&nbsp; Fax: +49 89 5455 8333&nbsp;|&nbsp; Mobil: +49 171 7755400&nbsp;|&nbsp; E-Mail: <a title="E-Mail" href="mailto:info@matten.de">info@matten.de</a> <br /> <a title="Ju-Stones Natursteinwaschbecken und Wannen" href="https://ju-stones.com"> <img title="Ju-Stones" src="/media/bild/Ju-Stones-Logo.png" alt="Ju-Stones" width="86" height="42" /> </a> &nbsp;&nbsp; <a title="Wir in Ismaning" href="http://www.wir-in-ismaning.de/fuchsius-der-mattenfuchs"> <img title="wir in Ismaning" src="/media/bild/wii_Banner_335x43.jpg" alt="wir in Ismaning" width="335" height="43" /> </a></p>	        </footer>
+</div>    	</div>
+    	<script src="/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script id="twitter-wjs" src="//platform.twitter.com/widgets.js"></script>
+ 	</body>
+</html>

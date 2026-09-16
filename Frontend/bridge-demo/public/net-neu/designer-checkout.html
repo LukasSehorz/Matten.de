@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mattenfuchs</title>
+<meta name="keywords" content="e-commerce, matten">
+<meta name="description" content="Matten.de e-commerce">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="matten.de">
+<meta property="og:description" content="Matten.de e-commerce">
+<link rel="icon" type="image/png" href="assets/img/sonstige/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="assets/img/sonstige/favicon-16x16.png" sizes="16x16">
+<link rel="stylesheet" href="assets/css/matten-net.css">
+<link rel="stylesheet" href="assets/css/animate.css">
+<link rel="stylesheet" href="assets/fonts/nunito.css">
+<link rel="stylesheet" href="assets/fontawesome/css/all.css">
+<link rel="stylesheet" href="assets/css/net-neu.css">
+<link rel="stylesheet" href="assets/css/designer.css">
+</head>
+<body id="">
+<div style="background: #fff;">
+<div id="net-kopf"></div>
+
+<div style="min-height: 500px;">
+    <div class="container padding-top">
+        <h1>
+            Auftrag verlassen        </h1>
+
+        <div class="row">
+
+            <div class="col">
+                <h2>Specification</h2>
+                <div id="auftrag-meldung"></div>
+                <!-- Markup 1:1 nach spec/screens/mattendesigner-bestellformular.html (Spec 9.7).
+                     Das Original schickt das Formular per POST an matten.net; hier faengt
+                     seite-designer-checkout.js das Absenden ab und legt die Anfrage ueber die
+                     Bruecke in den Warenkorb des Altsystems (Adresse -> /api/kasse/adresse). -->
+                <form name="custom_mat_order_checkout" method="post" id="designer-auftrag" novalidate>
+                <div class="designer-vorschau">
+                    <img src="" alt="Preview" id="matDisplay">
+                    <div>
+                        <!-- Ergaenzung: das Vorschaubild zum Herunterladen, damit der Kunde es dem Angebot beilegt -->
+                        <a class="btn btn-sm btn-secondary" id="vorschau-download" download="mattendesign.png" href="#" hidden><i class="fas fa-download"></i> Vorschau herunterladen</a>
+                    </div>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Menge</th>
+                        <td id="spec-menge"></td>
+                    </tr>
+                    <tr>
+                        <th>Mattenart</th>
+                        <td id="spec-mattenart"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Breite</th>
+                        <td id="spec-breite"></td>
+                    </tr>
+                    <tr>
+                        <th>Länge</th>
+                        <td id="spec-laenge"></td>
+                    </tr>
+                </table>
+                                <div class="d-none">
+                    <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_customMat_quantity">Menge</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_customMat_quantity" name="custom_mat_order_checkout[customMat][quantity]" required="required" class="form-control" /></div>
+    </div>
+                    <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_customMat_material">Material</label><div class="col-sm-8"><select id="custom_mat_order_checkout_customMat_material" name="custom_mat_order_checkout[customMat][material]" class="form-control"><option value="1">JetPrint</option><option value="2">JetPrint_light</option><option value="4">JetPrint-Velour</option><option value="5">ColorStar</option></select></div>
+    </div>
+                    <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_customMat_baseColor">Grundfarbe</label><div class="col-sm-8"><select id="custom_mat_order_checkout_customMat_baseColor" name="custom_mat_order_checkout[customMat][baseColor]" class="form-control"></select></div>
+    </div>
+                    <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_customMat_width">Breite (cm)</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_customMat_width" name="custom_mat_order_checkout[customMat][width]" required="required" class="form-control" /></div>
+    </div>
+                    <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_customMat_height">Höhe (cm)</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_customMat_height" name="custom_mat_order_checkout[customMat][height]" required="required" class="form-control" /></div>
+    </div>
+                </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4" for="custom_mat_order_checkout_customMat_notes">Bemerkungen</label><div class="col-sm-8"><textarea id="custom_mat_order_checkout_customMat_notes" name="custom_mat_order_checkout[customMat][notes]" class="form-control"></textarea></div>
+    </div>
+                <h2>Kundendaten</h2>
+                <div class="alert alert-info small" id="test-hinweis">
+                    Vorname, Nachname und Firma sind für Tests vorbelegt (<strong>TEST … kein echter Auftrag</strong>),
+                    damit ein Datensatz im Livesystem sofort als Probe erkennbar ist. E-Mail und Telefon verlangt das
+                    Altsystem matten.de als Pflichtfelder — bitte eigene Angaben eintragen, dorthin geht die Bestätigung.
+                </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_title">Anrede</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_title" name="custom_mat_order_checkout[title]" required="required" class="form-control" /><div class="invalid-feedback" id="fehler-title"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_firstName">Vorname</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_firstName" name="custom_mat_order_checkout[firstName]" required="required" class="form-control" /><div class="invalid-feedback" id="fehler-firstName"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_lastName">Nachname</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_lastName" name="custom_mat_order_checkout[lastName]" required="required" class="form-control" /><div class="invalid-feedback" id="fehler-lastName"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4" for="custom_mat_order_checkout_companyName">Firmenname</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_companyName" name="custom_mat_order_checkout[companyName]" class="form-control" /><div class="invalid-feedback" id="fehler-companyName"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_streetAddress">Straße</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_streetAddress" name="custom_mat_order_checkout[streetAddress]" required="required" class="form-control" /><div class="invalid-feedback" id="fehler-streetAddress"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_city">Stadt</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_city" name="custom_mat_order_checkout[city]" required="required" class="form-control" /><div class="invalid-feedback" id="fehler-city"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4" for="custom_mat_order_checkout_state">Bundesland</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_state" name="custom_mat_order_checkout[state]" class="form-control" /><div class="invalid-feedback" id="fehler-state"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_postalCode">PLZ</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_postalCode" name="custom_mat_order_checkout[postalCode]" required="required" class="form-control" /><div class="invalid-feedback" id="fehler-postalCode"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_country">Land</label><div class="col-sm-8"><select id="custom_mat_order_checkout_country" name="custom_mat_order_checkout[country]" class="form-control"><option value="de" selected="selected">Deutschland</option></select><div class="invalid-feedback" id="fehler-country"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_phone">Telefon</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_phone" name="custom_mat_order_checkout[phone]" required="required" class="form-control" /><div class="invalid-feedback" id="fehler-phone"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4 required" for="custom_mat_order_checkout_email">eMail</label><div class="col-sm-8"><input type="email" id="custom_mat_order_checkout_email" name="custom_mat_order_checkout[email]" required="required" class="form-control" /><div class="invalid-feedback" id="fehler-email"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4" for="custom_mat_order_checkout_mobile">Mobil</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_mobile" name="custom_mat_order_checkout[mobile]" class="form-control" /><div class="invalid-feedback" id="fehler-mobile"></div></div>
+    </div>
+                <div class="form-group row"><label class="col-form-label col-sm-4" for="custom_mat_order_checkout_fax">Fax</label><div class="col-sm-8"><input type="text" id="custom_mat_order_checkout_fax" name="custom_mat_order_checkout[fax]" class="form-control" /><div class="invalid-feedback" id="fehler-fax"></div></div>
+    </div>
+                <div class="form-group row"><div class="col-sm-4"></div><div class="col-sm-8"><div class="form-check">        <input type="checkbox" id="custom_mat_order_checkout_tos" name="custom_mat_order_checkout[tos]" required="required" class="form-check-input" value="1" />
+        <label class="form-check-label required" for="custom_mat_order_checkout_tos">Wir akzeptieren ihre AGB</label><div class="invalid-feedback" id="fehler-tos"></div></div></div></div>
+                <hr>
+                <div id="auftrag-weg" class="small text-muted mb-2"></div>
+                <button type="submit" class="btn btn-primary" id="auftrag-knopf">
+                    <i class="fas fa-check"></i>
+                    Auftrag erteilen                </button>
+                <ol class="auftrag-fortschritt" id="auftrag-fortschritt" hidden>
+                    <li data-schritt="1" data-stand="offen"><i class="fas fa-fw fa-circle"></i><span class="fortschritt-text">Anfrageartikel in den Warenkorb des Altsystems legen (POST /api/cart/add)</span><span class="fortschritt-detail"></span></li>
+                    <li data-schritt="2" data-stand="offen"><i class="fas fa-fw fa-circle"></i><span class="fortschritt-text">Kundendaten an das Altsystem übergeben (POST /api/kasse/adresse)</span><span class="fortschritt-detail"></span></li>
+                    <li data-schritt="3" data-stand="offen"><i class="fas fa-fw fa-circle"></i><span class="fortschritt-text">Weiter zur Prüfung — dort steht die Vorschau des Altsystems und der Knopf „Anfrage abschicken“</span><span class="fortschritt-detail"></span></li>
+                </ol>
+                <div class="form-group row"><div class="col-sm-4"></div><div class="col-sm-8"><div id="custom_mat_order_checkout_customMat"><div class="form-group row"><div class="col-sm-4"></div><div class="col-sm-8"><div id="custom_mat_order_checkout_customMat_image"><input type="hidden" id="custom_mat_order_checkout_customMat_image_base64" name="custom_mat_order_checkout[customMat][image][base64]" /></div></div>
+    </div></div></div>
+    </div></form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div id="net-fuss"></div>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/vendor/jquery.min.js"></script>
+<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/shell.js"></script>
+<script type="module" src="assets/js/seite-designer-checkout.js"></script>
+</body>
+</html>

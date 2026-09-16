@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mattenfuchs</title>
+<meta name="keywords" content="e-commerce, matten">
+<meta name="description" content="Matten.de e-commerce">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="matten.de">
+<meta property="og:description" content="Matten.de e-commerce">
+<link rel="icon" type="image/png" href="assets/img/sonstige/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="assets/img/sonstige/favicon-16x16.png" sizes="16x16">
+<link rel="stylesheet" href="assets/css/matten-net.css">
+<link rel="stylesheet" href="assets/css/animate.css">
+<link rel="stylesheet" href="assets/fonts/nunito.css">
+<link rel="stylesheet" href="assets/fontawesome/css/all.css">
+<link rel="stylesheet" href="assets/css/net-neu.css">
+</head>
+<body id="">
+<div style="background: #fff;">
+<div id="net-kopf"></div>
+
+<div style="min-height: 500px;">
+    <div class="big-container padding-top">
+        <div class="row">
+            <div class="col-md-3">
+                <button id="filter-toggle" type="button" class="btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none">Filter</button>
+                <form id="filter" class="filter d-none d-md-block" method="get">
+                    <input type="hidden" name="keyword" id="filter-keyword" value="">
+                    <div id="filter-gruppen"></div>
+                    <label for="filter-sort">Sort by</label>
+                    <select id="filter-sort" name="filter_sort" class="custom-select custom-select-sm">
+                        <option value="LATEST" selected>Latest</option>
+                        <option value="NAME_ASC">Name a-z</option>
+                        <option value="NAME_DESC">Name z-a</option>
+                    </select>
+                    <hr>
+                    <button class="btn btn-sm btn-primary">
+                        <i class="fas fa-filter"></i>
+                        Filter
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-9">
+                <div class="row" id="produkt-raster"></div>
+                <nav><ul class="pagination" id="seitenzahlen"></ul></nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="net-fuss"></div>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/vendor/jquery.min.js"></script>
+<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/seite-produkte.js"></script>
+</body>
+</html>

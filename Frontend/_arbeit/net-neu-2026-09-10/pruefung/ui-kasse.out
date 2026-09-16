@@ -1,0 +1,425 @@
+[
+ {
+  "schritt": "K0 leerer Korb",
+  "titel": "Auschecken",
+  "meldung": "Ihr Warenkorb ist leer. Zur Startseite",
+  "meldungKlasse": "alert alert-info",
+  "schritteSichtbar": false,
+  "korbZeilen": [
+   "Your cart is empty."
+  ],
+  "summen": [
+   "Subtotal € 0.00",
+   "Versandkosten € 0.00",
+   "VAT 19.00% € 0.00",
+   "Total € 0.00"
+  ],
+  "felder": [],
+  "agbLabel": "Wir akzeptieren ihre AGB (AGB lesen)",
+  "kontoStatus": "",
+  "testHinweis": "Vorname, Nachname und Firma sind für Tests vorbelegt (TEST … kein echter Auftrag), damit ein Datensatz im Livesystem sofort als Probe erkennbar ist. Die E-Mail-Adresse bleibt leer — bitte die eigene eintragen, dorthin schickt das Altsystem die Bestätigung."
+ },
+ {
+  "schritt": "D20 add",
+  "http": 200,
+  "ok": true,
+  "count": 1,
+  "modus": "anfrage",
+  "abgelehnt": [],
+  "items": [
+   "Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-kirschrot | Format: quer - horizontal | Grundfarbe: 630-mittelgrau | Standardgröße: 40cm x 60cm | Mattengröße: 90cm × 120cm | auf Anfrage"
+  ]
+ },
+ {
+  "schritt": "D20 Kasse offen",
+  "titel": "Anfrage abschließen",
+  "meldung": "Dies ist ein Anfragenkorb: das Altsystem erzeugt daraus eine Anfrage, keine Bestellung. Die Preise stehen „auf Anfrage“ und werden im Angebot bestätigt.",
+  "meldungKlasse": "alert alert-info",
+  "schritteSichtbar": true,
+  "korbZeilen": [
+   "Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-kirschrot | Format: quer - horizontal | Grundfarbe: 630-mittelgrau | Standardgröße: 40cm x 60cm | Mattengröße: 90cm × 120cm TEST Kontrollagent - bitte ignorieren (Prüfung Anfragenkorb) auf Anfrage 1 auf Anfrage"
+  ],
+  "summen": [
+   "Subtotal auf Anfrage",
+   "Versandkosten auf Anfrage",
+   "VAT 19.00% auf Anfrage",
+   "Total auf Anfrage"
+  ],
+  "felder": [
+   "anrede=\"\"*",
+   "vorname=\"TEST\"*",
+   "name=\"Sehorz (Bitte ignorieren)\"*",
+   "firma=\"TESTBESTELLUNG – kein echter Auftrag\"",
+   "strasse=\"\"*",
+   "plz=\"\"*",
+   "ort=\"\"*",
+   "land=\"de\"*",
+   "email=\"\"*",
+   "telefon=\"\"*",
+   "mobil=\"\"",
+   "fax=\"\"",
+   "uid=\"\"",
+   "bemerkungen=\"TESTBESTELLUNG aus der Brücken-Demo – kein echter Auftrag, bitte nicht ausliefern.\""
+  ],
+  "agbLabel": "Wir akzeptieren ihre AGB (AGB lesen)",
+  "kontoStatus": "Sie sind nicht angemeldet — das Altsystem nimmt Gastbestellungen an.",
+  "testHinweis": "Vorname, Nachname und Firma sind für Tests vorbelegt (TEST … kein echter Auftrag), damit ein Datensatz im Livesystem sofort als Probe erkennbar ist. Die E-Mail-Adresse bleibt leer — bitte die eigene eintragen, dorthin schickt das Altsystem die Bestätigung."
+ },
+ {
+  "schritt": "D23 Adresse ohne PLZ",
+  "schritt2": false,
+  "melder": "Das Altsystem hat 1 Feld beanstandet — die Meldungen stehen wörtlich unter den Feldern.",
+  "fehlerFelder": [
+   "plz :: Die angebenene Postleitzahl ist ungültig!"
+  ],
+  "fokus": "plz"
+ },
+ {
+  "schritt": "D23b ohne AGB",
+  "schritt2": false,
+  "melder": "Bitte die AGB bestätigen.",
+  "fehlerFelder": [],
+  "fokus": "plz"
+ },
+ {
+  "schritt": "D20 Adresse gültig",
+  "schritt2": true,
+  "melder": "",
+  "fehlerFelder": []
+ },
+ {
+  "schritt": "D20 Schritt 2",
+  "land": "de",
+  "landN": 21,
+  "versand": [
+   "7=DHL*",
+   "11=pauschal",
+   "12=DPD",
+   "13=Spedition"
+  ],
+  "versandText": "DHL\npauschal\nDPD\nSpedition",
+  "zahlung": [],
+  "zahlungText": "Für eine Anfrage verlangt das Altsystem keine Zahlungsart.",
+  "gesperrt": null,
+  "fortschritt": [
+   "1. Adresse✓",
+   "2. Versand & Zahlung*",
+   "3. Prüfen",
+   "4. Ergebnis"
+  ]
+ },
+ {
+  "schritt": "D20 Schritt 3",
+  "optionenMelder": "",
+  "titel": "Prüfen — Anfragenkorb",
+  "bloecke": [
+   "Lieferadresse ÄNDERN TESTBESTELLUNG – kein echter Auftrag Herr TEST Sehorz (Bitte ignorieren) Teststraße 1 80331 München, Deutschland E-Mail-Adresse: test-anfrage@example.com Telefon: 089 123456 Bemerkungen: TESTBESTELLUNG aus der Brücken-Demo – kein echter Auftrag, bitte nicht ausliefern.",
+   "Positionen 1 × - Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig - Designfarbe: 639-kirschrot - Format: quer - horizontal - Grundfarbe: 630-mittelgrau - Standardgröße: 40cm x 60cm - Mattengröße: 90cm × 120cm (Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-ki",
+   "Beträge Anfrage — das Altsystem nennt keine Summen. Der berechnete Preis steht im Kommentar jeder Position und wird im Angebot bestätigt.",
+   "Versand und Zahlung ÄNDERN Versandart: DHL Zahlungsart: keine (Anfrage) Es fließt kein Geld — es entsteht nur ein Datensatz."
+  ],
+  "melder": "Das Altsystem zeigt den Knopf „Anfrage abschicken“ an — der Abschluss wäre jetzt möglich.",
+  "knopfText": "Anfrage abschicken",
+  "knopfKlasse": "btn btn-success",
+  "knopfDisabled": true,
+  "schalterDisabled": false,
+  "scharfText": "Mir ist bewusst, dass dies eine echte Anfrage im Live-System matten.de erzeugt.",
+  "roh": "{\n  \"methode\": \"POST\",\n  \"url\": \"https://matten.de/bestellen\",\n  \"header\": {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n    \"Origin\": \"https://matten.de\",\n    \"Referer\": \"https://matten.de/logomatten/bierbankmatten/6303041\",\n    \"Content-Length\": \"37\",\n    \"Cookie\": \"PHPSESSID der Proxy-Sitzung (hier nicht ausgeschrieben)\"\n  },\n  \"felder\": [\n    {\n      \"name\": \"anfrage_abschicken\",\n      \"wert\": \"Anfrage abschicken\"\n    }\n  ],\n  \"body\": \"anfrage_abschicken=Anfrage+abschicken\",\n  \"bodyKodierung\": \"utf-8 (Leerzeichen als \\\"+\\\", Rest prozentkodiert)\",\n  \"wirkung\": \"Das Altsystem legt eine Anfrage an -- ohne Preis, Zahlungsart und Versandkosten. Was danach folgt (Bestaetigung per "
+ },
+ {
+  "schritt": "D20 Schalter",
+  "knopfDisabledMitHaken": false,
+  "knopfDisabledOhneHaken": true
+ },
+ {
+  "schritt": "D20 /api/kasse/vorschau",
+  "http": 200,
+  "art": "anfrage",
+  "bereit": true,
+  "huerden": [],
+  "modus": "anfrage",
+  "korb": "Anfragenkorb",
+  "knopf": "Anfrage abschicken",
+  "knopfName": "anfrage_abschicken",
+  "items": [
+   {
+    "name": null,
+    "attribut": "Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-kirschrot | Format: quer - horizontal | Grundfarbe: 630-mittelgrau | Standardgröße: 40cm x 60cm | Mattengröße: 90cm × 120cm",
+    "beschreibung": "- Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig - Designfarbe: 639-kirschrot - Format: quer - horizontal - Grundfarbe: 630-mittelgrau - Standardgröße: 40cm x 60cm - Mattengröße: 90cm × 120cm",
+    "modus": "anfrage",
+    "preis": "auf Anfrage",
+    "preisNum": null,
+    "anzahl": 1,
+    "summe": "auf Anfrage",
+    "summeNum": null
+   }
+  ],
+  "felder": [
+   {
+    "name": "anfrage_abschicken",
+    "wert": "Anfrage abschicken"
+   }
+  ],
+  "zahlung": {
+   "optionen": [],
+   "abgelehnt": [],
+   "gewaehlt": null,
+   "versteckt": "RechnungPayment"
+  },
+  "versandGewaehlt": "7"
+ },
+ {
+  "schritt": "D20 zurück",
+  "schritt2": true
+ },
+ {
+  "schritt": "D21 add",
+  "http": 200,
+  "ok": true,
+  "count": 1,
+  "modus": "kauf",
+  "abgelehnt": [],
+  "items": [
+   "Art-Designs, Welcome-Holzdesign VIII | Größe: : 50 cm x 75 cm | 25,17 €"
+  ]
+ },
+ {
+  "schritt": "D21 Kasse offen",
+  "titel": "Auschecken",
+  "meldung": "",
+  "schritteSichtbar": true,
+  "korbZeilen": [
+   "Art-Designs, Welcome-Holzdesign VIII Größe: : 50 cm x 75 cm TEST Kontrollagent - bitte ignorieren (Prüfung Kaufkorb) 25,17 € 1 25,17 €"
+  ],
+  "summen": [
+   "Subtotal 25,17 €",
+   "Versandkosten 0,00 €",
+   "VAT 19.00% 4,78 €",
+   "Total 29,95 €"
+  ],
+  "felder": [
+   "anrede=\"Herr\"*",
+   "vorname=\"TEST\"*",
+   "name=\"Sehorz (Bitte ignorieren)\"*",
+   "firma=\"TESTBESTELLUNG – kein echter Auftrag\"",
+   "strasse=\"Teststraße 1\"*",
+   "plz=\"80331\"*",
+   "ort=\"München\"*",
+   "land=\"de\"*",
+   "email=\"test-anfrage@example.com\"*",
+   "telefon=\"089 123456\"*",
+   "mobil=\"\"",
+   "fax=\"\"",
+   "uid=\"\"",
+   "bemerkungen=\"TESTBESTELLUNG aus der Brücken-Demo – kein echter Auftrag, bitte nicht ausliefern.\""
+  ],
+  "agbLabel": "Wir akzeptieren ihre AGB (AGB lesen)",
+  "kontoStatus": "Sie sind nicht angemeldet — das Altsystem nimmt Gastbestellungen an.",
+  "testHinweis": "Vorname, Nachname und Firma sind für Tests vorbelegt (TEST … kein echter Auftrag), damit ein Datensatz im Livesystem sofort als Probe erkennbar ist. Die E-Mail-Adresse bleibt leer — bitte die eigene eintragen, dorthin schickt das Altsystem die Bestätigung."
+ },
+ {
+  "schritt": "D21 Adresse",
+  "schritt2": true,
+  "melder": "",
+  "fehlerFelder": []
+ },
+ {
+  "schritt": "D21 Schritt 2",
+  "land": "de",
+  "landN": 21,
+  "versand": [
+   "7=DHL*",
+   "11=pauschal",
+   "12=DPD",
+   "13=Spedition"
+  ],
+  "versandText": "DHL\npauschal\nDPD\nSpedition",
+  "zahlung": [
+   "VorkassePayment=Vorkasse Kein Geldfluss — es entsteht nur ein Datensatz.",
+   "RechnungPayment=Rechnung Kein Geldfluss — es entsteht nur ein Datensatz.*"
+  ],
+  "zahlungText": "Vorkasse Kein Geldfluss — es entsteht nur ein Datensatz.\nRechnung Kein Geldfluss — es entsteht nur ein Datensatz.",
+  "gesperrt": "Paypal (PayPal (Worldline/Ogone)), Kreditkarte (Kreditkarte (Worldline/Ogone))",
+  "fortschritt": [
+   "1. Adresse✓",
+   "2. Versand & Zahlung*",
+   "3. Prüfen",
+   "4. Ergebnis"
+  ]
+ },
+ {
+  "schritt": "D21 Schritt 3",
+  "optionenMelder": "",
+  "titel": "Prüfen — Warenkorb",
+  "bloecke": [
+   "Lieferadresse ÄNDERN TESTBESTELLUNG – kein echter Auftrag Herr TEST Sehorz (Bitte ignorieren) Teststraße 1 80331 München, Deutschland E-Mail-Adresse: test-anfrage@example.com Telefon: 089 123456 Bemerkungen: TESTBESTELLUNG aus der Brücken-Demo – kein echter Auftrag, bitte nicht ausliefern.",
+   "Positionen 1 × Art-Designs, Welcome-Holzdesign VIII - Größe: : 50 cm x 75 cm (Größe: : 50 cm x 75 cm) — 25,17 €",
+   "Beträge laut Altsystem Zwischensumme: 25,17 € Versandkosten: 0,00 € Umsatzsteuer (19 %): 4,78 € Gesamtsumme: 29,95 €",
+   "Versand und Zahlung ÄNDERN Versandart: DHL Zahlungsart: Rechnung Es fließt kein Geld — es entsteht nur ein Datensatz."
+  ],
+  "melder": "Das Altsystem zeigt den Knopf „Bestellung abschicken“ an — der Abschluss wäre jetzt möglich.",
+  "knopfText": "Bestellung abschicken",
+  "knopfKlasse": "btn btn-primary",
+  "knopfDisabled": true,
+  "schalterDisabled": false,
+  "scharfText": "Mir ist bewusst, dass dies eine echte Bestellung im Live-System matten.de erzeugt.",
+  "roh": "{\n  \"methode\": \"POST\",\n  \"url\": \"https://matten.de/bestellen\",\n  \"header\": {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n    \"Origin\": \"https://matten.de\",\n    \"Referer\": \"https://matten.de/logomatten/bierbankmatten/6303041\",\n    \"Content-Length\": \"43\",\n    \"Cookie\": \"PHPSESSID der Proxy-Sitzung (hier nicht ausgeschrieben)\"\n  },\n  \"felder\": [\n    {\n      \"name\": \"bestellung_abschicken\",\n      \"wert\": \"Bestellung abschicken\"\n    }\n  ],\n  \"body\": \"bestellung_abschicken=Bestellung+abschicken\",\n  \"bodyKodierung\": \"utf-8 (Leerzeichen als \\\"+\\\", Rest prozentkodiert)\",\n  \"wirkung\": \"Das Altsystem legt eine echte Bestellung an, verschickt die Auftragsbestaetigung per E-Mail an die oben "
+ },
+ {
+  "schritt": "D21 Schalter",
+  "knopfDisabledMitHaken": false,
+  "knopfDisabledOhneHaken": true
+ },
+ {
+  "schritt": "D21 /api/kasse/vorschau",
+  "http": 200,
+  "art": "bestellung",
+  "bereit": true,
+  "huerden": [],
+  "modus": "kauf",
+  "korb": "Warenkorb",
+  "knopf": "Bestellung abschicken",
+  "knopfName": "bestellung_abschicken",
+  "zahlungsartText": "Rechnung",
+  "gesamt": "29,95 €",
+  "felder": [
+   {
+    "name": "bestellung_abschicken",
+    "wert": "Bestellung abschicken"
+   }
+  ]
+ },
+ {
+  "schritt": "D22 add",
+  "count": 2,
+  "modus": "gemischt",
+  "gesamt": "177,43 EUR"
+ },
+ {
+  "schritt": "D22 Kasse offen",
+  "titel": "Anfrage abschließen",
+  "meldung": "Ihr Warenkorb enthält Kauf- und Anfragepositionen. Das Altsystem behandelt ihn damit als Anfrage — die Kaufartikel werden nicht bestellt, sondern mit angefragt.",
+  "meldungKlasse": "alert alert-warning",
+  "schritteSichtbar": true,
+  "korbZeilen": [
+   "Art-Designs, Welcome-Holzdesign VIII Größe: : 50 cm x 75 cm TEST Kontrollagent - bitte ignorieren (gemischt, Kauf) 25,17 € 1 25,17 €",
+   "Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-kirschrot | Format: quer - horizontal | Grundfarbe: 630-mittelgrau | Standardgröße: 40cm x 60cm | Mattengröße: 90cm × 120cm TEST Kontrollagent - bitte ignorieren (gemischt, Anfrage) auf Anfrage 1 auf Anfrage"
+  ],
+  "summen": [
+   "Subtotal auf Anfrage",
+   "Versandkosten auf Anfrage",
+   "VAT 19.00% auf Anfrage",
+   "Total auf Anfrage"
+  ],
+  "felder": [
+   "anrede=\"Herr\"*",
+   "vorname=\"TEST\"*",
+   "name=\"Sehorz (Bitte ignorieren)\"*",
+   "firma=\"TESTBESTELLUNG – kein echter Auftrag\"",
+   "strasse=\"Teststraße 1\"*",
+   "plz=\"80331\"*",
+   "ort=\"München\"*",
+   "land=\"de\"*",
+   "email=\"test-anfrage@example.com\"*",
+   "telefon=\"089 123456\"*",
+   "mobil=\"\"",
+   "fax=\"\"",
+   "uid=\"\"",
+   "bemerkungen=\"TESTBESTELLUNG aus der Brücken-Demo – kein echter Auftrag, bitte nicht ausliefern.\""
+  ],
+  "agbLabel": "Wir akzeptieren ihre AGB (AGB lesen)",
+  "kontoStatus": "Sie sind nicht angemeldet — das Altsystem nimmt Gastbestellungen an.",
+  "testHinweis": "Vorname, Nachname und Firma sind für Tests vorbelegt (TEST … kein echter Auftrag), damit ein Datensatz im Livesystem sofort als Probe erkennbar ist. Die E-Mail-Adresse bleibt leer — bitte die eigene eintragen, dorthin schickt das Altsystem die Bestätigung."
+ },
+ {
+  "schritt": "D22 Adresse",
+  "schritt2": true,
+  "melder": "",
+  "fehlerFelder": []
+ },
+ {
+  "schritt": "D22 Schritt 2",
+  "land": "de",
+  "landN": 21,
+  "versand": [
+   "7=DHL*",
+   "11=pauschal",
+   "12=DPD",
+   "13=Spedition"
+  ],
+  "versandText": "DHL\npauschal\nDPD\nSpedition",
+  "zahlung": [],
+  "zahlungText": "Für eine Anfrage verlangt das Altsystem keine Zahlungsart.",
+  "gesperrt": null,
+  "fortschritt": [
+   "1. Adresse✓",
+   "2. Versand & Zahlung*",
+   "3. Prüfen",
+   "4. Ergebnis"
+  ]
+ },
+ {
+  "schritt": "D22 Schritt 3",
+  "optionenMelder": "",
+  "titel": "Prüfen — Anfragenkorb",
+  "bloecke": [
+   "Lieferadresse ÄNDERN TESTBESTELLUNG – kein echter Auftrag Herr TEST Sehorz (Bitte ignorieren) Teststraße 1 80331 München, Deutschland E-Mail-Adresse: test-anfrage@example.com Telefon: 089 123456 Bemerkungen: TESTBESTELLUNG aus der Brücken-Demo – kein echter Auftrag, bitte nicht ausliefern.",
+   "Positionen 1 × Art-Designs, Welcome-Holzdesign VIII - Größe: : 50 cm x 75 cm (Größe: : 50 cm x 75 cm) — 25,17 € 1 × - Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig - Designfarbe: 639-kirschrot - Format: quer - horizontal - Grundfarbe: 630-mittelgrau - Standardgröße: 40cm x 60cm - Matten",
+   "Beträge Anfrage — das Altsystem nennt keine Summen. Der berechnete Preis steht im Kommentar jeder Position und wird im Angebot bestätigt.",
+   "Versand und Zahlung ÄNDERN Versandart: DHL Zahlungsart: keine (Anfrage) Es fließt kein Geld — es entsteht nur ein Datensatz."
+  ],
+  "warnung": "Ihr Warenkorb enthält Kauf- und Anfragepositionen. Das Altsystem behandelt ihn damit als Anfrage — die Kaufartikel werden nicht bestellt, sondern mit angefragt.",
+  "melder": "Das Altsystem zeigt den Knopf „Anfrage abschicken“ an — der Abschluss wäre jetzt möglich.",
+  "knopfText": "Anfrage abschicken",
+  "knopfKlasse": "btn btn-success",
+  "knopfDisabled": true,
+  "schalterDisabled": false,
+  "scharfText": "Mir ist bewusst, dass dies eine echte Anfrage im Live-System matten.de erzeugt.",
+  "roh": "{\n  \"methode\": \"POST\",\n  \"url\": \"https://matten.de/bestellen\",\n  \"header\": {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n    \"Origin\": \"https://matten.de\",\n    \"Referer\": \"https://matten.de/logomatten/bierbankmatten/6303041\",\n    \"Content-Length\": \"37\",\n    \"Cookie\": \"PHPSESSID der Proxy-Sitzung (hier nicht ausgeschrieben)\"\n  },\n  \"felder\": [\n    {\n      \"name\": \"anfrage_abschicken\",\n      \"wert\": \"Anfrage abschicken\"\n    }\n  ],\n  \"body\": \"anfrage_abschicken=Anfrage+abschicken\",\n  \"bodyKodierung\": \"utf-8 (Leerzeichen als \\\"+\\\", Rest prozentkodiert)\",\n  \"wirkung\": \"Das Altsystem legt eine Anfrage an -- ohne Preis, Zahlungsart und Versandkosten. Was danach folgt (Bestaetigung per "
+ },
+ {
+  "schritt": "D22 /api/kasse/vorschau",
+  "art": "anfrage",
+  "bereit": true,
+  "huerden": [],
+  "modus": "gemischt",
+  "korb": "Anfragenkorb",
+  "knopf": "Anfrage abschicken",
+  "items": [
+   {
+    "name": "Art-Designs, Welcome-Holzdesign VIII",
+    "attribut": "Größe: : 50 cm x 75 cm",
+    "beschreibung": "Art-Designs, Welcome-Holzdesign VIII - Größe: : 50 cm x 75 cm",
+    "modus": "kauf",
+    "preis": "25,17 €",
+    "preisNum": 25.17,
+    "anzahl": 1,
+    "summe": "25,17 €",
+    "summeNum": 25.17
+   },
+   {
+    "name": null,
+    "attribut": "Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-kirschrot | Format: quer - horizontal | Grundfarbe: 630-mittelgrau | Standardgröße: 40cm x 60cm | Mattengröße: 90cm × 120cm",
+    "beschreibung": "- Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig - Designfarbe: 639-kirschrot - Format: quer - horizontal - Grundfarbe: 630-mittelgrau - Standardgröße: 40cm x 60cm - Mattengröße: 90cm × 120cm",
+    "modus": "anfrage",
+    "preis": "auf Anfrage",
+    "preisNum": null,
+    "anzahl": 1,
+    "summe": "auf Anfrage",
+    "summeNum": null
+   }
+  ],
+  "gesamt": null,
+  "cartGesamt": "177,43 EUR"
+ },
+ {
+  "schritt": "Ende",
+  "korb": 0,
+  "konsole": [
+   "log-error: Failed to load resource: the server responded with a status of 422 (Unprocessable Entity) @ http://localhost:8787/api/kasse/adresse"
+  ],
+  "netz": [
+   "422 http://localhost:8787/api/kasse/adresse"
+  ]
+ }
+]

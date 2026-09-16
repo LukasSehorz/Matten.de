@@ -1,0 +1,25 @@
+· K0 leerer Korb
+· D20 add
+· D20 Kasse offen
+· D23 Adresse ohne PLZ
+· D23b ohne AGB
+· D20 Adresse gültig
+· D20 Schritt 2
+· D20 Schritt 3
+· D20 Schalter
+· D20 /api/kasse/vorschau
+· D20 zurück
+· D21 add
+· D21 Kasse offen
+· D21 Adresse
+· D21 Schritt 2
+· D21 Schritt 3
+· D21 Schalter
+· D21 /api/kasse/vorschau
+· D22 add
+· D22 Kasse offen
+· D22 Adresse
+· D22 Schritt 2
+· D22 Schritt 3
+· D22 /api/kasse/vorschau
+· Ende

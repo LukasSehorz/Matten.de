@@ -1,0 +1,334 @@
+{
+ "a": {
+  "produkt": "jetprint",
+  "eingabe": {
+   "breite": 60,
+   "laenge": 40,
+   "menge": 1
+  },
+  "zusatz": null,
+  "ok": true,
+  "formel": {
+   "vkProStueck": 24.4093848,
+   "vkProStueckOhneEinmaliges": 24.4093848,
+   "vkGesamt": 24.4093848,
+   "faktorBreite": 1,
+   "faktorLaenge": 1,
+   "staffelfaktor": 1,
+   "faktorFormMitRand": 1,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 0.24
+  },
+  "ui": {
+   "nettoJeStueck": 24.41,
+   "nettoGesamt": 24.41,
+   "aufschlag": 0,
+   "wareBrutto": 29.05,
+   "bruttoNachPlan": 29.05,
+   "versand": 11.9,
+   "endpreis": 40.95
+  }
+ },
+ "b": {
+  "produkt": "jetprint",
+  "eingabe": {
+   "breite": 50,
+   "laenge": 200,
+   "menge": 1
+  },
+  "zusatz": null,
+  "ok": true,
+  "formel": {
+   "vkProStueck": 101.70577,
+   "vkProStueckOhneEinmaliges": 101.70577,
+   "vkGesamt": 101.70577,
+   "faktorBreite": 1,
+   "faktorLaenge": 1,
+   "staffelfaktor": 1,
+   "faktorFormMitRand": 1,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 1
+  },
+  "ui": {
+   "nettoJeStueck": 101.71,
+   "nettoGesamt": 101.71,
+   "aufschlag": 0,
+   "wareBrutto": 121.03,
+   "bruttoNachPlan": 121.03,
+   "versand": 11.9,
+   "endpreis": 132.93
+  }
+ },
+ "c": {
+  "produkt": "jetprint",
+  "eingabe": {
+   "breite": 90,
+   "laenge": 120,
+   "menge": 1
+  },
+  "zusatz": null,
+  "ok": true,
+  "formel": {
+   "vkProStueck": 137.30278950000002,
+   "vkProStueckOhneEinmaliges": 137.30278950000002,
+   "vkGesamt": 137.30278950000002,
+   "faktorBreite": 1.25,
+   "faktorLaenge": 1,
+   "staffelfaktor": 1,
+   "faktorFormMitRand": 1,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 1.08
+  },
+  "ui": {
+   "nettoJeStueck": 137.3,
+   "nettoGesamt": 137.3,
+   "aufschlag": 0,
+   "wareBrutto": 163.39,
+   "bruttoNachPlan": 163.39,
+   "versand": 11.9,
+   "endpreis": 175.29
+  }
+ },
+ "d": {
+  "produkt": "jetprint",
+  "eingabe": {
+   "breite": 90,
+   "laenge": 60,
+   "menge": 5
+  },
+  "zusatz": null,
+  "ok": true,
+  "formel": {
+   "vkProStueck": 50.527426536000014,
+   "vkProStueckOhneEinmaliges": 50.527426536000014,
+   "vkGesamt": 252.63713268000006,
+   "faktorBreite": 1,
+   "faktorLaenge": 1,
+   "staffelfaktor": 0.92,
+   "faktorFormMitRand": 1,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 0.54
+  },
+  "ui": {
+   "nettoJeStueck": 50.53,
+   "nettoGesamt": 252.64,
+   "aufschlag": 0,
+   "wareBrutto": 300.64,
+   "bruttoNachPlan": 300.64,
+   "versand": 11.9,
+   "endpreis": 312.54
+  }
+ },
+ "e": {
+  "produkt": "jetprint",
+  "eingabe": {
+   "breite": 85,
+   "laenge": 120,
+   "menge": 2,
+   "sonderfarbe": true
+  },
+  "zusatz": null,
+  "ok": true,
+  "formel": {
+   "vkProStueck": 166.55289113,
+   "vkProStueckOhneEinmaliges": 98.55289113,
+   "vkGesamt": 265.10578226,
+   "faktorBreite": 1,
+   "faktorLaenge": 1,
+   "staffelfaktor": 0.95,
+   "faktorFormMitRand": 1,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 1.02
+  },
+  "ui": {
+   "nettoJeStueck": 98.55,
+   "nettoGesamt": 265.11,
+   "aufschlag": 0,
+   "wareBrutto": 315.48,
+   "bruttoNachPlan": 315.48,
+   "versand": 11.9,
+   "endpreis": 327.38
+  }
+ },
+ "f": {
+  "produkt": "jetprint",
+  "eingabe": {
+   "breite": 85,
+   "laenge": 120,
+   "menge": 1,
+   "sonderformMitRand": true
+  },
+  "zusatz": null,
+  "ok": true,
+  "formel": {
+   "vkProStueck": 155.60982810000002,
+   "vkProStueckOhneEinmaliges": 155.60982810000002,
+   "vkGesamt": 155.60982810000002,
+   "faktorBreite": 1,
+   "faktorLaenge": 1,
+   "staffelfaktor": 1,
+   "faktorFormMitRand": 1.5,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 1.02
+  },
+  "ui": {
+   "nettoJeStueck": 155.61,
+   "nettoGesamt": 155.61,
+   "aufschlag": 0,
+   "wareBrutto": 185.18,
+   "bruttoNachPlan": 185.18,
+   "versand": 11.9,
+   "endpreis": 197.08
+  }
+ },
+ "g": {
+  "produkt": "jetprint",
+  "eingabe": {
+   "breite": 250,
+   "laenge": 250,
+   "menge": 1
+  },
+  "ok": false,
+  "code": "ZU_BREIT",
+  "grund": "Matte zu breit",
+  "klartext": "Eine Seite darf hoechstens 200 cm breit sein — die Matte kommt von der Rolle."
+ },
+ "h": {
+  "produkt": "jetprint",
+  "eingabe": {
+   "breite": 29,
+   "laenge": 100,
+   "menge": 1
+  },
+  "ok": false,
+  "code": "ZU_SCHMAL",
+  "grund": "zu schmal",
+  "klartext": "Die kleinste Seite muss mindestens 30 cm betragen."
+ },
+ "i1": {
+  "produkt": "ironhorse",
+  "eingabe": {
+   "breite": 60,
+   "laenge": 100,
+   "menge": 1
+  },
+  "zusatz": null,
+  "ok": true,
+  "formel": {
+   "vkProStueck": 37.6515,
+   "vkProStueckOhneEinmaliges": 37.6515,
+   "vkGesamt": 37.6515,
+   "faktorBreite": 1.25,
+   "faktorLaenge": 1,
+   "staffelfaktor": 1,
+   "faktorFormMitRand": 1,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 0.6
+  },
+  "ui": {
+   "nettoJeStueck": 37.65,
+   "nettoGesamt": 37.65,
+   "aufschlag": 0,
+   "wareBrutto": 44.8,
+   "bruttoNachPlan": 44.8,
+   "versand": 11.9,
+   "endpreis": 56.7
+  }
+ },
+ "i2": {
+  "produkt": "ironhorse",
+  "eingabe": {
+   "breite": 85,
+   "laenge": 100,
+   "menge": 1
+  },
+  "zusatz": null,
+  "ok": true,
+  "formel": {
+   "vkProStueck": 42.6717,
+   "vkProStueckOhneEinmaliges": 42.6717,
+   "vkGesamt": 42.6717,
+   "faktorBreite": 1,
+   "faktorLaenge": 1,
+   "staffelfaktor": 1,
+   "faktorFormMitRand": 1,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 0.85
+  },
+  "ui": {
+   "nettoJeStueck": 42.67,
+   "nettoGesamt": 42.67,
+   "aufschlag": 0,
+   "wareBrutto": 50.78,
+   "bruttoNachPlan": 50.78,
+   "versand": 11.9,
+   "endpreis": 62.68
+  }
+ },
+ "j": {
+  "produkt": "kokos",
+  "eingabe": {
+   "breite": 100,
+   "laenge": 100,
+   "menge": 1
+  },
+  "zusatz": {
+   "aufschlag": 10.56,
+   "hinweis": "30mm"
+  },
+  "ok": true,
+  "formel": {
+   "vkProStueck": 71.9125,
+   "vkProStueckOhneEinmaliges": 71.9125,
+   "vkGesamt": 71.9125,
+   "faktorBreite": 1.25,
+   "faktorLaenge": 1,
+   "staffelfaktor": 1,
+   "faktorFormMitRand": 1,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 1
+  },
+  "ui": {
+   "nettoJeStueck": 82.47,
+   "nettoGesamt": 82.47,
+   "aufschlag": 10.56,
+   "wareBrutto": 98.14,
+   "bruttoNachPlan": 98.14,
+   "versand": 18.98,
+   "endpreis": 117.12
+  }
+ },
+ "k": {
+  "produkt": "diplomat",
+  "eingabe": {
+   "breite": 100,
+   "laenge": 100,
+   "menge": 1
+  },
+  "zusatz": {
+   "aufschlag": 35.87,
+   "hinweis": "mit Kratzkante"
+  },
+  "ok": true,
+  "formel": {
+   "vkProStueck": 349.12352999999996,
+   "vkProStueckOhneEinmaliges": 349.12352999999996,
+   "vkGesamt": 349.12352999999996,
+   "faktorBreite": 1,
+   "faktorLaenge": 1,
+   "staffelfaktor": 1,
+   "faktorFormMitRand": 1,
+   "faktorFormOhneRand": 1,
+   "qmProStueck": 1
+  },
+  "ui": {
+   "nettoJeStueck": 384.99,
+   "nettoGesamt": 384.99,
+   "aufschlag": 35.87,
+   "wareBrutto": 458.14,
+   "bruttoNachPlan": 458.14,
+   "versand": 26.49,
+   "endpreis": 484.63
+  }
+ }
+}

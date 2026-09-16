@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mattenfuchs</title>
+<meta name="keywords" content="e-commerce, matten">
+<meta name="description" content="Matten.de e-commerce">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="matten.de">
+<meta property="og:description" content="Matten.de e-commerce">
+<link rel="icon" type="image/png" href="assets/img/sonstige/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="assets/img/sonstige/favicon-16x16.png" sizes="16x16">
+<link rel="stylesheet" href="assets/css/matten-net.css">
+<link rel="stylesheet" href="assets/css/animate.css">
+<link rel="stylesheet" href="assets/fonts/nunito.css">
+<link rel="stylesheet" href="assets/fontawesome/css/all.css">
+<link rel="stylesheet" href="assets/css/net-neu.css">
+</head>
+<body id="">
+<div style="background: #fff;">
+<div id="net-kopf"></div>
+
+<div style="min-height: 500px;">
+    <div class="container padding-top">
+        <h2 id="kasse-titel">Auschecken</h2>
+        <p class="text-muted" id="kasse-untertitel">Warenkorb, Adresse, Versand und Zahlung laufen über die Brücke im Altsystem matten.de.</p>
+
+        <div id="kasse-meldung"></div>
+
+        <!-- Warenkorb (wie im Modal) -->
+        <div class="table-responsive">
+            <table class="table kasse-tabelle" id="kasse-korb">
+                <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Produkt</th>
+                    <th class="text-right">Preis</th>
+                    <th class="text-right" style="width: 1%;">Menge</th>
+                    <th class="text-right">Total</th>
+                    <th class="text-center"></th>
+                </tr>
+                </thead>
+                <tbody id="kasse-korb-zeilen"><tr><td colspan="7"><p class="text-center">Your cart is empty.</p></td></tr></tbody>
+                <tfoot class="tfoot-light" id="kasse-korb-summen"></tfoot>
+            </table>
+        </div>
+
+        <div id="kasse-schritte-bereich" hidden>
+            <ol class="kasse-schritte" id="fortschritt">
+                <li data-schritt="1" aria-current="step">1. Adresse</li>
+                <li data-schritt="2">2. Versand &amp; Zahlung</li>
+                <li data-schritt="3">3. Prüfen</li>
+                <li data-schritt="4">4. Ergebnis</li>
+            </ol>
+
+            <!-- Schritt 1: Adresse -->
+            <section id="schritt-1">
+                <h3 class="h4">Kundendaten</h3>
+                <p class="small text-muted" id="konto-status"></p>
+                <div class="alert alert-info small" id="test-hinweis">
+                    Vorname, Nachname und Firma sind für Tests vorbelegt (<strong>TEST … kein echter Auftrag</strong>),
+                    damit ein Datensatz im Livesystem sofort als Probe erkennbar ist. Die E-Mail-Adresse bleibt leer —
+                    bitte die eigene eintragen, dorthin schickt das Altsystem die Bestätigung.
+                </div>
+                <form id="adress-form" novalidate>
+                    <div class="row" id="kasse-adresse"></div>
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="f-agb" name="agb">
+                        <label class="custom-control-label" for="f-agb">Wir akzeptieren ihre AGB (<a href="pages.html?s=agb" target="_blank" rel="noopener">AGB lesen</a>)</label>
+                    </div>
+                    <div id="adress-melder"></div>
+                    <button type="submit" class="btn btn-primary" id="adress-knopf">Weiter</button>
+                </form>
+            </section>
+
+            <!-- Schritt 2: Versand & Zahlung -->
+            <section id="schritt-2" hidden>
+                <h3 class="h4">Versand &amp; Zahlung</h3>
+                <form id="optionen-form" novalidate>
+                    <div class="form-group row">
+                        <label for="f-lieferland" class="col-sm-3 col-form-label">Lieferland</label>
+                        <div class="col-sm-9"><select id="f-lieferland" class="form-control"></select></div>
+                    </div>
+                    <div class="form-group row">
+                        <span class="col-sm-3 col-form-label">Versandart</span>
+                        <div class="col-sm-9" id="versand-auswahl"></div>
+                    </div>
+                    <div class="form-group row">
+                        <span class="col-sm-3 col-form-label">Zahlungsart</span>
+                        <div class="col-sm-9">
+                            <div id="zahlung-auswahl"></div>
+                            <div id="gesperrt-block" class="small text-muted mt-2" hidden>
+                                Nicht angeboten (gesperrt durch die Brücke): <span id="gesperrt-liste"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="optionen-melder"></div>
+                    <button type="button" class="btn btn-secondary" data-zurueck="1">Zurück</button>
+                    <button type="submit" class="btn btn-primary" id="optionen-knopf">Weiter</button>
+                </form>
+            </section>
+
+            <!-- Schritt 3: Prüfen -->
+            <section id="schritt-3" hidden>
+                <h3 class="h4" id="pruef-titel">Prüfen</h3>
+                <div id="pruef-blocks" aria-busy="true"></div>
+                <details class="kasse-roh mb-3">
+                    <summary>Was genau abgeschickt wird</summary>
+                    <pre id="roh-inhalt"></pre>
+                </details>
+                <div id="pruef-melder"></div>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" id="scharf-schalter">
+                    <label class="custom-control-label" for="scharf-schalter" id="scharf-text">Mir ist bewusst, dass dies eine echte Anfrage/Bestellung im Live-System matten.de erzeugt.</label>
+                </div>
+                <button type="button" class="btn btn-secondary" data-zurueck="2" id="pruef-zurueck">Zurück</button>
+                <button type="button" class="btn btn-outline-secondary" id="pruef-neu">Neu laden</button>
+                <button type="button" class="btn btn-primary" id="bestell-knopf" disabled>Bestellung abschicken</button>
+                <div id="bestell-melder" class="mt-3"></div>
+            </section>
+
+            <!-- Schritt 4: Ergebnis -->
+            <section id="schritt-4" hidden>
+                <h3 class="h4">Ergebnis</h3>
+                <div id="ergebnis"></div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<div id="net-fuss"></div>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/vendor/jquery.min.js"></script>
+<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/daten.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/seite-checkout.js"></script>
+</body>
+</html>

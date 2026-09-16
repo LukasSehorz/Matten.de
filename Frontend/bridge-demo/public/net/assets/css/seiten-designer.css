@@ -1,0 +1,151 @@
+@charset "utf-8";
+/* ==========================================================================
+   matten.net — Zusatzregeln fuer den Mattendesigner
+   --------------------------------------------------------------------------
+   Nur fuer mattendesigner.html.
+
+   Die Seite benutzt dieselben Bausteine wie die Artikelseite — Farbfelder,
+   Groessenliste, Wunschmass, Sonderwuensche, Kaufbox und die angeheftete
+   Preisleiste stehen in seiten-katalog.css und werden hier NICHT
+   wiederholt und nicht ueberschrieben. Beide Seiten sollen sich gleich
+   anfuehlen; der Kunde soll den Konfigurator wiedererkennen.
+
+   Hier steht nur, was es allein im Designer gibt:
+
+     01  Massstabsgetreue Skizze
+     02  Klappbereich fuer den Rechenweg
+     03  Bewegung und Barrierefreiheit
+
+   Ausschliesslich Tokens aus net.css. Keine eigenen Farbwerte.
+   ========================================================================== */
+
+/* ==========================================================================
+   01  MASSSTABSGETREUE SKIZZE
+   --------------------------------------------------------------------------
+   Sie zeigt das Seitenverhaeltnis des eingegebenen Masses und sonst nichts.
+   Fuer den Kunden ist das die schnellste Kontrolle, ob er sich vertippt
+   hat: eine Matte, die ploetzlich zum Streifen wird, faellt sofort auf.
+   ========================================================================== */
+
+.dz-skizze {
+  /* Die Zeichenflaeche ist QUADRATISCH und hat eine feste Groesse. Beides
+     ist noetig, damit die Skizze wirklich massstaeblich wird:
+       · fest, weil eine Prozenthoehe einen bestimmten Bezug braucht — mit
+         "min-height" bliebe die Zeile unbestimmt und die Matte waere immer
+         gleich hoch, egal welches Mass eingetragen ist;
+       · quadratisch, weil sich Breite und Hoehe der Matte sonst auf
+         verschieden grosse Bezuege beziehen und das Seitenverhaeltnis
+         verzerrt herauskommt.
+     content-box, damit --skizze wirklich die Innenmasse sind. */
+  --skizze: 216px;
+  box-sizing: content-box;
+  display: grid;
+  grid-template-rows: var(--skizze);
+  grid-template-columns: var(--skizze);
+  justify-content: center;
+  place-items: center;
+  height: var(--skizze);
+  margin-top: var(--sp-3);
+  padding: var(--sp-6);
+  border: 1px solid var(--lines);
+  border-radius: var(--r-3);
+  background:
+    repeating-linear-gradient(0deg, var(--surface-2) 0 15px, var(--surface) 15px 16px),
+    var(--surface);
+}
+
+.dz-skizze__matte {
+  position: relative;
+  /* Sehr schmale Matten (60 × 700 cm) blieben sonst ein Strich. */
+  min-width: 14px;
+  min-height: 14px;
+  max-width: 100%;
+  border: 2px solid var(--navy);
+  border-radius: var(--r-2);
+  background: var(--blau-hell);
+  transition: width var(--t-ruhig) var(--ease), height var(--t-ruhig) var(--ease);
+}
+.dz-skizze[data-gueltig="nein"] .dz-skizze__matte {
+  border-color: var(--signalrot);
+  border-style: dashed;
+  background: var(--rot-hell);
+}
+
+/* Die Masszahlen liegen an den Kanten — aussen, damit sie die Flaeche
+   nicht ueberdecken, wenn die Matte sehr schmal wird. */
+.dz-skizze__mass {
+  position: absolute;
+  font-size: var(--fs-100);
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.dz-skizze__mass--breite {
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, -6px);
+}
+.dz-skizze__mass--laenge {
+  top: 50%;
+  left: 100%;
+  transform: translate(6px, -50%);
+}
+
+/* ==========================================================================
+   02  KLAPPBEREICH FUER DEN RECHENWEG
+   --------------------------------------------------------------------------
+   Der Rechenweg ist fuer die Abnahme wichtig und fuer den Kunden im Laden
+   uninteressant. Er steht deshalb ganz unten und zugeklappt.
+   ========================================================================== */
+
+.dz-klapp {
+  border: 1px solid var(--lines);
+  border-radius: var(--r-3);
+  background: var(--surface);
+}
+.dz-klapp + .dz-klapp { margin-top: var(--sp-4); }
+
+.dz-klapp > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--navy);
+  list-style: none;
+}
+.dz-klapp > summary::-webkit-details-marker { display: none; }
+.dz-klapp > summary:hover { background: var(--surface-2); }
+.dz-klapp[open] > summary { border-bottom: 1px solid var(--lines); }
+
+.dz-klapp__pfeil {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--blau);
+  border-bottom: 2px solid var(--blau);
+  transform: rotate(-45deg);
+  transition: transform var(--t-schnell) var(--ease);
+}
+.dz-klapp[open] > summary .dz-klapp__pfeil { transform: rotate(45deg); }
+
+.dz-klapp__koerper { padding: var(--sp-5); }
+.dz-klapp__koerper > :first-child { margin-top: 0; }
+
+/* Die Zellbezuege sollen als Bezuege lesbar bleiben, nicht als Fliesstext. */
+.dz-klapp code {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   03  BEWEGUNG UND BARRIEREFREIHEIT
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .dz-skizze__matte,
+  .dz-klapp__pfeil { transition: none; }
+}

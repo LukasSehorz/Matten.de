@@ -54,7 +54,7 @@ const {
   addToCart, addToCartPfad, baueRawHtml, bestellungAbschicken, blaettere,
   cartResponse, clearCart, decodeBody, ensureUpstreamSession, fetchPrice,
   fetchPricePfad, holeBild, kontoLogin, kontoRegister, leseVorschau,
-  normalisierePfad, normalizeAttribut, nurText, parseAdressWerte,
+  normalisierePfad, normalizeAttribut, nurText, ogoneSperre, parseAdressWerte,
   parseCookieHeader, parseKontoMenue, parseSelect, pfadSchluessel,
   pruefeZahlungsart, readCart, readCartMitOptionen, setQuantity,
   setzeKasseOptionen, speichereAdresse, upstream,
@@ -679,9 +679,15 @@ async function route(req, url, pfad, methode, ctx) {
       }, ctx);
     }
 
-    // Zweite Sperre: die im Altsystem tatsaechlich gesetzte Zahlungsart.
+    // Zweite Sperre: was das Altsystem an Zahlungsart fuehrt -- angehaktes
+    // Radio oder verstecktes Feld. Ogone ist hier in JEDEM Fall Schluss,
+    // noch vor dem Blick auf die Uebersichtsseite. Ob eine Zahlungsart
+    // ueberhaupt Pflicht ist, haengt vom Korb ab (Kauf: ja, Anfragenkorb:
+    // das Altsystem bietet keine an) und wird in leseVorschau() entschieden,
+    // die bestellungAbschicken() gleich aufruft -- dieselbe Regel wie im
+    // lokalen Server, weil sie im Kern steht (ermittleHuerden).
     const stand = await readCartMitOptionen(sitzung);
-    const verboten = pruefeZahlungsart(stand.optionen.zahlungsart.gewaehlt);
+    const verboten = ogoneSperre(stand.optionen);
     if (verboten) {
       return jsonAntwort(400, { ok: false, fehler: verboten, upstream: stand.logs }, ctx);
     }
@@ -693,6 +699,7 @@ async function route(req, url, pfad, methode, ctx) {
     if (!r.ok && r.huerden) {
       return jsonAntwort(409, {
         ok: false,
+        art: r.art ?? null,
         fehler: 'Der Bestellabschluss ist noch nicht moeglich.',
         huerden: r.huerden,
         upstream: r.logs,
@@ -700,6 +707,7 @@ async function route(req, url, pfad, methode, ctx) {
     }
     return jsonAntwort(200, {
       ok: r.ok,
+      art: r.art,
       bestellnummer: r.bestellnummer,
       status: r.status,
       finalUrl: r.finalUrl,

@@ -1,0 +1,122 @@
+[
+ {
+  "schritt": "D24 Modal mit 1 Position",
+  "zaehlerVorher": "Cart (1)",
+  "modal": {
+   "zeilen": [
+    {
+     "text": "Art-Designs, Welcome-Holzdesign VIII Größe: : 50 cm x 75 cm TEST Kontrollagent - bitte ignorieren (Modal) 25,17 € 25,17 €",
+     "bild": true,
+     "menge": "1"
+    }
+   ],
+   "summen": [
+    "Subtotal 25,17 €",
+    "Versandkosten 0,00 €",
+    "Nettosumme —",
+    "VAT 19.00% 4,78 €",
+    "Total 29,95 €"
+   ],
+   "laden": "justify-content-center align-items-center cart-loading d-none"
+  }
+ },
+ {
+  "schritt": "D24 Menge 2",
+  "ui": {
+   "zeilen": [
+    "Art-Designs, Welcome-Holzdesign VIII Größe: : 50 cm x 75 cm TEST Kontrollagent - bitte ignorieren (Modal) 25,17 € 50,34 €"
+   ],
+   "summen": [
+    "Subtotal 50,34 €",
+    "Versandkosten 0,00 €",
+    "Nettosumme —",
+    "VAT 19.00% 9,56 €",
+    "Total 59,90 €"
+   ],
+   "zaehler": "Cart (2)"
+  },
+  "api": {
+   "count": 2,
+   "anzahl": [
+    2
+   ],
+   "gesamt": "59,90 €"
+  }
+ },
+ {
+  "schritt": "D24 Entfernen",
+  "ui": {
+   "zeilen": [
+    "Your cart is empty."
+   ],
+   "summen": [
+    "Subtotal € 0.00",
+    "Versandkosten € 0.00",
+    "Nettosumme € 0.00",
+    "VAT 19.00% € 0.00",
+    "Total € 0.00"
+   ],
+   "zaehler": "Cart"
+  },
+  "api": {
+   "count": 0,
+   "items": 0
+  }
+ },
+ {
+  "schritt": "D24 Leeren (API)",
+  "count": 0,
+  "items": 0
+ },
+ {
+  "schritt": "D25 Login falsch",
+  "ui": {
+   "meldung": "Username oder Password sind falsch! (Meldung des Altsystems)",
+   "klasse": "alert alert-danger",
+   "knopf": "Login",
+   "status": ""
+  },
+  "api": {
+   "eingeloggt": false
+  }
+ },
+ {
+  "schritt": "D25 Reset-Link",
+  "meldung": "Das Zurücksetzen des Passworts läuft im Altsystem (matten.de, „Passwort vergessen“) — hier noch nicht angebunden."
+ },
+ {
+  "schritt": "D25 Registrierung",
+  "form": {
+   "laender": 249,
+   "gewaehlt": "DE",
+   "pflicht": [
+    "eMail",
+    "Passwort",
+    "Anrede",
+    "Nachname",
+    "Straße",
+    "Stadt",
+    "Bundesland",
+    "PLZ",
+    "Land",
+    "Telefon",
+    "Mobil"
+   ],
+   "h1": 2,
+   "knopf": "versenden"
+  },
+  "ui": {
+   "meldung": "Antwort des Altsystems (HTTP 501):\nDas Altsystem stellt unter /register kein Registrierungsformular bereit (Status 200, aber nur ein Begruessungstext). Ein Kundenkonto laesst sich hier nicht anlegen. Die Bestellung funktioniert ohne Konto -- die Adresse wird direkt im Bestellvorgang erfasst.\n\nSeiteninhalt: Willkommen bei matten.de-Shop * FUCHSIUS multi-media GmbH\n\nDie Registrierung ist im Altsystem nicht über diesen Weg möglich; es wurde kein Konto angelegt.",
+   "klasse": "alert alert-warning"
+  }
+ },
+ {
+  "schritt": "Ende",
+  "konsole": [
+   "log-error: Failed to load resource: the server responded with a status of 501 (Not Implemented) @ http://localhost:8787/api/konto/register"
+  ],
+  "netz": [
+   "501 http://localhost:8787/api/konto/register"
+  ]
+ }
+]

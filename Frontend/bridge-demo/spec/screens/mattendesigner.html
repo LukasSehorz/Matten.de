@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+                <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mattenfuchs</title>
+        <meta name="keywords" content="e-commerce, matten" />
+<meta name="description" content="Matten.de e-commerce" />
+<meta name="robots" content="index, follow" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="matten.de" />
+<meta property="og:description" content="Matten.de e-commerce" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="UTF-8" />
+
+        <meta name="referrer" content="origin-when-crossorigin">
+        <meta property="og:image" content="https://www.matten.net/images/mattenfuchs.png" />
+        
+        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+        <link rel="stylesheet" href="/build/837.96782462.css"><link rel="stylesheet" href="/build/css/style.747cc104.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+              crossorigin="anonymous">
+        <style>
+            // Quill
+            .ql-align-right {
+                text-align: right;
+            }
+            .ql-align-center {
+                text-align: center;
+            }
+            .ql-align-left {
+                text-align: left;
+            }
+        </style>
+    
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Vast+Shadow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Finger+Paint" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu" rel="stylesheet">
+</head>
+
+<body id="">
+<div class="alert alert-warning py-1" role="alert">
+    <div class="container">
+        ⚠️ Entwicklungswebsite — diese Website entspricht möglicherweise nicht den geltenden Gesetzen und Vorschriften.
+    </div>
+</div>
+        <div style="background: #fff;">
+    <div class="big-container">
+    <div class="row">
+        <!-- Logo col -->
+        <div class="col-lg-6">
+            <a class="logo-link" href="/de">
+                <h1 class="logo" style="margin-bottom: 0;">
+                                            <img src="/images/logo_german.png" width="1024" height="197" class="d-md-inline" alt="Logo">
+                                    </h1>
+            </a>
+        </div>
+        <!-- Cart & search col -->
+        <div class="col-lg-6">
+            <div class="text-right header-links">
+                <div class="dropdown d-inline">
+                    <a href="#" class="dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/images/flags/german.png" alt="english" width="25" height="25">
+                            Deutsch</a>
+                    <div class="dropdown-menu" aria-labelledby="language-dropdown">
+                        <a class="dropdown-item" href="/en/custom-mat/create">
+                            <img src="/images/flags/united-kingdom.png" alt="english" width="25" height="25" style="vertical-align: top;">
+                            English
+                        </a>
+                        <a class="dropdown-item" href="/de/custom-mat/create">
+                            <img src="/images/flags/german.png" alt="english" width="25" height="25" style="vertical-align: top;">
+                            Deutsch
+                        </a>
+                    </div>
+                </div>
+                <span class="divider"></span>
+                <a href="/de/guest-book">
+                    Gästebuch                </a>
+                <span class="divider"></span>
+                                    <a href="/de/login">
+                        Login                    </a>
+                    <span class="divider"></span>
+                    <a href="/de/account/register">
+                        Registrieren                    </a>
+                            </div>
+            <div class="float-sm-right row no-gutters">
+                <div class="col-sm-6">
+                    <div class="btn-group mb-2 mb-sm-0" style="width: 100%;">
+                        <button class="btn btn-light" data-toggle="modal" data-target="#cart-modal" style="white-space: nowrap">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>
+                                Cart
+                                                            </span>
+                        </button>
+
+                        <a href="/de/order/checkout" class="btn btn-orange">
+                            Auschecken                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <form action="/de/products" method="get" class="ml-sm-2">
+                        <div class="input-group search-box">
+                            <input type="text" class="form-control" name="keyword" placeholder="Produkt suchen">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End cart col -->
+    </div>
+</div>
+
+<div class="modal fade" id="cart-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: initial;">
+            <div class="modal-header bg-primary" style="border: none;">
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0 bg-white cart-container">
+                <div style="position: absolute; background-color: rgba(255, 255, 255, 0.5); z-index: 20; width: 100%; height: 100%;"
+     class="d-none justify-content-center align-items-center cart-loading">
+    <div class="spinner-border" role="status" style="width: 3rem; height: 3rem;">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th></th>
+        <th></th>
+        <th>Produkt</th>
+        <th class="text-right">Preis</th>
+        <th class="text-right" style="width: 1%;">Menge</th>
+        <th class="text-right">Total</th>
+        <th class="text-center"></th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td colspan="7">
+                <p class="text-center">Your cart is empty.</p>
+            </td>
+        </tr>
+            </tbody>
+    <tfoot class="tfoot-light">
+    <tr>
+        <th colspan="5" class="text-right">Subtotal</th>
+        <td class="text-right" style="white-space: nowrap;"><strong>&euro; 0.00</strong></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th colspan="5" class="text-right">
+            Versandkosten
+                    </th>
+        <td class="text-right" style="white-space: nowrap;"><strong>&euro; 0.00</strong></td>
+        <td></td>
+    </tr>
+    <tr>
+        <th colspan="5" class="text-right">Nettosumme</th>
+        <td class="text-right" style="white-space: nowrap;"><strong>&euro; 0.00</strong></td>
+        <td></td>
+    </tr>
+            <tr>
+            <th colspan="5" class="text-right">VAT 19.00%</th>
+            <td class="text-right" style="white-space: nowrap;"><strong>&euro; 0.00</strong></td>
+            <td></td>
+        </tr>
+        <tr>
+        <th colspan="5" class="text-right">Total</th>
+        <td class="text-right" style="white-space: nowrap;"><strong>&euro; 0.00</strong></td>
+        <td></td>
+    </tr>
+    </tfoot>
+</table>
+
+<div class="text-right p-2">
+    <a href="/de" class="btn btn-secondary" data-dismiss="modal">
+        <i class="fas fa-fw fa-angle-left"></i>Weiter einkaufen
+    </a>
+    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary mt-1 d-lg-none">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link " href="/de">Home</a>
+            </li>
+
+                                                                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Fussmatten
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/jetprint-einfarbig">JetPrint-einfarbig</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/ironhorse">IronHorse</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/ironhorse-xl">IronHorse XL</a>
+                                                    </div>
+                    </li>
+                                                                <li class="nav-item">
+                        <a class="nav-link" href="/de/custom-mat/create">
+                            Mattendesigner
+                        </a>
+                    </li>
+                                                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Logomatten
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/designmatten">Designmatten</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/jet-print-light">Jet Print light</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/katzen-willk">Katzen Willk</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/jetprint-design">JetPrint-Design</a>
+                                                    </div>
+                    </li>
+                                                                                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            OS-REHA-Physio-Matten
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/os-rehab-physio-matten">OS-REHAB-Physio-Matten</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/os-y-matte-wide-balance">OS-Y-Matte, Wide Balance</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/os-rehab-basis-matte">OS-REHAB Basis-Matte</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/os-rehab-bahnmatte">OS-REHAB-Bahnmatte</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/os-rehab-stern-matte">OS-REHAB-Stern-Matte</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/os-rehab-gitter-matte">OS-REHAB-Gitter-Matte</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/os-rehab-5-punkt-matte">OS-REHAB-5-Punkt-Matte</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/os-rehab-quadrat-matte">OS-REHAB Quadrat-Matte</a>
+                                                    </div>
+                    </li>
+                                                                                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Kokosmatten
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/kokos-farbig">Kokos Farbig</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/kokos-naturfarbig">Kokos naturfarbig</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/kokos-logomatte">Kokos-Logomatte</a>
+                                                    </div>
+                    </li>
+                                                                                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Aluminium-Matten
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/marschall">MARSCHALL</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/diplomat">Diplomat</a>
+                                                    </div>
+                    </li>
+                                                                                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gummimatten
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/cushion-coil">Cushion Coil</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/scraper">Scraper</a>
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/struktura">Struktura</a>
+                                                    </div>
+                    </li>
+                                                                                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Outdoor-Matten
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/turf">Turf</a>
+                                                    </div>
+                    </li>
+                                                                                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mietmatten
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/iron-horse-mietmatten">IRON-HORSE-Mietmatten</a>
+                                                    </div>
+                    </li>
+                                                                                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Was ist neu
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <a class="dropdown-item bg-blue" href="/de/product-categories/waschbecken">Waschbecken</a>
+                                                    </div>
+                    </li>
+                                        <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="flag-icon flag-icon-us"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right p-0">
+                    <a href="#" class="dropdown-item active">
+                        <i class="flag-icon flag-icon-us mr-2"></i> English
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="flag-icon flag-icon-de mr-2"></i> German
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="flag-icon flag-icon-fr mr-2"></i> French
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="flag-icon flag-icon-es mr-2"></i> Spanish
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand bg-gradient-primary pl-0 pr-0 d-none d-lg-block mt-1 main-navbar">
+    <div class="big-container" style="position: relative;">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/de/custom-mat/create" class="nav-link">
+                        Mattendesigner                    </a>
+                </li>
+                                                            <li class="nav-item">
+                            <span class="nav-link pr-1 pl-1 mr-1 ml-1 category-dropdown-trigger">
+                            Fussmatten
+                            <div class="category-dropdown-menu pl-2 pr-2 pt-2">
+                                <div class="row no-gutters">
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/jetprint-einfarbig">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c785fa38931b.jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">JetPrint-einfarbig</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/ironhorse">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fa2b5364ejpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">IronHorse</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/ironhorse-xl">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fa5a8109ejpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">IronHorse XL</p>
+                                            </a>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </span>
+                    </li>
+                    
+                                                            <li class="nav-item">
+                            <span class="nav-link pr-1 pl-1 mr-1 ml-1 category-dropdown-trigger">
+                            Logomatten
+                            <div class="category-dropdown-menu pl-2 pr-2 pt-2">
+                                <div class="row no-gutters">
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/designmatten">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/JPL-621-aubergine_0.jpg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Designmatten</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/jet-print-light">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/JPrint-light.jpg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Jet Print light</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/katzen-willk">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c45865f923d2jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Katzen Willk</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/jetprint-design">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/JetPrint-Design.jpg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">JetPrint-Design</p>
+                                            </a>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </span>
+                    </li>
+                    
+                                                            <li class="nav-item">
+                            <span class="nav-link pr-1 pl-1 mr-1 ml-1 category-dropdown-trigger">
+                            OS-REHA-Physio-Matten
+                            <div class="category-dropdown-menu pl-2 pr-2 pt-2">
+                                <div class="row no-gutters">
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/os-rehab-physio-matten">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c4cc9df3e243jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">OS-REHAB-Physio-Matten</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/os-y-matte-wide-balance">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c899bca0f1ab.jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">OS-Y-Matte, Wide Balance</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/os-rehab-basis-matte">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5cca3e65b5598.jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">OS-REHAB Basis-Matte</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/os-rehab-bahnmatte">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c899da8bc245.jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">OS-REHAB-Bahnmatte</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/os-rehab-stern-matte">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c899f0b48969.jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">OS-REHAB-Stern-Matte</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/os-rehab-gitter-matte">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c899e468cda6.jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">OS-REHAB-Gitter-Matte</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/os-rehab-5-punkt-matte">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5cca325ee6c13.jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">OS-REHAB-5-Punkt-Matte</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/os-rehab-quadrat-matte">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5cce29fead941.jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">OS-REHAB Quadrat-Matte</p>
+                                            </a>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </span>
+                    </li>
+                    
+                                                            <li class="nav-item">
+                            <span class="nav-link pr-1 pl-1 mr-1 ml-1 category-dropdown-trigger">
+                            Kokosmatten
+                            <div class="category-dropdown-menu pl-2 pr-2 pt-2">
+                                <div class="row no-gutters">
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/kokos-farbig">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fa829d279jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Kokos Farbig</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/kokos-naturfarbig">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/kokos-natur_512x340.jpg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Kokos naturfarbig</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/kokos-logomatte">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fafe5a2a8jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Kokos-Logomatte</p>
+                                            </a>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </span>
+                    </li>
+                    
+                                                            <li class="nav-item">
+                            <span class="nav-link pr-1 pl-1 mr-1 ml-1 category-dropdown-trigger">
+                            Aluminium-Matten
+                            <div class="category-dropdown-menu pl-2 pr-2 pt-2">
+                                <div class="row no-gutters">
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/marschall">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47f8cfcc5b7jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">MARSCHALL</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/diplomat">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47f937b4f5fjpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Diplomat</p>
+                                            </a>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </span>
+                    </li>
+                    
+                                                            <li class="nav-item">
+                            <span class="nav-link pr-1 pl-1 mr-1 ml-1 category-dropdown-trigger">
+                            Gummimatten
+                            <div class="category-dropdown-menu pl-2 pr-2 pt-2">
+                                <div class="row no-gutters">
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/cushion-coil">
+                                                                                                    <img src="https://via.placeholder.com/150x100" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Cushion Coil</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/scraper">
+                                                                                                    <img src="https://via.placeholder.com/150x100" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Scraper</p>
+                                            </a>
+                                        </div>
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/struktura">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fd1c6e5f7jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Struktura</p>
+                                            </a>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </span>
+                    </li>
+                    
+                                                            <li class="nav-item">
+                            <span class="nav-link pr-1 pl-1 mr-1 ml-1 category-dropdown-trigger">
+                            Outdoor-Matten
+                            <div class="category-dropdown-menu pl-2 pr-2 pt-2">
+                                <div class="row no-gutters">
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/turf">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c47fbd86c22fjpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Turf</p>
+                                            </a>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </span>
+                    </li>
+                    
+                                                            <li class="nav-item">
+                            <span class="nav-link pr-1 pl-1 mr-1 ml-1 category-dropdown-trigger">
+                            Mietmatten
+                            <div class="category-dropdown-menu pl-2 pr-2 pt-2">
+                                <div class="row no-gutters">
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/iron-horse-mietmatten">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c4cc0ab6bb26jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">IRON-HORSE-Mietmatten</p>
+                                            </a>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </span>
+                    </li>
+                    
+                                                            <li class="nav-item">
+                            <span class="nav-link pr-1 pl-1 mr-1 ml-1 category-dropdown-trigger">
+                            Was ist neu
+                            <div class="category-dropdown-menu pl-2 pr-2 pt-2">
+                                <div class="row no-gutters">
+                                                                            <div class="col-2 category-dropdown-link-container">
+                                            <a class="category-dropdown-link" href="/de/product-categories/waschbecken">
+                                                                                                    <img src="https://www.matten.net/media/cache/product_category_thumbnail/uploads/5c773ded137fb.jpeg" width="150" height="100" alt="Category" style="width: 100%; height: auto;">
+                                                                                                <p class="text-center text-dark">Waschbecken</p>
+                                            </a>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </span>
+                    </li>
+                    
+                                <li class="nav-item">
+                    <a href="/de/products" class="nav-link">
+                        Alle Produkte                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/de/blog" class="nav-link">
+                        Blog                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+                <div style="min-height: 500px;">
+            <div class="mx-3">
+
+        <div class="alert alert-primary m-1 d-touch-block" role="alert">
+            Für die besten Design-Ergebnisse empfehlen wir die Verwendung eines Computers.
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>wählen Sie die Mattengröße aus.</li>
+                            <li>wählen Sie die Mattengrundfarbe.</li>
+                            <li>entwerfen Sie mithilfe der Rechtecke, Kreise, Schriften und Ihrer Bilder Ihr eigenes Design.</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mat-editor"></div>
+    </div>
+    </div>
+    <div class="subscribe-widget-container padding-top">
+        <div class="subscribe-widget">
+            <form>
+                <label class="subscribe-widget-label" for="subscribe-email">
+                    Newsletter abonnieren                </label>
+                <div class="input-group mb-3">
+                    <input id="subscribe-email" type="text" class="form-control subscribe-widget-input" placeholder="eMail-Adresse">
+                    <div class="input-group-append">
+                        <button class="btn btn-warning subscribe-widget-button" type="button">
+                            Abonnieren                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="footer p-2">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="footer-title">
+                    Find us                </h3>
+
+                <ul class="footer-links mt-3">
+                                    <li>
+                        <a href="https://m.facebook.com/Fuchsius-multi-media-GmbH-329921957172415/">
+                            <i class="fab fa-facebook fa-fw"></i>
+                            Facebook
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="https://twitter.com/mattenfuchs">
+                            <i class="fab fa-twitter fa-fw"></i>
+                            Twitter
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="https://www.linkedin.com/in/dieter-fuchsius-36902ba4/">
+                            <i class="fab fa-linkedin fa-fw"></i>
+                            LinkedIn
+                        </a>
+                    </li>
+                                                    <li>
+                        <a href="https://www.instagram.com/mattenfuchsi/">
+                            <i class="fab fa-instagram fa-fw"></i>
+                            Instagram
+                        </a>
+                    </li>
+                
+                </ul>
+            </div>
+            <div class="col">
+                <h3 class="footer-title">
+                    Information                </h3>
+                <ul class="footer-links mt-3">
+                    <li>
+                        <a href="/de">
+                            Home                        </a>
+                    </li>
+                    <li>
+                        <a href="/de/products">
+                            Produktliste                        </a>
+                    </li>
+                    <li>
+                        <a href="/de/account/register">
+                            Registrieren                        </a>
+                    </li>
+                                                            <li>
+                    <a href="/de/pages/data-protection">datenschutz</a>
+                    </li>
+                                        <li>
+                    <a href="/de/pages/datenschutzerklarung-dsgvo">Datenschutzerklärung (DSGVO)</a>
+                    </li>
+                                        <li>
+                    <a href="/de/pages/agb">AGB</a>
+                    </li>
+                                        <li>
+                    <a href="/de/pages/impressum">Impressum</a>
+                    </li>
+                                    </ul>
+            </div>
+            <div class="col">
+                <h3 class="footer-title">
+                    Kontakt                </h3>
+
+                <div class="footer-links mt-3">
+                    <div class="contact-info">Mail:        info@matten.net
+Tel.:     +49 89 5455 8264
+Fax:     +49 89 5455 8333
+Mobil: +49 171 77 55 400</div>
+                <img src="/images/cards.png" class="mt-2" width="200" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center text-muted">
+        &copy; 2026 Mattenfuchs
+    </div>
+</footer>
+
+    </div>
+    <div class="overlay"></div>
+        
+    <script type="text/javascript">
+        window.submitURL = '/de/custom-mat/checkout';
+        window.translations = {
+                            'label.preferences': 'Auswahl',
+                            'label.material': 'Mattenart',
+                            'label.size': 'Größe',
+                            'label.jetprint': 'JetPrint',
+                            'label.jetprint_light': 'JetPrint light',
+                            'label.leather': 'Velour',
+                            'label.vision': 'Vision',
+                            'label.toolbox': 'Werkzeuge',
+                            'label.add_text': 'Text einfügen',
+                            'label.add_rectangle': 'Rechteck einfügen',
+                            'label.add_circle': 'Kreis einfügen',
+                            'label.add_image': 'Bild einfügen',
+                            'label.design_elements': 'Designelemente',
+                            'label.base_rect': 'Grundfarbe',
+                            'label.textbox': 'A Textbox',
+                            'label.circle': 'Kreis',
+                            'label.image': 'Bild',
+                            'label.selected': 'ausgewählt',
+                            'label.font_weight': 'Schriftgröße',
+                            'label.normal': 'normal',
+                            'label.bold': 'fett',
+                            'label.font': 'Schriftart',
+                            'label.attributes': 'Design-details',
+                            'label.color': 'Farbe',
+                            'label.stroke_color': 'Linienfarbe',
+                            'label.stroke_width': 'Linienbreite',
+                            'label.position': 'Elementreihenfolge',
+                            'label.additional_info': 'zusätzliche Informationen',
+                            'label.notes': 'Bemerkungen',
+                            'label.order_mat': 'Matte bestellen',
+                            'label.quantity': 'Menge',
+                            'label.rectangle': 'Rechteck',
+                            'label.text': 'Text',
+                            'label.new_design': 'Neues Design',
+                            'label.portrait': 'Hochformat',
+                            'label.horizontal': 'Querformat',
+                            'label.price': 'Preis',
+                            'label.total': 'Total',
+                            'label.order_this_mat': 'Diese Matte ordern',
+                            'label.select_size': 'Größe',
+                            'label.select_material': 'Material',
+                            'label.including_tax_plus_shipping_cost': 'inkl. MWSt. plus Versandkosten',
+                            'label.please_check_spelling': 'Bitte prüfen Sie Mattenmaße, Mattenformat, Design, Texte, Farben und Spezifikationen vor dem Absenden des Auftrages. Weitere Wünsche schreiben Sie bitte unter ”Anmerkungen&quot;',
+                            'label.base_color': 'Grundfarbe',
+                            'label.design_color': 'Design-Farbe',
+                            'title.order_custom_mat': 'Kundenmatten-Bestellung',
+                            'label.delete_object': 'Objekt entfernen',
+                            'label.text_align': 'Textausrichtung',
+                            'label.line_height': 'Line spacing',
+                            'label.letter_spacing': 'Letter spacing',
+                    };
+    </script>
+            <script>
+          Window.locale = 'de';
+        </script>
+        <script src="/build/runtime.a6ba3cf9.js"></script><script src="/build/576.a55b98e3.js"></script><script src="/build/814.30d0226b.js"></script><script src="/build/js/app.f1a77904.js"></script>
+        <script>
+            window.cookieconsent.initialise({
+                container: document.getElementById('cookieconsent'),
+                palette: {
+                    popup: { background: '#2579d3', text: '#ffffff', link: '#ffffff' },
+                    button: { background: '#cbf1ff', text: '#000000' },
+                },
+                content: {
+                    'href': 'https://matten.net/de/pages/data-protection',
+                    'message': 'Diese Website nutzt Cookies, um bestmögliche Funktionalität bieten zu können.',
+                    'dismiss': 'Einverstanden',
+                    'link': 'Mehr Infos',
+                },
+                'theme': 'edgeless'
+            });
+        </script>
+    
+    <script type="text/javascript">
+      $('#helpModal').modal('show');
+    </script>
+</body>
+</html>

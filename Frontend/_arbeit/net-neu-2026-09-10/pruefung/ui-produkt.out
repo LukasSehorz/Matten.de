@@ -1,0 +1,486 @@
+[
+ {
+  "schritt": "jp-start",
+  "preis": "€ 29,05",
+  "versand": "Plus 11,90€ Versandkosten",
+  "endpreis": "Endpreis inkl. MwSt. und Versand: € 40,95",
+  "weg": "",
+  "hinweisB": "",
+  "hinweisL": "",
+  "kaufDisabled": false,
+  "formKlasse": "",
+  "breite": "60",
+  "laenge": "40",
+  "menge": "1",
+  "sichtB": "none",
+  "sichtL": "none",
+  "sichtFW": "none",
+  "konsole": []
+ },
+ {
+  "schritt": "C15a 40x60 fix",
+  "preis": "€ 29,05",
+  "versand": "Plus 11,90€ Versandkosten",
+  "endpreis": "Endpreis inkl. MwSt. und Versand: € 40,95",
+  "weg": "",
+  "hinweisB": "",
+  "hinweisL": "",
+  "kaufDisabled": false,
+  "formKlasse": "",
+  "breite": "60",
+  "laenge": "40",
+  "menge": "1",
+  "sichtB": "none",
+  "sichtL": "none",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15b 50x200",
+  "preis": "€ 121,03",
+  "versand": "Plus 11,90€ Versandkosten",
+  "endpreis": "Endpreis inkl. MwSt. und Versand: € 132,93",
+  "weg": "Wunschmaße übernehmen wir als Anfrage über 6300000-a — den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "",
+  "hinweisL": "",
+  "kaufDisabled": false,
+  "formKlasse": "custom_size",
+  "breite": "50",
+  "laenge": "200",
+  "menge": "1",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15c 90x120",
+  "preis": "€ 163,39",
+  "versand": "Plus 11,90€ Versandkosten",
+  "endpreis": "Endpreis inkl. MwSt. und Versand: € 175,29",
+  "weg": "Wunschmaße übernehmen wir als Anfrage über den Wunschmaß-Artikel 6300201-logomatte-a (Artikel 569) — das Produkt steht im Kommentar, den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "",
+  "hinweisL": "",
+  "kaufDisabled": false,
+  "formKlasse": "custom_size",
+  "breite": "90",
+  "laenge": "120",
+  "menge": "1",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15d 60x90 x5",
+  "preis": "€ 300,64",
+  "versand": "Plus 11,90€ Versandkosten",
+  "endpreis": "Endpreis inkl. MwSt. und Versand: € 312,54",
+  "weg": "Wunschmaße übernehmen wir als Anfrage über 6300000-a — den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "",
+  "hinweisL": "",
+  "kaufDisabled": false,
+  "formKlasse": "",
+  "breite": "90",
+  "laenge": "60",
+  "menge": "5",
+  "sichtB": "none",
+  "sichtL": "none",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15e 85x120 x2 sonderfarbe",
+  "preis": "€ 315,48",
+  "versand": "Plus 11,90€ Versandkosten",
+  "endpreis": "Endpreis inkl. MwSt. und Versand: € 327,38",
+  "weg": "Sonderform/Sonderfarbe übernehmen wir als Anfrage über 6300000-a — den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "",
+  "hinweisL": "",
+  "kaufDisabled": false,
+  "formKlasse": "custom_size",
+  "breite": "85",
+  "laenge": "120",
+  "menge": "2",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15f 85x120 mitRand",
+  "preis": "€ 185,18",
+  "versand": "Plus 11,90€ Versandkosten",
+  "endpreis": "Endpreis inkl. MwSt. und Versand: € 197,08",
+  "weg": "Sonderform/Sonderfarbe übernehmen wir als Anfrage über 6300000-a — den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "",
+  "hinweisL": "",
+  "kaufDisabled": false,
+  "formKlasse": "custom_size",
+  "breite": "85",
+  "laenge": "120",
+  "menge": "1",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15g 250x250",
+  "preis": "Breite höchstens 200 cm — bitte kleiner wählen.",
+  "versand": "",
+  "endpreis": "",
+  "weg": "Wunschmaße übernehmen wir als Anfrage über den Wunschmaß-Artikel 6300201-logomatte-a (Artikel 569) — das Produkt steht im Kommentar, den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "Breite höchstens 200 cm — bitte kleiner wählen.",
+  "hinweisL": "",
+  "kaufDisabled": true,
+  "formKlasse": "custom_size",
+  "breite": "250",
+  "laenge": "250",
+  "menge": "1",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15g2 200x250",
+  "preis": "€ 605,15",
+  "versand": "Plus 11,90€ Versandkosten",
+  "endpreis": "Endpreis inkl. MwSt. und Versand: € 617,05",
+  "weg": "Wunschmaße übernehmen wir als Anfrage über 6300000-a — den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "",
+  "hinweisL": "",
+  "kaufDisabled": false,
+  "formKlasse": "custom_size",
+  "breite": "200",
+  "laenge": "250",
+  "menge": "1",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15h 29x100",
+  "preis": "Breite mindestens 40 cm — bitte größer wählen.",
+  "versand": "",
+  "endpreis": "",
+  "weg": "Wunschmaße übernehmen wir als Anfrage über den Wunschmaß-Artikel 6300201-logomatte-a (Artikel 569) — das Produkt steht im Kommentar, den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "Breite mindestens 40 cm — bitte größer wählen.",
+  "hinweisL": "",
+  "kaufDisabled": true,
+  "formKlasse": "custom_size",
+  "breite": "29",
+  "laenge": "100",
+  "menge": "1",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15h2 100x29",
+  "preis": "Länge mindestens 40 cm — bitte größer wählen.",
+  "versand": "",
+  "endpreis": "",
+  "weg": "Wunschmaße übernehmen wir als Anfrage über den Wunschmaß-Artikel 6300201-logomatte-a (Artikel 569) — das Produkt steht im Kommentar, den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "",
+  "hinweisL": "Länge mindestens 40 cm — bitte größer wählen.",
+  "kaufDisabled": true,
+  "formKlasse": "custom_size",
+  "breite": "100",
+  "laenge": "29",
+  "menge": "1",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15h3 100x800",
+  "preis": "Länge höchstens 700 cm — bitte kleiner wählen.",
+  "versand": "",
+  "endpreis": "",
+  "weg": "Wunschmaße übernehmen wir als Anfrage über den Wunschmaß-Artikel 6300201-logomatte-a (Artikel 569) — das Produkt steht im Kommentar, den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "",
+  "hinweisL": "Länge höchstens 700 cm — bitte kleiner wählen.",
+  "kaufDisabled": true,
+  "formKlasse": "custom_size",
+  "breite": "100",
+  "laenge": "800",
+  "menge": "1",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "C15c2 90x120 wieder",
+  "preis": "€ 163,39",
+  "versand": "Plus 11,90€ Versandkosten",
+  "endpreis": "Endpreis inkl. MwSt. und Versand: € 175,29",
+  "weg": "Wunschmaße übernehmen wir als Anfrage über den Wunschmaß-Artikel 6300201-logomatte-a (Artikel 569) — das Produkt steht im Kommentar, den berechneten Preis bestätigen wir im Angebot.",
+  "hinweisB": "",
+  "hinweisL": "",
+  "kaufDisabled": false,
+  "formKlasse": "custom_size",
+  "breite": "90",
+  "laenge": "120",
+  "menge": "1",
+  "sichtB": "block",
+  "sichtL": "block",
+  "sichtFW": "none"
+ },
+ {
+  "schritt": "D17 40x60 kauf",
+  "vorher": {
+   "preis": "€ 29,05",
+   "versand": "Plus 11,90€ Versandkosten",
+   "endpreis": "Endpreis inkl. MwSt. und Versand: € 40,95",
+   "weg": "",
+   "hinweisB": "",
+   "hinweisL": "",
+   "kaufDisabled": false,
+   "formKlasse": "",
+   "breite": "60",
+   "laenge": "40",
+   "menge": "1",
+   "sichtB": "none",
+   "sichtL": "none",
+   "sichtFW": "none"
+  },
+  "ui": {
+   "meldung": "In den Warenkorb gelegt — der Warenkorb enthält jetzt 1 Position.",
+   "modalOffen": true,
+   "zaehler": "Cart (1)",
+   "zeilen": [
+    "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 40cm x 60cm | Trittrand,: mit umlaufendem Nitrilgummirand JetPrint-Premium · Breite 60 cm × Länge 40 cm · 1 Stück · Grundfarbe 613-königsblau · Kalkulation: netto je Stück 24,41 € · netto gesamt 24,41 € · brutto inkl. Versand 40,95 € · Preisformel Excel (preisformel.js) 24,90 € 24,90 €"
+   ],
+   "summen": [
+    "Subtotal 24,90 €",
+    "Versandkosten 10,00 €",
+    "Nettosumme —",
+    "VAT 19.00% 6,63 €",
+    "Total 41,53 €"
+   ],
+   "hinweis": ""
+  },
+  "korb": {
+   "count": 1,
+   "modus": "kauf",
+   "gesamt": "41,53 €",
+   "zwischensumme": "24,90 €",
+   "versand": "10,00 €",
+   "umsatzsteuer": "6,63 €",
+   "ustSatz": 19
+  },
+  "positionen": [
+   {
+    "pfad": "/fussmatten/standard-schmutzfangmatten/6300000",
+    "name": "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben",
+    "attribut": "Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 40cm x 60cm | Trittrand,: mit umlaufendem Nitrilgummirand",
+    "preis": "24,90 €",
+    "anzahl": 1,
+    "summe": "24,90 €",
+    "modus": "kauf",
+    "kommentar": "JetPrint-Premium · Breite 60 cm × Länge 40 cm · 1 Stück · Grundfarbe 613-königsblau · Kalkulation: netto je Stück 24,41 € · netto gesamt 24,41 € · brutto inkl. Versand 40,95 € · Preisformel Excel (preisformel.js)"
+   }
+  ]
+ },
+ {
+  "schritt": "D22a Warnung gemischt",
+  "warn": {
+   "text": "Ihr Warenkorb wird damit zur Anfrage — die bereits enthaltenen Artikel werden nicht bestellt, sondern mit angefragt. TROTZDEM FORTFAHREN ABBRECHEN",
+   "trotzdem": true,
+   "abbrechen": true
+  },
+  "korbCountUnveraendert": 1
+ },
+ {
+  "schritt": "D22b gemischt angelegt",
+  "nachAbbruch": "",
+  "ui": {
+   "meldung": "Als Anfrage übernommen — der Warenkorb enthält jetzt 2 Positionen.",
+   "modalOffen": true,
+   "zaehler": "Cart (2)",
+   "hinweis": "Ihr Warenkorb enthält Kauf- und Anfragepositionen. Das Altsystem behandelt ihn damit als Anfrage — die Kaufartikel werden nicht bestellt, sondern mit angefragt.\n\n1 Position steht „auf Anfrage“ — den berechneten Preis bestätigt der Anbieter im Angebot.",
+   "summen": [
+    "Subtotal auf Anfrage",
+    "Versandkosten auf Anfrage",
+    "Nettosumme auf Anfrage",
+    "VAT 19.00% auf Anfrage",
+    "Total auf Anfrage"
+   ]
+  },
+  "korb": {
+   "count": 2,
+   "modus": "gemischt",
+   "gesamt": "189,01 EUR"
+  },
+  "positionen": [
+   {
+    "pfad": "/fussmatten/standard-schmutzfangmatten/6300000",
+    "name": "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben",
+    "attribut": "Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 40cm x 60cm | Trittrand,: mit umlaufendem Nitrilgummirand",
+    "preis": "24,90 €",
+    "anzahl": 1,
+    "summe": "24,90 €",
+    "modus": "kauf",
+    "kommentar": "JetPrint-Premium · Breite 60 cm × Länge 40 cm · 1 Stück · Grundfarbe 613-königsblau · Kalkulation: netto je Stück 24,41 € · netto gesamt 24,41 € · brutto inkl. Versand 40,95 € · Preisformel Excel (preisformel.js)"
+   },
+   {
+    "pfad": "/logomatten/6300201-logomatte-a",
+    "name": null,
+    "attribut": "Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-kirschrot | Format: quer - horizontal | Grundfarbe: 613-königsblau | Standardgröße: Maßanfertigung | Mattengröße: 90cm × 120cm",
+    "preis": "auf Anfrage",
+    "anzahl": 1,
+    "summe": "auf Anfrage",
+    "modus": "anfrage",
+    "kommentar": "ARTIKEL: JetPrint-Premium (Zuordnung matten.de: /fussmatten/standard-schmutzfangmatten/6300000) · Breite 90 cm × Länge 120 cm (Wunschmaß) · 1 Stück · Grundfarbe 613-königsblau · Kalkulation: netto je Stück 137,30 € · netto gesamt 137,30 € · brutto inkl. Versand 175,29 € · Sondermaß ×1,25 · Preisformel Excel (preisformel.js)"
+   }
+  ]
+ },
+ {
+  "schritt": "D18 90x120 offer",
+  "vorher": {
+   "preis": "€ 163,39",
+   "versand": "Plus 11,90€ Versandkosten",
+   "endpreis": "Endpreis inkl. MwSt. und Versand: € 175,29",
+   "weg": "Wunschmaße übernehmen wir als Anfrage über den Wunschmaß-Artikel 6300201-logomatte-a (Artikel 569) — das Produkt steht im Kommentar, den berechneten Preis bestätigen wir im Angebot.",
+   "hinweisB": "",
+   "hinweisL": "",
+   "kaufDisabled": false,
+   "formKlasse": "custom_size",
+   "breite": "90",
+   "laenge": "120",
+   "menge": "1",
+   "sichtB": "block",
+   "sichtL": "block",
+   "sichtFW": "none"
+  },
+  "ui": {
+   "meldung": "Als Anfrage übernommen — der Warenkorb enthält jetzt 1 Position.",
+   "modalOffen": true,
+   "zaehler": "Cart (1)",
+   "zeilen": [
+    "Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-kirschrot | Format: quer - horizontal | Grundfarbe: 613-königsblau | Standardgröße: Maßanfertigung | Mattengröße: 90cm × 120cm ARTIKEL: JetPrint-Premium (Zuordnung matten.de: /fussmatten/standard-schmutzfangmatten/6300000) · Breite 90 cm × Länge 120 cm (Wunschmaß) · 1 Stück · Grundfarbe 613-königsblau · Kalkulation: netto je Stück 137,30 € · netto gesamt 137,30 € · brutto inkl. Versand 175,29 € · Sondermaß ×1,25 · Preisformel Excel (preisformel.js) auf Anfrage auf Anfrage"
+   ],
+   "summen": [
+    "Subtotal auf Anfrage",
+    "Versandkosten auf Anfrage",
+    "Nettosumme auf Anfrage",
+    "VAT 19.00% auf Anfrage",
+    "Total auf Anfrage"
+   ],
+   "hinweis": "1 Position steht „auf Anfrage“ — den berechneten Preis bestätigt der Anbieter im Angebot."
+  },
+  "korb": {
+   "count": 1,
+   "modus": "anfrage",
+   "gesamt": "147,48 EUR"
+  },
+  "positionen": [
+   {
+    "pfad": "/logomatten/6300201-logomatte-a",
+    "name": null,
+    "attribut": "Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-kirschrot | Format: quer - horizontal | Grundfarbe: 613-königsblau | Standardgröße: Maßanfertigung | Mattengröße: 90cm × 120cm",
+    "preis": "auf Anfrage",
+    "anzahl": 1,
+    "summe": "auf Anfrage",
+    "modus": "anfrage",
+    "kommentar": "ARTIKEL: JetPrint-Premium (Zuordnung matten.de: /fussmatten/standard-schmutzfangmatten/6300000) · Breite 90 cm × Länge 120 cm (Wunschmaß) · 1 Stück · Grundfarbe 613-königsblau · Kalkulation: netto je Stück 137,30 € · netto gesamt 137,30 € · brutto inkl. Versand 175,29 € · Sondermaß ×1,25 · Preisformel Excel (preisformel.js)"
+   }
+  ]
+ },
+ {
+  "schritt": "D18b 85x120 offer",
+  "vorher": {
+   "preis": "€ 123,45",
+   "versand": "Plus 11,90€ Versandkosten",
+   "endpreis": "Endpreis inkl. MwSt. und Versand: € 135,35",
+   "weg": "",
+   "hinweisB": "",
+   "hinweisL": "",
+   "kaufDisabled": false,
+   "formKlasse": "custom_size",
+   "breite": "85",
+   "laenge": "120",
+   "menge": "1",
+   "sichtB": "block",
+   "sichtL": "block",
+   "sichtFW": "none"
+  },
+  "ui": {
+   "meldung": "Als Anfrage übernommen — der Warenkorb enthält jetzt 1 Position.",
+   "modalOffen": true,
+   "zaehler": "Cart (1)",
+   "zeilen": [
+    "Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 85cm x 120cm | Trittrand,: mit umlaufendem Nitrilgummirand | Mattengröße: 85cm × 120cm JetPrint-Premium · Breite 85 cm × Länge 120 cm (Wunschmaß) · 1 Stück · Grundfarbe 613-königsblau · Kalkulation: netto je Stück 103,74 € · netto gesamt 103,74 € · brutto inkl. Versand 135,35 € · Preisformel Excel (preisformel.js) auf Anfrage auf Anfrage"
+   ],
+   "summen": [
+    "Subtotal auf Anfrage",
+    "Versandkosten auf Anfrage",
+    "Nettosumme auf Anfrage",
+    "VAT 19.00% auf Anfrage",
+    "Total auf Anfrage"
+   ],
+   "hinweis": "1 Position steht „auf Anfrage“ — den berechneten Preis bestätigt der Anbieter im Angebot."
+  },
+  "positionen": [
+   {
+    "pfad": "/fussmatten/standard-schmutzfangmatten/6300000-a",
+    "name": null,
+    "attribut": "Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 85cm x 120cm | Trittrand,: mit umlaufendem Nitrilgummirand | Mattengröße: 85cm × 120cm",
+    "preis": "auf Anfrage",
+    "anzahl": 1,
+    "summe": "auf Anfrage",
+    "modus": "anfrage",
+    "kommentar": "JetPrint-Premium · Breite 85 cm × Länge 120 cm (Wunschmaß) · 1 Stück · Grundfarbe 613-königsblau · Kalkulation: netto je Stück 103,74 € · netto gesamt 103,74 € · brutto inkl. Versand 135,35 € · Preisformel Excel (preisformel.js)"
+   }
+  ]
+ },
+ {
+  "schritt": "D19 40x60 sonderfarbe kauf",
+  "vorher": {
+   "preis": "€ 109,97",
+   "versand": "Plus 11,90€ Versandkosten",
+   "endpreis": "Endpreis inkl. MwSt. und Versand: € 121,87",
+   "weg": "Sonderform/Sonderfarbe übernehmen wir als Anfrage über 6300000-a — den berechneten Preis bestätigen wir im Angebot.",
+   "hinweisB": "",
+   "hinweisL": "",
+   "kaufDisabled": false,
+   "formKlasse": "",
+   "breite": "60",
+   "laenge": "40",
+   "menge": "1",
+   "sichtB": "none",
+   "sichtL": "none",
+   "sichtFW": "none"
+  },
+  "ui": {
+   "meldung": "Als Anfrage übernommen — der Warenkorb enthält jetzt 1 Position.",
+   "modalOffen": true,
+   "zaehler": "Cart (1)",
+   "zeilen": [
+    "Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 40cm x 60cm | Trittrand,: mit umlaufendem Nitrilgummirand | Mattengröße: 60cm × 40cm JetPrint-Premium · Breite 60 cm × Länge 40 cm · 1 Stück · Grundfarbe 613-königsblau · Sonderfarbe (+68 € einmalig) · Kalkulation: netto je Stück 24,41 € · netto gesamt 92,41 € · brutto inkl. Versand 121,87 € · Preisformel Excel (preisformel.js) auf Anfrage auf Anfrage"
+   ],
+   "summen": [
+    "Subtotal auf Anfrage",
+    "Versandkosten auf Anfrage",
+    "Nettosumme auf Anfrage",
+    "VAT 19.00% auf Anfrage",
+    "Total auf Anfrage"
+   ],
+   "hinweis": "1 Position steht „auf Anfrage“ — den berechneten Preis bestätigt der Anbieter im Angebot."
+  },
+  "positionen": [
+   {
+    "pfad": "/fussmatten/standard-schmutzfangmatten/6300000-a",
+    "name": null,
+    "attribut": "Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 40cm x 60cm | Trittrand,: mit umlaufendem Nitrilgummirand | Mattengröße: 60cm × 40cm",
+    "preis": "auf Anfrage",
+    "anzahl": 1,
+    "summe": "auf Anfrage",
+    "modus": "anfrage",
+    "kommentar": "JetPrint-Premium · Breite 60 cm × Länge 40 cm · 1 Stück · Grundfarbe 613-königsblau · Sonderfarbe (+68 € einmalig) · Kalkulation: netto je Stück 24,41 € · netto gesamt 92,41 € · brutto inkl. Versand 121,87 € · Preisformel Excel (preisformel.js)"
+   }
+  ]
+ },
+ {
+  "schritt": "ABBRUCH",
+  "fehler": "Error: Zeit abgelaufen: !!document.querySelector(\"#produkt-meldung .alert\")\n    at Object.warteBis (file:///private/tmp/claude-501/-Users-lukas-sehorz-Library-CloudStorage-OneDrive-Pers-nlich-Desktop-Webseiten-Sale-Matten-de-Frontend/7bd488bf-2581-4d9e-9958-8bfd9e72b1aa/scratchpad/pruefung/cdp.mjs:69:13)\n    at async klickUndWarte (file:///private/tmp/claude-501/-Users-lukas-sehorz-Library-CloudStorage-OneDrive-Pers-nlich-Desktop-Webseiten-Sale-Matten-de-Frontend/7bd488bf-2581-4d9e-9958-8bfd9e72b1aa/scratchpad/pruefung/ui-produkt.mjs:29:3)\n    at async file:///private/tmp/claude-501/-Users-lukas-sehorz-Library-CloudStorage-OneDrive-Pers-nlich-Desktop-Webseiten-Sale-Matten-de-Frontend/7bd488bf-2581-4d9e-9958-8bfd9e72b1aa/scratchpad/pruefung/ui-produkt.mjs:113:16",
+  "konsole": [
+   "log-error: An invalid form control with name='width' is not focusable."
+  ]
+ }
+]

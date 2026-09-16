@@ -75,9 +75,26 @@ function nurText(wert) {
   return typeof wert === 'string' ? wert : null;
 }
 
-/** Das einzige Feld des finalen Formulars auf /bestellen. */
+/**
+ * Das finale Formular auf /bestellen hat genau EIN Feld -- welches, entscheidet
+ * das Altsystem nach dem Inhalt des Korbs. Ein Korb aus Kaufartikeln ("In den
+ * Warenkorb") bekommt den Knopf "Bestellung abschicken"; ein Korb aus
+ * Anfrageartikeln ("in den Anfragenkorb") bekommt "Anfrage abschicken", die
+ * Seite heisst dann "Anfragenkorb", und Zahlungsart wie Summen fehlen
+ * (belegt am 10.09.2026, fixtures/bestellen-raw-anfrage.html). Beide Felder
+ * muessen darum bekannt sein: gesendet wird immer das, was die Seite anbietet,
+ * nie ein erfundenes.
+ */
 const BESTELL_FELD = 'bestellung_abschicken';
 const BESTELL_WERT = 'Bestellung abschicken';
+const ANFRAGE_FELD = 'anfrage_abschicken';
+const ANFRAGE_WERT = 'Anfrage abschicken';
+
+/** Absende-Feld -> Betriebsart der Uebersichtsseite und Beschriftung laut Altsystem. */
+const ABSENDE_FELDER = new Map([
+  [BESTELL_FELD, { art: 'bestellung', wert: BESTELL_WERT }],
+  [ANFRAGE_FELD, { art: 'anfrage', wert: ANFRAGE_WERT }],
+]);
 
 /**
  * Die Felder des Adressformulars, in genau der Reihenfolge des Live-Formulars.
@@ -431,6 +448,27 @@ function firstMatch(html, re, group = 1) {
 }
 
 /**
+ * Anfrageartikel tragen im Warenkorb und auf /bestellen statt eines Betrags
+ * den Text "auf Anfrage". Erkannt wird das am Text, nicht an preisNum allein:
+ * ein Kaufartikel zu 0,00 EUR bleibt ein Kaufartikel.
+ */
+function istAufAnfrage(preisText) {
+  return /auf\s+anfrage/i.test(preisText || '');
+}
+
+/**
+ * Betriebsart eines Korbs nach seinen Positionen: 'kauf', 'anfrage',
+ * 'gemischt' (beides nebeneinander) oder null (leer). Danach richtet sich,
+ * welchen Absende-Knopf das Altsystem auf /bestellen zeigt -- siehe
+ * parseUebersicht() und UEBERGABE.md §4.
+ */
+function korbModus(items) {
+  const arten = new Set((items || []).map((i) => i && i.modus).filter(Boolean));
+  if (arten.size === 0) return null;
+  return arten.size > 1 ? 'gemischt' : [...arten][0];
+}
+
+/**
  * Liest die Warenkorb-Seite. Defensiv: jedes nicht gefundene Feld
  * wird null, nie ein Absturz.
  */
@@ -438,6 +476,7 @@ function parseCart(html) {
   const result = {
     count: null,
     items: [],
+    modus: null,
     gesamt: null,
     gesamtNum: null,
     zwischensumme: null,
@@ -505,12 +544,14 @@ function parseCart(html) {
         attribut,
         kommentar,
         anzahl: anzahlRaw != null ? Number(anzahlRaw) : null,
+        modus: istAufAnfrage(preisText) ? 'anfrage' : 'kauf',
         preis: preisText || null,
         preisNum: toNumber(preisText),
         summe: summeText || null,
         summeNum: toNumber(summeText),
       });
     }
+    result.modus = korbModus(result.items);
 
     // 3) Summenblock
     const grab = (label) =>
@@ -620,7 +661,20 @@ function parseZahlungsarten(html) {
     });
     if (ist) gewaehlt = wert;
   }
-  return { optionen: out, gewaehlt };
+
+  // Im Anfragenkorb zeigt die Warenkorbseite keine Zahlungsart-Radios, fuehrt
+  // aber ein verstecktes Feld <input type="hidden" name='zahlungsart'> mit
+  // (beobachtet: RechnungPayment). Es wird getrennt gemeldet -- `gewaehlt`
+  // bleibt die Auswahl des Besuchers --, damit die Sperre vor dem Absenden
+  // auch das prueft, was das Altsystem still mitschickt.
+  let versteckt = null;
+  for (const m of html.matchAll(/<input\b[^>]*>/gi)) {
+    const tag = m[0];
+    if (!/\sname=["']zahlungsart["']/i.test(tag) || !/\stype=["']hidden["']/i.test(tag)) continue;
+    versteckt = firstMatch(tag, /\svalue=["']([^"']*)["']/i) ?? '';
+    break;
+  }
+  return { optionen: out, gewaehlt, versteckt };
 }
 
 /** Land, Versandart und Zahlungsart, wie sie gerade im Warenkorb stehen. */
@@ -635,6 +689,8 @@ function parseKasseOptionen(html) {
       optionen: zahlung.optionen.filter((z) => z.erlaubt),
       abgelehnt: zahlung.optionen.filter((z) => !z.erlaubt).map((z) => ({ wert: z.wert, label: z.label, grund: z.grund })),
       gewaehlt: zahlung.gewaehlt,
+      // Nur im Anfragenkorb belegt (leere Optionsliste, aber verstecktes Feld).
+      versteckt: zahlung.versteckt,
     },
   };
 }
@@ -709,12 +765,19 @@ function parseAdressWerte(html) {
 
 /**
  * Die Bestelluebersicht /bestellen: Lieferadresse, Positionen, Summen,
- * Zahlungsart -- und ob der finale Absende-Knopf ueberhaupt da ist.
+ * Zahlungsart -- und WELCHER finale Absende-Knopf da ist.
+ *
+ * `art` sagt, was das Altsystem aus dem Korb gemacht hat: 'bestellung'
+ * (Knopf bestellung_abschicken), 'anfrage' (Knopf anfrage_abschicken) oder
+ * null (kein Knopf -- dann ist nichts freigegeben). `korb` ist die
+ * Ueberschrift ueber der Tabelle ("Warenkorb" bzw. "Anfragenkorb"), eine
+ * zweite, vom Knopf unabhaengige Auskunft.
  */
 function parseUebersicht(html) {
   const result = {
     adresseText: null,
     bemerkungen: null,
+    korb: null,
     items: [],
     zwischensumme: null,
     versand: null,
@@ -723,7 +786,11 @@ function parseUebersicht(html) {
     gesamt: null,
     gesamtNum: null,
     zahlungsartText: null,
+    art: null,
     absendeknopf: false,
+    absendeknopfName: null,
+    absendeknopfText: null,
+    absendeknoepfe: [],
   };
   if (typeof html !== 'string' || !html) return result;
 
@@ -742,6 +809,10 @@ function parseUebersicht(html) {
     const bem = firstMatch(html, /<b>Bemerkungen<\/b>:<br\/>([\s\S]*?)<\/div>/i);
     if (bem) result.bemerkungen = textOf(bem) || null;
 
+    // Ueberschrift der Positionstabelle: "Warenkorb" beim Kauf, "Anfragenkorb"
+    // bei Anfrageartikeln (jeweils gefolgt von "(... aendern)").
+    result.korb = firstMatch(html, /<h4>\s*(Warenkorb|Anfragenkorb)\b/i);
+
     const tabelle = firstMatch(html, /<table class='warenkorb table'>([\s\S]*?)<\/table>/i) || '';
     for (const row of tabelle.matchAll(/<tr>([\s\S]*?)<\/tr>/gi)) {
       const tds = [...row[1].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map((m) => m[1]);
@@ -749,16 +820,28 @@ function parseUebersicht(html) {
       const erste = textOf(tds[0]);
       if (!erste || /^(Zwischensumme|Versandkosten|Gesamtsumme)/i.test(erste)) continue;
 
+      // Name = Text vor dem <small>-Block. Im Anfragenkorb FEHLT er: die Zelle
+      // beginnt direkt mit den Attributzeilen (dieselbe Eigenheit wie im
+      // Warenkorb, UEBERGABE.md §6 Nr. 10). Ein leerer Name darf die Position
+      // darum nicht verwerfen -- `beschreibung` traegt in jedem Fall den
+      // ganzen Zellentext, so wie das Altsystem ihn zeigt.
       const desc = tds[0];
       const name = textOf(desc.split(/<small>/i)[0]) || null;
-      const attr = textOf((desc.match(/<small>([\s\S]*?)<\/small>/i) || [])[1] || '')
-        .replace(/^-\s*/, '') || null;
-      if (!name) continue;
+      const klein = (desc.match(/<small>([\s\S]*?)<\/small>/i) || [])[1] || '';
+      // Attributzeilen "- Feld: Wert" wie in parseCart(): mit " | " verbunden.
+      const zeilen = klein.split(/<br\s*\/?>/i)
+        .map((z) => textOf(z))
+        .filter((t) => t && t.startsWith('-'))
+        .map((t) => t.replace(/^-\s*/, ''));
+      const attr = zeilen.length ? zeilen.join(' | ') : (textOf(klein).replace(/^-\s*/, '') || null);
+      const preis = textOf(tds[1]);
       result.items.push({
         name,
         attribut: attr,
-        preis: textOf(tds[1]),
-        preisNum: toNumber(textOf(tds[1])),
+        beschreibung: erste,
+        modus: istAufAnfrage(preis) ? 'anfrage' : 'kauf',
+        preis,
+        preisNum: toNumber(preis),
         anzahl: Number(textOf(tds[2])) || null,
         summe: textOf(tds[3]),
         summeNum: toNumber(textOf(tds[3])),
@@ -785,7 +868,30 @@ function parseUebersicht(html) {
     const za = firstMatch(html, /Zahlungsart:\s*([^<]*)/i);
     if (za) result.zahlungsartText = decodeEntities(za).trim() || null;
 
-    result.absendeknopf = new RegExp(`name=['"]${BESTELL_FELD}['"]`, 'i').test(html);
+    // Der Absende-Knopf: ein <input type='submit'> mit einem der beiden
+    // bekannten Namen. Die Beschriftung kommt woertlich aus dem value-Attribut
+    // der Seite; nur wenn es fehlt, aus der Tabelle oben.
+    for (const m of html.matchAll(/<input\b[^>]*>/gi)) {
+      const tag = m[0];
+      const name = firstMatch(tag, /\sname=['"]([^'"]+)['"]/i);
+      if (!name || !ABSENDE_FELDER.has(name)) continue;
+      const wert = firstMatch(tag, /\svalue=['"]([^'"]*)['"]/i);
+      result.absendeknoepfe.push({
+        name,
+        wert: wert != null ? decodeEntities(wert) : ABSENDE_FELDER.get(name).wert,
+        art: ABSENDE_FELDER.get(name).art,
+      });
+    }
+    // Zeigte das Altsystem je BEIDE Knoepfe (nie beobachtet), gilt der
+    // Kauf-Weg: er ist der strengere, weil er die Zahlungsart-Pruefung verlangt.
+    const knopf =
+      result.absendeknoepfe.find((k) => k.art === 'bestellung') || result.absendeknoepfe[0] || null;
+    if (knopf) {
+      result.art = knopf.art;
+      result.absendeknopf = true;
+      result.absendeknopfName = knopf.name;
+      result.absendeknopfText = knopf.wert;
+    }
   } catch (err) {
     console.error('  [parser] Uebersicht:', err.message);
   }
@@ -945,6 +1051,119 @@ function pruefeZahlungsart(wert) {
   return null;
 }
 
+/**
+ * Die Zahlungsarten, die das Altsystem fuer diesen Korb gerade fuehrt: das
+ * angehakte Radio (Kauf) und/oder das versteckte Feld (Anfrage). Beides
+ * ginge beim Absenden des Warenkorb-Formulars mit -- darum zaehlen beide.
+ * Im Anfragenkorb ist die Liste leer oder enthaelt nur den versteckten Wert.
+ */
+function gefuehrteZahlungsarten(optionen) {
+  const z = (optionen && optionen.zahlungsart) || {};
+  return [z.gewaehlt, z.versteckt].filter((w) => w != null);
+}
+
+/**
+ * Die Sperre, die IMMER gilt -- Kauf wie Anfrage: fuehrt das Altsystem
+ * irgendwo eine Ogone-Zahlungsart, ist Schluss. Die Bestell-Endpunkte rufen
+ * sie auf, bevor sie ueberhaupt auf die Uebersichtsseite schauen. Ob eine
+ * Zahlungsart darueber hinaus PFLICHT ist, entscheidet ermittleHuerden() --
+ * das haengt vom Korb ab und laesst sich erst mit /bestellen sagen.
+ */
+function ogoneSperre(optionen) {
+  for (const wert of gefuehrteZahlungsarten(optionen)) {
+    const z = (nurText(wert) ?? '').trim();
+    if (ZAHLUNGSARTEN_VERBOTEN.has(z)) return pruefeZahlungsart(z);
+  }
+  return null;
+}
+
+/**
+ * Die Huerden vor dem Absenden -- als reine Funktion ueber dem, was das
+ * Altsystem gerade zeigt. So stehen die Regeln nur an EINER Stelle und sind
+ * ohne Netz pruefbar (pruefe-anfrage.mjs).
+ *
+ *   art 'bestellung'  Zahlungsart muss gesetzt UND auf der Allowlist sein
+ *                     (unveraendert gegenueber frueher).
+ *   art 'anfrage'     Das Altsystem bietet keine Zahlungsart an. Fuehrt es
+ *                     dennoch eine (verstecktes Feld), muss sie auf der
+ *                     Allowlist stehen; fuehrt es keine, ist das keine
+ *                     Huerde. Ogone bleibt in jedem Fall gesperrt.
+ *   art null          Kein Knopf erkannt: Huerden wie bisher, nie bereit.
+ *
+ * `stand` ist der gelesene Warenkorb samt Optionen (readCartMitOptionen),
+ * `uebersicht` die geparste Seite /bestellen (null bei Umleitung),
+ * `umleitung` das Ziel, falls /bestellen umgeleitet hat.
+ */
+function ermittleHuerden({ stand, uebersicht, umleitung }) {
+  const huerden = [];
+  const art = (uebersicht && uebersicht.art) || null;
+  const gefuehrt = gefuehrteZahlungsarten(stand.optionen);
+
+  if (umleitung) {
+    huerden.push(
+      `Das Altsystem leitet ${ORDER_PATH} auf ${umleitung} um -- die Lieferadresse fehlt noch ` +
+      'oder der Warenkorb ist leer.'
+    );
+  }
+
+  // Zahlungsart. Jeder gefuehrte Wert muss die Allowlist bestehen (das
+  // schliesst Ogone aus). Fehlt jeder Wert, ist das nur beim Anfragenkorb
+  // in Ordnung -- dort bietet das Altsystem schlicht keine Zahlungsart an.
+  if (gefuehrt.length === 0) {
+    if (art !== 'anfrage') huerden.push(pruefeZahlungsart(null));
+  } else {
+    for (const wert of gefuehrt) {
+      const fehler = pruefeZahlungsart(wert);
+      if (fehler && !huerden.includes(fehler)) huerden.push(fehler);
+    }
+  }
+
+  // Zweite, unabhaengige Quelle: die Uebersichtsseite schreibt die Zahlungsart
+  // im Klartext aus ("Zahlungsart: Vorkasse"). Weichen die beiden Quellen ab
+  // -- etwa weil das Altsystem intern etwas anderes gesetzt hat als das
+  // angehakte Radio im Warenkorb --, gewinnt die Ablehnung.
+  const klartext = (uebersicht && uebersicht.zahlungsartText) || '';
+  if (/paypal|kredit|ogone|worldline/i.test(klartext)) {
+    huerden.push(
+      `Die Bestelluebersicht des Altsystems weist "${klartext}" als Zahlungsart aus. ` +
+      'Das ist ein Weg ueber einen Zahlungsdienstleister und in dieser Demo gesperrt. ' +
+      'Bitte im Warenkorb auf Vorkasse oder Rechnung umstellen.'
+    );
+  }
+
+  if (uebersicht && !uebersicht.absendeknopf) {
+    huerden.push('Auf der Uebersichtsseite steht kein Absende-Knopf -- der Bestellabschluss ist nicht freigegeben.');
+  }
+  if (stand.cart.items.length === 0) huerden.push('Der Warenkorb ist leer.');
+
+  return { art, huerden, zahlungsart: gefuehrt[0] ?? null };
+}
+
+/**
+ * Das Feld, das die Uebersichtsseite anbietet -- als [name, wert] fuer das
+ * finale Formular. null, wenn kein Knopf da ist: dann wird nichts erfunden
+ * und nichts gesendet.
+ */
+function absendeFeld(uebersicht) {
+  if (!uebersicht || !uebersicht.absendeknopf || !uebersicht.absendeknopfName) return null;
+  const bekannt = ABSENDE_FELDER.get(uebersicht.absendeknopfName);
+  return {
+    name: uebersicht.absendeknopfName,
+    wert: uebersicht.absendeknopfText ?? (bekannt ? bekannt.wert : ''),
+  };
+}
+
+/** Was der finale Klick im Altsystem ausloest -- je Betriebsart, ehrlich benannt. */
+const WIRKUNG = {
+  bestellung:
+    'Das Altsystem legt eine echte Bestellung an, verschickt die Auftragsbestaetigung ' +
+    'per E-Mail an die oben genannte Adresse und leitet auf /danke weiter.',
+  anfrage:
+    'Das Altsystem legt eine Anfrage an -- ohne Preis, Zahlungsart und Versandkosten. ' +
+    'Was danach folgt (Bestaetigung per E-Mail, Zielseite), ist fuer den Anfrage-Weg ' +
+    'nicht live geprueft: der Abschluss wurde nie ausgeloest.',
+};
+
 /** Liest die Warenkorbseite und gibt Warenkorb + Kasse-Optionen zurueck. */
 async function readCartMitOptionen(session) {
   const logs = await ensureUpstreamSession(session);
@@ -1060,9 +1279,6 @@ async function leseVorschau(session, { vorabStand = null } = {}) {
   const stand = vorabStand || await readCartMitOptionen(session);
   const logs = [...stand.logs];
 
-  const zahlungsart = stand.optionen.zahlungsart.gewaehlt;
-  const zahlungsartFehler = pruefeZahlungsart(zahlungsart);
-
   // Kein Redirect verfolgen: die Umleitung SELBST ist die Auskunft.
   const res = await upstream('GET', `${UPSTREAM_ORIGIN}${ORDER_PATH}`, {
     session,
@@ -1074,37 +1290,20 @@ async function leseVorschau(session, { vorabStand = null } = {}) {
   const html = umleitung ? '' : decodeBody(res.buffer);
   const uebersicht = umleitung ? null : parseUebersicht(html);
 
-  const huerden = [];
-  if (umleitung) {
-    huerden.push(
-      `Das Altsystem leitet ${ORDER_PATH} auf ${umleitung} um -- die Lieferadresse fehlt noch ` +
-      'oder der Warenkorb ist leer.'
-    );
-  }
-  if (zahlungsartFehler) huerden.push(zahlungsartFehler);
-
-  // Zweite, unabhaengige Quelle: die Uebersichtsseite schreibt die Zahlungsart
-  // im Klartext aus ("Zahlungsart: Vorkasse"). Weichen die beiden Quellen ab
-  // -- etwa weil das Altsystem intern etwas anderes gesetzt hat als das
-  // angehakte Radio im Warenkorb --, gewinnt die Ablehnung.
-  if (/paypal|kredit|ogone|worldline/i.test(uebersicht?.zahlungsartText || '')) {
-    huerden.push(
-      `Die Bestelluebersicht des Altsystems weist "${uebersicht.zahlungsartText}" als Zahlungsart aus. ` +
-      'Das ist ein Weg ueber einen Zahlungsdienstleister und in dieser Demo gesperrt. ' +
-      'Bitte im Warenkorb auf Vorkasse oder Rechnung umstellen.'
-    );
-  }
-
-  if (uebersicht && !uebersicht.absendeknopf) {
-    huerden.push('Auf der Uebersichtsseite steht kein Absende-Knopf -- der Bestellabschluss ist nicht freigegeben.');
-  }
-  if (stand.cart.items.length === 0) huerden.push('Der Warenkorb ist leer.');
-
+  // Die Regeln stehen in ermittleHuerden() -- hier wird nur zusammengesetzt.
+  const { art, huerden } = ermittleHuerden({ stand, uebersicht, umleitung });
   const bereit = huerden.length === 0;
+
+  // Das Feld, das die Seite anbietet. Ohne Knopf bleibt die Liste leer --
+  // dann ist `bereit` ohnehin false, und es wird nichts erfunden.
+  const feld = absendeFeld(uebersicht);
+  const felder = feld ? [feld] : [];
+  const body = buildForm(felder.map((f) => [f.name, f.wert]));
 
   return {
     bereit,
     huerden,
+    art,
     warenkorb: stand.cart,
     optionen: stand.optionen,
     konto: stand.konto,
@@ -1123,15 +1322,13 @@ async function leseVorschau(session, { vorabStand = null } = {}) {
       // Content-Length (aus der Laenge des Bodys) und der Cookie.
       header: {
         ...postHeaders(),
-        'Content-Length': String(Buffer.byteLength(buildForm([[BESTELL_FELD, BESTELL_WERT]]))),
+        'Content-Length': String(Buffer.byteLength(body)),
         Cookie: 'PHPSESSID der Proxy-Sitzung (hier nicht ausgeschrieben)',
       },
-      felder: [{ name: BESTELL_FELD, wert: BESTELL_WERT }],
-      body: buildForm([[BESTELL_FELD, BESTELL_WERT]]),
+      felder,
+      body,
       bodyKodierung: 'utf-8 (Leerzeichen als "+", Rest prozentkodiert)',
-      wirkung:
-        'Das Altsystem legt eine echte Bestellung an, verschickt die Auftragsbestaetigung ' +
-        'per E-Mail an die oben genannte Adresse und leitet auf /danke weiter.',
+      wirkung: WIRKUNG[art] || 'Kein Absende-Knopf erkannt -- es wird nichts gesendet.',
       gesperrt: [...ZAHLUNGSARTEN_VERBOTEN.keys()],
       bestaetigungsfeld: { bestaetigung: BESTELL_BESTAETIGUNG },
     },
@@ -1141,16 +1338,31 @@ async function leseVorschau(session, { vorabStand = null } = {}) {
 
 /**
  * Der finale Schritt. Prueft noch einmal alles nach und schickt dann genau
- * ein Feld ab. Die Rohantwort bleibt in der Sitzung liegen, damit
- * /api/kasse/raw sie spaeter als Beweis ausliefern kann.
+ * ein Feld ab -- das, das die Uebersichtsseite eben angeboten hat
+ * (bestellung_abschicken beim Kauf, anfrage_abschicken beim Anfragenkorb).
+ * Die Rohantwort bleibt in der Sitzung liegen, damit /api/kasse/raw sie
+ * spaeter als Beweis ausliefern kann.
  */
 async function bestellungAbschicken(session, { vorabStand = null } = {}) {
   const vorschau = await leseVorschau(session, { vorabStand });
   if (!vorschau.bereit) {
-    return { ok: false, huerden: vorschau.huerden, vorschau, logs: vorschau.upstream };
+    return { ok: false, art: vorschau.art, huerden: vorschau.huerden, vorschau, logs: vorschau.upstream };
   }
 
-  const body = buildForm([[BESTELL_FELD, BESTELL_WERT]]);
+  // `bereit` schliesst einen fehlenden Knopf bereits aus. Trotzdem wird hier
+  // noch einmal nachgesehen -- fail-closed: ohne genau ein Feld geht nichts raus.
+  const felder = vorschau.finalRequest.felder;
+  if (felder.length !== 1) {
+    return {
+      ok: false,
+      art: vorschau.art,
+      huerden: ['Die Uebersichtsseite bietet kein eindeutiges Absende-Feld an -- es wurde nichts gesendet.'],
+      vorschau,
+      logs: vorschau.upstream,
+    };
+  }
+
+  const body = buildForm(felder.map((f) => [f.name, f.wert]));
   const res = await upstream('POST', `${UPSTREAM_ORIGIN}${ORDER_PATH}`, { session, body });
   const html = decodeBody(res.buffer);
 
@@ -1158,6 +1370,7 @@ async function bestellungAbschicken(session, { vorabStand = null } = {}) {
 
   return {
     ok: res.status >= 200 && res.status < 400,
+    art: vorschau.art,
     status: res.status,
     finalUrl: res.finalUrl,
     bestellnummer: parseBestellnummer(html),
@@ -2764,6 +2977,94 @@ function baueAddBodyAusFormular(artikel, { anzahl, kommentar, werte }) {
   return { body: buildForm(paare), paare, abgelehnt };
 }
 
+/* ------------------------------------------------------------------ */
+/* Herkunft der Warenkorbpositionen                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Das Altsystem nennt zu einer Warenkorbzeile nur den Namen -- keinen Pfad
+ * und kein Bild. Beides ist aber genau in dem Augenblick bekannt, in dem
+ * wir die Zeile selbst anlegen (POST /api/cart/add mit `pfad`). Also wird
+ * es dort gemerkt, und zwar unter dem `key`, den das Altsystem der Position
+ * gibt: ein stabiler Hash ueber Artikel und Ausfuehrung. Der aendert sich
+ * weder beim Neuladen der Seite noch beim Setzen der Menge, und er ist je
+ * Position eindeutig -- damit haelt die Zuordnung ueber die ganze Sitzung
+ * und ueber beliebig viele Positionen.
+ *
+ * Die Ablage haengt an der Besucher-Sitzung (dieselbe, die auch die
+ * Upstream-Cookies traegt), nicht an einem globalen Speicher: zwei Besucher
+ * sehen sich gegenseitig nie. Positionen, die ohne unser Zutun im Warenkorb
+ * des Altsystems liegen, stehen nicht darin -- die bekommen `pfad: null`,
+ * statt dass ueber den Namen ein Treffer geraten wird.
+ */
+const HERKUNFT_MAX = 200;
+
+function herkunftAblage(session) {
+  if (!session || typeof session !== 'object') return null;
+  if (!(session.herkunft instanceof Map)) session.herkunft = new Map();
+  return session.herkunft;
+}
+
+/** Merkt Pfad (und, wenn vorhanden, Bild) zu einem Positionsschluessel. */
+function merkeHerkunft(session, key, { pfad, bild }) {
+  const ablage = herkunftAblage(session);
+  if (!ablage || !key || !pfad) return;
+  ablage.delete(key);                     // ans Ende, damit Altes zuerst faellt
+  ablage.set(key, {
+    pfad,
+    // Bilder duerfen nur als /api/img/-Pfad herausgehen, nie als Adresse
+    // bei matten.de. mediaZuApiPfad() hat das schon geleistet -- hier wird
+    // es nur noch einmal nachgeprueft.
+    bild: typeof bild === 'string' && bild.startsWith('/api/img/') ? bild : null,
+  });
+  while (ablage.size > HERKUNFT_MAX) ablage.delete(ablage.keys().next().value);
+}
+
+function herkunftVon(session, key) {
+  const ablage = herkunftAblage(session);
+  if (!ablage || !key) return null;
+  return ablage.get(key) || null;
+}
+
+/**
+ * Was nicht mehr im Warenkorb liegt, muss auch nicht gemerkt bleiben.
+ *
+ * Aufgeraeumt wird nur, wenn die Warenkorbseite auch wirklich gelesen werden
+ * konnte: entweder stehen Positionen darin, oder der Zaehler des Altsystems
+ * sagt ausdruecklich 0. Hat der Parser gar nichts gefunden (Zaehler null),
+ * bleibt die Ablage stehen -- ein voruebergehender Aussetzer soll nicht die
+ * Verweise aller Positionen loeschen.
+ */
+function putzeHerkunft(session, cart) {
+  const ablage = herkunftAblage(session);
+  if (!ablage || !ablage.size) return;
+  const items = (cart && cart.items) || [];
+  if (!items.length && cart.count !== 0) return;
+  const da = new Set(items.map((i) => i.key).filter(Boolean));
+  for (const key of [...ablage.keys()]) if (!da.has(key)) ablage.delete(key);
+}
+
+/**
+ * Welche Position ist bei diesem Hinzufuegen entstanden?
+ *
+ * Verglichen wird der Warenkorb vor und nach dem POST -- ueber die
+ * Schluessel des Altsystems, nicht ueber Namen. Normalfall: genau ein
+ * Schluessel ist neu. Legt jemand dieselbe Ausfuehrung ein zweites Mal,
+ * vergibt das Altsystem keinen neuen Schluessel, sondern erhoeht die Menge
+ * der vorhandenen Zeile -- dann ist es die eine Zeile, deren Menge gewachsen
+ * ist. Ist beides nicht eindeutig, wird nichts gemerkt: lieber `pfad: null`
+ * als eine falsche Zuordnung.
+ */
+function neuePositionKey(vorher, items) {
+  const neu = (items || []).filter((i) => i.key && !vorher.has(i.key));
+  if (neu.length === 1) return neu[0].key;
+  if (neu.length > 1) return null;
+  const gewachsen = (items || []).filter(
+    (i) => i.key && Number(i.anzahl || 0) > Number(vorher.get(i.key) || 0)
+  );
+  return gewachsen.length === 1 ? gewachsen[0].key : null;
+}
+
 /** Legt einen beliebigen Katalogartikel in den Warenkorb der Besucher-Sitzung. */
 async function addToCartPfad(session, pfad, { anzahl, kommentar, werte }) {
   const r = await holeArtikel(pfad);
@@ -2781,16 +3082,34 @@ async function addToCartPfad(session, pfad, { anzahl, kommentar, werte }) {
   const gebaut = baueAddBodyAusFormular(a, { anzahl, kommentar, werte });
   const ziel = normalisierePfad(a.formular.upstreamAktion) || CART_PATH;
   const logs = await ensureUpstreamSession(session);
+
+  /* Der Warenkorb VOR dem Hinzufuegen. Nur so laesst sich die neue Position
+     hinterher eindeutig benennen -- ohne ueber den Artikelnamen zu raten. */
+  const vorher = new Map();
+  const vorLogs = [];
+  try {
+    const stand = await readCart(session);
+    vorLogs.push(...stand.logs);
+    for (const i of stand.cart.items) if (i.key) vorher.set(i.key, Number(i.anzahl || 0));
+  } catch (err) {
+    // Kein Vorher-Bild: dann wird eben nichts gemerkt (pfad bleibt null).
+    console.error('  [herkunft] Warenkorb vor dem Hinzufuegen nicht lesbar:', err.message);
+  }
+
   const res = await upstream('POST', `${UPSTREAM_ORIGIN}${ziel}`, { session, body: gebaut.body });
+  const cart = parseCart(decodeBody(res.buffer));
+
+  const key = neuePositionKey(vorher, cart.items);
+  if (key) merkeHerkunft(session, key, { pfad: a.pfad || pfad, bild: a.hauptbild });
 
   return {
     ok: true,
-    cart: parseCart(decodeBody(res.buffer)),
+    cart,
     artikelId: a.artikelId,
     modus: a.modus,
     gesendet: gebaut.paare.map(([name, wert]) => ({ name, wert })),
     abgelehnt: gebaut.abgelehnt,
-    logs: [...logs, ...res.logs],
+    logs: [...logs, ...vorLogs, ...res.logs],
   };
 }
 
@@ -3303,22 +3622,39 @@ function mediaZuApiPfad(src) {
   return '/api/img/' + rein.split('/').map(encodeURIComponent).join('/');
 }
 
-/** Antwortformat fuer alle Warenkorb-Endpunkte. */
-function cartResponse(cart, logs, extra = {}) {
+/**
+ * Antwortformat fuer alle Warenkorb-Endpunkte.
+ *
+ * `session` ist freiwillig und dient nur der Herkunft: liegt sie vor, traegt
+ * jede Position zusaetzlich `pfad` und `bild` -- also den Weg zurueck zur
+ * Produktseite und das Bild aus den Produktdaten, die beim Hinzufuegen ohnehin
+ * gelesen wurden. Beides steht nur fuer Positionen zur Verfuegung, die ueber
+ * diese Bruecke angelegt wurden; alle anderen bekommen ehrlich `null`.
+ */
+function cartResponse(cart, logs, extra = {}, session = null) {
+  if (session) putzeHerkunft(session, cart);
   return {
     ok: true,
     count: cart.count ?? (cart.items.length ? cart.items.reduce((a, i) => a + (i.anzahl || 0), 0) : 0),
-    items: cart.items.map((i) => ({
-      key: i.key,
-      name: i.name,
-      attribut: i.attribut,
-      kommentar: i.kommentar,
-      anzahl: i.anzahl,
-      preis: i.preis,
-      preisNum: i.preisNum,
-      summe: i.summe,
-      summeNum: i.summeNum,
-    })),
+    items: cart.items.map((i) => {
+      const h = session ? herkunftVon(session, i.key) : null;
+      return {
+        key: i.key,
+        name: i.name,
+        attribut: i.attribut,
+        kommentar: i.kommentar,
+        anzahl: i.anzahl,
+        modus: i.modus ?? null,
+        preis: i.preis,
+        preisNum: i.preisNum,
+        summe: i.summe,
+        summeNum: i.summeNum,
+        pfad: h ? h.pfad : null,
+        bild: h ? h.bild : null,
+      };
+    }),
+    // 'kauf' | 'anfrage' | 'gemischt' | null -- siehe korbModus().
+    modus: cart.modus ?? null,
     gesamt: cart.gesamt,
     gesamtNum: cart.gesamtNum,
     zwischensumme: cart.zwischensumme,
@@ -3473,13 +3809,16 @@ export {
   UPSTREAM_HOST, UPSTREAM_ORIGIN, CART_PATH, PRICE_PATH,
   ADDRESS_PATH, ORDER_PATH, LOGIN_PATH, REGISTER_PATH, SUCH_PFAD,
   ZAHLUNGSARTEN_ERLAUBT, ZAHLUNGSARTEN_VERBOTEN,
-  BESTELL_BESTAETIGUNG, BESTELL_FELD, BESTELL_WERT,
+  BESTELL_BESTAETIGUNG, BESTELL_FELD, BESTELL_WERT, ANFRAGE_FELD, ANFRAGE_WERT, ABSENDE_FELDER,
   ADRESS_FELDER, RECHNUNG_FELDER, DEMO, ATTRIBUT_NEIN, ATTRIBUT_JA, UA,
   SEITE_STANDARD, SEITE_MAX, SPRACHEN, KATALOG_TTL_MS,
   SHOP_MAX_PRODUKTE, SHOP_KATALOG_TTL_MS, SHOP_DETAIL_PARALLEL, IMG_MIME,
 
   /* Werte pruefen statt koerzieren */
   nurText, normalizeAttribut, pruefeZahlungsart,
+
+  /* Regeln der Bestellstrecke -- rein, ohne Netz pruefbar */
+  istAufAnfrage, korbModus, gefuehrteZahlungsarten, ogoneSperre, ermittleHuerden, absendeFeld,
 
   /* Cookies und Zeichensatz */
   parseCookieHeader, cookieHeaderFor, absorbSetCookie,

@@ -1,0 +1,42 @@
+/* ==========================================================================
+   designer.css — Ergaenzungen fuer den Mattendesigner (mattendesigner.html,
+   designer-checkout.html). Eigene Datei statt net-neu.css, damit die Designer-
+   Seiten nichts an den uebrigen Seiten aendern (LIESMICH.md, Mattendesigner).
+
+   Alles, was das Original zeichnet (.mat-editor, .colors, .color, .color-sample,
+   .utility-button, .d-touch-block …), steht bereits in matten-net.css. Hier
+   stehen nur die Dinge, die es auf matten.net nicht gibt:
+     1  Hinweis, wenn die Schriften nicht laden (statt window.alert)
+     2  Preisfeld: Fehlertext von berechne()
+     3  Bestellformular: Vorschaubild, Download-Knopf, Fortschritt der drei
+        Schritte (Warenkorb -> Adresse -> Weiterleitung), Feldfehler des Altsystems
+   ========================================================================== */
+
+/* --- 1  Schriften ------------------------------------------------------ */
+.mat-editor .schrift-hinweis { margin: .5rem 0 0; }
+.mat-editor .schrift-hinweis:empty { display: none; }
+
+/* --- 2  Preis ------------------------------------------------------------ */
+.mat-editor .preis-fehler { color: #dc3545; font-weight: 400; }
+
+/* --- 3  Bestellformular ------------------------------------------------- */
+/* Das Original zeigt <img src="" alt="Preview"> ohne Regel; unser Bild ist die
+   Zeichenflaeche (bis 800 px) und soll in der Spalte bleiben. */
+#designer-auftrag #matDisplay { max-width: 100%; height: auto; border: 1px solid #ced4da; }
+#designer-auftrag #matDisplay[src=""] { display: none; }
+.designer-vorschau { margin-bottom: 1rem; }
+.designer-vorschau .btn { margin-top: .5rem; }
+/* Pflichtfeld-Sternchen kommen aus matten-net.css (label.required:after). */
+#designer-auftrag .invalid-feedback { display: block; }
+#designer-auftrag .invalid-feedback:empty { display: none; }
+/* Fortschritt der Uebergabe an das Altsystem */
+.auftrag-fortschritt { list-style: none; padding: 0; margin: 1rem 0 0; }
+.auftrag-fortschritt li { padding: .35rem 0; border-bottom: 1px solid #dee2e6; font-size: .9rem; }
+.auftrag-fortschritt li .fa-fw { margin-right: .35rem; }
+.auftrag-fortschritt li[data-stand="laeuft"] { color: #004085; }
+.auftrag-fortschritt li[data-stand="ok"] { color: #155724; }
+.auftrag-fortschritt li[data-stand="fehler"] { color: #721c24; }
+.auftrag-fortschritt li[data-stand="offen"] { color: #6c757d; }
+.auftrag-fortschritt .fortschritt-detail { display: block; font-size: .8rem; color: #6c757d; white-space: pre-wrap; }
+#auftrag-meldung:empty { display: none; }
+#auftrag-meldung .alert { font-size: .9rem; }

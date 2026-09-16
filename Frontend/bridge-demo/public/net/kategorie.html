@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warengruppe | Mattenfuchs</title>
+<meta name="description" content="Übersicht einer Warengruppe im Mattenfuchs-Shop — mit den Live-Daten von matten.de.">
+<!-- Vorschau der Modernisierung: noch nicht fuer Suchmaschinen. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050a40">
+<link rel="icon" href="assets/img/favicon.ico" sizes="16x16">
+<link rel="stylesheet" href="assets/css/net.css">
+<link rel="stylesheet" href="assets/css/seiten-katalog.css">
+</head>
+<body>
+
+<a class="skiplink" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Kopf und Navigation baut assets/js/net-shell.js hier ein. -->
+<div id="kopf"></div>
+
+<!-- Brotkrumen setzt assets/js/seite-kategorie.js ein, sobald der
+     Kategoriename bekannt ist. Bis dahin steht die Startseite darin. -->
+<nav class="brotkrumen" aria-label="Sie sind hier">
+  <div class="container">
+    <ol id="brotkrumen">
+      <li><a href="index.html">Startseite</a></li>
+      <li><span aria-current="page">Warengruppe</span></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="inhalt">
+
+  <!-- ============ Kopf der Warengruppe ============ -->
+  <section class="abschnitt abschnitt--eng">
+    <div class="container">
+      <header class="abschnitt-kopf">
+        <div>
+          <p class="label" id="kat-gruppe">Warengruppe</p>
+          <h1 id="kat-titel"><span class="skel skel--titel" style="width:16rem"></span></h1>
+          <p class="kat-text" id="kat-text" data-gekuerzt="true"></p>
+          <p id="kat-mehr" hidden>
+            <button class="btn btn--dezent btn--klein" type="button" id="kat-mehr-knopf"
+                    aria-expanded="false" aria-controls="kat-text">Ganzen Text anzeigen</button>
+          </p>
+        </div>
+      </header>
+
+      <!-- Unterkategorien dieser Warengruppe, falls es welche gibt. -->
+      <nav id="unterkategorien" aria-label="Unterkategorien" hidden></nav>
+    </div>
+  </section>
+
+  <!-- ============ Produkte ============ -->
+  <section class="abschnitt abschnitt--flach">
+    <div class="container">
+
+      <div class="leiste" id="kat-leiste">
+        <p class="kat-leiste__zahl" style="margin:0" id="kat-zahl" role="status" aria-live="polite">
+          Die Artikel werden geladen …
+        </p>
+        <div class="reihe reihe--eng">
+          <label for="sortierung" class="feld-beschriftung" style="margin:0">Sortierung</label>
+          <select id="sortierung" name="sortierung">
+            <option value="katalog">Reihenfolge des Katalogs</option>
+            <option value="name-auf">Name A–Z</option>
+            <option value="name-ab">Name Z–A</option>
+            <option value="nummer">Artikelnummer</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Ladeplatzhalter, Leerzustand, Fehlermeldung und Raster teilen sich
+           diesen Bereich. Der Zustand steht in aria-busy. -->
+      <div class="raster raster--4 raster--produkte mt-5" id="produkte" aria-busy="true"></div>
+
+      <!-- Blaetterung. Nur sichtbar, wenn es mehr als eine Seite gibt. -->
+      <nav class="blaetterung" id="blaetterung" aria-label="Seiten der Warengruppe" hidden></nav>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="fuss"></div>
+
+<script src="assets/js/net-nav.js"></script>
+<script src="assets/js/net-api.js"></script>
+<script src="assets/js/net-shell.js" defer></script>
+<script src="assets/js/seite-kategorie.js" defer></script>
+</body>
+</html>

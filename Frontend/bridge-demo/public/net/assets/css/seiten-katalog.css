@@ -1,0 +1,767 @@
+@charset "utf-8";
+/* ==========================================================================
+   matten.net — Zusatzregeln fuer die Katalogstrecke
+   --------------------------------------------------------------------------
+   Nur fuer index.html, kategorie.html und produkt.html. Alles, was auch auf
+   anderen Seiten vorkommt, steht im Designsystem (net.css) und wird hier
+   NICHT wiederholt und nicht ueberschrieben.
+
+   Diese Datei benutzt ausschliesslich die Tokens aus net.css (--sp-*,
+   --fs-*, --navy, --kante …), damit ein Farb- oder Abstandswechsel im
+   Designsystem hier automatisch ankommt.
+
+   Aufbau
+     01  Karussell auf der Startseite
+     02  Warengruppen-Kacheln
+     03  Kategorieseite: Kopf, Leiste, Raster
+     04  Produktseite: Galerie
+     05  Produktseite: Bestellbereich und Preis
+     06  Statusmeldungen
+     07  Bewegung und Barrierefreiheit
+
+   Haltepunkte wie im Designsystem: 720px und 1024px.
+   ========================================================================== */
+
+/* ==========================================================================
+   01  KARUSSELL (Buehne der Startseite)
+   --------------------------------------------------------------------------
+   matten.net zeigt hier 11 Folien mit Titel und Untertitel. Umgesetzt als
+   waagerechte Leiste mit Scroll-Rasterung: ohne JavaScript bedienbar, mit
+   der Tastatur erreichbar, und die Folien bleiben echte Links.
+   ========================================================================== */
+
+.karussell { position: relative; }
+
+.karussell__spur {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: var(--sp-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  /* Die Bildlaufleiste bleibt sichtbar — sie ist der zweite Bedienweg. */
+  scrollbar-width: thin;
+  padding-bottom: var(--sp-2);
+}
+.karussell__folie {
+  position: relative;
+  scroll-snap-align: start;
+  display: block;
+  min-width: 0;
+  border-radius: var(--r-3);
+  overflow: hidden;
+  background: var(--navy-2);
+  color: var(--ink-invers);
+  text-decoration: none;
+}
+.karussell__folie:hover .karussell__titel { text-decoration: underline; }
+
+.karussell__bild {
+  aspect-ratio: 16 / 7;
+  background: var(--navy-2);
+}
+.karussell__bild img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.karussell__text {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--sp-5) var(--sp-5) var(--sp-6);
+  /* Der Verlauf haelt den Text lesbar, egal wie hell das Bild ist. */
+  background: linear-gradient(180deg, rgba(5, 10, 64, 0) 0%, rgba(5, 10, 64, .82) 55%, rgba(5, 10, 64, .95) 100%);
+}
+.karussell__text::before {
+  content: "";
+  position: absolute;
+  left: var(--sp-5);
+  top: var(--sp-4);
+  width: 48px;
+  height: var(--kante-breite);
+  background: var(--kante);
+}
+.karussell__titel {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-600);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink-invers);
+}
+.karussell__unter {
+  display: block;
+  margin-top: var(--sp-1);
+  font-size: var(--fs-300);
+  color: var(--muted-invers);
+}
+
+/* Punktleiste unter dem Karussell. */
+.karussell__punkte {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-2);
+  list-style: none;
+  margin: var(--sp-4) 0 0;
+  padding: 0;
+}
+.karussell__punkt {
+  width: 34px;
+  min-height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.karussell__punkt::before {
+  content: "";
+  display: block;
+  height: 4px;
+  border-radius: var(--r-1);
+  background: var(--linie-hell);
+  transition: background var(--t-schnell) var(--ease);
+}
+.karussell__punkt[aria-current="true"]::before { background: var(--cyan); }
+.karussell__punkt:hover::before { background: var(--blau); }
+
+@media (min-width: 720px) {
+  .karussell__bild { aspect-ratio: 1024 / 260; }
+  .karussell__titel { font-size: var(--fs-700); }
+}
+
+/* ==========================================================================
+   02  WARENGRUPPEN-KACHELN
+   ========================================================================== */
+
+/* Grosse Kachel mit Bild im Hintergrund — fuer "Was ist neu" und den
+   Designer-Teaser. */
+.kachel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 220px;
+  padding: var(--sp-5);
+  border-radius: var(--r-3);
+  overflow: hidden;
+  background: var(--navy);
+  color: var(--ink-invers);
+  text-decoration: none;
+}
+.kachel__bild {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .55;
+  transition: transform var(--t-ruhig) var(--ease), opacity var(--t-ruhig) var(--ease);
+}
+.kachel:hover .kachel__bild { transform: scale(1.03); opacity: .7; }
+.kachel__inhalt { position: relative; z-index: 1; }
+.kachel__inhalt::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: var(--kante-breite);
+  background: var(--kante);
+  margin-bottom: var(--sp-3);
+}
+.kachel__titel {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-600);
+  font-weight: 700;
+  color: var(--ink-invers);
+}
+.kachel__text { display: block; margin-top: var(--sp-2); font-size: var(--fs-300); color: var(--muted-invers); }
+.kachel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5, 10, 64, .15) 0%, rgba(5, 10, 64, .85) 100%);
+}
+.kachel__inhalt { z-index: 2; }
+
+@media (min-width: 720px) { .kachel { min-height: 260px; } }
+
+/* Zahl der Artikel auf einer Warengruppenkarte. */
+.karte__zahl {
+  font-family: var(--font-display);
+  font-size: var(--fs-200);
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   03  KATEGORIESEITE
+   ========================================================================== */
+
+/* Der Kategorietext des Altsystems ist oft sehr lang. Er wird auf eine
+   ruhige Zeilenlaenge begrenzt und laesst sich aufklappen. */
+.kat-text { max-width: 68ch; }
+.kat-text[data-gekuerzt="true"] {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Zeile ueber dem Raster: Trefferzahl links, Sortierung rechts.
+   Nutzt .leiste aus dem Designsystem, hier nur die Feinheiten. */
+.kat-leiste__zahl { font-variant-numeric: tabular-nums; color: var(--muted); }
+
+/* Produktraster. Die Umbrueche liegen auf denselben zwei Haltepunkten wie
+   im Designsystem: bis 720px eine Spalte, dann zwei, ab 1024px vier. */
+@media (min-width: 720px) {
+  .raster--produkte { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .raster--produkte { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Auf einer Produktkarte darf der Name nicht die ganze Karte sprengen. */
+.karte__titel--kurz {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Kennzeichnung "Auf Anfrage" — kein Preis, aber auch keine Leerstelle. */
+.preis--anfrage {
+  font-family: var(--font-display);
+  font-size: var(--fs-300);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Solange der Grundpreis noch nachgeladen wird. */
+.preis--laedt { color: var(--muted); font-size: var(--fs-300); font-weight: 400; }
+
+/* ==========================================================================
+   04  ARTIKELSEITE — BILD UND GRUNDRISS
+   --------------------------------------------------------------------------
+   Wie bei matten.net: links das Produktbild, rechts die Auswahl. Mobil
+   untereinander, das Bild zuerst — der Kunde will sehen, was er kauft,
+   bevor er etwas waehlt.
+
+   Das Bild wechselt mit der Farbe. Es ist deshalb kein Zierrat, sondern
+   die Rueckmeldung zur Farbwahl und bekommt entsprechend Platz.
+   ========================================================================== */
+
+.pdp {
+  display: grid;
+  gap: var(--sp-6);
+  grid-template-columns: 1fr;
+}
+.pdp > * { min-width: 0; }
+.pdp--leer { grid-template-columns: 1fr; }
+
+@media (min-width: 1024px) {
+  .pdp { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--sp-8); align-items: start; }
+  /* Das Bild laeuft mit, solange rechts gewaehlt wird. */
+  .pdp__bilder { position: sticky; top: var(--sp-5); }
+}
+
+.bildbuehne {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-2);
+  border: 1px solid var(--lines);
+  border-radius: var(--r-3);
+  overflow: hidden;
+}
+.bildbuehne img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  /* Der Farbwechsel soll sichtbar sein, aber nicht flackern. */
+  transition: opacity var(--t-mittel) var(--ease);
+}
+
+.bildstreifen {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+  list-style: none;
+  padding: 0;
+}
+.bildstreifen__knopf {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 1px solid var(--lines);
+  border-radius: var(--r-2);
+  background: var(--surface-2);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--t-schnell) var(--ease);
+}
+.bildstreifen__knopf img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bildstreifen__knopf:hover { border-color: var(--blau); }
+.bildstreifen__knopf[aria-current="true"] {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px var(--cyan-hell);
+}
+
+.pdp__kopfzeile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+  margin-bottom: var(--sp-2);
+}
+.pdp__wahl h1 { margin-bottom: var(--sp-3); }
+
+/* ==========================================================================
+   05  ARTIKELSEITE — DIE AUSWAHL
+   --------------------------------------------------------------------------
+   Vier Bloecke, mehr nicht: Farbe · Groesse · Sonderwuensche · Menge.
+   Jeder Block ist ein <fieldset> mit <legend>; die Legende traegt links den
+   Namen und rechts den aktuellen Wert. Damit sieht der Kunde auf einen
+   Blick, was er schon beantwortet hat, ohne dass etwas doppelt gefragt
+   wird.
+   ========================================================================== */
+
+.block {
+  border: 0;
+  border-top: 1px solid var(--lines);
+  margin: 0;
+  padding: var(--sp-5) 0 0;
+}
+.block:first-of-type { border-top: 0; padding-top: var(--sp-5); }
+.block + .block { margin-top: var(--sp-5); }
+
+.block > legend {
+  /* legend als Blockelement, damit sich der aktuelle Wert rechts absetzen
+     laesst. float statt display:block, weil das in jedem Browser haelt. */
+  float: left;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-4);
+  margin: 0 0 var(--sp-3);
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-500);
+  font-weight: 600;
+  color: var(--navy);
+}
+.block > legend + * { clear: both; }
+
+.block__wert {
+  font-family: var(--font-text);
+  font-size: var(--fs-300);
+  font-weight: 400;
+  color: var(--muted);
+}
+.block__text {
+  margin: 0 0 var(--sp-4);
+  font-size: var(--fs-300);
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+/* --------------------------------------------------------------------------
+   Farbfelder
+   --------------------------------------------------------------------------
+   Die Farbe traegt nie allein die Information: auf jedem Feld steht die
+   Farbnummer, und der volle Farbname liegt als Text fuer Vorlesesoftware
+   dahinter. Der gewaehlte Name steht ausserdem in der Legende.
+   Bedienung mit den Pfeiltasten, weil es echte Radios sind.
+   -------------------------------------------------------------------------- */
+
+.farbfelder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.farbfelder--rest { margin-top: var(--sp-2); }
+.farbfelder[hidden] { display: none; }
+
+.farbfeld { display: inline-block; }
+.farbfeld input {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.farbfeld label {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--lines);
+  border-radius: var(--r-2);
+  background: var(--farbe, var(--surface-2));
+  cursor: pointer;
+  transition: transform var(--t-schnell) var(--ease),
+              box-shadow var(--t-schnell) var(--ease);
+}
+.farbfeld[data-ohne-farbwert="true"] label {
+  background: repeating-linear-gradient(45deg,
+    var(--surface-2) 0 6px, var(--surface) 6px 12px);
+}
+.farbfeld__nr {
+  font-size: var(--fs-100);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  /* Die Nummer muss auf hellem wie dunklem Grund lesbar bleiben. */
+  color: #fff;
+  text-shadow: 0 0 3px rgba(5, 10, 64, .95), 0 0 1px rgba(5, 10, 64, .95);
+}
+.farbfeld label:hover { transform: translateY(-2px); box-shadow: var(--sh-2); }
+.farbfeld input:checked + label {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--blau);
+}
+.farbfeld input:focus-visible + label {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.mehrfarben {
+  margin-top: var(--sp-3);
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--fs-300);
+  color: var(--blau);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.mehrfarben:hover { color: var(--tiefblau); }
+
+/* --------------------------------------------------------------------------
+   Groessen
+   --------------------------------------------------------------------------
+   Der Kern der Kundenkritik: der Kunde hat nur sein Wunschmass im Kopf und
+   weiss nicht, was Standard ist. Deshalb steht jede Standardgroesse SICHTBAR
+   da — mit Mass und mit Preis — und der Weg zum Wunschmass haengt direkt an
+   der Liste, nicht am Seitenende.
+   -------------------------------------------------------------------------- */
+
+.groessen {
+  display: grid;
+  gap: var(--sp-2);
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.groesse {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  height: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--lines);
+  border-radius: var(--r-3);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color var(--t-schnell) var(--ease),
+              background var(--t-schnell) var(--ease);
+}
+.groesse input {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.groesse:hover { border-color: var(--blau); background: var(--surface-2); }
+.groesse:has(input:checked) {
+  border-color: var(--blau);
+  border-left: var(--kante-breite) solid var(--blau);
+  padding-left: calc(var(--sp-4) - var(--kante-breite) + 1px);
+  background: var(--blau-hell);
+}
+.groesse:has(input:focus-visible) { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+.groesse__mass {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+.groesse__preis {
+  font-size: var(--fs-400);
+  font-weight: 600;
+  color: var(--tiefblau);
+  font-variant-numeric: tabular-nums;
+}
+.groesse__zusatz { font-size: var(--fs-100); color: var(--muted); }
+
+/* Der Weg zum Wunschmass. Er sieht aus wie eine Groessenkarte — nur
+   eingeladen statt versteckt, und er nimmt die ganze Zeile ein, damit ihn
+   niemand uebersieht. */
+.groessen__wunsch { grid-column: 1 / -1; }
+.groesse--wunsch {
+  border-style: dashed;
+  border-color: var(--blau);
+  background: var(--surface);
+}
+.groesse--wunsch .groesse__mass { color: var(--tiefblau); }
+.groesse--wunsch .groesse__preis { text-decoration: underline; }
+.groesse--wunsch:hover { background: var(--blau-hell); }
+.groesse--wunsch:has(input:checked) { border-style: solid; }
+
+/* --------------------------------------------------------------------------
+   Wunschmass — erscheint direkt unter der Groessenliste
+   -------------------------------------------------------------------------- */
+
+.wunschmass {
+  margin-top: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  border: 1px solid var(--lines);
+  border-left: var(--kante-breite) solid var(--cyan);
+  border-radius: 0 var(--r-3) var(--r-3) 0;
+  background: var(--surface-2);
+}
+.wunschmass[hidden] { display: none; }
+.wunschmass__felder {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 560px) {
+  .wunschmass__felder { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.wunschmass__stand { display: block; margin: var(--sp-3) 0 0; }
+
+/* Die Bahnbreiten der Rolle. Sie sind eine Auswahl, keine freie Eingabe —
+   breiter als die Bahn gibt es das Material nicht. */
+.bahnen { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.bahn { position: relative; }
+.bahn input {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.bahn span {
+  display: grid;
+  place-items: center;
+  min-width: 52px;
+  min-height: 40px;
+  padding-inline: var(--sp-2);
+  border: 1px solid var(--lines);
+  border-radius: var(--r-2);
+  background: var(--surface);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+}
+.bahn span:hover { border-color: var(--blau); }
+.bahn input:checked + span {
+  border-color: var(--blau);
+  background: var(--blau-hell);
+  color: var(--tiefblau);
+}
+.bahn input:focus-visible + span { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+/* --------------------------------------------------------------------------
+   Sonderwuensche — "einfach nur ein Kreuz im entsprechenden Feld"
+   --------------------------------------------------------------------------
+   Kein eigener Pruefungsblock, keine Karten mit Bild: drei ruhige Zeilen,
+   die in derselben Spur stehen wie die Groessenliste darueber.
+   -------------------------------------------------------------------------- */
+
+.kreuze { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.kreuz {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-2);
+  border-bottom: 1px solid var(--lines);
+  cursor: pointer;
+}
+.kreuze li:last-child .kreuz { border-bottom: 0; }
+.kreuz:hover { background: var(--surface-2); }
+.kreuz input { width: 18px; height: 18px; accent-color: var(--blau); cursor: pointer; }
+.kreuz__text { display: grid; gap: 2px; color: var(--ink); }
+.kreuz__zusatz { font-size: var(--fs-200); color: var(--muted); }
+.kreuz__wert {
+  font-size: var(--fs-300);
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Menge
+   -------------------------------------------------------------------------- */
+
+.mengenzeile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3) var(--sp-4);
+}
+.mengenzeile .meta { max-width: 42ch; }
+
+/* --------------------------------------------------------------------------
+   Kaufbox — der Endpreis und der Abschluss
+   --------------------------------------------------------------------------
+   Die grosse Zahl ist der BRUTTOENDPREIS inklusive Mehrwertsteuer und
+   inklusive Versand; genau das hat der Kunde verlangt. Netto, Steuer und
+   Versand stehen darunter aufgeschluesselt, aber zugeklappt — sie sollen
+   nachvollziehbar sein, nicht die Aufmerksamkeit binden.
+   -------------------------------------------------------------------------- */
+
+.kaufbox {
+  margin-top: var(--sp-6);
+  padding: calc(var(--sp-5) + var(--kante-breite)) var(--sp-5) var(--sp-5);
+  border: 1px solid var(--lines);
+  border-radius: var(--r-3);
+  background: var(--surface-2);
+  position: relative;
+  overflow: hidden;
+}
+.kaufbox::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--kante-breite);
+  background: var(--kante);
+  border-radius: var(--r-3) var(--r-3) 0 0;
+}
+.kaufbox__preis { display: grid; gap: var(--sp-1); }
+.kaufbox__label {
+  font-size: var(--fs-100);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.kaufbox__betrag {
+  font-family: var(--font-display);
+  font-size: var(--fs-800);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+  min-height: 1.05em;
+}
+.kaufbox__zusatz { font-size: var(--fs-300); color: var(--muted); }
+
+.aufstellung { margin-top: var(--sp-4); }
+.aufstellung > summary {
+  cursor: pointer;
+  font-size: var(--fs-300);
+  color: var(--blau);
+  padding: var(--sp-2) 0;
+}
+.aufstellung > summary:hover { color: var(--tiefblau); }
+.aufstellung[open] > summary { color: var(--navy); }
+.aufstellung .summen { margin-top: var(--sp-3); }
+
+/* --------------------------------------------------------------------------
+   Angeheftete Preisleiste — auf dem Handy bleibt der Preis im Blick
+   -------------------------------------------------------------------------- */
+
+.preisleiste {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: var(--z-kopf);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-3) var(--rand);
+  background: var(--navy);
+  border-top: var(--kante-breite) solid var(--cyan);
+  box-shadow: 0 -6px 24px rgba(5, 10, 64, .22);
+}
+.preisleiste__preis { display: grid; gap: 0; min-width: 0; }
+.preisleiste__label {
+  font-size: var(--fs-100);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted-invers);
+}
+.preisleiste__wert {
+  font-family: var(--font-display);
+  font-size: var(--fs-600);
+  font-weight: 700;
+  color: var(--ink-invers);
+  font-variant-numeric: tabular-nums;
+}
+.preisleiste .btn { flex: none; }
+
+/* Damit die Leiste den Fussbereich nicht verdeckt. */
+body.hat-preisleiste { padding-bottom: 84px; }
+
+@media (min-width: 1024px) {
+  .preisleiste { display: none; }
+  body.hat-preisleiste { padding-bottom: 0; }
+}
+
+/* ==========================================================================
+   06  STATUSMELDUNGEN
+   --------------------------------------------------------------------------
+   Rueckmeldung nach "In den Warenkorb" — ohne Seitenwechsel, ohne alert().
+   Der Bereich ist immer im Baum, damit aria-live ihn beobachten kann.
+   ========================================================================== */
+
+.meldung:empty { display: none; }
+.meldung { margin-top: var(--sp-4); }
+
+/* ==========================================================================
+   07  BEWEGUNG UND BARRIEREFREIHEIT
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .karussell__spur { scroll-behavior: auto; }
+  .kachel__bild { transition: none; }
+  .kachel:hover .kachel__bild { transform: none; }
+  .farbfeld label,
+  .bildbuehne img,
+  .groesse { transition: none; }
+  .farbfeld label:hover { transform: none; }
+}
+
+/* Browser ohne :has() — dort bleibt die Auswahl sonst unsichtbar. Die
+   Umrandung des Radios uebernimmt dann die Anzeige. */
+@supports not selector(:has(*)) {
+  .groesse input,
+  .bahn input,
+  .farbfeld input {
+    position: static;
+    width: auto; height: auto;
+    margin: 0 var(--sp-2) 0 0;
+    clip: auto;
+  }
+}
+
+/* ==========================================================================
+   08  KLEINE ABSTANDSHILFEN
+   --------------------------------------------------------------------------
+   net.css kennt .mt-4 bis .mt-7. Die beiden kleinsten Stufen fehlen dort
+   und werden hier ergaenzt — gleiche Benennung, gleiches 4-px-Raster.
+   ========================================================================== */
+
+.mt-2 { margin-top: var(--sp-2); }
+.mt-3 { margin-top: var(--sp-3); }
+
+/* ==========================================================================
+   09  LEERZUSTAND MIT UEBERSCHRIFT ERSTER ORDNUNG
+   --------------------------------------------------------------------------
+   net.css formatiert .leer h2 und .leer h3. Ersetzt die Box den ganzen
+   Artikelbereich, traegt sie die einzige <h1> der Seite (NetApi.leerbox mit
+   rang: 1) — sonst haette die Fehlerseite gar keine. Sie soll dabei nicht
+   groesser aussehen als die anderen Faelle.
+   ========================================================================== */
+
+.leer h1 { margin: 0; font-size: var(--fs-600); }

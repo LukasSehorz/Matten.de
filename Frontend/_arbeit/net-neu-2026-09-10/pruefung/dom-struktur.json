@@ -1,0 +1,1934 @@
+{
+ "kopf": {
+  "logo": true,
+  "logoSrc": "assets/img/logo_german.png",
+  "logoHref": "index.html",
+  "sprache": "Deutsch",
+  "sprachOptionen": [
+   "English -> # [in Vorbereitung]",
+   "Deutsch -> index.html"
+  ],
+  "links": [
+   "Gästebuch -> guest-book.html",
+   "Login -> login.html",
+   "Registrieren -> register.html"
+  ],
+  "cartKnopf": "Cart",
+  "cartKlasse": "btn btn-light",
+  "auschecken": "Auschecken",
+  "auscheckenHref": "checkout.html",
+  "suche": {
+   "action": "products.html",
+   "method": "get",
+   "feld": "keyword",
+   "platzhalter": "Produkt suchen",
+   "knopf": "btn btn-primary"
+  },
+  "warnbanner": false
+ },
+ "modal": {
+  "klassen": "modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered",
+  "kopf": "modal-header bg-primary",
+  "thead": [
+   "|",
+   "|",
+   "Produkt|",
+   "Preis|text-right",
+   "Menge|text-right",
+   "Total|text-right",
+   "|text-center"
+  ],
+  "leer": "Your cart is empty.",
+  "tfoot": [
+   "Subtotal = € 0.00",
+   "Versandkosten = € 0.00",
+   "Nettosumme = € 0.00",
+   "VAT 19.00% = € 0.00",
+   "Total = € 0.00"
+  ],
+  "tfootKlasse": "tfoot-light",
+  "knopf": "Weiter einkaufen",
+  "knopfHref": "index.html"
+ },
+ "navDesktop": {
+  "klasse": "navbar navbar-expand bg-gradient-primary pl-0 pr-0 d-none d-lg-block mt-1 main-navbar",
+  "eintraege": [
+   {
+    "typ": "link",
+    "label": "Mattendesigner",
+    "href": "mattendesigner.html"
+   },
+   {
+    "typ": "gruppe",
+    "label": "Fussmatten",
+    "kacheln": [
+     {
+      "label": "JetPrint-einfarbig",
+      "href": "kategorie.html?slug=jetprint-einfarbig",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c785fa38931b.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "IronHorse",
+      "href": "kategorie.html?slug=ironhorse",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c47fa2b5364ejpeg.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "IronHorse XL",
+      "href": "kategorie.html?slug=ironhorse-xl",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c47fa5a8109ejpeg.jpeg",
+      "wh": "150x100"
+     }
+    ]
+   },
+   {
+    "typ": "gruppe",
+    "label": "Logomatten",
+    "kacheln": [
+     {
+      "label": "Designmatten",
+      "href": "kategorie.html?slug=designmatten",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "JPL-621-aubergine_0.jpg",
+      "wh": "150x100"
+     },
+     {
+      "label": "Jet Print light",
+      "href": "kategorie.html?slug=jet-print-light",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "JPrint-light.jpg",
+      "wh": "150x100"
+     },
+     {
+      "label": "Katzen Willk",
+      "href": "kategorie.html?slug=katzen-willk",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c45865f923d2jpeg.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "JetPrint-Design",
+      "href": "kategorie.html?slug=jetprint-design",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "JetPrint-Design.jpg",
+      "wh": "150x100"
+     }
+    ]
+   },
+   {
+    "typ": "gruppe",
+    "label": "OS-REHA-Physio-Matten",
+    "kacheln": [
+     {
+      "label": "OS-REHAB-Physio-Matten",
+      "href": "kategorie.html?slug=os-rehab-physio-matten",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c4cc9df3e243jpeg.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "OS-Y-Matte, Wide Balance",
+      "href": "kategorie.html?slug=os-y-matte-wide-balance",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c899bca0f1ab.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "OS-REHAB Basis-Matte",
+      "href": "kategorie.html?slug=os-rehab-basis-matte",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5cca3e65b5598.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "OS-REHAB-Bahnmatte",
+      "href": "kategorie.html?slug=os-rehab-bahnmatte",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c899da8bc245.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "OS-REHAB-Stern-Matte",
+      "href": "kategorie.html?slug=os-rehab-stern-matte",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c899f0b48969.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "OS-REHAB-Gitter-Matte",
+      "href": "kategorie.html?slug=os-rehab-gitter-matte",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c899e468cda6.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "OS-REHAB-5-Punkt-Matte",
+      "href": "kategorie.html?slug=os-rehab-5-punkt-matte",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5cca325ee6c13.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "OS-REHAB Quadrat-Matte",
+      "href": "kategorie.html?slug=os-rehab-quadrat-matte",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5cce29fead941.jpeg",
+      "wh": "150x100"
+     }
+    ]
+   },
+   {
+    "typ": "gruppe",
+    "label": "Kokosmatten",
+    "kacheln": [
+     {
+      "label": "Kokos Farbig",
+      "href": "kategorie.html?slug=kokos-farbig",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c47fa829d279jpeg.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "Kokos naturfarbig",
+      "href": "kategorie.html?slug=kokos-naturfarbig",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "kokos-natur_512x340.jpg",
+      "wh": "150x100"
+     },
+     {
+      "label": "Kokos-Logomatte",
+      "href": "kategorie.html?slug=kokos-logomatte",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c47fafe5a2a8jpeg.jpeg",
+      "wh": "150x100"
+     }
+    ]
+   },
+   {
+    "typ": "gruppe",
+    "label": "Aluminium-Matten",
+    "kacheln": [
+     {
+      "label": "MARSCHALL",
+      "href": "kategorie.html?slug=marschall",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c47f8cfcc5b7jpeg.jpeg",
+      "wh": "150x100"
+     },
+     {
+      "label": "Diplomat",
+      "href": "kategorie.html?slug=diplomat",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c47f937b4f5fjpeg.jpeg",
+      "wh": "150x100"
+     }
+    ]
+   },
+   {
+    "typ": "gruppe",
+    "label": "Gummimatten",
+    "kacheln": [
+     {
+      "label": "Cushion Coil",
+      "href": "kategorie.html?slug=cushion-coil",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": null,
+      "wh": null
+     },
+     {
+      "label": "Scraper",
+      "href": "kategorie.html?slug=scraper",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": null,
+      "wh": null
+     },
+     {
+      "label": "Struktura",
+      "href": "kategorie.html?slug=struktura",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c47fd1c6e5f7jpeg.jpeg",
+      "wh": "150x100"
+     }
+    ]
+   },
+   {
+    "typ": "gruppe",
+    "label": "Outdoor-Matten",
+    "kacheln": [
+     {
+      "label": "Turf",
+      "href": "kategorie.html?slug=turf",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c47fbd86c22fjpeg.jpeg",
+      "wh": "150x100"
+     }
+    ]
+   },
+   {
+    "typ": "gruppe",
+    "label": "Mietmatten",
+    "kacheln": [
+     {
+      "label": "IRON-HORSE-Mietmatten",
+      "href": "kategorie.html?slug=iron-horse-mietmatten",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c4cc0ab6bb26jpeg.jpeg",
+      "wh": "150x100"
+     }
+    ]
+   },
+   {
+    "typ": "gruppe",
+    "label": "Was ist neu",
+    "kacheln": [
+     {
+      "label": "Waschbecken",
+      "href": "kategorie.html?slug=waschbecken",
+      "col": "col-2 category-dropdown-link-container",
+      "bild": "5c773ded137fb.jpeg",
+      "wh": "150x100"
+     }
+    ]
+   },
+   {
+    "typ": "link",
+    "label": "Alle Produkte",
+    "href": "products.html"
+   },
+   {
+    "typ": "link",
+    "label": "Blog",
+    "href": "blog.html"
+   }
+  ]
+ },
+ "navMobil": {
+  "eintraege": [
+   "Home -> index.html",
+   "Fussmatten [JetPrint-einfarbig|dropdown-item bg-blue, IronHorse|dropdown-item bg-blue, IronHorse XL|dropdown-item bg-blue]",
+   "Mattendesigner -> mattendesigner.html",
+   "Logomatten [Designmatten|dropdown-item bg-blue, Jet Print light|dropdown-item bg-blue, Katzen Willk|dropdown-item bg-blue, JetPrint-Design|dropdown-item bg-blue]",
+   "OS-REHA-Physio-Matten [OS-REHAB-Physio-Matten|dropdown-item bg-blue, OS-Y-Matte, Wide Balance|dropdown-item bg-blue, OS-REHAB Basis-Matte|dropdown-item bg-blue, OS-REHAB-Bahnmatte|dropdown-item bg-blue, OS-REHAB-Stern-Matte|dropdown-item bg-blue, OS-REHAB-Gitter-Matte|dropdown-item bg-blue, OS-REHAB-5-Punkt-Matte|dropdown-item bg-blue, OS-REHAB Quadrat-Matte|dropdown-item bg-blue]",
+   "Kokosmatten [Kokos Farbig|dropdown-item bg-blue, Kokos naturfarbig|dropdown-item bg-blue, Kokos-Logomatte|dropdown-item bg-blue]",
+   "Aluminium-Matten [MARSCHALL|dropdown-item bg-blue, Diplomat|dropdown-item bg-blue]",
+   "Gummimatten [Cushion Coil|dropdown-item bg-blue, Scraper|dropdown-item bg-blue, Struktura|dropdown-item bg-blue]",
+   "Outdoor-Matten [Turf|dropdown-item bg-blue]",
+   "Mietmatten [IRON-HORSE-Mietmatten|dropdown-item bg-blue]",
+   "Was ist neu [Waschbecken|dropdown-item bg-blue]"
+  ]
+ },
+ "fuss": {
+  "spalten": [
+   {
+    "titel": "Find us",
+    "inhalt": [
+     "Facebook -> https://m.facebook.com/Fuchsius-multi-media-GmbH-329921957172415/",
+     "Twitter -> https://twitter.com/mattenfuchs",
+     "LinkedIn -> https://www.linkedin.com/in/dieter-fuchsius-36902ba4/",
+     "Instagram -> https://www.instagram.com/mattenfuchsi/"
+    ]
+   },
+   {
+    "titel": "Information",
+    "inhalt": [
+     "Home -> index.html",
+     "Produktliste -> products.html",
+     "Registrieren -> register.html",
+     "datenschutz -> pages.html?s=data-protection",
+     "Datenschutzerklärung (DSGVO) -> pages.html?s=datenschutzerklarung-dsgvo",
+     "AGB -> pages.html?s=agb",
+     "Impressum -> pages.html?s=impressum"
+    ]
+   },
+   {
+    "titel": "Kontakt",
+    "inhalt": [
+     "Mail: info@matten.net",
+     "Tel.: +49 89 5455 8264",
+     "Fax: +49 89 5455 8333",
+     "Mobil: +49 171 77 55 400"
+    ]
+   }
+  ],
+  "copyright": "© 2026 Mattenfuchs",
+  "newsletter": {
+   "label": "Newsletter abonnieren",
+   "platzhalter": "eMail-Adresse",
+   "knopf": "Abonnieren",
+   "method": "post"
+  },
+  "cookie": true
+ },
+ "start": {
+  "datenschutz": "Datenschutzerklärung der FUCHSIUS multi-media GmbH als Betreiber dieser Seite „www.matten.de“ nutzt Cookies. Wir behandeln Ihre Daten sehr sorgsam und vertraulich, entsprechend der neuen gesetzlichen EU-Datenschutzverordnung (DSGVO) und unserer angefügten Datenschutzerklärung. Mehr Information.",
+  "datenschutzLink": "pages.html?s=data-protection",
+  "karussell": {
+   "ride": "carousel",
+   "indikatoren": 11,
+   "folien": [
+    {
+     "titel": "Eingangsmatten, Schmutzfangmatten",
+     "unter": "einfarbig, meliert oder gestaltet",
+     "bild": "SL-1024x170-Eing.jpg",
+     "alt": "Eingangsmatten, Schmutzfangmatten",
+     "href": "#",
+     "imgW": "1024x170",
+     "h": 207.515625
+    },
+    {
+     "titel": "Ihre Grußbotschaft im Eingang",
+     "unter": "Herzlich Willkommen",
+     "bild": "SL-1024x170-willkommen.jpg",
+     "alt": "Ihre Grußbotschaft im Eingang",
+     "href": "#",
+     "imgW": "1024x170",
+     "h": 0
+    },
+    {
+     "titel": "Alu-Profil",
+     "unter": "Aluminium-Profilmatten",
+     "bild": "SL-1024x170-Alu-RCB.JPG",
+     "alt": "Alu-Profil",
+     "href": "kategorie.html?slug=diplomat",
+     "imgW": "1024x170",
+     "h": 0
+    },
+    {
+     "titel": "Fussmatten",
+     "unter": "150 verschiedene Farben",
+     "bild": "SL-1024x170-Rollen.JPG",
+     "alt": "Fussmatten",
+     "href": "kategorie.html?slug=jetprint-einfarbig",
+     "imgW": "1024x170",
+     "h": 0
+    },
+    {
+     "titel": "Fussmatten",
+     "unter": "1-farbig, beliebige Größe",
+     "bild": "SL-1024x170-1farbig.jpg",
+     "alt": "Fussmatten",
+     "href": "#",
+     "imgW": "1024x170",
+     "h": 0
+    },
+    {
+     "titel": "Logomatten, Designmatten",
+     "unter": "bis 20-farbig und fotorealistisch",
+     "bild": "SL-1024x170-Logo.jpg",
+     "alt": "Logomatten, Designmatten",
+     "href": "#",
+     "imgW": "1024x170",
+     "h": 0
+    },
+    {
+     "titel": "REHAB-Matten",
+     "unter": "Physio-Trainingsmatten",
+     "bild": "SL-1024x170-OS-Phys.jpg",
+     "alt": "REHAB-Matten",
+     "href": "#",
+     "imgW": "1024x170",
+     "h": 0
+    },
+    {
+     "titel": "Eingangs-Fussmatten",
+     "unter": "Standards und individuelle Größen, Formen und Farben",
+     "bild": "SL-1024x170-VierJahr.jpg",
+     "alt": "Eingangs-Fussmatten",
+     "href": "#",
+     "imgW": "1024x170",
+     "h": 0
+    },
+    {
+     "titel": "Fussmatten",
+     "unter": "Schmutzfangmatten, einfarbig und gestaltet",
+     "bild": "SL-1024x170-Logo.jpg",
+     "alt": "Fussmatten",
+     "href": "#",
+     "imgW": "1024x170",
+     "h": 0
+    },
+    {
+     "titel": "Aluminium-Profilmatten",
+     "unter": "verschiedene Trittflächen/-Kombinationen",
+     "bild": "SL-1024x170-Aluminium.jpg",
+     "alt": "Aluminium-Profilmatten",
+     "href": "#",
+     "imgW": "1024x170",
+     "h": 0
+    },
+    {
+     "titel": "Marmor, Onyx, Fossil, Terrazzo",
+     "unter": "Waschbecken, Wannen, Badzubehör",
+     "bild": "SL-1024x170-Washtafel.jpg",
+     "alt": "Marmor, Onyx, Fossil, Terrazzo",
+     "href": "#",
+     "imgW": "1024x170",
+     "h": 0
+    }
+   ],
+   "prev": "Previous",
+   "next": "Next"
+  },
+  "featured": {
+   "titel": "Featured Category (German)",
+   "href": "kategorie.html?slug=was-ist-neu",
+   "caption": "Was ist neu",
+   "bild": "url(\"assets/img/uploads/5c787ff38c28b.jpeg\")",
+   "col": "col-md-6"
+  },
+  "top": [
+   {
+    "col": "col-6 col-lg-4 col-xl-3 mb-3",
+    "href": "produkt.html?slug=iron-horse-1-farbige-und-melierte-schmutzfangmatten",
+    "name": "IRON-HORSE 1-farbige und melierte Schmutzfangmatten",
+    "img": "5c4c1812b732ejpeg.jpeg",
+    "alt": "IRON-HORSE 1-farbige und melierte Schmutzfangmatten",
+    "wh": "256x170",
+    "innerA": false
+   },
+   {
+    "col": "col-6 col-lg-4 col-xl-3 mb-3",
+    "href": "produkt.html?slug=iron-horse-matte",
+    "name": "IRON-HORSE-Mietmatte",
+    "img": "5c47fa2b58b3djpeg.jpeg",
+    "alt": "IRON-HORSE-Mietmatte",
+    "wh": "256x170",
+    "innerA": false
+   },
+   {
+    "col": "col-6 col-lg-4 col-xl-3 mb-3",
+    "href": "produkt.html?slug=jetprint-premium-1-farbig",
+    "name": "JetPrint Premium 1-farbig",
+    "img": "637-leuchtblau.JPG",
+    "alt": "JetPrint Premium 1-farbig",
+    "wh": "256x170",
+    "innerA": false
+   },
+   {
+    "col": "col-6 col-lg-4 col-xl-3 mb-3",
+    "href": "produkt.html?slug=mjplit-jetprint-light-1-farbig",
+    "name": "JetPrint light 1-farbig",
+    "img": "JetPrint%20light%201-farbig.jpg",
+    "alt": "JetPrint light 1-farbig",
+    "wh": "256x170",
+    "innerA": false
+   },
+   {
+    "col": "col-6 col-lg-4 col-xl-3 mb-3",
+    "href": "produkt.html?slug=designmatten-jetprint",
+    "name": "Designmatten JetPrint",
+    "img": "JetPrint-Logo-616.jpg",
+    "alt": "Designmatten JetPrint",
+    "wh": "256x170",
+    "innerA": false
+   }
+  ],
+  "mattenfuchs": "Seit mehr als 35 Jahren liefern wir Fussmatten in einer Viel … Anfrage.  Ihr Mattenfuchs-Team",
+  "mattenfuchsLaenge": 862,
+  "vorteile": [
+   {
+    "col": "col-2 info-col text-center",
+    "text": "Best Price",
+    "img": "5c36ad55d8af8jpeg.jpeg",
+    "alt": "Best Price",
+    "ok": true
+   },
+   {
+    "col": "col-2 info-col text-center",
+    "text": "International shipping",
+    "img": "5c36ad9452e74jpeg.jpeg",
+    "alt": "International shipping",
+    "ok": true
+   }
+  ],
+  "h2s": [
+   "Featured Category (German)",
+   "TOP-ANGEBOTE",
+   "Der Mattenfuchs"
+  ]
+ },
+ "kategorien": [
+  {
+   "slug": "jetprint-einfarbig",
+   "spec": {
+    "name": "JetPrint-einfarbig",
+    "n": 2,
+    "beschr": "Fußmatten, einfarbig. Wahl aus 150 Farben Nach Ihren Wünschen gefertigt"
+   },
+   "ist": {
+    "h1": "JetPrint-einfarbig",
+    "beschr": "Fußmatten, einfarbig. Wahl aus 150 Farben Nach Ihren Wünschen gefertigt",
+    "bild": "5ccf40e26130a.jpeg\")",
+    "karten": 2,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "mjplit-jetprint-light-1-farbig",
+     "jetprint-premium-1-farbig"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "ironhorse",
+   "spec": {
+    "name": "IronHorse",
+    "n": 3,
+    "beschr": "Die schön&sauber-Iron-Horse®-Fussmatte ist eine robuste Matte, zur Aufnahme von Schmutz und Nässe. Die schön&sauber-Fussmatte ist eine waschbare Schmutzfangmatte. Die schön&sauber-Iron-Horse®-Fussmatte ist das \"Arbeitspferd\" unter den textilen Eingangsmatten. Die Matte wurde geschaffen um höchsten Schmutz-Rückhalte-Anforderungen zu entsprechen. Sie überzeugt durch extreme Schmutz-Halte-Kapazität und Strapazierfähigkeit und stellt mit 8 harmonisch abgestimmten melierten Farben für jeden Eingangsbereich und Raum eine optische Aufwertung dar. Die zu 100% voll durchgefärbte Polyamid- Nylonfaser (solution-dyed) nimmt bis zu 4 kg/qm Schmutz und Feuchtigkeit auf. Sie hält den Schmutz zwischen den Fasern fest und senkt damit den Reinigungsaufwand in Gebäuden erheblich. Die Rückenbeschichtung ist ein 100% bis zu 80°C maschinenwaschbarer Nitrilgummi."
+   },
+   "ist": {
+    "h1": "IronHorse",
+    "beschr": "Die schön&sauber-Iron-Horse®-Fussmatte ist eine robuste Matte, zur Aufnahme von Schmutz und Nässe. Die schön&sauber-Fussmatte ist eine waschbare Schmutzfangmatte. Die schön&sauber-Iron-Horse®-Fussmatte ist das \"Arbeitspferd\" unter den textilen Eingangsmatten. Die Matte wurde geschaffen um höchsten Schmutz-Rückhalte-Anforderungen zu entsprechen. Sie überzeugt durch extreme Schmutz-Halte-Kapazität und Strapazierfähigkeit und stellt mit 8 harmonisch abgestimmten melierten Farben für jeden Eingangsbereich und Raum eine optische Aufwertung dar. Die zu 100% voll durchgefärbte Polyamid- Nylonfaser (solution-dyed) nimmt bis zu 4 kg/qm Schmutz und Feuchtigkeit auf. Sie hält den Schmutz zwischen den Fasern fest und senkt damit den Reinigungsaufwand in Gebäuden erheblich. Die Rückenbeschichtung ist ein 100% bis zu 80°C maschinenwaschbarer Nitrilgummi.",
+    "bild": "5c47fa2b58b3djpeg.jpeg\")",
+    "karten": 3,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "iron-horse-matte-2",
+     "iron-horse-matte",
+     "iron-horse-1-farbige-und-melierte-schmutzfangmatten"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "ironhorse-xl",
+   "spec": {
+    "name": "IronHorse XL",
+    "n": 0,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "IronHorse XL",
+    "beschr": "",
+    "bild": "5c47fa5a8336bjpeg.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "designmatten",
+   "spec": {
+    "name": "Designmatten",
+    "n": 5,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "Designmatten",
+    "beschr": "",
+    "bild": "JPL-613-k%C3%B6nigsblau_0.jpg\")",
+    "karten": 5,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "designmatten-jetprint-velour",
+     "designmatten-jetprint-light",
+     "hinweismatten",
+     "designmatten-jetprint",
+     "jetprint-premium"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "jet-print-light",
+   "spec": {
+    "name": "Jet Print light",
+    "n": 1,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "Jet Print light",
+    "beschr": "",
+    "bild": "5c7730c15903b.jpeg\")",
+    "karten": 1,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "jetprint-light-logo"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "katzen-willk",
+   "spec": {
+    "name": "Katzen Willk",
+    "n": 0,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "Katzen Willk",
+    "beschr": "",
+    "bild": "5bcf6fe4d7960jpeg.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "jetprint-design",
+   "spec": {
+    "name": "JetPrint-Design",
+    "n": 1,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "JetPrint-Design",
+    "beschr": "",
+    "bild": "SL-1024x170-JetPrint.JPG\")",
+    "karten": 1,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "jetprint-matten-design"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "os-rehab-physio-matten",
+   "spec": {
+    "name": "OS-REHAB-Physio-Matten",
+    "n": 3,
+    "beschr": "OS-Physio-REHA-Matten nach Ihren Angaben designed"
+   },
+   "ist": {
+    "h1": "OS-REHAB-Physio-Matten",
+    "beschr": "OS-Physio-REHA-Matten nach Ihren Angaben designed",
+    "bild": "5c4cc9df43aabjpeg.jpeg\")",
+    "karten": 3,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "os-5-punkt-rehab-trainingsmatte-c",
+     "os-stern-rehab-trainingsmatte",
+     "os-quadrat-rehab-trainingsmatte"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "os-y-matte-wide-balance",
+   "spec": {
+    "name": "OS-Y-Matte, Wide Balance",
+    "n": 0,
+    "beschr": "OS-Physio-REHAB-Y-Matte, Wide Balance"
+   },
+   "ist": {
+    "h1": "OS-Y-Matte, Wide Balance",
+    "beschr": "OS-Physio-REHAB-Y-Matte, Wide Balance",
+    "bild": "5c899f57088f7.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "os-rehab-basis-matte",
+   "spec": {
+    "name": "OS-REHAB Basis-Matte",
+    "n": 0,
+    "beschr": "OS-REHAB Basis-Matte"
+   },
+   "ist": {
+    "h1": "OS-REHAB Basis-Matte",
+    "beschr": "OS-REHAB Basis-Matte",
+    "bild": "5cca3e65c6da1.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "os-rehab-bahnmatte",
+   "spec": {
+    "name": "OS-REHAB-Bahnmatte",
+    "n": 0,
+    "beschr": "OS-Physio-REHAB-Bahnmatte"
+   },
+   "ist": {
+    "h1": "OS-REHAB-Bahnmatte",
+    "beschr": "OS-Physio-REHAB-Bahnmatte",
+    "bild": "5c89a4d3827c1.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "os-rehab-stern-matte",
+   "spec": {
+    "name": "OS-REHAB-Stern-Matte",
+    "n": 1,
+    "beschr": "OS-Physio-REHAB-Stern-Matte"
+   },
+   "ist": {
+    "h1": "OS-REHAB-Stern-Matte",
+    "beschr": "OS-Physio-REHAB-Stern-Matte",
+    "bild": "5c899fcaea079.jpeg\")",
+    "karten": 1,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "os-stern-rehab-trainingsmatte"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "os-rehab-gitter-matte",
+   "spec": {
+    "name": "OS-REHAB-Gitter-Matte",
+    "n": 0,
+    "beschr": "OS-Physio-REHAB-Gitter-Matte"
+   },
+   "ist": {
+    "h1": "OS-REHAB-Gitter-Matte",
+    "beschr": "OS-Physio-REHAB-Gitter-Matte",
+    "bild": "5c899f359ba7d.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "os-rehab-5-punkt-matte",
+   "spec": {
+    "name": "OS-REHAB-5-Punkt-Matte",
+    "n": 1,
+    "beschr": "OS-REHAB-5-Punkt-Matte"
+   },
+   "ist": {
+    "h1": "OS-REHAB-5-Punkt-Matte",
+    "beschr": "OS-REHAB-5-Punkt-Matte",
+    "bild": "5c89a066994bd.jpeg\")",
+    "karten": 1,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "os-5-punkt-rehab-trainingsmatte-c"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "os-rehab-quadrat-matte",
+   "spec": {
+    "name": "OS-REHAB Quadrat-Matte",
+    "n": 1,
+    "beschr": "OS-REHAB Quadrat-Matte"
+   },
+   "ist": {
+    "h1": "OS-REHAB Quadrat-Matte",
+    "beschr": "OS-REHAB Quadrat-Matte",
+    "bild": "5cccd534814b3.jpeg\")",
+    "karten": 1,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "os-quadrat-rehab-trainingsmatte"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "kokos-farbig",
+   "spec": {
+    "name": "Kokos Farbig",
+    "n": 1,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "Kokos Farbig",
+    "beschr": "",
+    "bild": "SL-1024x170-Kokos-farb.JPG\")",
+    "karten": 1,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "kokos-farbig"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "kokos-naturfarbig",
+   "spec": {
+    "name": "Kokos naturfarbig",
+    "n": 1,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "Kokos naturfarbig",
+    "beschr": "",
+    "bild": "SL-1024x170-Kokos-natur.jpg\")",
+    "karten": 1,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "kokosmatten-naturfarbig"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "kokos-logomatte",
+   "spec": {
+    "name": "Kokos-Logomatte",
+    "n": 1,
+    "beschr": "Kokos-Logomatte einfarbig und mehrfarbig gestaltet"
+   },
+   "ist": {
+    "h1": "Kokos-Logomatte",
+    "beschr": "Kokos-Logomatte einfarbig und mehrfarbig gestaltet",
+    "bild": "SL-1024x170-Kokos-gest.JPG\")",
+    "karten": 1,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "kokos-gestaltet"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "marschall",
+   "spec": {
+    "name": "MARSCHALL",
+    "n": 0,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "MARSCHALL",
+    "beschr": "",
+    "bild": "5c6c8e7112268.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "diplomat",
+   "spec": {
+    "name": "Diplomat",
+    "n": 1,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "Diplomat",
+    "beschr": "",
+    "bild": "5c6c8e3dcd9bb.jpeg\")",
+    "karten": 1,
+    "kartenKlassen": [
+     "col-6 col-lg-4 col-xl-3 mb-3"
+    ],
+    "slugs": [
+     "aluminium-profilmatte-typ-diplomat-r"
+    ],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "cushion-coil",
+   "spec": {
+    "name": "Cushion Coil",
+    "n": 0,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "Cushion Coil",
+    "beschr": "",
+    "bild": "SL-1024x170-Kushion.jpg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "scraper",
+   "spec": {
+    "name": "Scraper",
+    "n": 0,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "Scraper",
+    "beschr": "",
+    "bild": "SL-1024x170-Scraper.jpg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "struktura",
+   "spec": {
+    "name": "Struktura",
+    "n": 0,
+    "beschr": "Gummi-Wabenmatte mit und ohne Bürsteneinsätze Höhen 13,5 und 22mm"
+   },
+   "ist": {
+    "h1": "Struktura",
+    "beschr": "Gummi-Wabenmatte mit und ohne Bürsteneinsätze Höhen 13,5 und 22mm",
+    "bild": "5c6c8e1ae39da.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "turf",
+   "spec": {
+    "name": "Turf",
+    "n": 0,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "Turf",
+    "beschr": "",
+    "bild": "5c47fbd86f17cjpeg.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "iron-horse-mietmatten",
+   "spec": {
+    "name": "IRON-HORSE-Mietmatten",
+    "n": 0,
+    "beschr": ""
+   },
+   "ist": {
+    "h1": "IRON-HORSE-Mietmatten",
+    "beschr": "",
+    "bild": "5c4cc0ab73be2jpeg.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "waschbecken",
+   "spec": {
+    "name": "Waschbecken",
+    "n": 0,
+    "beschr": "Natursteinwaschbecken aus Flußstein, Marmor, Onyx, Fossil"
+   },
+   "ist": {
+    "h1": "Waschbecken",
+    "beschr": "Natursteinwaschbecken aus Flußstein, Marmor, Onyx, Fossil",
+    "bild": "5c788150c5ece.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  },
+  {
+   "slug": "was-ist-neu",
+   "spec": {
+    "name": "Was ist neu",
+    "n": 0,
+    "beschr": "Natursteinwaschbecken aus Flußstein, Marmor, Onyx, Fossil"
+   },
+   "ist": {
+    "h1": "Was ist neu",
+    "beschr": "Natursteinwaschbecken aus Flußstein, Marmor, Onyx, Fossil",
+    "bild": "5c787ff38c28b.jpeg\")",
+    "karten": 0,
+    "kartenKlassen": [],
+    "slugs": [],
+    "sort": {
+     "label": "Sort by",
+     "optionen": [
+      "LATEST=Latest*",
+      "NAME_ASC=Name a-z",
+      "NAME_DESC=Name z-a"
+     ],
+     "klasse": "custom-select custom-select-sm",
+     "name": "filter_sort",
+     "knopf": "Filter",
+     "toggle": "btn btn-lg btn-outline-primary btn-block mb-3 d-block d-md-none",
+     "formKlasse": "filter d-none d-md-block"
+    }
+   },
+   "konsole": []
+  }
+ ],
+ "produkte1": {
+  "h": [],
+  "gruppen": [
+   "Fussmatten(3)",
+   "Logomatten(4)",
+   "OS-REHA-Physio-Matten(8)",
+   "Kokosmatten(3)",
+   "Aluminium-Matten(2)",
+   "Gummimatten(3)",
+   "Outdoor-Matten(1)",
+   "Mietmatten(1)",
+   "Was ist neu(1)"
+  ],
+  "kaestchen": 26,
+  "alleAn": true,
+  "sort": [
+   "LATEST=Latest",
+   "NAME_ASC=Name a-z",
+   "NAME_DESC=Name z-a"
+  ],
+  "karten": 16,
+  "namen": [
+   "OS-5-Punkt-REHAB-Trainingsmatte-c",
+   "OS-Stern-REHAB-Trainingsmatte",
+   "Aluminium-Profilmatte, Typ Diplomat R",
+   "Designmatten JetPrint-Velour",
+   "Designmatten JetPrint-light",
+   "Hinweismatten",
+   "Kokos, Logomatten",
+   "IRON-HORSE-2",
+   "JetPrint light Logo",
+   "Kokos, farbig",
+   "Kokos, natur",
+   "OS-Quadrat-REHAB-Trainingsmatte",
+   "Designmatten JetPrint",
+   "JetPrint Matten, Design",
+   "JetPrint light 1-farbig",
+   "JetPrint Premium 1-farbig"
+  ],
+  "pag": [
+   "« Vorherige(x)",
+   "1*",
+   "2",
+   "Nächste »"
+  ]
+ },
+ "produkte2": {
+  "karten": 3,
+  "namen": [
+   "JetPrint-Premium",
+   "IRON-HORSE-Mietmatte",
+   "IRON-HORSE 1-farbige und melierte Schmutzfangmatten"
+  ],
+  "pag": [
+   "« Vorherige",
+   "1",
+   "2*",
+   "Nächste »"
+  ]
+ },
+ "produkteSuche": {
+  "karten": 3,
+  "namen": [
+   "Kokos, Logomatten",
+   "Kokos, farbig",
+   "Kokos, natur"
+  ],
+  "suchfeld": "Kokos"
+ },
+ "produkteSort": {
+  "namen": [
+   "OS-Stern-REHAB-Trainingsmatte",
+   "OS-Quadrat-REHAB-Trainingsmatte",
+   "OS-5-Punkt-REHAB-Trainingsmatte-c",
+   "Kokos, natur",
+   "Kokos, Logomatten"
+  ],
+  "sel": "NAME_DESC"
+ },
+ "produkteFilter": {
+  "karten": 2,
+  "namen": [
+   "JetPrint light 1-farbig",
+   "JetPrint Premium 1-farbig"
+  ],
+  "an": [
+   "2"
+  ]
+ },
+ "produktseiten": {
+  "jetprint-premium": {
+   "bodyId": "product_view",
+   "krumen": [
+    "Designmatten -> kategorie.html?slug=designmatten",
+    "JetPrint-Premium"
+   ],
+   "h2": "JetPrint-Premium",
+   "stars": true,
+   "formId": "",
+   "bilder": {
+    "gross": 2,
+    "aktiv": "image-farbe",
+    "grossSrc": "/api/img/bild/JP-613-k%C3%B6nigsblau_0.JPG",
+    "grossWH": "512x340",
+    "minis": [
+     "#image-1",
+     "#image-farbe*"
+    ],
+    "miniKlasse": "col-4 col-lg-3",
+    "farbBildSichtbar": true,
+    "farbBildSrc": "/api/img/bild/JP-613-k%C3%B6nigsblau_0.JPG"
+   },
+   "farben": [
+    {
+     "label": "Grundfarbe",
+     "small": "613 Königsblau",
+     "n": 44,
+     "sichtbar": 30,
+     "erste": [
+      "601|Zitronengelb|rgb(255, 254, 40)|attributes[0][]=601-zitronengelb",
+      "602|Gelb|rgb(253, 211, 2)|attributes[0][]=602-gelb",
+      "603|Melone|rgb(255, 154, 2)|attributes[0][]=603-melone"
+     ],
+     "mehr": "Mehr Farben Anzeigen/Weniger Farben",
+     "weitere": null
+    }
+   ],
+   "selects": [],
+   "groesse": {
+    "label": "Größe",
+    "name": "size_id",
+    "optionen": [
+     "343=40 cm x 60 cm [w60 l40 p24.20]",
+     "344=50 cm x 75 cm [w75 l50 p37.50]",
+     "345=60 cm x 90 cm [w90 l60 p54.10]",
+     "346=85 cm x 115 cm [w115 l85 p98.60]",
+     "347=85 cm x 150 cm [w150 l85 p128.50]",
+     "348=85 cm x 300 cm [w300 l85 p258.20]",
+     "349=115 cm x 175 cm [w175 l115 p203.20]",
+     "350=150 cm x 200 cm [w200 l150 p304.10]",
+     "FIXED+CUSTOM_SIZE=Custom [wnull lnull pnull]"
+    ]
+   },
+   "breite": {
+    "label": "Breite",
+    "min": "40",
+    "max": "200",
+    "value": "60",
+    "ph": "Width",
+    "title": "Geben Sie bitte eine Breite zwischen 40 cm und 200 cm ein.",
+    "sichtbar": false,
+    "fixedSichtbar": false,
+    "fixedOptionen": [
+     "60",
+     "75",
+     "85",
+     "115",
+     "150",
+     "200"
+    ]
+   },
+   "laenge": {
+    "label": "Länge",
+    "min": "40",
+    "max": "700",
+    "value": "40",
+    "ph": "Length",
+    "title": "Geben Sie bitte eine Länge zwischen 40 cm und 700 cm ein.",
+    "sichtbar": false
+   },
+   "menge": {
+    "label": "Menge",
+    "value": "1",
+    "min": "1",
+    "ph": "Quantity"
+   },
+   "preis": {
+    "label": "Preis",
+    "text": "€ 29,05",
+    "mwst": "inkl. MWSt.",
+    "versand": "Plus 11,90€ Versandkosten",
+    "endpreis": "Endpreis inkl. MwSt. und Versand: € 40,95",
+    "weg": ""
+   },
+   "sonder": [
+    "Sonderform ohne Rand (+30 %)",
+    "Sonderform mit Rand (+50 %)",
+    "Sonderfarbe (+68 € einmalig)"
+   ],
+   "knoepfe": [
+    "add-to-cart|In den Warenkorb|CART|submit|btn btn-primary|disabled=false",
+    "add-to-inquiry|Make an offer|INQUIRY_CART|submit|btn btn-secondary|disabled=false"
+   ],
+   "reiter": [
+    "Beschreibung|#description*",
+    "Bewertungen|#reviews"
+   ],
+   "beschrLaenge": 1044,
+   "reviewsLeer": true,
+   "meldung": "",
+   "konsole": []
+  },
+  "aluminium-profilmatte-typ-diplomat-r": {
+   "bodyId": "product_view",
+   "krumen": [
+    "Diplomat -> kategorie.html?slug=diplomat",
+    "Aluminium-Profilmatte, Typ Diplomat R"
+   ],
+   "h2": "Aluminium-Profilmatte, Typ Diplomat R",
+   "stars": true,
+   "formId": "custom_size",
+   "bilder": {
+    "gross": 2,
+    "aktiv": "image-farbe",
+    "grossSrc": "/api/img/bild/Anthrazit_0.jpg",
+    "grossWH": "512x340",
+    "minis": [
+     "#image-1",
+     "#image-farbe*"
+    ],
+    "miniKlasse": "col-4 col-lg-3",
+    "farbBildSichtbar": true,
+    "farbBildSrc": "/api/img/bild/Anthrazit_0.jpg"
+   },
+   "farben": [
+    {
+     "label": "Grundfarbe",
+     "small": "200 Anthrazit",
+     "n": 5,
+     "sichtbar": 5,
+     "erste": [
+      "200|Anthrazit|rgb(95, 95, 95)|attributes[0][]=Anthrazit-200",
+      "485|Braun|rgb(122, 73, 0)|attributes[0][]=Braun-485",
+      "220|Hellgrau|rgb(170, 170, 170)|attributes[0][]=Hellgrau-220"
+     ],
+     "mehr": null,
+     "weitere": null
+    }
+   ],
+   "selects": [
+    {
+     "name": "attributes[0]",
+     "label": "Höhe",
+     "optionen": [
+      "1825=12mm",
+      "1826=17mm",
+      "1827=22mm"
+     ]
+    },
+    {
+     "name": "attributes[1]",
+     "label": "Profilbreite",
+     "optionen": [
+      "1828=27,5mm - Standard",
+      "1829=44mm - L = Large"
+     ]
+    },
+    {
+     "name": "attributes[2]",
+     "label": "Format",
+     "optionen": [
+      "1830=Querformat",
+      "1831=Hochformat"
+     ]
+    },
+    {
+     "name": "attributes[4]",
+     "label": "Kratzkante",
+     "optionen": [
+      "1837=ohne Kratzkante",
+      "1838=mit Kratzkante"
+     ]
+    }
+   ],
+   "groesse": null,
+   "breite": {
+    "label": "Breite",
+    "min": "40",
+    "max": "200",
+    "value": "100",
+    "ph": "Width",
+    "title": "Geben Sie bitte eine Breite zwischen 40 cm und 200 cm ein.",
+    "sichtbar": true,
+    "fixedSichtbar": false,
+    "fixedOptionen": []
+   },
+   "laenge": {
+    "label": "Länge",
+    "min": "40",
+    "max": "700",
+    "value": "100",
+    "ph": "Length",
+    "title": "Geben Sie bitte eine Länge zwischen 40 cm und 700 cm ein.",
+    "sichtbar": true
+   },
+   "menge": {
+    "label": "Menge",
+    "value": "1",
+    "min": "1",
+    "ph": "Quantity"
+   },
+   "preis": {
+    "label": "Preis",
+    "text": "€ 415,45",
+    "mwst": "inkl. MWSt.",
+    "versand": "Plus 26,49€ Versandkosten",
+    "endpreis": "Endpreis inkl. MwSt. und Versand: € 441,94",
+    "weg": "Wunschmaße übernehmen wir als Anfrage über 52601-a — den berechneten Preis bestätigen wir im Angebot."
+   },
+   "sonder": [
+    "Sonderform ohne Rand (+30 %)",
+    "Sonderform mit Rand (+50 %)",
+    "Sonderfarbe (+68 € einmalig)"
+   ],
+   "knoepfe": [
+    "add-to-cart|In den Warenkorb|CART|submit|btn btn-primary|disabled=false",
+    "add-to-inquiry|Make an offer|INQUIRY_CART|submit|btn btn-secondary|disabled=false"
+   ],
+   "reiter": [
+    "Beschreibung|#description*",
+    "Bewertungen|#reviews"
+   ],
+   "beschrLaenge": 2544,
+   "reviewsLeer": true,
+   "meldung": "",
+   "konsole": []
+  },
+  "kokosmatten-naturfarbig": {
+   "bodyId": "product_view",
+   "krumen": [
+    "Kokos naturfarbig -> kategorie.html?slug=kokos-naturfarbig",
+    "Kokos, natur"
+   ],
+   "h2": "Kokos, natur",
+   "stars": true,
+   "formId": "custom_size",
+   "bilder": {
+    "gross": 2,
+    "aktiv": "image-1",
+    "grossSrc": "assets/img/produkte/kokos-natur_512x340.jpg",
+    "grossWH": "512x340",
+    "minis": [
+     "#image-1*"
+    ],
+    "miniKlasse": "col-4 col-lg-3",
+    "farbBildSichtbar": false,
+    "farbBildSrc": ""
+   },
+   "farben": [],
+   "selects": [
+    {
+     "name": "attributes[0]",
+     "label": "Mattenhöhe",
+     "optionen": [
+      "148=13/14mm",
+      "158=16/17mm",
+      "161=20mm",
+      "163=22mm",
+      "164=24mm",
+      "165=27mm",
+      "166=30mm"
+     ]
+    }
+   ],
+   "groesse": null,
+   "breite": {
+    "label": "Breite",
+    "min": "40",
+    "max": "200",
+    "value": "100",
+    "ph": "Width",
+    "title": "Geben Sie bitte eine Breite zwischen 40 cm und 200 cm ein.",
+    "sichtbar": true,
+    "fixedSichtbar": false,
+    "fixedOptionen": []
+   },
+   "laenge": {
+    "label": "Länge",
+    "min": "40",
+    "max": "700",
+    "value": "100",
+    "ph": "Length",
+    "title": "Geben Sie bitte eine Länge zwischen 40 cm und 700 cm ein.",
+    "sichtbar": true
+   },
+   "menge": {
+    "label": "Menge",
+    "value": "1",
+    "min": "1",
+    "ph": "Quantity"
+   },
+   "preis": {
+    "label": "Preis",
+    "text": "€ 85,57",
+    "mwst": "inkl. MWSt.",
+    "versand": "Plus 18,98€ Versandkosten",
+    "endpreis": "Endpreis inkl. MwSt. und Versand: € 104,55",
+    "weg": "Wunschmaße gehen als Kauf mit freien Maßen über kokosmatte-natur-kauf — den Preis dafür rechnet das Altsystem selbst; unsere Kalkulation steht im Kommentar und wird bestätigt."
+   },
+   "sonder": [
+    "Sonderform ohne Rand (+30 %)",
+    "Sonderform mit Rand (+50 %)",
+    "Sonderfarbe (+68 € einmalig)"
+   ],
+   "knoepfe": [
+    "add-to-cart|In den Warenkorb|CART|submit|btn btn-primary|disabled=false",
+    "add-to-inquiry|Make an offer|INQUIRY_CART|submit|btn btn-secondary|disabled=false"
+   ],
+   "reiter": [
+    "Beschreibung|#description*",
+    "Bewertungen|#reviews"
+   ],
+   "beschrLaenge": 798,
+   "reviewsLeer": true,
+   "meldung": "",
+   "konsole": []
+  },
+  "iron-horse-matte": {
+   "bodyId": "product_view",
+   "krumen": [
+    "IronHorse -> kategorie.html?slug=ironhorse",
+    "IRON-HORSE-Mietmatte"
+   ],
+   "h2": "IRON-HORSE-Mietmatte",
+   "stars": true,
+   "formId": "",
+   "bilder": {
+    "gross": 2,
+    "aktiv": "image-1",
+    "grossSrc": "/api/img/bild/IH_009.jpg",
+    "grossWH": "512x340",
+    "minis": [
+     "#image-1*"
+    ],
+    "miniKlasse": "col-4 col-lg-3",
+    "farbBildSichtbar": false,
+    "farbBildSrc": ""
+   },
+   "farben": [],
+   "selects": [],
+   "groesse": {
+    "label": "Größe",
+    "name": "size_id",
+    "optionen": [
+     "23=50 cm x 85 cm [w85 l50 p]",
+     "24=60 cm x 85 cm [w85 l60 p]",
+     "25=85 cm x 115 cm [w115 l85 p]",
+     "26=85 cm x 300 cm [w300 l85 p]",
+     "27=115 cm x 175 cm [w175 l115 p]",
+     "407=150 cm x 200 cm [w200 l150 p]",
+     "408=150 cm x 250 cm [w250 l150 p]"
+    ]
+   },
+   "breite": {
+    "label": "Breite",
+    "min": "40",
+    "max": "200",
+    "value": "85",
+    "ph": "Width",
+    "title": "Geben Sie bitte eine Breite zwischen 40 cm und 200 cm ein.",
+    "sichtbar": false,
+    "fixedSichtbar": false,
+    "fixedOptionen": [
+     "85",
+     "115",
+     "150",
+     "200"
+    ]
+   },
+   "laenge": {
+    "label": "Länge",
+    "min": "40",
+    "max": "700",
+    "value": "50",
+    "ph": "Length",
+    "title": "Geben Sie bitte eine Länge zwischen 40 cm und 700 cm ein.",
+    "sichtbar": false
+   },
+   "menge": {
+    "label": "Menge",
+    "value": "1",
+    "min": "1",
+    "ph": "Quantity"
+   },
+   "preis": {
+    "label": "Preis",
+    "text": "€ 5,18",
+    "mwst": "inkl. MWSt.",
+    "versand": "Plus 0,00€ Versandkosten",
+    "endpreis": "Endpreis inkl. MwSt. und Versand: € 5,18",
+    "weg": "Wunschmaße übernehmen wir als Anfrage über den Wunschmaß-Artikel 6300201-logomatte-a (Artikel 569) — das Produkt steht im Kommentar, den berechneten Preis bestätigen wir im Angebot."
+   },
+   "sonder": [],
+   "knoepfe": [
+    "add-to-cart|In den Warenkorb|CART|submit|btn btn-primary|disabled=false",
+    "add-to-inquiry|Make an offer|INQUIRY_CART|submit|btn btn-secondary|disabled=false"
+   ],
+   "reiter": [
+    "Beschreibung|#description*",
+    "Bewertungen|#reviews"
+   ],
+   "beschrLaenge": 480,
+   "reviewsLeer": true,
+   "meldung": "",
+   "konsole": []
+  }
+ }
+}
