@@ -140,6 +140,124 @@ try {
       `gewaehlt=${JSON.stringify(farben.gewaehlt)} anzeige="${farben.anzeige}"`);
   }
 
+  /* ====================================================================
+     Zweite Mail / WhatsApp vom 17.09.2026 — Layout und Beschriftung
+     ==================================================================== */
+
+  /* --- Punkt 1: Rand steht vor Form ------------------------------------ */
+  const reihenfolge = await t.eval(`(() => {
+    const alle = Array.from(document.querySelectorAll('#input_rand, #input_form'));
+    return alle.map(e => e.id);
+  })()`);
+  pruefe(12, 'Rand steht vor Form',
+    JSON.stringify(reihenfolge) === '["input_rand","input_form"]',
+    `Reihenfolge im DOM: ${JSON.stringify(reihenfolge)}`);
+
+  /* --- Punkt 2: Sonderfarben einzeilig mit neuem Text ------------------- */
+  const farbzeile = await t.eval(`(() => {
+    const feld = document.getElementById('input_sonderfarben');
+    const label = document.querySelector('label[for="input_sonderfarben"]');
+    if (!feld || !label) return null;
+    const rf = feld.getBoundingClientRect(), rl = label.getBoundingClientRect();
+    return {
+      text: label.textContent.trim(),
+      gleicheZeile: Math.abs((rf.top + rf.height/2) - (rl.top + rl.height/2)) < 12,
+      feldBreite: Math.round(rf.width)
+    };
+  })()`);
+  pruefe(13, 'Sonderfarben einzeilig, Text "Anzahl gewünschter Sonderfarben: 0= keine"',
+    farbzeile && farbzeile.gleicheZeile && /Anzahl gewünschter Sonderfarben:\s*0=\s*keine/.test(farbzeile.text),
+    JSON.stringify(farbzeile));
+
+  /* --- Punkt 3: flachere Felder ---------------------------------------- */
+  const hoehen = await t.eval(`(() => {
+    const ids = ['input_width','input_length','input_rand','input_form','input_sonderfarben','input_quantity'];
+    const h = ids.map(id => { const e = document.getElementById(id);
+      return e ? Math.round(e.getBoundingClientRect().height) : null; }).filter(Boolean);
+    return { hoehen: h, max: Math.max(...h) };
+  })()`);
+  pruefe(14, 'Eingabefelder flacher als die Bootstrap-Vorgabe (38 px)',
+    hoehen.max <= 32, `Hoehen: ${JSON.stringify(hoehen.hoehen)}`);
+
+  /* --- Punkt 4: MWSt. in derselben Zeile wie der Preis ------------------ */
+  const preisZeile = await t.eval(`(() => {
+    const p = document.getElementById('price');
+    const mwst = Array.from(document.querySelectorAll('.preis-zeile small'))
+      .find(e => /MWSt/i.test(e.textContent));
+    if (!p || !mwst) return null;
+    const rp = p.getBoundingClientRect(), rm = mwst.getBoundingClientRect();
+    return { gleicheZeile: Math.abs(rp.bottom - rm.bottom) < 8,
+             preis: p.textContent.trim(), mwst: mwst.textContent.trim() };
+  })()`);
+  pruefe(15, 'MWSt.-Angabe steht hinter dem Preis, nicht darunter',
+    preisZeile && preisZeile.gleicheZeile, JSON.stringify(preisZeile));
+
+  /* --- Punkt 5: Endpreis einzeilig ------------------------------------- */
+  const endpreis = await t.eval(`(() => {
+    const e = document.getElementById('endpreis');
+    if (!e) return null;
+    const stil = getComputedStyle(e);
+    const zeilenhoehe = parseFloat(stil.lineHeight) || 20;
+    return { text: e.textContent.trim(),
+             zeilen: Math.round(e.getBoundingClientRect().height / zeilenhoehe),
+             umbruch: stil.whiteSpace };
+  })()`);
+  pruefe(16, 'Endpreis steht in einer Zeile',
+    endpreis && endpreis.zeilen <= 1, JSON.stringify(endpreis));
+
+  /* --- Punkt 6: Knopf heisst "Angebot anfordern" ----------------------- */
+  const knopf = await t.eval(`(() => {
+    const k = document.getElementById('add-to-inquiry');
+    return k ? k.textContent.trim() : null;
+  })()`);
+  pruefe(17, 'Knopf heisst "Angebot anfordern" statt "Make an offer"',
+    knopf === 'Angebot anfordern', `Beschriftung: "${knopf}"`);
+
+  /* --- Punkt 7: Formular und Farbfelder gleich breit -------------------- */
+  const breiten = await t.eval(`(() => {
+    const w = el => el ? Math.round(el.getBoundingClientRect().width) : null;
+    const form = document.getElementById('order-form');
+    /* .color-input-container ist der Block der Farbfelder. Produkte ohne
+       Farbauswahl (z. B. Kokos naturfarbig) haben ihn nicht — dann entfaellt
+       der Vergleich. */
+    const farbBox = document.querySelector('.color-input-container');
+    return { formular: w(form), farbfelder: w(farbBox) };
+  })()`);
+  pruefe(18, 'Bestellformular und Farbfeld-Block gleich breit',
+    breiten.farbfelder === null ||
+    Math.abs(breiten.formular - breiten.farbfelder) <= 4,
+    `Formular=${breiten.formular} Farbfelder=${breiten.farbfelder}`);
+
+  /* --- WhatsApp: Standard gruen / Sonderanfertigung rot ----------------- */
+  const artFuer = async (breite, laenge, form) => {
+    await t.eval(`(() => {
+      const s=(id,v,ev='change')=>{const e=document.getElementById(id);e.value=v;e.dispatchEvent(new Event(ev,{bubbles:true}));};
+      s('input_sonderfarben','0'); s('input_form',${JSON.stringify(form)});
+      s('input_width',${JSON.stringify(breite)},'input'); s('input_length',${JSON.stringify(laenge)},'input');
+    })()`);
+    await new Promise(r => setTimeout(r, 1400));
+    return t.eval(`(() => {
+      const a = document.getElementById('groessen-art');
+      if (!a) return null;
+      return { text: a.textContent.trim(), farbe: getComputedStyle(a).color };
+    })()`);
+  };
+
+  const fix = await t.eval(`(() => {
+    const s = document.getElementById('input_fixed_size');
+    if (!s) return null;
+    const o = Array.from(s.options).find(o => /\\d+\\s*[x×]\\s*\\d+/.test(o.textContent));
+    return o ? o.textContent.trim() : null;
+  })()`);
+  const sonder = await artFuer('63', '43', 'rechteckig');
+  pruefe(19, 'Wunschmass zeigt "Sonderanfertigung" in Rot',
+    sonder && sonder.text === 'Sonderanfertigung' && /220,\s*53,\s*69/.test(sonder.farbe),
+    `${JSON.stringify(sonder)} (Fixgroesse im Angebot: ${fix})`);
+
+  const mitForm = await artFuer('63', '43', 'sonderform');
+  pruefe(20, 'Sonderform zeigt ebenfalls "Sonderanfertigung"',
+    mitForm && mitForm.text === 'Sonderanfertigung', JSON.stringify(mitForm));
+
   /* --- Konsole sauber? -------------------------------------------------- */
   const fehler = t.konsole.filter(z => z.typ === 'error');
   pruefe(11, 'Keine Fehler in der Browser-Konsole',

@@ -114,8 +114,15 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
         colortype: 1,                                  /* Salesfactor je Produkt steht in salesfactorMehrfarbig */
         salesfactorMehrfarbig: pd.salesFactor,         /* matten.net-Salesfactor je Produkt (Spec 13.5) */
         ekListenpreisProQm: pd.einkaufProQm,           /* EK/m2 je Produkt (Spec 13.5) */
-        standardbreiten: (pd.standardbreiten || []).slice()   /* Standardbreiten je Produkt (Spec 13.4) — steuert x1,25 */
-        /* Mengenstaffel, Sonderform x1,3/x1,5, Sonderfarbe +68 EUR, TZ: Excel-Vorgabe (STAMMDATEN_VORGABE) */
+        standardbreiten: (pd.standardbreiten || []).slice(),  /* Standardbreiten je Produkt (Spec 13.4) — steuert x1,25 */
+        /* Einkaufsaufschlag je Sonderfarbe: in der Excel-Mappe stehen 50 EUR,
+           der Auftraggeber nennt am 17.09.2026 aber 54 EUR ("momentan").
+           Die Mappe bleibt unangetastet — pruefe-preisformel.mjs vergleicht
+           gegen sie; der gueltige Wert steht deshalb hier bei den Stammdaten.
+           Der Verkaufsaufschlag bleibt bei den bestaetigten 68 EUR. */
+        aufschlagSonderfarbeEK: 54
+        /* Mengenstaffel, Sonderform x1,3/x1,5, Sonderfarbe +68 EUR VK, TZ:
+           Excel-Vorgabe (STAMMDATEN_VORGABE) */
       });
     }
     var versand = Number.isFinite(preis.versand) ? preis.versand : null;
@@ -470,39 +477,47 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
        Auswahlfelder (Form, Rand) und ein Zahlenfeld fuer die Sonderfarben.
        Ohne Aufpreisangabe — der Preis unten rechnet sie automatisch ein. */
     if (einkaufBekannt) {
+      /* Reihenfolge Rand vor Form (Aenderungswunsch 17.09.2026, Punkt 1). */
       h += '<div class="form-row sonder-auswahl">\n' +
-        '<div class="col"><div class="form-group row"><label for="input_form" class="col-sm-4 col-form-label">Form</label><div class="col-sm-8">' +
-        '<select class="form-control" id="input_form">' +
-        '<option value="rechteckig" selected>Rechteckig</option>' +
-        '<option value="sonderform">Sonderform</option>' +
-        '</select></div></div></div>\n' +
         '<div class="col"><div class="form-group row"><label for="input_rand" class="col-sm-4 col-form-label">Rand</label><div class="col-sm-8">' +
         '<select class="form-control" id="input_rand">' +
         '<option value="mit" selected>Mit Rand</option>' +
         '<option value="ohne">Ohne Rand</option>' +
         '</select></div></div></div>\n' +
+        '<div class="col"><div class="form-group row"><label for="input_form" class="col-sm-4 col-form-label">Form</label><div class="col-sm-8">' +
+        '<select class="form-control" id="input_form">' +
+        '<option value="rechteckig" selected>Rechteckig</option>' +
+        '<option value="sonderform">Sonderform</option>' +
+        '</select></div></div></div>\n' +
         '</div>\n' +
-        '<div class="form-row sonder-auswahl">\n' +
-        '<div class="col"><div class="form-group row"><label for="input_sonderfarben" class="col-sm-4 col-form-label">Sonderfarben</label><div class="col-sm-8">' +
+        /* Sonderfarben einzeilig ueber die volle Breite (Punkt 2): Text links,
+           schmales Zahlenfeld rechts. */
+        '<div class="form-row sonder-auswahl sonderfarben-zeile">\n' +
+        '<div class="col"><div class="form-group row mb-0">' +
+        '<label for="input_sonderfarben" class="col-form-label">Anzahl gewünschter Sonderfarben: 0= keine</label>' +
         '<input type="number" class="form-control" id="input_sonderfarben" min="0" max="9" step="1" value="0">' +
-        '<small class="form-text text-muted">Anzahl gewünschter Sonderfarben — 0, wenn keine.</small>' +
-        '</div></div></div>\n' +
-        '<div class="col"></div>\n' +
+        '</div></div>\n' +
         '</div>\n';
     }
     h += '<div class="form-row">\n' +
       '<div class="col"><div class="form-group row"><label for="input_quantity" class="col-sm-4 col-form-label">Menge</label><div class="col-sm-8">' +
       '<input type="number" class="form-control" id="input_quantity" placeholder="Quantity" value="1" name="quantity" min="1"></div></div></div>\n' +
+      /* MWSt. direkt hinter den Preis, Endpreis einzeilig (Punkte 4 und 5);
+         #groessen-art zeigt "Standard" gruen bzw. "Sonderanfertigung" rot
+         (WhatsApp-Notiz 17.09.2026, 15:38). */
       '<div class="col"><div class="form-group row"><label for="price" class="col-sm-4 col-form-label">Preis</label><div class="col-sm-8">' +
-      '<div id="price"><div class="spinner-border" role="status" style="width: 1rem; height: 1rem;"><span class="sr-only">Loading...</span></div></div>' +
-      '<small class="form-text text-muted"><span class="no-wrap">inkl. MWSt.</span></small>' +
-      '<small class="form-text text-muted"><span class="no-wrap"><span id="shipping_cost"></span></span></small>' +
-      '<small class="form-text" id="endpreis"></small>' +
+      '<div class="preis-zeile">' +
+      '<span id="price"><span class="spinner-border" role="status" style="width: 1rem; height: 1rem;"><span class="sr-only">Loading...</span></span></span>' +
+      '<small class="text-muted no-wrap">inkl. MWSt.</small>' +
+      '<small class="groessen-art" id="groessen-art"></small>' +
+      '</div>' +
+      '<small class="form-text text-muted preis-nebenzeile"><span class="no-wrap"><span id="shipping_cost"></span></span></small>' +
+      '<small class="form-text preis-nebenzeile" id="endpreis"></small>' +
       '<small id="weg-hinweis"></small>' +
       '</div></div></div>\n</div>\n' +
       '<div>' +
       '<button class="btn btn-primary" id="add-to-cart" value="CART" name="submit">In den Warenkorb</button> ' +
-      '<button class="btn btn-secondary" id="add-to-inquiry" type="submit" name="submit" value="INQUIRY_CART">Make an offer</button>' +
+      '<button class="btn btn-secondary" id="add-to-inquiry" type="submit" name="submit" value="INQUIRY_CART">Angebot anfordern</button>' +
       '</div>';
     return h;
   }
@@ -737,6 +752,22 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
 
   function euroText(betrag) { return betrag == null ? '—' : '€ ' + zahl(betrag, 2); }
 
+  /**
+   * "Standard" (gruen) oder "Sonderanfertigung" (rot) neben dem Preis
+   * (WhatsApp-Notiz Fuchsius 17.09.2026, 15:38). Massgeblich ist dieselbe
+   * Entscheidung, die auch den Zielartikel bestimmt: Standard ist nur, was
+   * eine Fixgroesse trifft und ohne Sonderform/Sonderfarbe auskommt.
+   * @param {object|null} w Rueckgabe von weg(), oder null zum Ausblenden.
+   */
+  function groessenArtZeigen(w) {
+    var $a = document.getElementById('groessen-art');
+    if (!$a) return;
+    if (!w) { $a.textContent = ''; $a.className = 'groessen-art'; return; }
+    var standard = !w.freieMasse && !zuschlaege();
+    $a.textContent = standard ? 'Standard' : 'Sonderanfertigung';
+    $a.className = 'groessen-art ' + (standard ? 'ist-standard' : 'ist-sonder');
+  }
+
   function neuRechnen() {
     var $preis = document.getElementById('price');
     var $versand = document.getElementById('shipping_cost');
@@ -759,6 +790,7 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       $preis.innerHTML = '<span class="preis-fehler">' + esc(fehler[0]) + '</span>';
       $versand.textContent = '';
       $end.textContent = '';
+      groessenArtZeigen(null);
       if ($kauf) $kauf.disabled = true;
       return;
     }
@@ -770,9 +802,11 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       $preis.innerHTML = '<span class="preis-fehler">' + esc(e.grund) + '</span>';
       $versand.textContent = '';
       $end.textContent = '';
-      if ($kauf) $kauf.disabled = true;   /* "Make an offer" bleibt nutzbar */
+      groessenArtZeigen(null);
+      if ($kauf) $kauf.disabled = true;   /* "Angebot anfordern" bleibt nutzbar */
       return;
     }
+    groessenArtZeigen(w);
     $preis.textContent = euroText(e.gesamt.wareBrutto);
     $versand.textContent = e.gesamt.versandBrutto != null ? 'Plus ' + zahl(e.gesamt.versandBrutto, 2) + '€ Versandkosten' : 'Versand laut Angebot';
     $end.textContent = e.gesamt.gesamtBrutto != null ? 'Endpreis inkl. MwSt. und Versand: ' + euroText(e.gesamt.gesamtBrutto) : '';
@@ -783,9 +817,10 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
     var $preis = document.getElementById('price');
     var $versand = document.getElementById('shipping_cost');
     var $end = document.getElementById('endpreis');
-    if (!artikel) { $preis.textContent = 'Preis derzeit nicht verfügbar'; return; }
+    if (!artikel) { $preis.textContent = 'Preis derzeit nicht verfügbar'; groessenArtZeigen(null); return; }
     if (artikel.modus !== 'kauf') {
       $preis.textContent = 'Preis auf Anfrage'; $versand.textContent = ''; $end.textContent = '';
+      groessenArtZeigen(null);
       livePreis = null;
       return;
     }
@@ -793,16 +828,18 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
     var url = '/api/price?pfad=' + encodeURIComponent(artikel.pfad) + '&anzahl=' + encodeURIComponent(wahl.menge);
     Object.keys(werte).forEach(function (f) { url += '&' + encodeURIComponent(f) + '=' + encodeURIComponent(werte[f]); });
     var meiner = ++lauf;
-    $preis.innerHTML = '<div class="spinner-border" role="status" style="width: 1rem; height: 1rem;"><span class="sr-only">Loading...</span></div>';
+    $preis.innerHTML = '<span class="spinner-border" role="status" style="width: 1rem; height: 1rem;"><span class="sr-only">Loading...</span></span>';
     S.hole(url).then(function (res) {
       if (meiner !== lauf) return;
       var d = res.d || {};
       if (!res.ok || !Number.isFinite(d.gesamt)) {
         $preis.innerHTML = '<span class="preis-fehler">Preis derzeit nicht verfügbar</span>';
+        groessenArtZeigen(null);
         livePreis = null;
         return;
       }
       livePreis = d;
+      groessenArtZeigen(weg('kauf'));
       var g = mitSteuerUndVersand(d.gesamt, { ustSatz: stamm.ustSatz, versandBrutto: Number.isFinite(d.versand) ? d.versand : stamm.versandBrutto }, { bruttoBereits: true });
       $preis.textContent = euroText(g.wareBrutto);
       $versand.textContent = g.versandBrutto != null ? 'Plus ' + zahl(g.versandBrutto, 2) + '€ Versandkosten' : '';

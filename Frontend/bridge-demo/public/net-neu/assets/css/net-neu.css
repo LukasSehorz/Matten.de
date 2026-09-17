@@ -47,16 +47,77 @@
 /* Vorschau-Bild fuer die gewaehlte Grundfarbe (aus dem Altsystem, ueber /api/img/) */
 #variety-images .product-image-container img { width: 100%; height: auto; }
 #variety-images .product-image-nav-item img { width: 100%; height: auto; }
-/* Kundenwunsch: Endpreis inkl. MwSt. und Versand direkt unter dem Preis */
-#endpreis { display: block; margin-top: .25rem; font-weight: 700; }
+/* Kundenwunsch: Endpreis inkl. MwSt. und Versand direkt unter dem Preis.
+   Seit 17.09.2026 einzeilig und ohne zusaetzlichen Abstand (Punkt 5).
+   Kein nowrap — der Satz ist laenger als die Preisspalte und wuerde sonst
+   waagerecht aus der Seite laufen; stattdessen kleiner gesetzt. */
+#endpreis { display: block; font-weight: 700; font-size: .8125rem; }
 /* Zeile unter dem Preis: was beim Klick geschieht (Anfrage statt Kauf) */
 #weg-hinweis { display: block; font-size: .8rem; color: #856404; }
 #weg-hinweis:empty { display: none; }
-/* Sonderform / Sonderfarbe: drei unaufdringliche Kreuze */
-.sonder-kreuze { margin: -.25rem 0 .5rem; }
-.sonder-kreuze .custom-control-label { font-size: .875rem; }
-.sonder-kreuze .custom-control-label small { color: #6c757d; }
-/* Meldung nach "In den Warenkorb" / "Make an offer" */
+
+/* ---------------------------------------------------------------------------
+   Bestellformular, Aenderungswuensche Fuchsius vom 17.09.2026
+   1 Rand vor Form · 2 Sonderfarben einzeilig · 3 flachere Felder ·
+   4 MWSt. hinter dem Preis · 5 Endpreis einzeilig · 7 gleiche Breiten
+   --------------------------------------------------------------------------- */
+
+/* 3 — Felder flacher und enger, damit die Beschreibung weiter nach oben rueckt.
+   Gilt nur im Bestellformular, nicht fuer Kasse oder Konto. */
+#order-form .form-control,
+#order-form .custom-select { height: calc(1.5em + .375rem + 2px); padding: .1875rem .5rem; font-size: .875rem; }
+#order-form .col-form-label { padding-top: .1875rem; padding-bottom: .1875rem; font-size: .875rem; }
+#order-form .form-group { margin-bottom: .375rem; }
+#order-form .form-row { margin-bottom: 0; }
+#order-form .form-text { margin-top: .0625rem; }
+
+/* 2 — Sonderfarben: Text und Feld bilden EINE zusammenhaengende Zeile.
+   Die Beschriftung waechst nicht mehr auf die volle Formularbreite, sonst
+   stuende das Feld einsam am rechten Rand. Auf schmalen Bildschirmen darf
+   sie umbrechen — sonst schiebt sich das Feld in den Text hinein. */
+.sonderfarben-zeile .form-group { display: flex; align-items: center; flex-wrap: wrap; }
+.sonderfarben-zeile label { flex: 0 1 auto; margin: 0; padding-right: .5rem; }
+.sonderfarben-zeile .form-control { flex: 0 0 4rem; width: 4rem; }
+@media (min-width: 576px) {
+  .sonderfarben-zeile .form-group { flex-wrap: nowrap; }
+}
+
+/* 4 — Preis, MWSt. und die Art der Groesse in einer Zeile. */
+.preis-zeile { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem; }
+.preis-zeile #price { font-weight: 700; }
+.preis-nebenzeile { margin-top: 0; font-size: .8125rem; }
+
+/* Standard / Sonderanfertigung (WhatsApp-Notiz 17.09.2026): gruen bzw. rot.
+   Farben aus Bootstrap 4 (success/danger), damit sie zum uebrigen Shop passen. */
+.groessen-art { font-weight: 700; }
+.groessen-art:empty { display: none; }
+.groessen-art.ist-standard { color: #28a745; }
+.groessen-art.ist-sonder { color: #dc3545; }
+
+/* 7 — Der Farbfeld-Block gibt die Breite vor; das Formular zieht nach.
+   Die Felder bleiben zweispaltig, nutzen die Breite aber ganz aus. Beide
+   Spalten teilen sich die Breite gleichmaessig, damit Rand und Form (und
+   darunter Menge und Preis) buendig untereinander stehen. */
+#order-form .form-row > .col { min-width: 0; flex: 1 1 0; }
+
+/* Beschriftung und Feld im festen Verhaeltnis, damit "Rand" und "Form"
+   gleich weit vom jeweiligen Feld stehen (im Bild sass "Form" sonst mittig
+   in seiner Spalte). Erst ab Tablet-Breite — darunter stapelt Bootstrap
+   Beschriftung und Feld absichtlich untereinander. */
+@media (min-width: 576px) {
+  #order-form .form-group.row > .col-form-label { flex: 0 0 5.5rem; max-width: 5.5rem; }
+  #order-form .form-group.row > .col-sm-8 { flex: 1 1 auto; max-width: none; }
+}
+
+/* Zeile "Endpreis inkl. MwSt. und Versand" soll nicht umbrechen; sie darf
+   dafuer die Spalte nach links verlassen, ohne die Seite zu verbreitern.
+   Nur ab Tablet-Breite: auf dem Handy stehen Beschriftung und Feld
+   untereinander, dort gaebe es keine Spalte zum Ausbrechen. */
+@media (min-width: 576px) {
+  #endpreis { white-space: nowrap; margin-left: -5.5rem; }
+}
+
+/* Meldung nach "In den Warenkorb" / "Angebot anfordern" */
 #produkt-meldung:empty { display: none; }
 #produkt-meldung .alert { margin-top: .75rem; margin-bottom: 0; font-size: .875rem; }
 /* Preisfeld: Fehlertexte von berechne() in Rot, aber nicht fett */
