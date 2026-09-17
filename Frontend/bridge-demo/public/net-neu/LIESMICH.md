@@ -64,7 +64,7 @@ public/net-neu/
 2. **Zweite, funktionslose Sprachauswahl** am Ende der mobilen Leiste weggelassen (Briefing). „English" steht in der Kopfzeile, zeigt auf `#` mit `title="in Vorbereitung"` — es gibt keine englische Fassung.
 3. **Link-im-Link der Produktkarte** (ungültiges HTML): äußeres `<a>` bleibt, das innere `<a>` im `<h5>` ist ein `<span>`; `alt` gesetzt.
 4. **Karussell:** Tippfehler „Fusßmatten" (Folie 5) korrigiert; Folien 3 und 4 verlinken auf die deutschen Kategorien `diplomat` und `jetprint-einfarbig` statt in die englische Fassung.
-5. **Sonderform ohne Rand / mit Rand / Sonderfarbe** als drei kleine Kreuze unter der Größe (Kundenwunsch UEBERGABE 7.6) — gibt es auf matten.net nicht.
+5. **Form / Rand / Sonderfarben** unter der Größe (Kundenwunsch UEBERGABE 7.6) — gibt es auf matten.net nicht. Seit 17.09.2026 (Mail Fuchsius 16.09., 20:24) zwei Auswahlfelder statt drei Kreuzen: `Form` (Rechteckig | Sonderform) und `Rand` (Mit Rand | Ohne Rand), dazu ein Zahlenfeld `Sonderfarben` (0–9). Daraus werden die alten Flags abgeleitet, mit denen Preisformel, Artikelwahl und Kommentar weiterarbeiten: Sonderform + mit Rand = ×1,5, Sonderform + ohne Rand = ×1,3, bei „Rechteckig" kein Formzuschlag (die Randwahl bleibt dann ohne Preiswirkung). **Aufpreise stehen nicht mehr am Feld** — der Preis unten rechnet sie ein. Im Bestellkommentar bleiben sie stehen, er geht an das Team des Auftraggebers.
 6. **Endpreis-Zeile** „Endpreis inkl. MwSt. und Versand: € …" unter dem Preis (Kundenwunsch 7.3).
 7. **Hinweis über den Rechtstexten** „Dieser Text ist eine Kopie von matten.net und anwaltlich nicht geprüft." (Abmahnrisiko, UEBERGABE 10.3).
 8. **Maßhinweise mit Richtung** („Breite höchstens 200 cm — bitte kleiner wählen") als Text unter dem Feld statt nur Tooltip (Kundenwunsch 7.2). Die Tooltip-Attribute des Originals bleiben.
@@ -85,6 +85,8 @@ public/net-neu/
 23. **Blog-Einzelbeitrag** über `blog.html#slug` (statt `/de/blog/<slug>`).
 24. **Farbfelder vor dem Aufklappen: 30** wie das Original-CSS (`nth-child(n+31)`), nicht 12 wie im Briefing — der Screenshot von matten.net zeigt 30.
 25. **Cookie-Hinweis** schlicht nachgebaut (Balken unten, Farben laut Spec 1, `localStorage` in try/catch), kein `cookieconsent`-Skript.
+26. **Kein Weg-Hinweis unter dem Endpreis** (seit 17.09.2026, Mail Fuchsius): der Satz „Wunschmaße übernehmen wir als Anfrage über … — den berechneten Preis bestätigen wir im Angebot" entfällt. Begründung des Auftraggebers: Das bestätigt ohnehin die Auftragsbestätigung bzw. das Angebot. `weg()` bildet den Text weiter, weil die Artikelwahl darauf aufbaut und er im Bestellkommentar erhalten bleibt; nur `#weg-hinweis` bleibt leer.
+27. **Mehrere Designfarben namentlich** (seit 17.09.2026, Mail Fuchsius 20:30): die Beschriftung der Farbgruppe zeigt alle gewählten Werte („600 Weiß, 601 Zitronengelb, 602 Gelb") statt der ersten mit Zähler („600 Weiß (+2)") — wie matten.net.
 
 ## 4. Was geprüft wurde (10.09.2026)
 
@@ -103,4 +105,5 @@ public/net-neu/
 4. **IRON-HORSE-Mietmatte (pid 4 → `/miet-mattenservice/mietmatten`):** Artikel ohne freie Maße; die matten.net-Fixgrößen (50×85 …) entsprechen nicht den `Mattengröße`-Optionen des Altsystems (85×90 …) — der Kauf geht mit nächstliegender Größe + Kommentar, der Live-Preis (5,18 €) ist der des Altsystems.
 5. **Gästebuch, Passwort-Reset, Newsletter, englische Fassung:** ohne Funktion bzw. nicht vorhanden (wie im Original bzw. nicht angebunden).
 6. **Kokos, Logomatten (pid 26):** nur Anfrage (`beflockte_kokosmatte-a`), kein Preis.
-7. **Mattendesigner** (`mattendesigner.html`, `designer-checkout.html`) fehlt noch — baut ein anderer Agent; die Links in Navigation und Produktbeschreibungen führen bis dahin auf 404.
+7. **Mattendesigner** (`mattendesigner.html`, `designer-checkout.html`): am 10.09.2026 nach dem Schreiben dieser Datei noch gebaut (`seite-designer.js`, `seite-designer-checkout.js`), aber **ungeprüft** — keine Befundliste.
+8. **Preis mehrerer Sonderfarben — Rückfrage offen (17.09.2026).** Die Excel-Vorlage kennt in P3 nur „Sonderfarbe ja/nein" mit 68,- € netto (VK) bzw. 50,- € (EK), ausdrücklich einmal je Auftrag. Seit dem Kundenwunsch nach einer Anzahl rechnet `preisformel.js` **68,- € je Sonderfarbe**, weiterhin nur einmal je Auftrag (`sonderfarbenAnzahl`; zwei Farben = 136,- € netto, unabhängig von der Stückzahl). Dass sich der Betrag je Farbe vervielfacht, ist eine **Annahme** — der Entwurf der Rückfrage liegt in `Frontend/_arbeit/FRAGE-SONDERFARBEN.md`. Bleibt es bei 68,- € pauschal, genügt es, in `preisformel.js` den Faktor `sonderfarbenAnzahl` bei `aufschlagVK`/`aufschlagEK` wieder auf 1 zu setzen.

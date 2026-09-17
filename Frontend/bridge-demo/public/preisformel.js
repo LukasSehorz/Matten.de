@@ -529,6 +529,13 @@ export function staffelFuer(menge, k = STAMMDATEN_VORGABE) {
  * @param {boolean} eingaben.sonderformOhneRand  N3 — "X"
  * @param {boolean} eingaben.sonderformMitRand   O3 — "X"
  * @param {boolean} eingaben.sonderfarbe         P3 — "X"
+ * @param {number} [eingaben.sonderfarbenAnzahl] Anzahl der Sonderfarben
+ *        (Kundenwunsch 17.09.2026). Ohne Angabe gilt 1, wenn sonderfarbe
+ *        gesetzt ist. Der Aufschlag P5/P6 gilt je Sonderfarbe, faellt aber
+ *        weiterhin nur EINMAL je Auftrag an (nicht je Stueck).
+ *        ACHTUNG: dass sich der Betrag je Farbe vervielfacht, ist eine
+ *        Annahme — die Excel-Vorlage kennt nur "X". Rueckfrage an den
+ *        Auftraggeber laeuft (siehe FRAGE-SONDERFARBEN.md).
  * @param {number} [eingaben.colortype]       F2 — nur noch aus Rueckwaerts-
  *        kompatibilitaet; gehoert eigentlich in die Stammdaten und gewinnt,
  *        wenn beides gesetzt ist.
@@ -576,6 +583,16 @@ export function berechne(eingaben, stammdaten, optionen) {
   const sonderformOhneRand = istGesetzt(e.sonderformOhneRand);
   const sonderformMitRand  = istGesetzt(e.sonderformMitRand);
   const sonderfarbe        = istGesetzt(e.sonderfarbe);
+
+  /* Anzahl der Sonderfarben (Kundenwunsch 17.09.2026). Ohne Angabe bleibt es
+     bei der frueheren Ja/Nein-Rechnung, also 1. Werte unter 1 oder keine Zahl
+     zaehlen ebenfalls als 1, damit ein Tippfehler den Aufschlag nicht
+     verschwinden laesst. */
+  const sonderfarbenAnzahl = (function () {
+    if (!sonderfarbe) return 0;
+    const n = alsZahl(e.sonderfarbenAnzahl);
+    return Number.isFinite(n) && n >= 1 ? Math.floor(n) : 1;
+  })();
 
   const fehlend = [];
   if (!Number.isFinite(breite)) fehlend.push('Breite');
@@ -656,8 +673,10 @@ export function berechne(eingaben, stammdaten, optionen) {
   }
 
   /* --- P5 / P6: Sonderfarbe, feste Betraege --------------------------- */
-  const aufschlagVK = sonderfarbe ? k.aufschlagSonderfarbeVK : 0;
-  const aufschlagEK = sonderfarbe ? k.aufschlagSonderfarbeEK : 0;
+  //  Der Betrag gilt je Sonderfarbe (Annahme, siehe sonderfarbenAnzahl oben),
+  //  faellt aber wie in der Tabelle nur EINMAL je Auftrag an.
+  const aufschlagVK = k.aufschlagSonderfarbeVK * sonderfarbenAnzahl;
+  const aufschlagEK = k.aufschlagSonderfarbeEK * sonderfarbenAnzahl;
 
   /* --- Mengenstaffel --------------------------------------------------- */
   const stufe = staffelFuer(menge, k);
@@ -737,7 +756,7 @@ export function berechne(eingaben, stammdaten, optionen) {
     // --- normalisierte Eingaben -----------------------------------------
     eingaben: {
       breite, laenge, menge, colortype,
-      sonderformOhneRand, sonderformMitRand, sonderfarbe
+      sonderformOhneRand, sonderformMitRand, sonderfarbe, sonderfarbenAnzahl
     },
 
     // --- Zwischenwerte (Excel-Zelle in Klammern) -------------------------

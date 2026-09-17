@@ -81,7 +81,14 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
     farben: {},             /* de-Feldname -> gewaehlter Wert (Grundfarbe …)   */
     weitereDesign: [],      /* zusaetzliche Designfarben (Kontrollkaestchen)  */
     attribute: {},          /* matten.net formularname -> { value, label }    */
-    sonderformOhneRand: false, sonderformMitRand: false, sonderfarbe: false
+    /* Form und Rand sind seit 17.09.2026 zwei getrennte Auswahlfelder
+       (Kundenwunsch): form 'rechteckig' | 'sonderform', rand 'mit' | 'ohne'.
+       Die beiden Flags darunter bleiben als abgeleitete Werte erhalten, weil
+       Preisformel, Kommentar und Artikelwahl sie erwarten. */
+    form: 'rechteckig', rand: 'mit',
+    sonderformOhneRand: false, sonderformMitRand: false,
+    /* Sonderfarben: Anzahl statt Ja/Nein (Kundenwunsch 17.09.2026). */
+    sonderfarbe: false, sonderfarbenAnzahl: 0
   };
   var artikel = null;       /* matten.de-Kaufartikel (dePfad)                 */
   var zwilling = null;      /* matten.de-Anfrageartikel "-a" (deZwilling)     */
@@ -164,7 +171,8 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       breite: wahl.breite, laenge: wahl.laenge, menge: wahl.menge,
       sonderformOhneRand: wahl.sonderformOhneRand,
       sonderformMitRand: wahl.sonderformMitRand,
-      sonderfarbe: wahl.sonderfarbe
+      sonderfarbe: wahl.sonderfarbe,
+      sonderfarbenAnzahl: wahl.sonderfarbenAnzahl
     }, stamm.stammdaten);
     if (!r.ok) return { ok: false, r: r, grund: rat(r) };
     var aufschlag = attributAufschlag();
@@ -458,13 +466,29 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       '<div class="input-group-append"><span class="input-group-text">cm</span></div></div>' +
       '<small class="mass-hinweis" id="hinweis-laenge"></small></div></div></div>\n' +
       '</div>\n';
-    /* Kundenwunsch 7.6: Sonderform und Sonderfarbe als drei Kreuze (nicht auf matten.net) */
+    /* Kundenwunsch 7.6, geaendert am 17.09.2026: statt drei Kreuzen zwei
+       Auswahlfelder (Form, Rand) und ein Zahlenfeld fuer die Sonderfarben.
+       Ohne Aufpreisangabe — der Preis unten rechnet sie automatisch ein. */
     if (einkaufBekannt) {
-      h += '<div class="form-row sonder-kreuze"><div class="col">' +
-        '<div class="custom-control custom-checkbox custom-control-inline"><input type="checkbox" class="custom-control-input" id="sonderform_ohne_rand"><label class="custom-control-label" for="sonderform_ohne_rand">Sonderform ohne Rand <small>(+30 %)</small></label></div>' +
-        '<div class="custom-control custom-checkbox custom-control-inline"><input type="checkbox" class="custom-control-input" id="sonderform_mit_rand"><label class="custom-control-label" for="sonderform_mit_rand">Sonderform mit Rand <small>(+50 %)</small></label></div>' +
-        '<div class="custom-control custom-checkbox custom-control-inline"><input type="checkbox" class="custom-control-input" id="sonderfarbe"><label class="custom-control-label" for="sonderfarbe">Sonderfarbe <small>(+68 € einmalig)</small></label></div>' +
-        '</div></div>\n';
+      h += '<div class="form-row sonder-auswahl">\n' +
+        '<div class="col"><div class="form-group row"><label for="input_form" class="col-sm-4 col-form-label">Form</label><div class="col-sm-8">' +
+        '<select class="form-control" id="input_form">' +
+        '<option value="rechteckig" selected>Rechteckig</option>' +
+        '<option value="sonderform">Sonderform</option>' +
+        '</select></div></div></div>\n' +
+        '<div class="col"><div class="form-group row"><label for="input_rand" class="col-sm-4 col-form-label">Rand</label><div class="col-sm-8">' +
+        '<select class="form-control" id="input_rand">' +
+        '<option value="mit" selected>Mit Rand</option>' +
+        '<option value="ohne">Ohne Rand</option>' +
+        '</select></div></div></div>\n' +
+        '</div>\n' +
+        '<div class="form-row sonder-auswahl">\n' +
+        '<div class="col"><div class="form-group row"><label for="input_sonderfarben" class="col-sm-4 col-form-label">Sonderfarben</label><div class="col-sm-8">' +
+        '<input type="number" class="form-control" id="input_sonderfarben" min="0" max="9" step="1" value="0">' +
+        '<small class="form-text text-muted">Anzahl gewünschter Sonderfarben — 0, wenn keine.</small>' +
+        '</div></div></div>\n' +
+        '<div class="col"></div>\n' +
+        '</div>\n';
     }
     h += '<div class="form-row">\n' +
       '<div class="col"><div class="form-group row"><label for="input_quantity" class="col-sm-4 col-form-label">Menge</label><div class="col-sm-8">' +
@@ -504,6 +528,21 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
     var l = Number(String($l.value).replace(',', '.'));
     wahl.breite = Number.isFinite(b) && $b.value !== '' ? b : null;
     wahl.laenge = Number.isFinite(l) && $l.value !== '' ? l : null;
+  }
+
+  /**
+   * Anzahl der Sonderfarben aus dem Feld lesen (Kundenwunsch 17.09.2026).
+   * Leer oder unsinnig zaehlt als 0. Mit begradigen=true wird der bereinigte
+   * Wert ins Feld zurueckgeschrieben — das passiert erst beim Verlassen des
+   * Feldes, damit man waehrend des Tippens loeschen kann.
+   */
+  function sonderfarbenLesen($el, begradigen) {
+    var n = Math.floor(Number(String($el.value).replace(',', '.')));
+    if (!Number.isFinite(n) || n < 0) n = 0;
+    if (n > 9) n = 9;
+    if (begradigen && String(n) !== $el.value) $el.value = String(n);
+    wahl.sonderfarbenAnzahl = n;
+    wahl.sonderfarbe = n > 0;
   }
 
   /** Kundenwunsch 7.2: sagen, in welche Richtung es gehen muss. */
@@ -587,7 +626,18 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
         }
         var o = g.optionen.filter(function (x) { return x.wert === wahl.farben[g.feld]; })[0];
         var $l = document.getElementById('color-attribute-' + gi);
-        if ($l && o) $l.textContent = o.titel + (wahl.weitereDesign.length > 1 ? ' (+' + (wahl.weitereDesign.length - 1) + ')' : '');
+        /* Kundenwunsch 17.09.2026: bei mehreren Designfarben alle gewaehlten
+           namentlich zeigen (wie matten.net), nicht nur die erste mit Zaehler. */
+        if ($l) {
+          if (wahl.weitereDesign.length > 1) {
+            $l.textContent = wahl.weitereDesign.map(function (wert) {
+              var t = g.optionen.filter(function (x) { return x.wert === wert; })[0];
+              return t ? t.titel : wert;
+            }).join(', ');
+          } else if (o) {
+            $l.textContent = o.titel;
+          }
+        }
         if (gi === 0) bildSetzen();
         if (!einkaufBekannt) spaeter();
         return;
@@ -611,9 +661,20 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
         spaeter();
         return;
       }
-      if (el.id === 'sonderform_ohne_rand') { wahl.sonderformOhneRand = el.checked; neuRechnen(); return; }
-      if (el.id === 'sonderform_mit_rand') { wahl.sonderformMitRand = el.checked; neuRechnen(); return; }
-      if (el.id === 'sonderfarbe') { wahl.sonderfarbe = el.checked; neuRechnen(); return; }
+      /* Form und Rand: aus den beiden Auswahlfeldern werden die Flags
+         abgeleitet, mit denen Preisformel und Artikelwahl weiterarbeiten.
+         Bei einer rechteckigen Matte gibt es keinen Formzuschlag — die
+         Randwahl bleibt dann ohne Wirkung auf den Preis. */
+      if (el.id === 'input_form' || el.id === 'input_rand') {
+        if (el.id === 'input_form') wahl.form = el.value;
+        else wahl.rand = el.value;
+        var sonder = wahl.form === 'sonderform';
+        wahl.sonderformMitRand = sonder && wahl.rand === 'mit';
+        wahl.sonderformOhneRand = sonder && wahl.rand === 'ohne';
+        neuRechnen();
+        return;
+      }
+      if (el.id === 'input_sonderfarben') { sonderfarbenLesen(el, true); neuRechnen(); return; }
     });
 
     $form.addEventListener('input', function (ev) {
@@ -622,7 +683,11 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       if (el.id === 'input_quantity') {
         wahl.menge = Math.max(1, Math.min(999, Math.trunc(Number(el.value) || 1)));
         spaeter();
+        return;
       }
+      /* Beim Tippen nur lesen, nicht sofort zurueckschreiben — sonst kann man
+         die Zahl nicht mehr loeschen. Begradigt wird erst beim Verlassen. */
+      if (el.id === 'input_sonderfarben') { sonderfarbenLesen(el, false); spaeter(); }
     });
 
     /* Mehr Farben / Weniger Farben (CSS: .show-all zeigt alle Felder) */
@@ -682,7 +747,12 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
 
     var fehler = masseHinweise();
     var w = weg('kauf');
-    if ($weg) $weg.textContent = w.hinweis || '';
+    /* Kundenwunsch 17.09.2026: Der Weg-Hinweis unter dem Endpreis entfaellt.
+       Was mit Wunschmass, Sonderform und Sonderfarbe geschieht, bestaetigt
+       das Haus ohnehin mit Auftragsbestaetigung oder Angebot. w.hinweis wird
+       weiter gebildet, weil die Artikelwahl darauf aufbaut und der Text im
+       Bestellkommentar erhalten bleibt. */
+    if ($weg) $weg.textContent = '';
     if ($kauf) $kauf.disabled = false;
 
     if (fehler.length) {
@@ -926,9 +996,17 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       var a = wahl.attribute[k];
       if (a.label) t.push(a.beschriftung + ': ' + a.label);
     });
+    /* Im Kommentar bleiben die Zuschlaege stehen — er geht an das Team des
+       Auftraggebers, nicht an den Kunden, und ohne sie laesst sich der Preis
+       nicht nachvollziehen. Nur auf der Seite selbst sind sie weg. */
+    t.push('Form: ' + (wahl.form === 'sonderform' ? 'Sonderform' : 'rechteckig')
+      + ', ' + (wahl.rand === 'ohne' ? 'ohne Rand' : 'mit Rand'));
     if (wahl.sonderformOhneRand) t.push('Sonderform ohne Rand (+30 %)');
     if (wahl.sonderformMitRand) t.push('Sonderform mit Rand (+50 %)');
-    if (wahl.sonderfarbe) t.push('Sonderfarbe (+68 € einmalig)');
+    if (wahl.sonderfarbenAnzahl > 0) {
+      t.push(wahl.sonderfarbenAnzahl + ' Sonderfarbe' + (wahl.sonderfarbenAnzahl > 1 ? 'n' : '')
+        + ' (+68 € je Sonderfarbe, einmalig je Auftrag)');
+    }
     if (einkaufBekannt) {
       var e = preisFuer();
       if (e.ok) {
