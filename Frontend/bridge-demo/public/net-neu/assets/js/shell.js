@@ -17,11 +17,12 @@
 
      Shell.esc(text)                HTML-sicher
      Shell.param(name, vorgabe)     Wert aus der Adresszeile
-     Shell.hole(url)                GET  -> Promise<{ok, http, d}>   (wirft nie)
+     Shell.hole(url, grenzeMs?)     GET  -> Promise<{ok, http, d}>   (wirft nie)
      Shell.sende(url, daten)        POST -> Promise<{ok, http, d}>   (wirft nie)
      Shell.bild(pfad)               nur /api/img/… durchlassen, sonst null
-     Shell.warenkorbLaden()         GET /api/cart, rendert das Modal, setzt Zaehler
-     Shell.warenkorbZaehler(n)      "Cart (n)" im Kopf
+     Shell.warenkorbLaden()         GET /api/cart (immer frisch), rendert das
+                                    Modal, setzt Zaehler
+     Shell.warenkorbZaehler(n)      "Cart (n)" im Kopf, merkt die Zahl
      Shell.warenkorbOeffnen()       Modal oeffnen (laedt frisch)
      Shell.knopfArbeitet(btn, ja)   fa-spinner-Effekt (Spec 10)
      Shell.produktkarte(produkt)    Markup einer Produktkarte (Spec 5)
@@ -29,6 +30,12 @@
    Grundsatz: im Browser wird KEIN Geldbetrag gerechnet. Alle Betraege im
    Warenkorb sind Zeichenketten des Altsystems. Kein Aufruf geht an einen
    fremden Host; Bilder des Altsystems laufen nur ueber /api/img/.
+
+   Zweiter Grundsatz (01.10.2026): Der Warenkorb-Abruf beim Seitenstart
+   darf die Bedienung nicht aufhalten. Er ist zurueckgestellt, hat eine
+   Zeitgrenze und laeuft nur einmal; gemerkt wird allein die Zahl im Kopf.
+   Warenkorb-Modal und Kasse lesen ausnahmslos frisch vom Server —
+   ein gemerkter Stand ist nie die Wahrheit fuer Geld oder Positionen.
    ========================================================================== */
 
 (function () {
@@ -59,17 +66,73 @@
   }
   var NETZFEHLER = { http: 0, ok: false, d: { ok: false, fehler: 'Die Brücke zum Altsystem antwortet nicht (läuft der Server auf Port 8787?).' } };
 
-  function hole(url) {
-    return fetch(url, { credentials: 'same-origin', headers: { Accept: 'application/json' } })
-      .then(antwort).catch(function () { return NETZFEHLER; });
+  /* Laufende Nummer: sie zaehlt jedes Ereignis weiter, das den Korb
+     frischer macht als eine noch unterwegs befindliche Antwort —
+     eine Schreibanfrage (sende()) und jedes ausdrueckliche Laden
+     (warenkorbLaden(), also Modal und Mengenaenderung).
+
+     Wer eine Antwort anzeigen will, merkt sich den Stand beim Losschicken
+     und vergleicht beim Eintreffen. Ist er weitergezaehlt, war jemand
+     schneller und die eigene Antwort ist veraltet — sie wird verworfen.
+
+     Der stille Nachzug beim Seitenstart zaehlt NICHT mit: er ist nur ein
+     Nachschauen und darf dem Modal nie die Anzeige wegnehmen. Er prueft
+     beim Eintreffen lediglich, ob inzwischen etwas Neueres passiert ist. */
+  var korbLesestand = 0;
+
+  /* Wie viele Schreibanfragen am Korb gerade unterwegs sind.
+     Hintergrund (gemessen 01.10.2026): Die Netlify-Function haelt die
+     Sitzung des Altsystems im Cookie und schreibt sie bei JEDER Antwort
+     komplett zurueck. Laufen ein Lesen und ein Schreiben gleichzeitig,
+     waehrend noch keine PHPSESSID da ist, holt sich jede Anfrage ihre
+     eigene Sitzung beim Altsystem — und die spaetere Antwort ueberschreibt
+     die frueherere. Dann liegt die gerade hinzugefuegte Position in einer
+     Sitzung, die niemand mehr benutzt: der Korb ist aus Nutzersicht leer.
+     Darum fasst der stille Nachzug den Korb nicht an, solange geschrieben
+     wird — er wartet, bis das Schreiben durch ist. */
+  var korbSchreibt = 0;
+
+  /* GET gegen die Bruecke. Zweites Argument (Millisekunden) setzt eine
+     Zeitgrenze: laeuft sie ab, bricht der Abruf ab und liefert NETZFEHLER
+     statt ewig offen zu bleiben. Ohne Angabe wartet der Abruf wie bisher. */
+  function hole(url, grenzeMs) {
+    var opt = { credentials: 'same-origin', headers: { Accept: 'application/json' } };
+    var uhr = null;
+    if (grenzeMs > 0 && typeof window.AbortController === 'function') {
+      var abbruch = new window.AbortController();
+      opt.signal = abbruch.signal;
+      uhr = window.setTimeout(function () { try { abbruch.abort(); } catch (e) { /* egal */ } }, grenzeMs);
+    }
+    return fetch(url, opt).then(antwort).catch(function () { return NETZFEHLER; })
+      .then(function (res) { if (uhr) window.clearTimeout(uhr); return res; });
   }
 
   function sende(url, daten) {
+    /* Jede Schreibanfrage am Korb macht zwei Dinge ungueltig — zentral
+       hier, damit keine Seite es vergessen kann:
+         1. den gemerkten Zaehler,
+         2. alle Korb-Abrufe, die gerade noch unterwegs sind.
+
+       Punkt 2 war der eigentliche Bedienfehler: Der Abruf beim Seitenstart
+       war losgeschickt, als der Korb noch leer war. Klickte der Nutzer in
+       diesen 2,5 s "In den Warenkorb", kam die alte, leere Antwort NACH
+       dem Hinzufuegen zurueck und malte den Korb wieder leer — Position
+       weg, Zaehler weg, obwohl das Altsystem sie hatte. */
+    var amKorb = /^\/api\/(cart|kasse)\b/.test(String(url));
+    if (amKorb) {
+      zaehlerSpeicherLeeren();
+      ++korbLesestand;
+      ++korbSchreibt;
+    }
     return fetch(url, {
       method: 'POST', credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(daten || {})
-    }).then(antwort).catch(function () { return NETZFEHLER; });
+    }).then(antwort).catch(function () { return NETZFEHLER; })
+      .then(function (res) {
+        if (amKorb) korbSchreibt = Math.max(0, korbSchreibt - 1);
+        return res;
+      });
   }
 
   /* Bilder des Altsystems: nur der Bildproxy, nie matten.de direkt. */
@@ -207,6 +270,53 @@
   var letzterKorb = null;
   function letzterKorbLesen() { return letzterKorb; }
 
+  /* ----------------------------------------------------------------------
+     Zaehler-Zwischenspeicher (nur fuer die Zahl im Kopf)
+     ----------------------------------------------------------------------
+     Auf Netlify braucht GET /api/cart 2,0-2,6 s, weil die Function dafuer
+     zweimal matten.de abfragt (Sitzung holen + Warenkorbseite lesen). Beim
+     Seitenwechsel wuerde das jedes Mal neu passieren.
+
+     Hier liegt daher NUR die Positionszahl im sessionStorage, zusammen mit
+     dem Zeitstempel. Damit steht die Zahl im Kopf beim naechsten
+     Seitenaufruf sofort, waehrend der echte Abruf nachzieht.
+
+     Harte Grenzen, damit daraus nie eine falsche Wahrheit wird:
+     - gespeichert wird ausschliesslich die Zahl, niemals Positionen,
+       Preise oder Summen;
+     - der Wert dient nur der Anzeige im Kopf. Warenkorb-Modal und Kasse
+       lesen weiterhin ausnahmslos frisch vom Server (warenkorbLaden bzw.
+       S.hole('/api/cart')), und letzterKorb() bleibt leer, bis eine echte
+       Antwort da war;
+     - jede Schreibanfrage an /api/cart/* oder /api/kasse/* wirft ihn weg
+       (siehe sende());
+     - nach ALTER_MAX gilt er als verfallen.
+  */
+  var ZAEHLER_SCHLUESSEL = 'netneu.korbzaehler';
+  var ZAEHLER_ALTER_MAX = 5 * 60 * 1000;   /* 5 Minuten */
+
+  function zaehlerSpeicherLesen() {
+    try {
+      var roh = window.sessionStorage.getItem(ZAEHLER_SCHLUESSEL);
+      if (!roh) return null;
+      var d = JSON.parse(roh);
+      if (!d || typeof d.n !== 'number' || typeof d.t !== 'number') return null;
+      if (Date.now() - d.t > ZAEHLER_ALTER_MAX) return null;
+      return d.n;
+    } catch (e) { return null; }     /* privates Fenster, gesperrt, Schrott */
+  }
+
+  function zaehlerSpeicherSchreiben(n) {
+    try {
+      window.sessionStorage.setItem(ZAEHLER_SCHLUESSEL,
+        JSON.stringify({ n: Number(n) || 0, t: Date.now() }));
+    } catch (e) { /* ohne Speicher laeuft alles wie vorher, nur ohne Vorschau */ }
+  }
+
+  function zaehlerSpeicherLeeren() {
+    try { window.sessionStorage.removeItem(ZAEHLER_SCHLUESSEL); } catch (e) { /* egal */ }
+  }
+
   var GEMISCHT_HINWEIS = 'Ihr Warenkorb enthält Kauf- und Anfragepositionen. Das Altsystem behandelt ihn damit ' +
     'als Anfrage — die Kaufartikel werden nicht bestellt, sondern mit angefragt.';
 
@@ -263,18 +373,40 @@
     }
   }
 
+  /* Schreibt die Zahl in den Kopf. Jeder Aufruf kommt aus einer echten
+     Serverantwort (Modal, Kasse, Designer-Kasse, stiller Nachzug) und
+     frischt darum auch den Zwischenspeicher auf. Die Vorschau aus dem
+     Speicher geht nicht hier durch, sondern ueber zaehlerMalen(). */
   function warenkorbZaehler(n) {
+    zaehlerSpeicherSchreiben(Number(n) || 0);
+    zaehlerMalen(n);
+  }
+
+  function zaehlerMalen(n) {
     var el = document.getElementById('cart-count');
     if (!el) return;
     var z = Number(n) || 0;
     el.textContent = z > 0 ? ' (' + z + ')' : '';
   }
 
+  /* Der Spinner im Modal bleibt — das Modal liest immer frisch, und bei
+     2 s Wartezeit braucht der Nutzer ein Zeichen. Er erscheint aber erst
+     nach SPINNER_AB Millisekunden: eine schnelle Antwort zeigt dann gar
+     keinen Spinner statt eines Aufblitzens. */
+  var SPINNER_AB = 300;
+  var spinnerUhr = null;
+
   function ladeAnzeige(ja) {
-    var l = document.querySelector('#cart-modal .cart-loading');
-    if (!l) return;
-    l.classList.toggle('d-none', !ja);
-    l.classList.toggle('d-flex', !!ja);
+    var zeigen = function (an) {
+      var l = document.querySelector('#cart-modal .cart-loading');
+      if (!l) return;
+      l.classList.toggle('d-none', !an);
+      l.classList.toggle('d-flex', !!an);
+    };
+    window.clearTimeout(spinnerUhr);
+    spinnerUhr = null;
+    if (ja) spinnerUhr = window.setTimeout(function () { zeigen(true); }, SPINNER_AB);
+    else zeigen(false);
   }
 
   function korbFehler(text) {
@@ -282,10 +414,16 @@
     if (f) f.innerHTML = text ? '<div class="alert alert-danger mt-2" role="alert">' + esc(text) + '</div>' : '';
   }
 
+  /* Holt den Korb frisch vom Server — niemals aus dem Zwischenspeicher.
+     Hier haengen Modal und Mengenaenderung dran. */
   function warenkorbLaden() {
+    var meine = ++korbLesestand;
     ladeAnzeige(true);
     return hole('/api/cart').then(function (res) {
+      /* Der Spinner geht IMMER aus — auch wenn diese Antwort verworfen
+         wird. Sonst bliebe er nach einer ueberholten Anfrage stehen. */
       ladeAnzeige(false);
+      if (meine !== korbLesestand) return null;   /* ueberholt — verwerfen */
       if (!res.ok) { korbFehler(res.d.fehler || 'Der Warenkorb ließ sich nicht laden.'); return null; }
       warenkorbAnzeigen(res.d);
       return res.d;
@@ -294,6 +432,7 @@
 
   var mengenUhren = {};
   function mengeSetzen(key, anzahl) {
+    /* sende() zaehlt korbLesestand selbst weiter */
     ladeAnzeige(true);
     return sende('/api/cart/menge', { key: key, anzahl: anzahl }).then(function (res) {
       ladeAnzeige(false);
@@ -509,15 +648,94 @@
       });
     }
 
-    /* Zaehler im Kopf still nachziehen (kein Modal, kein Fehler). */
+    /* ------------------------------------------------------------------
+       Zaehler im Kopf: erst malen, dann nachfragen
+       ------------------------------------------------------------------
+       Vorher stand hier ein sofortiges hole('/api/cart'). Auf Netlify
+       dauert dieser Aufruf 2,0-2,6 s (die Function fragt dafuer zweimal
+       matten.de ab). Zwei Folgen hatte das:
+
+       1. Der Nutzer sah erst nach gut zwei Sekunden eine Zahl im Kopf.
+       2. Schlimmer: klickte er in dieser Zeit "In den Warenkorb", lief
+          sein POST gegen dieselbe, noch sitzungslose Function. Beide
+          Antworten setzen das Sitzungs-Cookie neu — die spaete
+          Korb-Antwort ueberschrieb die Sitzung, in der die Position
+          gerade gelandet war. Nach aussen: Klick ohne Wirkung, Flackern.
+
+       Jetzt: die gemerkte Zahl erscheint sofort, der echte Abruf startet
+       erst, wenn die Seite gezeichnet ist, und laeuft nur einmal.
+    */
+
+    /* a) Vorschau aus dem Zwischenspeicher — kostet keine Anfrage.
+          Bewusst nur gemalt: letzterKorb bleibt leer, damit niemand den
+          gespeicherten Stand fuer eine Wahrheit haelt. */
+    var gemerkt = zaehlerSpeicherLesen();
+    if (gemerkt != null) zaehlerMalen(gemerkt);
+
+    /* b) Der echte Abruf — still (kein Modal, keine Fehlermeldung),
+          hoechstens einer gleichzeitig, mit Zeitgrenze. */
+    var ZEITGRENZE = 8000;
+    var WARTE_SCHREIBEN = 400;     /* Nachsehen, ob noch geschrieben wird */
+    var VERZUG_START = 300;        /* Atempause nach dem Zeichnen */
+    var WARTE_MAX = 15;            /* hoechstens 15 x 400 ms = 6 s nachsehen */
+    var laeuft = null;
+    var nachgesehen = 0;
     var still = function () {
-      return hole('/api/cart').then(function (res) {
+      if (laeuft) return laeuft;              /* kein doppelter Abruf */
+
+      /* Schreibt gerade jemand am Korb (Hinzufuegen, Menge, Kasse), halten
+          wir uns heraus und sehen kurz darauf wieder nach. Sonst holen sich
+          Lesen und Schreiben je eine eigene Sitzung beim Altsystem und die
+          spaetere Antwort wirft die frueherere weg — die hinzugefuegte
+          Position waere verloren.
+
+          Nach WARTE_MAX Versuchen geben wir auf: der Zaehler ist nur eine
+          Nebensache und darf nicht endlos im Hintergrund nachfragen.
+          Das Schreiben selbst hat die Zahl ohnehin schon gesetzt. */
+      if (korbSchreibt > 0) {
+        if (++nachgesehen > WARTE_MAX) return null;
+        window.setTimeout(still, WARTE_SCHREIBEN);
+        return null;
+      }
+      nachgesehen = 0;
+
+      /* Nur merken, nicht weiterzaehlen — siehe korbLesestand. */
+      var meine = korbLesestand;
+      laeuft = hole('/api/cart', ZEITGRENZE).then(function (res) {
+        laeuft = null;
+        /* Hat das Modal oder ein Hinzufuegen inzwischen frischere Zahlen
+           geholt, gilt diese Antwort als veraltet und wird verworfen. */
+        if (meine !== korbLesestand) return null;
         if (res.ok) { letzterKorb = res.d; warenkorbZaehler(res.d.count); }
         return res.ok ? res.d : null;
       });
+      return laeuft;
     };
-    still();
-    window.addEventListener('pageshow', function (ev) { if (ev.persisted) still(); });
+
+    /* c) Zurueckstellen, bis die Seite wirklich steht.
+          requestIdleCallback allein genuegt nicht: ist der Rechner flott,
+          meldet es schon nach wenigen Millisekunden Leerlauf, und der
+          langsame Korb-Abruf liegt wieder genau im Klickfenster des
+          Nutzers. Darum zuerst zwei Bilder abwarten (die Seite ist
+          gezeichnet), dann der Leerlauf-Haken mit Zeitgrenze. */
+    var spaeter = function (fn) {
+      var dann = function () {
+        if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(fn, { timeout: 1500 });
+        else window.setTimeout(fn, 0);
+      };
+      if (typeof window.requestAnimationFrame === 'function') {
+        window.requestAnimationFrame(function () {
+          window.requestAnimationFrame(function () { window.setTimeout(dann, VERZUG_START); });
+        });
+      } else {
+        window.setTimeout(dann, VERZUG_START);
+      }
+    };
+    spaeter(still);
+
+    /* Zurueck aus dem Verlaufsspeicher: der Korb kann sich inzwischen
+       geaendert haben, also frisch nachfragen (ebenfalls zurueckgestellt). */
+    window.addEventListener('pageshow', function (ev) { if (ev.persisted) spaeter(still); });
   }
 
   window.Shell = {

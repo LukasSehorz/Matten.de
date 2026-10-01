@@ -50,8 +50,11 @@
 /* Kundenwunsch: Endpreis inkl. MwSt. und Versand direkt unter dem Preis.
    Seit 17.09.2026 einzeilig und ohne zusaetzlichen Abstand (Punkt 5).
    Kein nowrap — der Satz ist laenger als die Preisspalte und wuerde sonst
-   waagerecht aus der Seite laufen; stattdessen kleiner gesetzt. */
-#endpreis { display: block; font-weight: 700; font-size: .8125rem; }
+   waagerecht aus der Seite laufen; stattdessen kleiner gesetzt.
+   Seit 01.10.2026 ist nur noch der BETRAG fett (Screenshot des
+   Auftraggebers), die Beschriftung davor steht normal. */
+#endpreis { display: block; font-weight: 400; font-size: .8125rem; color: #212529; }
+#endpreis .endpreis-betrag { font-weight: 700; font-size: .9375rem; }
 /* Zeile unter dem Preis: was beim Klick geschieht (Anfrage statt Kauf) */
 #weg-hinweis { display: block; font-size: .8rem; color: #856404; }
 #weg-hinweis:empty { display: none; }
@@ -71,28 +74,80 @@
 #order-form .form-row { margin-bottom: 0; }
 #order-form .form-text { margin-top: .0625rem; }
 
-/* 2 — Sonderfarben: Text und Feld bilden EINE zusammenhaengende Zeile.
-   Die Beschriftung waechst nicht mehr auf die volle Formularbreite, sonst
-   stuende das Feld einsam am rechten Rand. Auf schmalen Bildschirmen darf
-   sie umbrechen — sonst schiebt sich das Feld in den Text hinein. */
-.sonderfarben-zeile .form-group { display: flex; align-items: center; flex-wrap: wrap; }
-.sonderfarben-zeile label { flex: 0 1 auto; margin: 0; padding-right: .5rem; }
-.sonderfarben-zeile .form-control { flex: 0 0 4rem; width: 4rem; }
+/* 2 — Sonderfarben: Beschriftung "Anzahl" in der Label-Spalte (wie Rand,
+   Form, Menge, Preis), daneben der erklaerende Text und das schmale
+   Zahlenfeld. Geaendert am 01.10.2026 nach dem Screenshot des Auftraggebers:
+   vorher stand die ganze Erklaerung in der Beschriftung, dadurch sass das
+   Feld weiter rechts als alle anderen Felder der Spalte. */
+.sonderfarben-zeile .sonderfarben-feld { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+/* Diese Zeile nimmt die GANZE Formularbreite ein (anders als Rand/Form, die
+   sich eine Spalte teilen). Ohne die Null-Basis waere der Inhalt breiter als
+   die Spalte und die Zeile bräche hinter der Beschriftung um — dann stuende
+   "Anzahl" ueber dem Feld statt daneben. */
 @media (min-width: 576px) {
-  .sonderfarben-zeile .form-group { flex-wrap: nowrap; }
+  /* Mit #order-form davor, weil die allgemeine Regel weiter unten
+     (#order-form .form-group.row > .col-sm-8 { flex: 1 1 auto }) sonst
+     staerker waere. */
+  #order-form .sonderfarben-zeile .form-group.row > .sonderfarben-feld { flex: 1 1 0; min-width: 0; }
 }
+.sonderfarben-zeile .sonderfarben-erklaerung { font-size: .8125rem; color: #6c757d; }
+.sonderfarben-zeile .form-control { flex: 0 0 4rem; width: 4rem; }
 
-/* 4 — Preis, MWSt. und die Art der Groesse in einer Zeile. */
+/* 4 — Preis gross und hervorgehoben, "inkl. MWSt." klein daneben, der
+   Versand klein darunter (Screenshot des Auftraggebers 18.09.2026). */
 .preis-zeile { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem; }
-.preis-zeile #price { font-weight: 700; }
+.preis-zeile #price { font-weight: 700; font-size: 1.5rem; line-height: 1.15; color: #212529; }
 .preis-nebenzeile { margin-top: 0; font-size: .8125rem; }
 
-/* Standard / Sonderanfertigung (WhatsApp-Notiz 17.09.2026): gruen bzw. rot.
-   Farben aus Bootstrap 4 (success/danger), damit sie zum uebrigen Shop passen. */
-.groessen-art { font-weight: 700; }
+/* Endpreis-Zeile: "Standard | Endpreis inkl. MWSt. | € 33,44" — die Art der
+   Groesse steht VOR dem Endpreis in derselben Zeile (Screenshot 18.09.2026).
+   flex-wrap, damit die Zeile auf dem Handy umbrechen darf statt die Seite
+   zu verbreitern. */
+.endpreis-zeile { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem; }
+
+/* Standard / Spezial (WhatsApp-Notiz 17.09.2026, Wortwahl aus der Mail vom
+   18.09.2026): gruen bzw. rot. Farben aus Bootstrap 4 (success/danger),
+   damit sie zum uebrigen Shop passen. */
+.groessen-art { font-weight: 700; font-size: .8125rem; }
 .groessen-art:empty { display: none; }
 .groessen-art.ist-standard { color: #28a745; }
-.groessen-art.ist-sonder { color: #dc3545; }
+.groessen-art.ist-spezial { color: #dc3545; }
+
+/* Kunden-Bemerkung (neu 01.10.2026): mehrzeilig, deshalb von der flachen
+   Feldhoehe des Formulars ausgenommen. */
+#order-form textarea#input_bemerkung { height: auto; min-height: 4.5rem; resize: vertical; }
+
+/* Knopfzeile: "In den Warenkorb", "Angebot anfordern" und
+   "Kunden-Datei hochladen" (neu 01.10.2026). Drei Knoepfe in der Spalte des
+   Formulars (rund 510 px bei 1280 px Fensterbreite) gehen nur mit engerem
+   Innenabstand und kleinerer Schrift auf — sonst rutscht der dritte Knopf in
+   die zweite Zeile und steht nicht mehr neben "Angebot anfordern".
+   Umbruch bleibt erlaubt, damit auf dem Handy nichts aus der Seite laeuft. */
+.knopf-zeile { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+.knopf-zeile .btn {
+  padding: .375rem .45rem; font-size: .75rem; white-space: nowrap;
+  letter-spacing: 0;   /* das Original-CSS sperrt Knopfschrift — hier zu breit */
+}
+/* Das echte Datei-Feld bleibt unsichtbar, aber bedienbar (Tastatur,
+   Screenreader) — geklickt wird das <label> daneben, das wie ein Knopf
+   aussieht. display:none wuerde es aus der Tabulatorfolge nehmen. */
+.datei-feld {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+/* Das Original-CSS zeichnet .btn-outline-secondary sehr blass — der Knopf
+   sah dadurch aus wie abgeschaltet. Deshalb hier eigene Kontraste. */
+.knopf-zeile label[for="input_datei"] {
+  cursor: pointer; color: #495057; border-color: #adb5bd; background: #fff;
+}
+.knopf-zeile label[for="input_datei"]:hover { color: #212529; background: #e9ecef; border-color: #6c757d; }
+.datei-feld:focus + label,
+.datei-feld:focus-visible + label { outline: 2px solid #007bff; outline-offset: 2px; }
+.datei-hinweis { font-size: .8125rem; color: #155724; margin-top: .375rem; word-break: break-word; }
+.datei-hinweis:empty { display: none; }
+/* Ehrlicher Hinweis: die Datei wird NICHT uebertragen (die Bruecke reicht
+   keine Dateien an matten.de durch) — sie wird per E-Mail nachgereicht. */
+.datei-erklaerung { display: block; font-size: .75rem; color: #6c757d; margin-top: .25rem; }
 
 /* 7 — Der Farbfeld-Block gibt die Breite vor; das Formular zieht nach.
    Die Felder bleiben zweispaltig, nutzen die Breite aber ganz aus. Beide
@@ -109,12 +164,15 @@
   #order-form .form-group.row > .col-sm-8 { flex: 1 1 auto; max-width: none; }
 }
 
-/* Zeile "Endpreis inkl. MwSt. und Versand" soll nicht umbrechen; sie darf
-   dafuer die Spalte nach links verlassen, ohne die Seite zu verbreitern.
-   Nur ab Tablet-Breite: auf dem Handy stehen Beschriftung und Feld
-   untereinander, dort gaebe es keine Spalte zum Ausbrechen. */
+/* Die Endpreis-Zeile ("Standard · Endpreis inkl. MWSt. · € 33,44") soll nicht
+   umbrechen; sie darf dafuer die Spalte nach links verlassen, ohne die Seite
+   zu verbreitern. Nur ab Tablet-Breite: auf dem Handy stehen Beschriftung und
+   Feld untereinander, dort gaebe es keine Spalte zum Ausbrechen.
+   Seit 01.10.2026 gilt das fuer die ganze Zeile samt "Standard"/"Spezial"
+   davor — nicht mehr nur fuer #endpreis allein. */
 @media (min-width: 576px) {
-  #endpreis { white-space: nowrap; margin-left: -5.5rem; }
+  .endpreis-zeile { flex-wrap: nowrap; margin-left: -5.5rem; }
+  #endpreis { white-space: nowrap; }
 }
 
 /* Meldung nach "In den Warenkorb" / "Angebot anfordern" */

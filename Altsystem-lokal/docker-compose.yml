@@ -1,0 +1,68 @@
+# matten.de als lokale Kopie — Shop und Datenbank laufen auf diesem Rechner.
+#
+# Zweck: Das neue Frontend soll gegen den ECHTEN Code des Altsystems laufen,
+# nicht mehr ueber die Bruecke gegen den Livesystem-Server. Damit entfallen die
+# 2,5 Sekunden je Aufruf, Testbestellungen bleiben folgenlos, und die
+# Preisformel laesst sich im Original nachlesen und anpassen.
+#
+# Stand des Codes und der Daten: Backup vom 07.09.2026.
+# Starten:  docker compose up -d       Stoppen:  docker compose down
+# Adresse:  http://localhost:8080
+
+services:
+  # ---------------------------------------------------------------------------
+  #  Datenbank — MariaDB 10.11, dieselbe Fassung wie auf dem Livesystem
+  #  (laut Kopfzeile des Dumps: 10.11.13-MariaDB auf Ubuntu 24.04).
+  # ---------------------------------------------------------------------------
+  db:
+    image: mariadb:10.11
+    platform: linux/amd64        # Apple Silicon: faellt auf Emulation zurueck
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MYSQL_DATABASE}
+      # Das Altsystem spricht MySQL 5.x — alte Zeichensaetze zulassen.
+      MARIADB_AUTO_UPGRADE: "1"
+    command:
+      - --character-set-server=utf8mb3
+      - --collation-server=utf8mb3_general_ci
+      - --sql-mode=
+      - --max-allowed-packet=256M
+    volumes:
+      # Beim ERSTEN Start wird der Dump eingespielt (dauert einige Minuten,
+      # 148 MB). Danach liegen die Daten im Volume und der Dump wird ignoriert.
+      - ../Backup/matten.de-2026-09-07/web/datenbank/datenbank.sql:/docker-entrypoint-initdb.d/01-datenbank.sql:ro
+      - db-daten:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 300s          # der Erstimport braucht Zeit
+
+  # ---------------------------------------------------------------------------
+  #  Shop — PHP 7.0 mit Apache. Hoeher geht nicht: der Code nutzt an 434
+  #  Stellen die alten mysql_*-Funktionen, die nur ueber den Shim
+  #  dshafik/php7-mysql-shim laufen (liegt in vendor/ bereits bei).
+  # ---------------------------------------------------------------------------
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    volumes:
+      # Der Quellcode wird eingehaengt, nicht kopiert: Aenderungen am Code
+      # wirken sofort, ohne das Abbild neu zu bauen.
+      - ../Backup/matten.de-2026-09-07/web:/var/www/html
+    environment:
+      TZ: Europe/Berlin
+
+volumes:
+  db-daten:

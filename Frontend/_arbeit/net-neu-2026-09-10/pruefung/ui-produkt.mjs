@@ -1,3 +1,11 @@
+/* VERALTET seit 01.10.2026 — bedient die alten Kontrollkaestchen #sonderfarbe,
+   #sonderform_mit_rand und #sonderform_ohne_rand. Die gibt es nicht mehr: auf
+   Wunsch des Auftraggebers (Mail 16.09.2026) stehen dort jetzt die Auswahlfelder
+   #input_rand und #input_form sowie das Zahlenfeld #input_sonderfarben.
+   Das Skript bricht deshalb bei "D19 40x60 sonderfarbe kauf" ab — das ist KEIN
+   Fehler der Produktseite, sondern dieses Skripts.
+   Der aktuelle Stand wird von ui-fuchsius-17-09.mjs geprueft (37 Punkte).
+   Vor Weiterverwendung auf die neuen Felder umschreiben. */
 /* ui-produkt.mjs — C15 (UI-Werte), C16, D17–D19, Sonderfälle (569 / 6300000-a / Kokos mm) über die echte Seite (CDP).
    Warenkorb wird nach jedem Schritt geleert (POST /api/cart/clear aus der Seite). Nie /api/kasse/bestellen. */
 import { neuesZiel } from './cdp.mjs';

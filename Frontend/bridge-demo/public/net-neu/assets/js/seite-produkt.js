@@ -23,7 +23,18 @@
    Kundenwuensche (UEBERGABE 7): Hinweis, in welche Richtung ein unmoegliches
    Mass geaendert werden muss (7.2); Endpreis inkl. MwSt. und Versand (7.3);
    Produktbild wechselt mit der Grundfarbe (7.5); Sonderform/Sonderfarbe als
-   drei unaufdringliche Kreuze (7.6).
+   drei unaufdringliche Kreuze (7.6), seit 17.09.2026 als zwei Auswahlfelder
+   plus Zahlenfeld.
+
+   Aenderungen vom 01.10.2026 (Mail Fuchsius 18.09.2026 + Screenshot):
+     - "Standard"/"Spezial" folgt der Preisformel (faktorBreiteFuer), nicht
+       mehr der Fixgroessenliste — siehe istStandardmass().
+     - Beschriftung "Sonderanfertigung" -> "Spezial".
+     - Sonderfarben-Zeile: Beschriftung nur "Anzahl", Erklaerung beim Feld.
+     - Preisblock: Betrag gross, "Standard"/"Spezial" vor dem Endpreis.
+     - Neu: Kunden-Bemerkung (Textfeld) und Kunden-Datei (nur Dateiname,
+       KEIN Upload — die Bruecke reicht keine Dateien durch). Beides geht
+       in den Bestellkommentar.
 
    Abbildung auf das Altsystem (Briefing 6, portiert aus public/net/…/seite-produkt.js):
      Make an offer          -> immer Anfrage: Zwilling mit spezialoption x/y,
@@ -35,7 +46,7 @@
      Kommentar              -> immer die vollstaendige Kalkulation
    ========================================================================== */
 
-import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
+import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../../preisformel.js';
 
 (function () {
   'use strict';
@@ -48,6 +59,10 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
   var FORM = { minB: 40, maxB: 200, minL: 40, maxL: 700 };
   var ENTPRELLUNG = 70;   /* ms, Spec 8.2 */
   var UST_VORGABE = 19;   /* Regelsatz, falls der Artikel keinen nennt */
+  /* Kunden-Bemerkung (neu 01.10.2026): Laengengrenze im Feld UND beim Bauen
+     des Kommentars. Der Kommentar des Altsystems ist insgesamt auf 500
+     Zeichen begrenzt — die Bemerkung darf ihn nicht ganz auffressen. */
+  var BEMERKUNG_MAX = 500;
 
   /* Attributaufschlaege des Preisdienstes von matten.net, netto je Stueck
      (Spec 13.8): Diplomat "mit Kratzkante" (attributeValueId 1838) und
@@ -88,7 +103,10 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
     form: 'rechteckig', rand: 'mit',
     sonderformOhneRand: false, sonderformMitRand: false,
     /* Sonderfarben: Anzahl statt Ja/Nein (Kundenwunsch 17.09.2026). */
-    sonderfarbe: false, sonderfarbenAnzahl: 0
+    sonderfarbe: false, sonderfarbenAnzahl: 0,
+    /* Kunden-Bemerkung und angekuendigte Datei (neu 01.10.2026): beide
+       landen ausschliesslich im Bestellkommentar, nicht als Feld. */
+    bemerkung: '', dateiname: ''
   };
   var artikel = null;       /* matten.de-Kaufartikel (dePfad)                 */
   var zwilling = null;      /* matten.de-Anfrageartikel "-a" (deZwilling)     */
@@ -490,35 +508,73 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
         '<option value="sonderform">Sonderform</option>' +
         '</select></div></div></div>\n' +
         '</div>\n' +
-        /* Sonderfarben einzeilig ueber die volle Breite (Punkt 2): Text links,
-           schmales Zahlenfeld rechts. */
+        /* Sonderfarben einzeilig (Punkt 2, 17.09.2026), Beschriftung geaendert
+           am 01.10.2026 nach dem Screenshot des Auftraggebers: in der
+           Beschriftungsspalte steht nur noch "Anzahl" — buendig mit "Rand",
+           "Form", "Menge" und "Preis" darueber und darunter. Der erklaerende
+           Text "Sonderfarben, 0 = keine" steht rechts daneben beim Feld,
+           wie im Bild, und ist kein <label> mehr. */
         '<div class="form-row sonder-auswahl sonderfarben-zeile">\n' +
         '<div class="col"><div class="form-group row mb-0">' +
-        '<label for="input_sonderfarben" class="col-form-label">Anzahl gewünschter Sonderfarben: 0= keine</label>' +
+        '<label for="input_sonderfarben" class="col-sm-4 col-form-label">Anzahl</label>' +
+        '<div class="col-sm-8 sonderfarben-feld">' +
+        '<span class="sonderfarben-erklaerung">Sonderfarben, 0 = keine</span>' +
         '<input type="number" class="form-control" id="input_sonderfarben" min="0" max="9" step="1" value="0">' +
+        '</div>' +
         '</div></div>\n' +
         '</div>\n';
     }
     h += '<div class="form-row">\n' +
       '<div class="col"><div class="form-group row"><label for="input_quantity" class="col-sm-4 col-form-label">Menge</label><div class="col-sm-8">' +
       '<input type="number" class="form-control" id="input_quantity" placeholder="Quantity" value="1" name="quantity" min="1"></div></div></div>\n' +
-      /* MWSt. direkt hinter den Preis, Endpreis einzeilig (Punkte 4 und 5);
-         #groessen-art zeigt "Standard" gruen bzw. "Sonderanfertigung" rot
-         (WhatsApp-Notiz 17.09.2026, 15:38). */
+      /* Preisblock nach dem Screenshot des Auftraggebers (18.09.2026):
+         der Betrag gross und hervorgehoben, daneben klein "inkl. MWSt.",
+         darunter "plus 11,90€ Versand" — und in der Endpreiszeile steht
+         "Standard"/"Spezial" VOR dem Endpreis:
+           Standard   Endpreis inkl. MWSt.   € 33,44
+         #groessen-art ist deshalb von der Preiszeile in die Endpreiszeile
+         gewandert (Farben: gruen bzw. rot, siehe groessenArtZeigen()). */
       '<div class="col"><div class="form-group row"><label for="price" class="col-sm-4 col-form-label">Preis</label><div class="col-sm-8">' +
       '<div class="preis-zeile">' +
       '<span id="price"><span class="spinner-border" role="status" style="width: 1rem; height: 1rem;"><span class="sr-only">Loading...</span></span></span>' +
       '<small class="text-muted no-wrap">inkl. MWSt.</small>' +
-      '<small class="groessen-art" id="groessen-art"></small>' +
       '</div>' +
       '<small class="form-text text-muted preis-nebenzeile"><span class="no-wrap"><span id="shipping_cost"></span></span></small>' +
-      '<small class="form-text preis-nebenzeile" id="endpreis"></small>' +
+      '<div class="endpreis-zeile">' +
+      '<span class="groessen-art" id="groessen-art"></span>' +
+      '<small class="preis-nebenzeile" id="endpreis"></small>' +
+      '</div>' +
       '<small id="weg-hinweis"></small>' +
       '</div></div></div>\n</div>\n' +
-      '<div>' +
+      /* Kunden-Bemerkung (neu 01.10.2026, Screenshot des Auftraggebers):
+         mehrzeiliges Feld unter dem Preisblock. Der Text wandert in den
+         Bestellkommentar an matten.de (kommentarFuer(), Abschnitt
+         "Kundenbemerkung"). 500 Zeichen, weil der Kommentar des Altsystems
+         insgesamt begrenzt ist. */
+      '<div class="form-row">\n' +
+      '<div class="col-12"><div class="form-group row kunden-bemerkung">' +
+      '<label for="input_bemerkung" class="col-sm-4 col-form-label">Kunden-Bemerkung</label>' +
+      '<div class="col-sm-8">' +
+      '<textarea class="form-control" id="input_bemerkung" name="kunden_bemerkung" rows="3" maxlength="' + BEMERKUNG_MAX + '" ' +
+      'placeholder="Platz für Wünsche, Hinweise oder Rückfragen"></textarea>' +
+      '</div></div></div>\n' +
+      '</div>\n' +
+      '<div class="knopf-zeile">' +
       '<button class="btn btn-primary" id="add-to-cart" value="CART" name="submit">In den Warenkorb</button> ' +
-      '<button class="btn btn-secondary" id="add-to-inquiry" type="submit" name="submit" value="INQUIRY_CART">Angebot anfordern</button>' +
-      '</div>';
+      '<button class="btn btn-secondary" id="add-to-inquiry" type="submit" name="submit" value="INQUIRY_CART">Angebot anfordern</button> ' +
+      /* Kunden-Datei (neu 01.10.2026): Das Altsystem hat ein Upload-Plugin
+         (KundenUpload, Seite /upload), aber die Bruecke reicht derzeit KEINE
+         Dateien durch (lib/bruecke.mjs kennt kein multipart). Deshalb wird
+         hier kein Upload vorgetaeuscht: die Datei wird nur ausgewaehlt, der
+         Name angezeigt und in den Bestellkommentar geschrieben
+         ("Kunde hat Datei angekündigt: …"), und der Hinweis darunter sagt
+         klar, dass die Datei per E-Mail nachgereicht wird. */
+      '<label class="btn btn-outline-secondary mb-0" for="input_datei">Kunden-Datei hochladen</label>' +
+      '<input type="file" id="input_datei" class="datei-feld">' +
+      '</div>' +
+      '<div class="datei-hinweis" id="datei-hinweis"></div>' +
+      '<small class="datei-erklaerung">Die Datei wird mit der Anfrage <strong>nicht</strong> übertragen: ' +
+      'wir vermerken nur den Dateinamen und melden uns per E-Mail, damit Sie sie nachreichen können.</small>';
     return h;
   }
 
@@ -558,6 +614,43 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
     if (begradigen && String(n) !== $el.value) $el.value = String(n);
     wahl.sonderfarbenAnzahl = n;
     wahl.sonderfarbe = n > 0;
+  }
+
+  /**
+   * Freitext fuer den Bestellkommentar saeubern (neu 01.10.2026).
+   * Der Kommentar ist eine EINZEILIGE Zeichenkette, die mit " · " getrennt
+   * ans Altsystem geht. Deshalb:
+   *   - Zeilenumbrueche und Tabulatoren werden zu Leerzeichen,
+   *   - Steuerzeichen fliegen heraus,
+   *   - das Trennzeichen " · " wird entschaerft, damit eine Bemerkung die
+   *     Kommentarstruktur nicht zerlegt,
+   *   - Mehrfach-Leerzeichen werden zusammengezogen, dann gekuerzt.
+   */
+  function saeubern(roh, max) {
+    var t = String(roh == null ? '' : roh);
+    /* eslint-disable-next-line no-control-regex */
+    t = t.replace(/[\u0000-\u001f\u007f]+/g, ' ');
+    t = t.replace(/·/g, '-');
+    t = t.replace(/\s+/g, ' ').trim();
+    if (t.length > max) t = t.slice(0, max).trim();
+    return t;
+  }
+
+  /**
+   * Kunden-Datei: nur den Namen lesen und anzeigen (neu 01.10.2026).
+   * Es wird NICHTS hochgeladen — die Bruecke kennt keinen Dateiweg zum
+   * Altsystem. Der Name geht in den Bestellkommentar, damit das Team weiss,
+   * was es per E-Mail anfordern muss.
+   */
+  function dateiLesen($el) {
+    var f = $el && $el.files && $el.files[0];
+    wahl.dateiname = f ? saeubern(f.name, 120) : '';
+    var $h = document.getElementById('datei-hinweis');
+    if (!$h) return;
+    if (!wahl.dateiname) { $h.textContent = ''; return; }
+    $h.innerHTML = 'Vermerkt: <strong>' + esc(wahl.dateiname) + '</strong>' +
+      (f && Number.isFinite(f.size) ? ' (' + zahl(f.size / 1024, 0) + ' kB)' : '') +
+      ' — bitte nach der Anfrage per E-Mail nachreichen.';
   }
 
   /** Kundenwunsch 7.2: sagen, in welche Richtung es gehen muss. */
@@ -690,6 +783,10 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
         return;
       }
       if (el.id === 'input_sonderfarben') { sonderfarbenLesen(el, true); neuRechnen(); return; }
+      /* Kunden-Datei (neu 01.10.2026): nur der Name wird uebernommen — die
+         Datei selbst bleibt im Browser, die Bruecke reicht sie nicht durch.
+         Deshalb wird hier auch nichts hochgeladen, nur vermerkt. */
+      if (el.id === 'input_datei') { dateiLesen(el); return; }
     });
 
     $form.addEventListener('input', function (ev) {
@@ -702,7 +799,10 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       }
       /* Beim Tippen nur lesen, nicht sofort zurueckschreiben — sonst kann man
          die Zahl nicht mehr loeschen. Begradigt wird erst beim Verlassen. */
-      if (el.id === 'input_sonderfarben') { sonderfarbenLesen(el, false); spaeter(); }
+      if (el.id === 'input_sonderfarben') { sonderfarbenLesen(el, false); spaeter(); return; }
+      /* Kunden-Bemerkung: nur merken — sie geht in den Bestellkommentar und
+         hat keine Preiswirkung, also wird nicht neu gerechnet. */
+      if (el.id === 'input_bemerkung') { wahl.bemerkung = saeubern(el.value, BEMERKUNG_MAX); }
     });
 
     /* Mehr Farben / Weniger Farben (CSS: .show-all zeigt alle Felder) */
@@ -753,19 +853,72 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
   function euroText(betrag) { return betrag == null ? '—' : '€ ' + zahl(betrag, 2); }
 
   /**
-   * "Standard" (gruen) oder "Sonderanfertigung" (rot) neben dem Preis
-   * (WhatsApp-Notiz Fuchsius 17.09.2026, 15:38). Massgeblich ist dieselbe
-   * Entscheidung, die auch den Zielartikel bestimmt: Standard ist nur, was
-   * eine Fixgroesse trifft und ohne Sonderform/Sonderfarbe auskommt.
-   * @param {object|null} w Rueckgabe von weg(), oder null zum Ausblenden.
+   * Die Endpreis-Zeile (Screenshot des Auftraggebers 18.09.2026):
+   * Beschriftung klein, der Betrag dahinter hervorgehoben. Der Text nennt
+   * weiter MwSt. UND Versand, weil der Betrag beides enthaelt (Kundenwunsch
+   * 7.3) — "inkl. MWSt." allein waere hier zu wenig gesagt.
    */
-  function groessenArtZeigen(w) {
+  function endpreisZeigen($end, betrag) {
+    if (!$end) return;
+    if (betrag == null) { $end.textContent = ''; return; }
+    $end.innerHTML = 'Endpreis inkl. MwSt. und Versand: ' +
+      '<strong class="endpreis-betrag">' + esc(euroText(betrag)) + '</strong>';
+  }
+
+  /**
+   * Ist das gewaehlte Mass ein Standardmass im Sinne der Kalkulation?
+   * ----------------------------------------------------------------------
+   * Mail Fuchsius 18.09.2026: "wenn die Matte mindestens eines dieser Masse
+   * hat, egal ob in der Breite oder in der Laenge, dann ist es ein
+   * Standardmass als Basis fuer diese Kalkulation."
+   *
+   * Genau das rechnet faktorBreiteFuer() aus der Preisformel (L5 der Mappe):
+   * Rueckgabe 1 = Standardbreite getroffen, 1,25 = Sondermass. Die Anzeige
+   * fragt deshalb dieselbe Funktion wie die Rechnung.
+   *
+   * FRUEHERER FEHLER (behoben 01.10.2026): hier stand !w.freieMasse — also
+   * "steht das Mass in der Fixgroessen-Auswahlliste des Artikels". Das ist
+   * etwas anderes: 85 x 120 cm bei JetPrint-Velour trifft mit 85 cm eine
+   * Standardbreite (Faktor 1, kein Aufschlag), steht aber in keiner
+   * Fixgroessenliste — und wurde deshalb als Sondermass beschriftet,
+   * obwohl der Preis korrekt ohne Aufschlag gerechnet war.
+   *
+   * @returns {boolean|null} true = Standardmass, false = Sondermass,
+   *   null = nicht entscheidbar (keine Standardbreiten bekannt).
+   */
+  function istStandardmass() {
+    if (!stamm || !stamm.stammdaten) return null;
+    var k = stamm.stammdaten;
+    if (!Array.isArray(k.standardbreiten) || !k.standardbreiten.length) return null;
+    if (!Number.isFinite(wahl.breite) || !Number.isFinite(wahl.laenge)) return null;
+    return faktorBreiteFuer(wahl.breite, wahl.laenge, k) === 1;
+  }
+
+  /**
+   * "Standard" (gruen) oder "Spezial" (rot) vor dem Endpreis
+   * (WhatsApp-Notiz Fuchsius 17.09.2026, 15:38; Wortwahl "Spezial" statt
+   * "Sonderanfertigung" aus der Mail vom 18.09.2026 — klingt positiver,
+   * ist kuerzer und aehnlich lang wie "Standard").
+   *
+   * "Standard" gilt, wenn das Mass ein Standardmass ist (istStandardmass())
+   * UND weder Sonderform noch Sonderfarbe gewaehlt sind (zuschlaege()) —
+   * beides sind Gruende fuer einen Aufschlag, also keine Standardfertigung.
+   *
+   * Produkte OHNE eigene Preisstammdaten (einkaufBekannt === false, Preis
+   * live ueber /api/price: IRON-HORSE, Kokos, Logomatten, Diplomat-Sonder)
+   * haben keine Standardbreiten — fuer sie gibt es diese Unterscheidung
+   * nicht. Dort bleibt das Feld bewusst LEER: eine Falschaussage ("Standard"
+   * oder "Spezial" geraten) waere schlechter als keine Aussage, zumal der
+   * Preis dort ohnehin vom Altsystem kommt und nicht aus unserer Mappe.
+   */
+  function groessenArtZeigen(zeigen) {
     var $a = document.getElementById('groessen-art');
     if (!$a) return;
-    if (!w) { $a.textContent = ''; $a.className = 'groessen-art'; return; }
-    var standard = !w.freieMasse && !zuschlaege();
-    $a.textContent = standard ? 'Standard' : 'Sonderanfertigung';
-    $a.className = 'groessen-art ' + (standard ? 'ist-standard' : 'ist-sonder');
+    var standard = zeigen === false ? null : istStandardmass();
+    if (standard === null) { $a.textContent = ''; $a.className = 'groessen-art'; return; }
+    if (standard) standard = !zuschlaege();
+    $a.textContent = standard ? 'Standard' : 'Spezial';
+    $a.className = 'groessen-art ' + (standard ? 'ist-standard' : 'ist-spezial');
   }
 
   function neuRechnen() {
@@ -790,7 +943,7 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       $preis.innerHTML = '<span class="preis-fehler">' + esc(fehler[0]) + '</span>';
       $versand.textContent = '';
       $end.textContent = '';
-      groessenArtZeigen(null);
+      groessenArtZeigen(false);
       if ($kauf) $kauf.disabled = true;
       return;
     }
@@ -802,14 +955,14 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       $preis.innerHTML = '<span class="preis-fehler">' + esc(e.grund) + '</span>';
       $versand.textContent = '';
       $end.textContent = '';
-      groessenArtZeigen(null);
+      groessenArtZeigen(false);
       if ($kauf) $kauf.disabled = true;   /* "Angebot anfordern" bleibt nutzbar */
       return;
     }
-    groessenArtZeigen(w);
+    groessenArtZeigen(true);
     $preis.textContent = euroText(e.gesamt.wareBrutto);
     $versand.textContent = e.gesamt.versandBrutto != null ? 'Plus ' + zahl(e.gesamt.versandBrutto, 2) + '€ Versandkosten' : 'Versand laut Angebot';
-    $end.textContent = e.gesamt.gesamtBrutto != null ? 'Endpreis inkl. MwSt. und Versand: ' + euroText(e.gesamt.gesamtBrutto) : '';
+    endpreisZeigen($end, e.gesamt.gesamtBrutto);
   }
 
   /** Produkte ohne EK/m2 (pid 4, 12, 26, 40): Preis des Altsystems fuer die gewaehlte Variante. */
@@ -817,10 +970,10 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
     var $preis = document.getElementById('price');
     var $versand = document.getElementById('shipping_cost');
     var $end = document.getElementById('endpreis');
-    if (!artikel) { $preis.textContent = 'Preis derzeit nicht verfügbar'; groessenArtZeigen(null); return; }
+    if (!artikel) { $preis.textContent = 'Preis derzeit nicht verfügbar'; groessenArtZeigen(false); return; }
     if (artikel.modus !== 'kauf') {
       $preis.textContent = 'Preis auf Anfrage'; $versand.textContent = ''; $end.textContent = '';
-      groessenArtZeigen(null);
+      groessenArtZeigen(false);
       livePreis = null;
       return;
     }
@@ -834,16 +987,16 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       var d = res.d || {};
       if (!res.ok || !Number.isFinite(d.gesamt)) {
         $preis.innerHTML = '<span class="preis-fehler">Preis derzeit nicht verfügbar</span>';
-        groessenArtZeigen(null);
+        groessenArtZeigen(false);
         livePreis = null;
         return;
       }
       livePreis = d;
-      groessenArtZeigen(weg('kauf'));
+      groessenArtZeigen(true);
       var g = mitSteuerUndVersand(d.gesamt, { ustSatz: stamm.ustSatz, versandBrutto: Number.isFinite(d.versand) ? d.versand : stamm.versandBrutto }, { bruttoBereits: true });
       $preis.textContent = euroText(g.wareBrutto);
       $versand.textContent = g.versandBrutto != null ? 'Plus ' + zahl(g.versandBrutto, 2) + '€ Versandkosten' : '';
-      $end.textContent = g.gesamtBrutto != null ? 'Endpreis inkl. MwSt. und Versand: ' + euroText(g.gesamtBrutto) : '';
+      endpreisZeigen($end, g.gesamtBrutto);
     });
   }
 
@@ -1060,7 +1213,20 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       t.push('Preis auf Anfrage');
     }
     (hinweise || []).forEach(function (h) { t.push(h); });
-    return t.join(' · ').slice(0, 500);
+
+    /* Kunden-Bemerkung und angekuendigte Datei (neu 01.10.2026) — am Ende und
+       klar abgesetzt, damit das Team sie findet. Sie stehen HINTER der
+       Kalkulation, weil die Kalkulation der Teil ist, ohne den das Team den
+       Preis nicht nachvollziehen kann; die 500-Zeichen-Grenze darf sie
+       deshalb nicht verdraengen. Beides ist nur Kommentar: die Datei selbst
+       reicht die Bruecke nicht an das Altsystem weiter (kein Upload-Weg). */
+    var anhang = [];
+    if (wahl.bemerkung) anhang.push('Kundenbemerkung: ' + wahl.bemerkung);
+    if (wahl.dateiname) anhang.push('Kunde hat Datei angekündigt: ' + wahl.dateiname + ' (wird per E-Mail nachgereicht)');
+
+    var rumpf = t.join(' · ').slice(0, 500);
+    if (!anhang.length) return rumpf;
+    return rumpf + ' · ' + anhang.join(' · ');
   }
 
   function uebernehmen(absicht, bestaetigt) {
@@ -1095,6 +1261,11 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
       document.getElementById('abbrechen').addEventListener('click', function () { melde(''); });
       return;
     }
+
+    /* Die Bemerkung sicherheitshalber direkt aus dem Feld lesen — Autofill
+       und manche Einfuege-Wege loesen kein 'input'-Ereignis aus. */
+    var $bem = document.getElementById('input_bemerkung');
+    if ($bem) wahl.bemerkung = saeubern($bem.value, BEMERKUNG_MAX);
 
     var werte = werteFuer(w.ziel, !!w.freieMasse, w);
     var hinweise = werte.__hinweise || [];

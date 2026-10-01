@@ -111,60 +111,68 @@
  {
   "schritt": "D20 Schritt 3",
   "optionenMelder": "",
-  "titel": "Prüfen — Anfragenkorb",
-  "bloecke": [
-   "Lieferadresse ÄNDERN TESTBESTELLUNG – kein echter Auftrag Herr TEST Sehorz (Bitte ignorieren) Teststraße 1 80331 München, Deutschland E-Mail-Adresse: test-anfrage@example.com Telefon: 089 123456 Bemerkungen: TESTBESTELLUNG aus der Brücken-Demo – kein echter Auftrag, bitte nicht ausliefern.",
-   "Positionen 1 × - Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig - Designfarbe: 639-kirschrot - Format: quer - horizontal - Grundfarbe: 630-mittelgrau - Standardgröße: 40cm x 60cm - Mattengröße: 90cm × 120cm (Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-ki",
-   "Beträge Anfrage — das Altsystem nennt keine Summen. Der berechnete Preis steht im Kommentar jeder Position und wird im Angebot bestätigt.",
-   "Versand und Zahlung ÄNDERN Versandart: DHL Zahlungsart: keine (Anfrage) Es fließt kein Geld — es entsteht nur ein Datensatz."
-  ],
-  "melder": "Das Altsystem zeigt den Knopf „Anfrage abschicken“ an — der Abschluss wäre jetzt möglich.",
-  "knopfText": "Anfrage abschicken",
-  "knopfKlasse": "btn btn-success",
+  "titel": "Prüfen",
+  "bloecke": [],
+  "warnung": "Das Altsystem gibt die Übersichtsseite noch nicht heraus — es leitet auf /warenkorb um.",
+  "melder": "Der Abschluss ist noch nicht möglich:\nDas Altsystem leitet /bestellen auf /warenkorb um -- die Lieferadresse fehlt noch oder der Warenkorb ist leer.\nDer Warenkorb ist leer.",
+  "knopfText": "Bestellung abschicken",
+  "knopfKlasse": "btn btn-primary",
   "knopfDisabled": true,
-  "schalterDisabled": false,
-  "scharfText": "Mir ist bewusst, dass dies eine echte Anfrage im Live-System matten.de erzeugt.",
-  "roh": "{\n  \"methode\": \"POST\",\n  \"url\": \"https://matten.de/bestellen\",\n  \"header\": {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n    \"Origin\": \"https://matten.de\",\n    \"Referer\": \"https://matten.de/logomatten/bierbankmatten/6303041\",\n    \"Content-Length\": \"37\",\n    \"Cookie\": \"PHPSESSID der Proxy-Sitzung (hier nicht ausgeschrieben)\"\n  },\n  \"felder\": [\n    {\n      \"name\": \"anfrage_abschicken\",\n      \"wert\": \"Anfrage abschicken\"\n    }\n  ],\n  \"body\": \"anfrage_abschicken=Anfrage+abschicken\",\n  \"bodyKodierung\": \"utf-8 (Leerzeichen als \\\"+\\\", Rest prozentkodiert)\",\n  \"wirkung\": \"Das Altsystem legt eine Anfrage an -- ohne Preis, Zahlungsart und Versandkosten. Was danach folgt (Bestaetigung per "
+  "schalterDisabled": true,
+  "scharfText": "Mir ist bewusst, dass dies eine echte Bestellung im Live-System matten.de erzeugt.",
+  "roh": "{\n  \"methode\": \"POST\",\n  \"url\": \"https://matten.de/bestellen\",\n  \"header\": {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n    \"Origin\": \"https://matten.de\",\n    \"Referer\": \"https://matten.de/logomatten/bierbankmatten/6303041\",\n    \"Content-Length\": \"0\",\n    \"Cookie\": \"PHPSESSID der Proxy-Sitzung (hier nicht ausgeschrieben)\"\n  },\n  \"felder\": [],\n  \"body\": \"\",\n  \"bodyKodierung\": \"utf-8 (Leerzeichen als \\\"+\\\", Rest prozentkodiert)\",\n  \"wirkung\": \"Kein Absende-Knopf erkannt -- es wird nichts gesendet.\",\n  \"gesperrt\": [\n    \"OgonePpPayment\",\n    \"OgoneCcPayment\"\n  ],\n  \"bestaetigungsfeld\": {\n    \"bestaetigung\": \"JA-BESTELLEN\"\n  }\n}"
  },
  {
   "schritt": "D20 Schalter",
-  "knopfDisabledMitHaken": false,
+  "knopfDisabledMitHaken": true,
   "knopfDisabledOhneHaken": true
  },
  {
   "schritt": "D20 /api/kasse/vorschau",
   "http": 200,
-  "art": "anfrage",
-  "bereit": true,
-  "huerden": [],
-  "modus": "anfrage",
-  "korb": "Anfragenkorb",
-  "knopf": "Anfrage abschicken",
-  "knopfName": "anfrage_abschicken",
-  "items": [
-   {
-    "name": null,
-    "attribut": "Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig | Designfarbe: 639-kirschrot | Format: quer - horizontal | Grundfarbe: 630-mittelgrau | Standardgröße: 40cm x 60cm | Mattengröße: 90cm × 120cm",
-    "beschreibung": "- Ausführung: mit umlaufendem Nitril-Gummirand, rechtwinklig - Designfarbe: 639-kirschrot - Format: quer - horizontal - Grundfarbe: 630-mittelgrau - Standardgröße: 40cm x 60cm - Mattengröße: 90cm × 120cm",
-    "modus": "anfrage",
-    "preis": "auf Anfrage",
-    "preisNum": null,
-    "anzahl": 1,
-    "summe": "auf Anfrage",
-    "summeNum": null
-   }
+  "art": null,
+  "bereit": false,
+  "huerden": [
+   "Das Altsystem leitet /bestellen auf /warenkorb um -- die Lieferadresse fehlt noch oder der Warenkorb ist leer.",
+   "Der Warenkorb ist leer."
   ],
-  "felder": [
-   {
-    "name": "anfrage_abschicken",
-    "wert": "Anfrage abschicken"
-   }
-  ],
+  "modus": null,
+  "korb": null,
+  "knopf": null,
+  "knopfName": null,
+  "items": null,
+  "felder": [],
   "zahlung": {
-   "optionen": [],
-   "abgelehnt": [],
-   "gewaehlt": null,
-   "versteckt": "RechnungPayment"
+   "optionen": [
+    {
+     "wert": "VorkassePayment",
+     "label": "Vorkasse",
+     "gewaehlt": false,
+     "erlaubt": true,
+     "grund": null
+    },
+    {
+     "wert": "RechnungPayment",
+     "label": "Rechnung",
+     "gewaehlt": true,
+     "erlaubt": true,
+     "grund": null
+    }
+   ],
+   "abgelehnt": [
+    {
+     "wert": "OgonePpPayment",
+     "label": "Paypal",
+     "grund": "PayPal (Worldline/Ogone)"
+    },
+    {
+     "wert": "OgoneCcPayment",
+     "label": "Kreditkarte",
+     "grund": "Kreditkarte (Worldline/Ogone)"
+    }
+   ],
+   "gewaehlt": "RechnungPayment",
+   "versteckt": null
   },
   "versandGewaehlt": "7"
  },
@@ -176,10 +184,11 @@
   "schritt": "D21 add",
   "http": 200,
   "ok": true,
-  "count": 1,
+  "count": 2,
   "modus": "kauf",
   "abgelehnt": [],
   "items": [
+   "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben | Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 40cm x 60cm | Trittrand,: mit umlaufendem Nitrilgummirand | 24,90 €",
    "Art-Designs, Welcome-Holzdesign VIII | Größe: : 50 cm x 75 cm | 25,17 €"
   ]
  },
@@ -189,13 +198,14 @@
   "meldung": "",
   "schritteSichtbar": true,
   "korbZeilen": [
+   "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 40cm x 60cm | Trittrand,: mit umlaufendem Nitrilgummirand JetPrint Premium 1-farbig · Breite 60 cm × Länge 40 cm · 1 Stück · Grundfarbe 613-königsblau · Form: rechteckig, mit Rand · Kalkulation: netto je Stück 24,41 € · netto gesamt 24,41 € · brutto inkl. Versand 40,95 € · Preisformel Excel (preisformel.js) 24,90 € 1 24,90 €",
    "Art-Designs, Welcome-Holzdesign VIII Größe: : 50 cm x 75 cm TEST Kontrollagent - bitte ignorieren (Prüfung Kaufkorb) 25,17 € 1 25,17 €"
   ],
   "summen": [
-   "Subtotal 25,17 €",
-   "Versandkosten 0,00 €",
-   "VAT 19.00% 4,78 €",
-   "Total 29,95 €"
+   "Subtotal 50,07 €",
+   "Versandkosten 10,00 €",
+   "VAT 19.00% 11,41 €",
+   "Total 71,48 €"
   ],
   "felder": [
    "anrede=\"Herr\"*",
@@ -253,8 +263,8 @@
   "titel": "Prüfen — Warenkorb",
   "bloecke": [
    "Lieferadresse ÄNDERN TESTBESTELLUNG – kein echter Auftrag Herr TEST Sehorz (Bitte ignorieren) Teststraße 1 80331 München, Deutschland E-Mail-Adresse: test-anfrage@example.com Telefon: 089 123456 Bemerkungen: TESTBESTELLUNG aus der Brücken-Demo – kein echter Auftrag, bitte nicht ausliefern.",
-   "Positionen 1 × Art-Designs, Welcome-Holzdesign VIII - Größe: : 50 cm x 75 cm (Größe: : 50 cm x 75 cm) — 25,17 €",
-   "Beträge laut Altsystem Zwischensumme: 25,17 € Versandkosten: 0,00 € Umsatzsteuer (19 %): 4,78 € Gesamtsumme: 29,95 €",
+   "Positionen 1 × JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben - Breite: 60 cm - Grundfarbe: 613-königsblau - Standardgröße: 40cm x 60cm - Trittrand,: mit umlaufendem Nitrilgummirand (Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 40cm x 60cm | Trittrand,: mit umlaufendem Nitri",
+   "Beträge laut Altsystem Zwischensumme: 50,07 € Versandkosten: 10,00 € Umsatzsteuer (19 %): 11,41 € Gesamtsumme: 71,48 €",
    "Versand und Zahlung ÄNDERN Versandart: DHL Zahlungsart: Rechnung Es fließt kein Geld — es entsteht nur ein Datensatz."
   ],
   "melder": "Das Altsystem zeigt den Knopf „Bestellung abschicken“ an — der Abschluss wäre jetzt möglich.",
@@ -281,7 +291,7 @@
   "knopf": "Bestellung abschicken",
   "knopfName": "bestellung_abschicken",
   "zahlungsartText": "Rechnung",
-  "gesamt": "29,95 €",
+  "gesamt": "71,48 €",
   "felder": [
    {
     "name": "bestellung_abschicken",
@@ -407,10 +417,21 @@
     "anzahl": 1,
     "summe": "auf Anfrage",
     "summeNum": null
+   },
+   {
+    "name": "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben",
+    "attribut": "Breite: 60 cm | Grundfarbe: 613-königsblau | Standardgröße: 40cm x 60cm | Trittrand,: mit umlaufendem Nitrilgummirand",
+    "beschreibung": "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben - Breite: 60 cm - Grundfarbe: 613-königsblau - Standardgröße: 40cm x 60cm - Trittrand,: mit umlaufendem Nitrilgummirand",
+    "modus": "kauf",
+    "preis": "24,90 €",
+    "preisNum": 24.9,
+    "anzahl": 1,
+    "summe": "24,90 €",
+    "summeNum": 24.9
    }
   ],
   "gesamt": null,
-  "cartGesamt": "177,43 EUR"
+  "cartGesamt": "218,96 EUR"
  },
  {
   "schritt": "Ende",

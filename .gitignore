@@ -40,3 +40,8 @@ pl.mjs
 pl2.mjs
 dp.txt
 o.txt
+
+# Lokale Testumgebung des Altsystems: .env enthaelt Zugangsdaten der
+# oertlichen Datenbank, db-daten ist der Datenbestand selbst.
+Altsystem-lokal/.env
+Altsystem-lokal/db-daten/
