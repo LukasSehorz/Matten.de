@@ -91,10 +91,41 @@ mit „inkl. MWSt." daneben, „Standard" grün vor dem Endpreis, Kunden-Bemerku
 drei Knöpfe in einer Zeile. Auf dem Handy bricht alles sauber um, nichts überlappt.
 Kein waagerechter Überlauf, keine Konsolenfehler.
 
+## 7. Navigation auf dem Mattendesigner (Live-Prüfung nach dem Deploy)
+
+Lukas' Meldung: „Ich klicke in der Navbar irgendwas an, zum Beispiel Mattendesigner.
+Dann lädt es ewig in dieser Warteschleife und ich kann nichts mehr klicken."
+
+Live auf Netlify nachgestellt (1280 und 1440 px). Befund in drei Teilen:
+
+**a) Der Designer selbst lädt sauber.** Canvas nach 1.601 ms da, Ladeanzeige verschwindet,
+0 Konsolenfehler, alle Dateien HTTP 200. Kein Hänger im Editor.
+
+**b) Ein Hilfe-Fenster öffnet sich automatisch** („1. wählen Sie die Mattengröße aus …")
+und legt einen Schleier über die Seite. Solange es offen ist, gehen Klicks auf die
+Menüleiste ins Leere — das erklärt „ich kann nichts mehr klicken". Nach „OK" ist der
+Schleier weg (`modal-backdrop` = 0), Kopfzeile und Menüleiste sind normal bedienbar
+(`elementFromPoint` trifft `A.nav-link`). Das ist Verhalten des Originals, kein Fehler —
+aber es ist der Grund für den Eindruck.
+
+**c) Der blasse Designer-Bereich ist Absicht.** Werkzeuge, Schriftfelder und der Knopf
+„Diese Matte ordern" stehen im Markup auf `disabled` (`seite-designer.js:250, 269–284`)
+und werden erst freigegeben, wenn ein Element ausgewählt bzw. ein Design erstellt ist
+(`seite-designer.js:381–391`). So verhält sich auch matten.net. Kein Fehler.
+
+**Was dagegen echt war:** der Warenkorb-Verlust aus Punkt 1 — die eigentliche Ursache
+für „es passiert nichts, dann flackert es". Der ist behoben.
+
+**Mehrere Fehlmessungen auf dem Weg dorthin**, zur Warnung festgehalten: Mein Prüfskript
+suchte „Fussmatten" und fand nur die *mobile* Navigationsleiste (`d-lg-none`, bei 1280 px
+`display: none`, Breite 0). Daraus entstand kurzzeitig der falsche Verdacht, die
+Navigation sei kaputt. Erst der Blick auf den Screenshot hat es geklärt. Lehre: Bei
+„Element nicht anklickbar" zuerst ein Bild ansehen, bevor man die Anwendung verdächtigt.
+
 ## Was nicht geprüft werden konnte
 
-* **Verhalten auf Netlify.** Alle Messungen liefen lokal mit nachgebildeter
-  Verzögerung. Auf Netlify kommt die serverlose Function hinzu, die je Aufruf
+* **Warenkorb-Konsistenz auf Netlify.** Die Konsistenzläufe (Punkt 1) liefen lokal mit
+  nachgebildeter Verzögerung; die Live-Prüfung auf Netlify betraf nur Punkt 7. Auf Netlify kommt die serverlose Function hinzu, die je Aufruf
   zweimal matten.de abfragt (2,0–2,6 s gemessen). Nach dem Deploy dort nachmessen.
 * **Zwei gleichzeitig offene Tabs.** Der Fix verhindert das Rennen innerhalb einer
   Seite. Bei zwei Tabs kann es erneut auftreten — dagegen hilft Frontend-Code
