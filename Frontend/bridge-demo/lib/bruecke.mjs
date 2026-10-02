@@ -24,6 +24,7 @@
  */
 
 import https from 'node:https';
+import http from 'node:http';
 import path from 'node:path';
 
 /** Eine frische, leere Upstream-Sitzung. */
@@ -32,8 +33,94 @@ export function neueSitzung() {
 }
 
 
-const UPSTREAM_HOST = 'matten.de';
-const UPSTREAM_ORIGIN = `https://${UPSTREAM_HOST}`;
+/* ------------------------------------------------------------------ */
+/* Das Upstream-Ziel: Livesystem oder lokale Kopie                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Die Bruecke kann gegen zwei Ziele sprechen:
+ *
+ *   matten.de         das LIVESYSTEM -- die Vorgabe. Netlify und die
+ *                     Vorfuehrung beim Auftraggeber laufen hierueber.
+ *   localhost:8080    die lokale Kopie des Altsystems (Altsystem-lokal/,
+ *                     eigene MariaDB) -- zum Entwickeln und fuer Tests,
+ *                     bei denen nichts im Livesystem passieren darf.
+ *
+ * Umgeschaltet wird mit der Umgebungsvariablen MATTEN_UPSTREAM, die Host
+ * UND Protokoll traegt:
+ *
+ *   MATTEN_UPSTREAM=http://localhost:8080  node server.mjs
+ *
+ * Ohne gesetzte Variable gilt das Livesystem. Es gibt bewusst keine zweite
+ * Variable fuer das Protokoll: ein Ziel ist genau eine Adresse, sonst
+ * koennte "Host lokal, Protokoll https" entstehen -- ein Zustand, der nur
+ * verwirrt.
+ *
+ * WICHTIG: Die drei Host-Sicherungen weiter unten (rawRequest, Redirect-
+ * Pruefung, Bild-/Linkpruefung) werden dadurch NICHT schwaecher. Sie pruefen
+ * nach wie vor gegen genau ein erlaubtes Ziel -- nur eben gegen das
+ * eingestellte. Das Protokoll bleibt ebenfalls gebunden:
+ * `http://` ist AUSSCHLIESSLICH fuer localhost/127.0.0.1 erlaubt, fuer
+ * jeden anderen Host wird weiterhin https erzwungen. Begruendung: ohne
+ * TLS fliesst die PHPSESSID im Klartext ueber das Netz -- bei einer
+ * Verbindung, die den Rechner nie verlaesst (Loopback), ist das kein
+ * Risiko, bei jedem Host dahinter schon.
+ */
+const UPSTREAM_VORGABE = 'https://matten.de';
+
+/**
+ * Liest MATTEN_UPSTREAM und macht daraus ein geprueftes Ziel.
+ * Fail-closed: was nicht eindeutig zulaessig ist, bricht den Start ab --
+ * besser kein Server als ein Server, der heimlich im Livesystem haengt.
+ */
+function leseUpstreamZiel(roh) {
+  const wert = (roh ?? '').trim() || UPSTREAM_VORGABE;
+  let u;
+  try {
+    u = new URL(wert);
+  } catch {
+    throw new Error(
+      `MATTEN_UPSTREAM ist keine gueltige Adresse: "${wert}". ` +
+      'Erwartet z. B. https://matten.de oder http://localhost:8080'
+    );
+  }
+  if (u.protocol !== 'https:' && u.protocol !== 'http:') {
+    throw new Error(`MATTEN_UPSTREAM: nur http oder https, nicht "${u.protocol}"`);
+  }
+  const lokal = u.hostname === 'localhost' || u.hostname === '127.0.0.1' || u.hostname === '[::1]';
+  if (u.protocol === 'http:' && !lokal) {
+    throw new Error(
+      `MATTEN_UPSTREAM: http:// ist nur fuer localhost erlaubt, nicht fuer "${u.hostname}". ` +
+      'Sitzungs-Cookies duerfen nicht unverschluesselt durch das Netz gehen.'
+    );
+  }
+  if (u.pathname !== '/' && u.pathname !== '') {
+    throw new Error(`MATTEN_UPSTREAM darf keinen Pfad enthalten: "${u.pathname}"`);
+  }
+  return {
+    // `host` statt `hostname`: der Port MUSS mittragen, sonst wuerde
+    // localhost:8080 still zu localhost und der Vergleich in rawRequest
+    // liesse jeden anderen lokalen Port durch.
+    host: u.host,
+    hostname: u.hostname,
+    port: u.port ? Number(u.port) : (u.protocol === 'https:' ? 443 : 80),
+    protocol: u.protocol,
+    origin: u.origin,
+    lokal,
+  };
+}
+
+const UPSTREAM = leseUpstreamZiel(process.env.MATTEN_UPSTREAM);
+
+/**
+ * UPSTREAM_HOST traegt jetzt Host MIT Port ("localhost:8080"), damit alle
+ * Vergleiche den Port mitfuehren. Beim Livesystem ist das unveraendert
+ * "matten.de" -- der Standardport steht in einer URL nie drin.
+ */
+const UPSTREAM_HOST = UPSTREAM.host;
+const UPSTREAM_ORIGIN = UPSTREAM.origin;
+/** true = lokale Kopie, false = Livesystem. Fuer Banner und Diagnose. */
+const UPSTREAM_LOKAL = UPSTREAM.lokal;
 const CART_PATH = '/warenkorb';
 const PRICE_PATH = '/logomatten/bierbankmatten/6303041';
 
@@ -351,11 +438,21 @@ function rawRequest(method, url, { body = null, session, extraHeaders = {} }) {
   return new Promise((resolve, reject) => {
     const u = new URL(url);
 
-    // Harte Grenze: dieser Proxy spricht mit genau einem Host. Ohne diese
+    // Harte Grenze: dieser Proxy spricht mit genau einem Ziel. Ohne diese
     // Pruefung wuerde ein Redirect auf einen Fremdhost die Upstream-Cookies
     // (inkl. PHPSESSID) dorthin mitnehmen.
-    if (u.hostname !== UPSTREAM_HOST || u.protocol !== 'https:') {
-      reject(new Error(`Fremder Host abgelehnt: ${u.protocol}//${u.hostname}`));
+    //
+    // Geprueft wird gegen das EINGESTELLTE Ziel, nicht gegen eine feste
+    // Adresse -- die Sicherung ist im lokalen Betrieb also genauso scharf,
+    // nur eben auf localhost:8080 gerichtet. Zwei Dinge sind wichtig:
+    //  * u.host (nicht u.hostname): fuehrt den Port mit. Sonst waere
+    //    localhost:9999 von localhost:8080 nicht zu unterscheiden.
+    //  * das Protokoll muss exakt stimmen. Weil UPSTREAM.protocol nur fuer
+    //    localhost ueberhaupt http: sein kann (siehe leseUpstreamZiel),
+    //    bleibt fuer jedes Ziel im Netz https erzwungen -- ein Downgrade
+    //    von https auf http ist hier nicht moeglich.
+    if (u.host !== UPSTREAM_HOST || u.protocol !== UPSTREAM.protocol) {
+      reject(new Error(`Fremdes Ziel abgelehnt: ${u.protocol}//${u.host}`));
       return;
     }
 
@@ -366,7 +463,10 @@ function rawRequest(method, url, { body = null, session, extraHeaders = {} }) {
       'Accept-Encoding': 'identity',
       ...extraHeaders,
     };
-    // Cookies gehen ausschliesslich an UPSTREAM_HOST (oben erzwungen).
+    // Cookies gehen ausschliesslich an das eingestellte Ziel (oben
+    // erzwungen). Live und lokal haben getrennte Sitzungen, weil jeder
+    // Prozess nur genau EIN Ziel kennt -- ein Cookie des Livesystems kann
+    // also nie an die lokale Kopie gehen und umgekehrt.
     const cookie = cookieHeaderFor(session);
     if (cookie) headers.Cookie = cookie;
     if (body != null) {
@@ -375,8 +475,20 @@ function rawRequest(method, url, { body = null, session, extraHeaders = {} }) {
     }
 
     const started = Date.now();
-    const req = https.request(
-      { hostname: u.hostname, path: u.pathname + u.search, method, headers, timeout: 20000 },
+    // Das Transportmodul folgt dem Protokoll des Ziels. Beide Module haben
+    // dieselbe request()-Signatur, darum ist das ein reiner Austausch.
+    const transport = UPSTREAM.protocol === 'http:' ? http : https;
+    const req = transport.request(
+      {
+        hostname: u.hostname,
+        // Port explizit: ohne ihn wuerde node den Standardport des Moduls
+        // nehmen (80/443) und die 8080 still verlieren.
+        port: u.port || UPSTREAM.port,
+        path: u.pathname + u.search,
+        method,
+        headers,
+        timeout: 20000,
+      },
       (res) => {
         const chunks = [];
         res.on('data', (c) => chunks.push(c));
@@ -422,9 +534,11 @@ async function upstream(method, url, opts = {}) {
     if (res.status >= 300 && res.status < 400 && loc && hop < maxRedirects) {
       const next = new URL(loc, curUrl);
       // Zweite Sicherung neben der Pruefung in rawRequest: eine Umleitung
-      // darf den Proxy niemals von matten.de wegfuehren.
-      if (next.hostname !== UPSTREAM_HOST || next.protocol !== 'https:') {
-        throw new Error(`Umleitung auf fremden Host abgelehnt: ${next.hostname}`);
+      // darf den Proxy niemals vom eingestellten Ziel wegfuehren -- auch
+      // nicht vom lokalen Altsystem auf das Livesystem. Wieder mit Port
+      // (next.host) und mit exaktem Protokollvergleich.
+      if (next.host !== UPSTREAM_HOST || next.protocol !== UPSTREAM.protocol) {
+        throw new Error(`Umleitung auf fremdes Ziel abgelehnt: ${next.protocol}//${next.host}`);
       }
       curUrl = next.toString();
       if (res.status !== 307 && res.status !== 308) {
@@ -1700,7 +1814,20 @@ function normalisierePfad(roh) {
     } catch {
       return null;
     }
-    if (u.hostname !== UPSTREAM_HOST && u.hostname !== `www.${UPSTREAM_HOST}`) return null;
+    // Hier wird nur der PFAD uebernommen -- die Anfrage geht anschliessend
+    // immer an das eingestellte Ziel. Erlaubt sind darum sowohl das
+    // eingestellte Ziel als auch matten.de selbst: die lokale Kopie ist ein
+    // Abzug des Livesystems und traegt in ihrem HTML weiterhin absolute
+    // Links auf https://www.matten.de/AGB usw. Wuerde man die verwerfen,
+    // fehlten im lokalen Betrieb still ganze Menuepunkte -- und das bei
+    // einem Vergleich, der am Ende genau diese Navigation pruefen soll.
+    // Ein Sicherheitsproblem ist es nicht: es entsteht keine Verbindung
+    // nach aussen, rawRequest laesst nur das eingestellte Ziel durch.
+    const erlaubteHosts = new Set([
+      UPSTREAM.hostname, `www.${UPSTREAM.hostname}`,
+      'matten.de', 'www.matten.de',
+    ]);
+    if (!erlaubteHosts.has(u.hostname)) return null;
     p = u.pathname;
   }
   if (p.includes('#') || p.includes('?')) p = p.split('#')[0].split('?')[0];
@@ -2471,7 +2598,9 @@ async function baueKatalog({ zaehlen = true, sprache = null } = {}) {
     liste.reduce((a, k) => a + (k.anzahlProdukte || 0) + summe(k.unterkategorien), 0);
 
   return {
-    quelle: 'Hauptnavigation und maschinell erzeugtes Untermenue der Startseite von matten.de',
+    // Das Ziel wird eingesetzt: ein lokal gebauter Katalog darf nicht
+    // behaupten, er komme aus dem Livesystem.
+    quelle: `Hauptnavigation und maschinell erzeugtes Untermenue der Startseite von ${UPSTREAM_HOST}`,
     stand: new Date().toISOString(),
     anzahlKategorien: kategorien.length + kategorien.reduce((a, k) => a + k.unterkategorien.length, 0),
     anzahlProdukteGelistet: zaehlen ? summe(kategorien) : null,
@@ -3130,7 +3259,10 @@ function preisAbfrageZiel(artikel) {
   } catch {
     return null;
   }
-  if (u.hostname !== UPSTREAM_HOST || u.protocol !== 'https:') return null;
+  // Gegen das eingestellte Ziel pruefen (mit Port, exaktes Protokoll).
+  // Der Kandidat kommt aus dem HTML des Altsystems und ist darum Daten,
+  // kein Befehl -- er darf das Ziel nicht verschieben.
+  if (u.host !== UPSTREAM_HOST || u.protocol !== UPSTREAM.protocol) return null;
   return u;
 }
 
@@ -3488,7 +3620,10 @@ function shopKatalogJs(daten) {
   }));
 
   const meta = {
-    quelle: 'matten.de, live gelesen ueber die Bruecken-Demo (bridge-demo/lib/bruecke.mjs)',
+    // Siehe oben: der Katalog nennt das Ziel, aus dem er gebaut wurde.
+    // Auf Netlify ist das immer das Livesystem (MATTEN_UPSTREAM ist dort
+    // nicht gesetzt), lokal steht hier localhost:8080.
+    quelle: `${UPSTREAM_HOST}, live gelesen ueber die Bruecken-Demo (bridge-demo/lib/bruecke.mjs)`,
     stand: daten.stand,
     // Derselbe Zeitpunkt in lesbarer Form. Die Shop-Seiten zeigen ihn dezent
     // in der Fusszeile an -- auf Netlify ist der Katalog eine BEIM BUILD
@@ -3748,7 +3883,10 @@ export function baueRawHtml(rohHtml, hinweis) {
     '<div style="position:sticky;top:0;z-index:99999;background:#050a40;color:#fff;' +
     'font:600 14px/1.5 system-ui,sans-serif;padding:10px 16px">' + hinweis +
     '<br><span style="font-weight:400;color:#9fb0e8">Diese Beweis-Ansicht ist die einzige Stelle ' +
-    'der Demo, an der Ihr Browser Bilder, Stile und Skripte <em>direkt</em> von matten.de laedt &ndash; ' +
+    // Das Ziel wird eingesetzt, nicht fest geschrieben: der <base>-Verweis
+    // oben zeigt auf UPSTREAM_ORIGIN, und ein Banner, das etwas anderes
+    // behauptet als der Browser tut, waere schlimmer als keins.
+    `der Demo, an der Ihr Browser Bilder, Stile und Skripte <em>direkt</em> von ${UPSTREAM_ORIGIN} laedt &ndash; ` +
     'anders liesse sich die Originalseite nicht zeigen. Alle Formulare und Knoepfe darin sind ' +
     'abgeschaltet.</span></div>';
   if (/<head[^>]*>/i.test(html)) {
@@ -3806,7 +3944,7 @@ export function isSameOrigin(header, hosts) {
 
 export {
   /* Adressen und harte Grenzen */
-  UPSTREAM_HOST, UPSTREAM_ORIGIN, CART_PATH, PRICE_PATH,
+  UPSTREAM_HOST, UPSTREAM_ORIGIN, UPSTREAM_LOKAL, CART_PATH, PRICE_PATH,
   ADDRESS_PATH, ORDER_PATH, LOGIN_PATH, REGISTER_PATH, SUCH_PFAD,
   ZAHLUNGSARTEN_ERLAUBT, ZAHLUNGSARTEN_VERBOTEN,
   BESTELL_BESTAETIGUNG, BESTELL_FELD, BESTELL_WERT, ANFRAGE_FELD, ANFRAGE_WERT, ABSENDE_FELDER,

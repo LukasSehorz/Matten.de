@@ -41,6 +41,59 @@ Installation, kein `npm install`, keine Zusatzpakete.**
 > Falls Port 8787 belegt ist, weicht der Server automatisch auf 8788 oder
 > 8789 aus. Maßgeblich ist immer die Adresse, die im Fenster steht.
 
+### Ziel umschalten: Livesystem oder lokales Altsystem
+
+Die Brücke kann mit zwei Backends sprechen. Umgeschaltet wird über die
+Umgebungsvariable `MATTEN_UPSTREAM`, die **Adresse samt Protokoll** trägt:
+
+| Ziel | Aufruf | Wann |
+|---|---|---|
+| **Livesystem** (Vorgabe) | `node server.mjs` | Vorführung beim Auftraggeber, Gegenprüfen am echten Shop |
+| **lokales Altsystem** | `MATTEN_UPSTREAM=http://localhost:8080 node server.mjs` | Entwickeln und Testen, ohne das Livesystem zu berühren |
+
+Ohne gesetzte Variable gilt immer das Livesystem – wer nichts tut, landet
+dort, wo es bisher auch hinging. Das lokale Altsystem muss dafür laufen
+(siehe `Altsystem-lokal/LIESMICH.md`).
+
+**Woran man das Ziel erkennt:** am Startbanner im Serverfenster. Es gibt
+genau zwei Formen, und sie sehen absichtlich unterschiedlich aus:
+
+```
+  ###################################################
+   ZIEL: LIVESYSTEM   https://matten.de
+   ACHTUNG: echte Kundenumgebung. Jede Anfrage geht nach aussen.
+  ###################################################
+```
+
+```
+  ---------------------------------------------------
+   ZIEL: LOKALES ALTSYSTEM   http://localhost:8080
+   Eigene Datenbankkopie - das Livesystem bleibt unberuehrt.
+  ---------------------------------------------------
+```
+
+Außerdem nennt jede protokollierte Upstream-Zeile das Ziel, mit dem der
+Server läuft. Wer unsicher ist, schaut ins Serverfenster – nicht in diese
+Datei.
+
+**Was die Umschaltung *nicht* aufweicht:** Die drei Host-Sicherungen der
+Brücke (Anfrage, Umleitung, Bild-/Linkprüfung) sind weiterhin scharf. Sie
+prüfen nur gegen das jeweils eingestellte Ziel statt gegen eine fest
+eingebaute Adresse. Im lokalen Betrieb wird also eine Anfrage an
+`matten.de` abgelehnt – und umgekehrt. `http://` ist ausschließlich für
+`localhost` erlaubt; für jeden anderen Host erzwingt die Brücke weiterhin
+`https`, damit die Sitzungskennung nie unverschlüsselt durchs Netz geht.
+Ein falscher Wert in `MATTEN_UPSTREAM` bricht den Start ab, statt
+stillschweigend auf das Livesystem zurückzufallen.
+
+Weil jeder Serverprozess genau ein Ziel kennt, können Sitzungs-Cookies
+nicht zwischen den beiden Systemen überlaufen. Wer beide gleichzeitig
+braucht, startet zwei Server (der zweite nimmt automatisch Port 8788).
+
+**Netlify bleibt unberührt:** Dort ist `MATTEN_UPSTREAM` nicht gesetzt und
+darf es auch nicht werden – das lokale Altsystem wäre von Netlify aus
+ohnehin nicht erreichbar. Siehe Kommentar in `netlify.toml`.
+
 ---
 
 ## 2. Was Sie sehen

@@ -38,7 +38,7 @@ const PORTS = [8787, 8788, 8789];
    ausgeschrieben: so steht schwarz auf weiss, was dieser Server benutzt. */
 const {
   ADDRESS_PATH, ADRESS_FELDER, BESTELL_BESTAETIGUNG, CART_PATH, DEMO, ORDER_PATH,
-  SHOP_KATALOG_TTL_MS, UPSTREAM_ORIGIN, ZAHLUNGSARTEN_ERLAUBT, addToCart, addToCartPfad,
+  SHOP_KATALOG_TTL_MS, UPSTREAM_ORIGIN, UPSTREAM_LOKAL, ZAHLUNGSARTEN_ERLAUBT, addToCart, addToCartPfad,
   baueRawHtml, bestellungAbschicken, blaettere, cartResponse, clearCart, decodeBody,
   diagnose, ensureUpstreamSession, fetchPrice, fetchPricePfad, holeArtikel, holeBild,
   holeKategorie, holeSuche, katalogMitCache, kaufformularAntwort, kontoLogin, kontoRegister,
@@ -1095,10 +1095,26 @@ function listen(idx = 0) {
     console.log('  ===================================================');
     console.log(`   Laeuft auf:  http://localhost:${actual}`);
     console.log(`   Shop-Demo:   http://localhost:${actual}/shop/`);
-    console.log(`   Upstream:    ${UPSTREAM_ORIGIN}`);
+    console.log('');
+    // Das Ziel steht bewusst als eigener, auffaelliger Block im Banner:
+    // Wer nicht merkt, dass er im Livesystem haengt, loest dort echte
+    // Warenkorb- und Sitzungsvorgaenge aus.
+    if (UPSTREAM_LOKAL) {
+      console.log('  ---------------------------------------------------');
+      console.log(`   ZIEL: LOKALES ALTSYSTEM   ${UPSTREAM_ORIGIN}`);
+      console.log('   Eigene Datenbankkopie - das Livesystem bleibt unberuehrt.');
+      console.log('  ---------------------------------------------------');
+    } else {
+      console.log('  ###################################################');
+      console.log(`   ZIEL: LIVESYSTEM   ${UPSTREAM_ORIGIN}`);
+      console.log('   ACHTUNG: echte Kundenumgebung. Jede Anfrage geht nach aussen.');
+      console.log('   Lokal testen:  MATTEN_UPSTREAM=http://localhost:8080 node server.mjs');
+      console.log('  ###################################################');
+    }
+    console.log('');
     console.log('   Beenden mit: Strg + C');
     console.log('');
-    console.log('   Jede Anfrage an matten.de wird hier protokolliert:');
+    console.log(`   Jede Anfrage an ${UPSTREAM_ORIGIN} wird hier protokolliert:`);
     console.log('');
   };
 

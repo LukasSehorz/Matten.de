@@ -34,6 +34,13 @@
   # LTS-Fassung auf Netlify und deckt das ab.
   NODE_VERSION = "22"
 
+  # MATTEN_UPSTREAM wird hier BEWUSST NICHT gesetzt: ohne diese Variable
+  # spricht die Bruecke mit dem Livesystem https://matten.de -- und das ist
+  # fuer Netlify das einzig Richtige. Das lokale Altsystem (localhost:8080)
+  # laeuft auf Lukas' Rechner und waere von Netlify aus ohnehin nicht
+  # erreichbar. Die Variable darf auch in der Netlify-Oberflaeche nicht
+  # gesetzt werden; siehe bridge-demo/START.md, Abschnitt "Ziel umschalten".
+
 # -----------------------------------------------------------------------------
 #  Weiterleitungen
 # -----------------------------------------------------------------------------

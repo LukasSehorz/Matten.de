@@ -120,10 +120,46 @@ eingehängt. Änderungen am Code wirken sofort, ohne Neubau.
    `socat` an der erwarteten Socket-Stelle eine Weiche zum Datenbank-Container.
    So bleibt `php/config.php` unverändert.
 
+## Die Brücke auf diese Kopie umstellen — erledigt am 02.10.2026
+
+Das neue Frontend (`net-neu`) kann jetzt über die Brücke mit dieser lokalen Kopie
+sprechen statt mit dem Livesystem. Umgeschaltet wird mit einer Umgebungsvariablen:
+
+```
+cd "../Frontend/bridge-demo"
+MATTEN_UPSTREAM=http://localhost:8080 node server.mjs
+```
+
+Ohne diese Variable spricht die Brücke wie bisher mit dem Livesystem `https://matten.de`.
+Das bleibt die Vorgabe, damit Netlify und die Vorführung beim Auftraggeber unverändert
+funktionieren.
+
+**Woran man das Ziel erkennt:** Das Serverfenster zeigt es beim Start als eigenen Block —
+`ZIEL: LOKALES ALTSYSTEM` mit Strichen, `ZIEL: LIVESYSTEM` mit Rauten und einem
+Achtung-Hinweis. Ausführlich in `Frontend/bridge-demo/START.md`, Abschnitt
+„Ziel umschalten".
+
+Gemessen am 02.10.2026, dieselben Aufrufe über die Brücke:
+
+| Aufruf | lokal | live |
+|---|---|---|
+| leerer Warenkorb (`/api/cart`) | 0,07–0,08 s | 0,50–0,58 s |
+| Produktseite im Browser bereit | 0,31 s | 0,61–1,05 s |
+| Katalog aufbauen (`/api/katalog`) | 3,2 s | 15,6 s |
+
+Die Preise stimmen überein: derselbe Artikel (JetPrint, 6300000) kostet in beiden
+Systemen 123,37 € bei 11,90 € Versand, Artikel-ID 459 — die Datenbankkopie ist deckungsgleich.
+
 ## Nächster Schritt
 
-Wenn der Shop lokal läuft, wird das neue Frontend (`net-neu`) von der Brücke zum Livesystem
-auf diese lokale Kopie umgestellt. Dann fällt das HTML-Auslesen weg und die Preisformel
-lässt sich direkt im Original anpassen.
+Jetzt, da die Brücke auf die lokale Kopie zeigt, kann das HTML-Auslesen entfallen:
+Preise und Stammdaten lassen sich direkt aus der lokalen Datenbank lesen und die
+Preisformel im Original anpassen, ohne das Livesystem zu berühren.
 
-Angelegt am 01.10.2026.
+Offen: In der lokalen Kopie stehen im HTML weiterhin absolute Links auf
+`https://www.matten.de/...` (AGB, Impressum, Kontakt und weitere). Die Brücke nimmt
+davon nur den Pfad und fragt immer das eingestellte Ziel — es entsteht also keine
+Verbindung nach außen. Wer die lokale Kopie aber als eigenständige Seite im Browser
+bedient, landet bei diesen Links im Livesystem.
+
+Angelegt am 01.10.2026, ergänzt am 02.10.2026.
