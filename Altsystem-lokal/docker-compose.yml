@@ -63,6 +63,7 @@ services:
       # Der Quellcode wird eingehaengt, nicht kopiert: Aenderungen am Code
       # wirken sofort, ohne das Abbild neu zu bauen.
       - ../Backup/matten.de-2026-09-07/web:/var/www/html
+    env_file: .env
     environment:
       TZ: Europe/Berlin
 

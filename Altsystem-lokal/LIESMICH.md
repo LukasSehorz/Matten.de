@@ -87,7 +87,14 @@ eingehängt. Änderungen am Code wirken sofort, ohne Neubau.
   ohne Emulation — also in voller Geschwindigkeit. (Der erste Anlauf lief auf `linux/amd64`;
   das war unnötig, `php:7.0-apache` und `mariadb:10.11` bieten beide `arm64`.)
   Colima ist mit 4 Kernen, 6 GB Arbeitsspeicher und 60 GB Platte eingerichtet.
-* **Der Admin-Bereich** liegt unter `http://localhost:8080/admin`.
+* **Der Admin-Bereich** liegt unter `http://localhost:8080/admin`. Die Anmeldung ist
+  dieselbe wie im echten Shop — die Konten stehen ja in der Datenbank-Kopie, auch
+  `Info@matten.de`. Was du dort änderst, bleibt in der Kopie.
+  (Der Admin erzwingt HTTPS, sobald in der Tabelle `stammdaten` der Eintrag `use_https`
+  auf 1 steht. Örtlich gibt es kein HTTPS, der Browser landete dadurch auf
+  `https://localhost/admin` und bekam nichts. `start.sh` schaltet den Eintrag in der
+  örtlichen Kopie bei jedem Start ab; der Schalter in `php/config.php` genügt nicht,
+  weil das Plugin `Stammdaten` ihn aus der Datenbank überschreibt.)
 
 ## Wenn etwas klemmt
 

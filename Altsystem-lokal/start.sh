@@ -57,6 +57,21 @@ else
   echo "[start] WARNUNG: build/vagrant/app_config/.htaccess nicht gefunden."
 fi
 
+# Der Admin-Bereich erzwingt HTTPS, sobald in der Tabelle "stammdaten" der
+# Eintrag use_https auf 1 steht — und das tut er, weil die Datenbank eine Kopie
+# des Livesystems ist. Oertlich gibt es kein HTTPS, der Browser landete dadurch
+# auf https://localhost/admin und bekam gar nichts. Der Schalter in config.php
+# genuegt nicht: das Plugin Stammdaten ueberschreibt ihn aus der Datenbank.
+# Darum hier einmalig in der OERTLICHEN Kopie abschalten (das Livesystem bleibt
+# unberuehrt — es ist eine andere Datenbank).
+if command -v mariadb >/dev/null 2>&1 || command -v mysql >/dev/null 2>&1; then
+  KLIENT="$(command -v mariadb || command -v mysql)"
+  "$KLIENT" -h db -uroot -p"${MYSQL_ROOT_PASSWORD}" "${MYSQL_DATABASE:-fuchsius_matten}" \
+    -e 'update stammdaten set value="0" where code="use_https" and value<>"0";' 2>/dev/null \
+    && echo "[start] HTTPS-Zwang des Admin-Bereichs oertlich abgeschaltet" \
+    || echo "[start] Hinweis: HTTPS-Schalter konnte nicht geprueft werden (Datenbank noch nicht bereit?)"
+fi
+
 # Verzeichnisse, in die der Shop schreibt.
 for d in media var dokumente export import rechnungen css/.cache; do
   mkdir -p "/var/www/html/$d" 2>/dev/null || true
