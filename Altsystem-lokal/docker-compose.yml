@@ -11,12 +11,15 @@
 
 services:
   # ---------------------------------------------------------------------------
-  #  Datenbank — MariaDB 10.11, dieselbe Fassung wie auf dem Livesystem
-  #  (laut Kopfzeile des Dumps: 10.11.13-MariaDB auf Ubuntu 24.04).
+  #  Datenbank — MariaDB 10.6.
+  #  Das Livesystem faehrt 10.11 (laut Kopfzeile des Dumps), aber genau dieses
+  #  Abbild stuerzt unter Colima schon bei der Grundeinrichtung ab ("Killed",
+  #  auch ohne jede eigene Einstellung — am 02.10.2026 nachgestellt). 10.6
+  #  laeuft dort einwandfrei und reicht vollauf: der Shop spricht ohnehin nur
+  #  MySQL 5.x ueber den alten mysql_*-Shim.
   # ---------------------------------------------------------------------------
   db:
-    image: mariadb:10.11
-    platform: linux/amd64        # Apple Silicon: faellt auf Emulation zurueck
+    image: mariadb:10.6
     restart: unless-stopped
     env_file: .env
     environment:
@@ -50,7 +53,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    platform: linux/amd64
     restart: unless-stopped
     depends_on:
       db:

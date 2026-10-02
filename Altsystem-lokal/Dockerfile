@@ -12,18 +12,28 @@ RUN set -eux; \
 
 # Erweiterungen, die der Shop braucht: Bilder (gd), Umlaute (mbstring),
 # XSL fuer die PDF-Belege, Internationalisierung, ZIP, mysqli.
+#   --allow-unauthenticated ist hier noetig und vertretbar: Debian Stretch ist
+#   abgekuendigt, die Signaturschluessel des Archivs sind abgelaufen. Die Quelle
+#   ist das offizielle archive.debian.org, und das Abbild laeuft ausschliesslich
+#   oertlich zum Entwickeln — es geht nie ins Netz.
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends --allow-unauthenticated \
         libpng-dev libjpeg-dev libfreetype6-dev \
         libxml2-dev libxslt1-dev libicu-dev zlib1g-dev \
-        default-mysql-client; \
+        default-mysql-client socat; \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
     docker-php-ext-install -j"$(nproc)" gd mysqli mbstring xsl intl opcache; \
     apt-get clean; rm -rf /var/lib/apt/lists/*
 
 # Apache: Rewrite (die .htaccess des Shops leitet alles auf index.php),
 # Headers, und .htaccess ueberhaupt zulassen.
+#   AllowOverride: die .htaccess des Shops wird gebraucht (sie leitet alles auf
+#   index.php). Die .htaccess im Web-Verzeichnis erzwingt allerdings HTTPS und
+#   den Host www.matten.de — oertlich landet der Browser damit auf dem
+#   LIVESYSTEM. start.sh legt deshalb die Entwickler-Fassung des Herstellers
+#   darueber (build/vagrant/app_config/.htaccess, so vorgesehen in
+#   bootstrap.d.always/80-link-config); das Original bleibt unangetastet.
 RUN set -eux; \
     a2enmod rewrite headers; \
     printf '<Directory /var/www/html>\n\
