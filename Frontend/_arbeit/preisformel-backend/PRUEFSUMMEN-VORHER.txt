@@ -1,0 +1,2 @@
+63972f82adb50f67eb63c1bd9f5ed0c401bbcab8  php/Plugins/Katalog/SpezialoptionSpezial.php
+42038c830d113112d46c1930f826345c0781a582  php/Plugins/Katalog/Artikel.php
