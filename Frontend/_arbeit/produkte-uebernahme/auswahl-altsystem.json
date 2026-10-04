@@ -1,0 +1,15 @@
+{
+  "_hinweis": "Steuert, welche Artikel des Altsystems in daten-alle.js erscheinen (bau-net-daten.mjs --alle). Die 19 kuratierten Produkte sind davon nicht betroffen. Vorgabe = alle Artikel. Jeder Eintrag darf fehlen.",
+  "modus": "alle",
+  "_modus": "alle | kauf | anfrage — nur Kaufartikel oder nur Anfrageartikel zeigen",
+  "varianten": true,
+  "_varianten": "false = die Anfrage-Varianten (-a, -ang …) weglassen; sie bleiben als Zwilling am Kaufartikel erhalten, nur nicht als eigene Karte",
+  "ohneBild": true,
+  "_ohneBild": "false = Artikel ohne jedes Bild weglassen",
+  "nurArtikelIds": [],
+  "_nurArtikelIds": "nicht leer = NUR diese Artikel-IDs zeigen, z. B. [459, 569]",
+  "ausschliessenArtikelIds": [],
+  "ausschliessenPfade": [],
+  "ausschliessenWarengruppen": [],
+  "_ausschliessenWarengruppen": "Schluessel aus dem Katalog, z. B. \"logomatten/bierbankmatten\"; Artikel, die NUR dort stehen, entfallen"
+}

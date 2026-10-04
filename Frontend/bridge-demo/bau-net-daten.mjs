@@ -37,6 +37,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -624,6 +625,552 @@ const mattendesigner = {
 };
 
 /* ==========================================================================
+   7c  Erweiterung "--alle": Produkte aus dem Altsystem (ueber die Bruecke)
+   --------------------------------------------------------------------------
+   Ohne Schalter laeuft dieser Abschnitt nicht: dann entsteht daten.js wie
+   bisher aus spec/struktur.json (die 19 Schaufenster-Produkte).
+
+   Mit  --alle  (oder --aus-altsystem)  holt das Skript ueber die Bruecke
+   (Vorgabe http://localhost:8787, ueberschreibbar mit BRUECKE=...):
+     /api/katalog      Warengruppen-Baum des Altsystems
+     /api/kategorie    die Artikel je Warengruppe (alle Seiten)
+     /api/suche?alle=1 der ganze Katalog (faengt Artikel ohne Warengruppe)
+     /api/produkt      je Artikel: Artikel-ID, Name, Preis, Bilder, Attribute
+   und schreibt NICHT daten.js, sondern daten-alle.js (anderer Name, damit
+   das Frontend erst umgestellt wird, wenn alles geprueft ist).
+
+   Was dabei entsteht:
+     * Die 19 kuratierten Produkte bleiben unveraendert (Beschreibungen,
+       Farbpalette, Zuordnung). Ihre Altsystem-Artikel (dePfad/deZwilling)
+       werden NICHT noch einmal als eigene Produkte angelegt; das kuratierte
+       Produkt traegt stattdessen die Warengruppen seines Artikels mit.
+     * Alle uebrigen Artikel kommen neu dazu. Eindeutiger Schluessel ist die
+       Artikel-ID des Altsystems (Pfade sind nicht eindeutig). Dubletten
+       (Teaser-Bloecke, die auf denselben Artikel zeigen) fallen weg;
+       Info-Seiten ohne Artikel-ID (/home/info-...) sind keine Produkte.
+     * Warengruppen des Altsystems werden zu Kategorien "de-<schluessel>"
+       (NET.kategorien) und als Baum in NET.warengruppen abgelegt. Die 27
+       Produktlinien von matten.net bleiben unveraendert Schaufenster
+       (NET.kategorieReihenfolge, NET.gruppen, Menue, Startseite).
+     * Anfrage-Varianten ("-a") haben meist kein eigenes Bild und keinen
+       Namen: beides kommt vom Hauptartikel.
+     * Preisstammdaten (preisdaten) gibt es nur, wo EK je m2, Salesfactor und
+       Standardbreiten bekannt sind. Sie stehen in der Datei
+       _arbeit/produkte-uebernahme/preisstamm-altsystem.json (je Artikel-ID)
+       und lassen sich dort jederzeit nachtragen; --preisstamm-vorlage schreibt
+       eine Vorlage mit allen Artikeln, die freie Masse aufnehmen.
+     * Welche Artikel erscheinen, steuert
+       _arbeit/produkte-uebernahme/auswahl-altsystem.json (oder die Schalter
+       --ohne-varianten, --nur-kauf, --nur-mit-bild).
+
+   Weitere Schalter: --cache-dir <ordner> merkt sich die Antworten der Bruecke
+   (Wiederholungslaeufe ohne Netz), --ausgabe <datei> aendert das Ziel.
+   ========================================================================== */
+const ARG = process.argv.slice(2);
+const MODUS_ALLE = ARG.includes('--alle') || ARG.includes('--aus-altsystem');
+const argWert = (name) => {
+  const i = ARG.indexOf(name);
+  if (i >= 0 && ARG[i + 1] && !ARG[i + 1].startsWith('--')) return ARG[i + 1];
+  const m = ARG.find((a) => a.startsWith(name + '='));
+  return m ? m.slice(name.length + 1) : null;
+};
+const ARBEIT_DIR = path.join(__dirname, '..', '_arbeit', 'produkte-uebernahme');
+const BRUECKE_BASIS = process.env.BRUECKE || 'http://localhost:8787';
+const MAX_BILDER = 12;          /* Galerie je Produkt; die Bruecke liefert bis zu 60 (Farbmuster-Topf) */
+const PARALLEL = 6;             /* gleichzeitige Anfragen an die Bruecke */
+
+/* Dateiname-tauglicher Schluessel (ASCII, a-z0-9 und Bindestrich). */
+function slugify(s) {
+  return String(s || '').toLowerCase()
+    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .normalize('NFKD').replace(/[̀-ͯ]/g, '')
+    .replace(/&[a-z0-9#]+;/g, ' ')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+/** Liste abarbeiten, hoechstens n gleichzeitig; Ergebnisse in Eingabereihenfolge. */
+async function parallel(liste, n, fn) {
+  const aus = new Array(liste.length);
+  let i = 0;
+  await Promise.all(Array.from({ length: Math.min(n, liste.length) }, async () => {
+    while (i < liste.length) { const k = i++; aus[k] = await fn(liste[k], k); }
+  }));
+  return aus;
+}
+
+/** GET auf die Bruecke (nur lesen). Mit cacheDir werden Antworten abgelegt/gelesen. */
+async function holeBruecke(pfadUndQuery, cacheDir) {
+  let datei = null;
+  if (cacheDir) {
+    const h = crypto.createHash('sha1').update(pfadUndQuery).digest('hex');
+    datei = path.join(cacheDir, h + '.json');
+    if (fs.existsSync(datei)) return JSON.parse(fs.readFileSync(datei, 'utf8'));
+  }
+  let letzter = null;
+  for (let versuch = 1; versuch <= 4; versuch++) {
+    try {
+      const r = await fetch(BRUECKE_BASIS + pfadUndQuery, { headers: { 'Sec-Fetch-Site': 'same-origin' } });
+      const d = await r.json();
+      if (datei && (r.ok || r.status === 404)) {
+        fs.mkdirSync(path.dirname(datei), { recursive: true });
+        fs.writeFileSync(datei, JSON.stringify(d), 'utf8');
+      }
+      return d;
+    } catch (e) {
+      letzter = e;
+      await new Promise((ok) => setTimeout(ok, 300 * versuch));
+    }
+  }
+  throw new Error('Bruecke nicht erreichbar (' + BRUECKE_BASIS + pfadUndQuery + '): ' + (letzter && letzter.message));
+}
+
+/* Auswahl: welche Altsystem-Artikel erscheinen. Vorgabe = alle. */
+const AUSWAHL_VORGABE = {
+  modus: 'alle',                   /* 'alle' | 'kauf' | 'anfrage' */
+  varianten: true,                 /* Anfrage-Varianten ("-a") aufnehmen */
+  ohneBild: true,                  /* Artikel ohne jedes Bild aufnehmen */
+  nurArtikelIds: [],               /* nicht leer: NUR diese Artikel-IDs */
+  ausschliessenArtikelIds: [],     /* diese Artikel-IDs weglassen */
+  ausschliessenPfade: [],          /* diese Pfade weglassen (Gross/Klein egal) */
+  ausschliessenWarengruppen: []    /* Schluessel wie "logomatten/bierbankmatten"; Artikel, die NUR dort stehen, entfallen */
+};
+function auswahlLesen() {
+  const datei = argWert('--auswahl') || path.join(ARBEIT_DIR, 'auswahl-altsystem.json');
+  let a = {};
+  if (fs.existsSync(datei)) a = json(datei);
+  const w = { ...AUSWAHL_VORGABE, ...a };
+  if (ARG.includes('--ohne-varianten')) w.varianten = false;
+  if (ARG.includes('--nur-kauf')) w.modus = 'kauf';
+  if (ARG.includes('--nur-mit-bild')) w.ohneBild = false;
+  w.quelle = fs.existsSync(datei) ? path.relative(__dirname, datei) : '(Vorgabe, keine Datei)';
+  return w;
+}
+
+/* Preisstamm: je Artikel-ID die Werte der Excel-Formel. Nur vollstaendige
+   Eintraege (EK, Salesfactor, Standardbreiten) werden zu preisdaten. */
+function preisstammLesen() {
+  const datei = argWert('--preisstamm') || path.join(ARBEIT_DIR, 'preisstamm-altsystem.json');
+  const aus = { artikel: {}, quelle: fs.existsSync(datei) ? path.relative(__dirname, datei) : '(keine Datei)' };
+  if (fs.existsSync(datei)) aus.artikel = json(datei).artikel || {};
+  return aus;
+}
+function preisdatenAus(e) {
+  if (!e) return { preisdaten: null, fehlt: ['einkaufProQm', 'salesFactor', 'standardbreiten'] };
+  const fehlt = [];
+  if (!(Number(e.einkaufProQm) > 0)) fehlt.push('einkaufProQm');
+  if (!(Number(e.salesFactor) > 0)) fehlt.push('salesFactor');
+  if (!Array.isArray(e.standardbreiten) || !e.standardbreiten.length) fehlt.push('standardbreiten');
+  if (fehlt.length) return { preisdaten: null, fehlt };
+  const pd = { einkaufProQm: Number(e.einkaufProQm), salesFactor: Number(e.salesFactor), standardbreiten: e.standardbreiten.map(Number) };
+  if (e.sondermassFaktor != null) pd.sondermassFaktor = Number(e.sondermassFaktor);
+  if (e.singleColorFaktor != null) pd.singleColorFaktor = Number(e.singleColorFaktor);
+  return { preisdaten: pd, fehlt: [] };
+}
+
+/** Bild-URL der Bruecke ("/api/img/bild/x.jpg") -> unveraendert; Cache-Fassungen aussortieren. */
+const istCacheBild = (b) => /\/cache\//.test(b.original || b.bild || '');
+function bilderAus(produkt) {
+  const alle = (produkt.bilder || []).filter((b) => b && b.bild);
+  const eigentlich = alle.filter((b) => !istCacheBild(b));
+  const urls = [];
+  for (const b of (eigentlich.length ? eigentlich : alle)) if (!urls.includes(b.bild)) urls.push(b.bild);
+  return urls.slice(0, MAX_BILDER);
+}
+
+/** Attribute des Altsystems kompakt: Feld, Name, Typ, Art, Optionswerte. */
+function attributeKompakt(produkt) {
+  return (produkt.attribute || []).map((a) => ({
+    feld: a.feld, name: a.name, typ: a.typ, art: a.art,
+    optionen: (a.optionen || []).map((o) => o.wert)
+  }));
+}
+function masseKompakt(produkt) {
+  return (produkt.masse || []).map((m) => ({ feld: m.feld, typ: m.typ, min: m.min, max: m.max }));
+}
+
+/* Endungen, an denen man Anfrage-Varianten erkennt (Erkundung Zuordnung 4.2). */
+const VARIANTEN_ENDUNGEN = ['-ang', '-sondermass', '-a', 'a'];
+/** Moegliche Pfade des Hauptartikels zu einer Variante (alles klein geschrieben). */
+function hauptKandidaten(pfadKlein) {
+  const aus = [];
+  for (const e of VARIANTEN_ENDUNGEN) {
+    if (!pfadKlein.endsWith(e) || pfadKlein.length <= e.length + 1) continue;
+    const stamm = pfadKlein.slice(0, -e.length);
+    for (const k of [stamm, stamm + '-kauf', stamm + '-k']) if (!aus.includes(k)) aus.push(k);
+  }
+  return aus;
+}
+
+async function erweitereAusAltsystem(NET) {
+  const cacheDir = argWert('--cache-dir');
+  const auswahl = auswahlLesen();
+  const preisstamm = preisstammLesen();
+  const bericht = { warnungen: [] };
+  const kuratiertSlugs = Object.keys(NET.produkte);   /* die 19 Schaufenster-Produkte, vor dem Ergaenzen */
+
+  /* ---- 1  Warengruppen-Baum --------------------------------------- */
+  const katalog = await holeBruecke('/api/katalog?zaehlen=0', cacheDir);
+  if (!katalog || !katalog.ok) throw new Error('/api/katalog lieferte keinen Baum: ' + JSON.stringify(katalog).slice(0, 200));
+  const knoten = [];
+  (function flach(liste, eltern) {
+    for (const k of liste) {
+      knoten.push({ schluessel: k.schluessel, name: entitiesAufloesen(k.name), pfad: k.pfad, ebene: k.ebene, eltern: eltern ? eltern.schluessel : null });
+      flach(k.unterkategorien || [], k);
+    }
+  })(katalog.kategorien || [], null);
+  const kategorieSlug = (k) => 'de-' + slugify(k.schluessel);
+  const slugCheck = new Set();
+  for (const k of knoten) {
+    const s = kategorieSlug(k);
+    if (slugCheck.has(s)) throw new Error('Kategorie-Schluessel doppelt: ' + s);
+    slugCheck.add(s);
+  }
+
+  /* ---- 2  Zeilen jeder Warengruppe (alle Seiten) ------------------ */
+  const kategorieZeilen = await parallel(knoten, 4, async (k) => {
+    const zeilen = [];
+    for (let seite = 1; ; seite++) {
+      const d = await holeBruecke('/api/kategorie?pfad=' + encodeURIComponent(k.pfad) + '&proSeite=200&seite=' + seite, cacheDir);
+      if (!d || !d.ok) { bericht.warnungen.push('Warengruppe ' + k.pfad + ' nicht lesbar: ' + (d && d.fehler)); break; }
+      zeilen.push(...(d.produkte || []));
+      if (seite >= (d.seiten || 1)) break;
+    }
+    return zeilen;
+  });
+
+  /* ---- 3  Gesamtkatalog (faengt Artikel ohne Warengruppe) --------- */
+  const sucheZeilen = [];
+  for (let seite = 1; ; seite++) {
+    const d = await holeBruecke('/api/suche?alle=1&proSeite=200&seite=' + seite, cacheDir);
+    if (!d || !d.ok) { bericht.warnungen.push('Gesamtkatalog Seite ' + seite + ' nicht lesbar'); break; }
+    sucheZeilen.push(...(d.produkte || []));
+    if (seite >= (d.seiten || 1)) break;
+  }
+
+  /* ---- 4  Alle verschiedenen Pfade -> Artikel (/api/produkt) ------- */
+  const zeilenJePfad = new Map();    /* pfad klein -> erste Listenzeile (Name, Bild, Kurztext) */
+  const pfadOriginal = new Map();    /* pfad klein -> Schreibweise der ersten Fundstelle */
+  /* Zeilen ohne Modus (weder "Online kaufen" noch "Anfrage") sind Teaser-Artikel des Altsystems:
+     eigene Artikelnummer, aber der Link zeigt auf eine andere Seite (Info-Seite, Landingpage
+     oder einen anderen Artikel, z. B. "Sonderangebot" -> 6301011). Sie sind keine Platzierung
+     des Zielartikels und werden hier nur gezaehlt. */
+  const teaser = new Map();         /* anker -> { pfad, name } */
+  const istTeaser = (z) => z && z.modus == null;
+  const merke = (z) => {
+    if (!z || !z.pfad) return;
+    if (istTeaser(z)) { if (!teaser.has(z.anker)) teaser.set(z.anker, { pfad: z.pfad, name: z.name }); return; }
+    const kl = z.pfad.toLowerCase();
+    if (!pfadOriginal.has(kl)) { pfadOriginal.set(kl, z.pfad); zeilenJePfad.set(kl, z); }
+    else if (!zeilenJePfad.get(kl).bildOriginal && z.bildOriginal) zeilenJePfad.set(kl, { ...zeilenJePfad.get(kl), bildOriginal: z.bildOriginal, bild: z.bild });
+  };
+  kategorieZeilen.forEach((zs) => zs.forEach(merke));
+  sucheZeilen.forEach(merke);
+  /* Die Pfade der kuratierten Zuordnung gehoeren dazu, auch wenn sie in keiner Liste stehen. */
+  for (const z of Object.values(ZUORDNUNG)) for (const p of [z.dePfad, z.deZwilling]) if (p) merke({ pfad: p });
+
+  const pfadListe = [...pfadOriginal.keys()].sort();
+  const details = new Map();         /* pfad klein -> { ok, produkt } */
+  await parallel(pfadListe, PARALLEL, async (kl) => {
+    const d = await holeBruecke('/api/produkt?pfad=' + encodeURIComponent(pfadOriginal.get(kl)), cacheDir);
+    details.set(kl, d && d.ok ? { ok: true, produkt: d.produkt } : { ok: false, fehler: d && d.fehler });
+  });
+
+  /* ---- 5  Artikel nach Artikel-ID zusammenfuehren ------------------ */
+  const artikel = new Map();         /* artikelId -> Datensatz */
+  const idJePfad = new Map();        /* pfad klein -> artikelId */
+  const keinArtikel = [];            /* Info-Seiten, nicht lesbare Pfade */
+  for (const kl of pfadListe) {
+    const d = details.get(kl);
+    const p = d.ok ? d.produkt : null;
+    if (!p || !Number.isInteger(p.artikelId)) { keinArtikel.push({ pfad: pfadOriginal.get(kl), grund: p ? 'Info-Seite ohne Artikel-ID' : (d.fehler || 'nicht lesbar') }); continue; }
+    idJePfad.set(kl, p.artikelId);
+    /* Der Pfad, den das Altsystem selbst nennt, ist der massgebliche. */
+    const echt = (p.pfad || pfadOriginal.get(kl));
+    idJePfad.set(echt.toLowerCase(), p.artikelId);
+    if (!artikel.has(p.artikelId)) {
+      artikel.set(p.artikelId, { id: p.artikelId, pfad: echt, produkt: p, zeile: zeilenJePfad.get(kl) || {}, pfade: new Set([kl]), warengruppen: [] });
+    } else {
+      const a = artikel.get(p.artikelId);
+      a.pfade.add(kl);
+      if (!a.zeile.bildOriginal && (zeilenJePfad.get(kl) || {}).bildOriginal) a.zeile = { ...a.zeile, bildOriginal: zeilenJePfad.get(kl).bildOriginal, bild: zeilenJePfad.get(kl).bild };
+    }
+  }
+  bericht.pfadeGesamt = pfadListe.length;
+  bericht.keinArtikel = keinArtikel;
+  bericht.teaser = [...teaser.entries()].map(([anker, t]) => ({ anker, ...t }));
+  bericht.listenzeilenKategorien = kategorieZeilen.reduce((n, zs) => n + zs.length, 0);
+  bericht.listenzeilenKatalog = sucheZeilen.length;
+
+  /* Warengruppen je Artikel, in der Reihenfolge des Katalogs. */
+  const reihenfolge = [];            /* artikelId in Reihenfolge des ersten Auftretens */
+  const gesehen = new Set();
+  const nimmAuf = (id) => { if (!gesehen.has(id)) { gesehen.add(id); reihenfolge.push(id); } };
+  knoten.forEach((k, i) => {
+    for (const z of kategorieZeilen[i]) {
+      if (istTeaser(z)) continue;
+      const id = idJePfad.get((z.pfad || '').toLowerCase());
+      if (!id) continue;
+      nimmAuf(id);
+      const a = artikel.get(id);
+      if (!a.warengruppen.includes(k.schluessel)) a.warengruppen.push(k.schluessel);
+    }
+  });
+  for (const z of sucheZeilen) { if (istTeaser(z)) continue; const id = idJePfad.get((z.pfad || '').toLowerCase()); if (id) nimmAuf(id); }
+  for (const id of [...artikel.keys()].sort((x, y) => x - y)) nimmAuf(id);
+
+  /* ---- 6  Hauptartikel und Zwillinge ableiten ---------------------- */
+  const hauptVon = new Map();        /* Variante (id) -> Hauptartikel (id) */
+  const zwillingVon = new Map();     /* Hauptartikel (id) -> Variante (id), nur geprueft */
+  for (const id of reihenfolge) {
+    const a = artikel.get(id);
+    if (a.produkt.modus !== 'anfrage') continue;
+    const kl = a.pfad.toLowerCase();
+    for (const kand of hauptKandidaten(kl)) {
+      const hid = idJePfad.get(kand);
+      if (!hid || hid === id) continue;
+      const h = artikel.get(hid);
+      if (h.produkt.modus !== 'kauf') continue;
+      hauptVon.set(id, hid);
+      /* Zwilling nur, wenn die Variante wirklich freie Masse aufnimmt. */
+      const freiesMass = (a.produkt.masse || []).length > 0 || (a.produkt.attribute || []).some((x) => x.art === 'spezialoption');
+      if (!freiesMass) bericht.zwillingOhneMasse = (bericht.zwillingOhneMasse || 0) + 1;
+      else if (!zwillingVon.has(hid)) zwillingVon.set(hid, id);
+      break;
+    }
+  }
+
+  /* ---- 7  Was die kuratierten Produkte schon abdecken --------------- */
+  const abgedeckt = new Map();       /* artikelId -> kuratierter slug (erster) */
+  for (const slug of kuratiertSlugs) {
+    const z = ZUORDNUNG[slug];
+    if (!z) continue;
+    for (const p of [z.dePfad, z.deZwilling]) {
+      const id = p && idJePfad.get(p.toLowerCase());
+      if (id && !abgedeckt.has(id)) abgedeckt.set(id, slug);
+    }
+  }
+  bericht.kuratiertAbgedeckt = abgedeckt.size;
+
+  /* ---- 8  Auswahl anwenden ----------------------------------------- */
+  const nurIds = new Set((auswahl.nurArtikelIds || []).map(Number));
+  const rausIds = new Set((auswahl.ausschliessenArtikelIds || []).map(Number));
+  const rausPfade = new Set((auswahl.ausschliessenPfade || []).map((p) => String(p).toLowerCase()));
+  const rausGruppen = new Set(auswahl.ausschliessenWarengruppen || []);
+  const entfallen = { variante: 0, modus: 0, ohneBild: 0, liste: 0, warengruppe: 0 };
+  const behalten = [];
+  for (const id of reihenfolge) {
+    if (abgedeckt.has(id)) continue;
+    const a = artikel.get(id);
+    const p = a.produkt;
+    if (nurIds.size && !nurIds.has(id)) { entfallen.liste++; continue; }
+    if (rausIds.has(id) || [...a.pfade].some((x) => rausPfade.has(x)) || rausPfade.has(a.pfad.toLowerCase())) { entfallen.liste++; continue; }
+    if (a.warengruppen.length && a.warengruppen.every((g) => rausGruppen.has(g))) { entfallen.warengruppe++; continue; }
+    if (!auswahl.varianten && hauptVon.has(id)) { entfallen.variante++; continue; }
+    if (auswahl.modus !== 'alle' && p.modus !== auswahl.modus) { entfallen.modus++; continue; }
+    behalten.push(id);
+  }
+  /* "ohne Bild" erst nach der Bildvererbung entscheiden (siehe unten). */
+
+  /* ---- 9  Produktdatensaetze --------------------------------------- */
+  const slugVon = new Map();         /* artikelId -> slug (neu) bzw. kuratierter slug (abgedeckt) */
+  for (const [id, s] of abgedeckt) slugVon.set(id, s);
+  const vergeben = new Set(Object.keys(NET.produkte));
+  for (const id of behalten) {
+    const a = artikel.get(id);
+    const name = anzeigeName(a);
+    let s = 'a' + id + '-' + slugify(name).slice(0, 40).replace(/-+$/g, '');
+    s = s.replace(/-+$/g, '');
+    if (vergeben.has(s)) throw new Error('Produkt-Schluessel doppelt: ' + s);
+    vergeben.add(s);
+    slugVon.set(id, s);
+  }
+  /* Name und Herkunft des Namens: Artikelseite > Hauptartikel (Pfad geprueft) >
+     in der Liste geerbter Name (folgt der Listenreihenfolge, unsicher) > Artikelnummer. */
+  function nameUndQuelle(a) {
+    const p = a.produkt;
+    if (p.name) return [entitiesAufloesen(p.name), 'artikel'];
+    const hid = hauptVon.get(a.id);
+    if (hid && artikel.get(hid).produkt.name) return [entitiesAufloesen(artikel.get(hid).produkt.name), 'hauptartikel'];
+    if (a.zeile && a.zeile.nameGeerbt) return [entitiesAufloesen(a.zeile.nameGeerbt), 'liste-geerbt'];
+    return [p.artikelnummer || String(a.id), 'artikelnummer'];
+  }
+  function anzeigeName(a) { return nameUndQuelle(a)[0]; }
+
+  const neu = {};                    /* slug -> Produkt */
+  const neuZuordnung = {};
+  const gewaehlt = [];
+  for (const id of behalten) {
+    const a = artikel.get(id);
+    const p = a.produkt;
+    const hid = hauptVon.get(id) || null;
+    const haupt = hid ? artikel.get(hid) : null;
+    /* Bild: eigenes, sonst das des Hauptartikels (Anfrage-Varianten). */
+    let bilder = bilderAus(p);
+    let kachel = a.zeile.bild || null;
+    let bildVon = bilder.length || kachel ? 'eigen' : null;
+    if (haupt && !a.zeile.bild) {
+      const hb = bilderAus(haupt.produkt);
+      const hk = haupt.zeile.bild || hb[0] || null;
+      if (hk) { kachel = hk; bildVon = 'hauptartikel'; }
+      if (!bilder.length && hb.length) bilder = hb;
+      else if (bildVon === 'hauptartikel' && hb.length) bilder = hb;
+    }
+    if (!kachel && bilder.length) kachel = bilder[0];
+    if (!bilder.length && kachel) bilder = [kachel];
+    if (!bildVon && kachel) bildVon = 'eigen';
+    if (!kachel && !bilder.length && !auswahl.ohneBild) { entfallen.ohneBild++; continue; }
+
+    const stamm = preisdatenAus(preisstamm.artikel[String(id)]);
+    const pr = p.preis || {};
+    const slug = slugVon.get(id);
+    const textVon = (x) => (x.produkt.beschreibungAbsaetze || []).length
+      ? x.produkt.beschreibungAbsaetze.map((z) => '<p>' + escHtml(z) + '</p>').join('\n')
+      : (x.zeile.kurzbeschreibung ? '<p>' + escHtml(x.zeile.kurzbeschreibung) + '</p>' : '');
+    const beschreibung = textVon(a) || (haupt ? textVon(haupt) : '');
+    neu[slug] = {
+      productId: null,                        /* kein matten.net-Produkt */
+      quelle: 'altsystem',
+      artikelId: id,
+      slug,
+      name: anzeigeName(a),
+      nameQuelle: nameUndQuelle(a)[1],
+      href: 'produkt.html?slug=' + slug,
+      artikelnummer: String(p.artikelnummer || ''),
+      modus: p.modus || null,                 /* 'kauf' | 'anfrage' (Stand des Bauens, zur Laufzeit gilt /api/produkt) */
+      variante: !!haupt || (!p.name && p.modus === 'anfrage'),
+      hauptartikelId: hid,
+      preisdaten: stamm.preisdaten,
+      preisAltsystem: pr.wert != null ? { wert: pr.wert, text: pr.text, ab: pr.unvollstaendigPraefix === 'ab', brutto: pr.brutto !== false, ustSatz: pr.ustSatz == null ? null : pr.ustSatz } : null,
+      fixgroessen: [],
+      standardbreitenSelect: [],
+      customOption: null,
+      attribute: [],                          /* Format von matten.net; fuer Altsystem-Artikel leer */
+      deAttribute: attributeKompakt(p),
+      deMasse: masseKompakt(p),
+      bilder,
+      kachel,
+      bildVon,
+      kategorien: [],                         /* unten gefuellt */
+      beschreibung
+    };
+    neuZuordnung[slug] = { dePfad: a.pfad, deZwilling: null, anmerkung: 'direkt aus dem Altsystem (Artikel-ID ' + id + ')' };
+    gewaehlt.push(id);
+  }
+  /* Zwillinge eintragen (nur wenn der Zwilling selbst erscheint ODER wenigstens existiert). */
+  for (const id of gewaehlt) {
+    const zid = zwillingVon.get(id);
+    if (zid) neuZuordnung[slugVon.get(id)].deZwilling = artikel.get(zid).pfad;
+  }
+  const bleibt = new Set(gewaehlt);
+
+  /* ---- 10  Kategorien und Verknuepfungen ---------------------------- */
+  const deKategorien = {};
+  for (const k of knoten) {
+    deKategorien[kategorieSlug(k)] = {
+      slug: kategorieSlug(k), name: k.name,
+      gruppe: k.eltern ? knoten.find((x) => x.schluessel === k.eltern).name : null,
+      href: 'kategorie.html?slug=' + kategorieSlug(k),
+      beschreibung: null,
+      titelbild: null,
+      produkte: [],
+      quelle: 'altsystem', deSchluessel: k.schluessel, dePfad: k.pfad, ebene: k.ebene,
+      eltern: k.eltern ? 'de-' + slugify(k.eltern) : null
+    };
+  }
+  knoten.forEach((k, i) => {
+    const kat = deKategorien[kategorieSlug(k)];
+    for (const z of kategorieZeilen[i]) {
+      if (istTeaser(z)) continue;
+      const id = idJePfad.get((z.pfad || '').toLowerCase());
+      if (!id) continue;
+      const slug = slugVon.get(id);
+      if (!slug) continue;
+      const kuratiert = abgedeckt.has(id);
+      if (!kuratiert && !bleibt.has(id)) continue;
+      if (!kat.produkte.includes(slug)) kat.produkte.push(slug);
+      const p = kuratiert ? NET.produkte[slug] : neu[slug];
+      if (!p.kategorien.includes(kategorieSlug(k))) p.kategorien.push(kategorieSlug(k));
+    }
+  });
+
+  /* ---- 11  In NET einsetzen ----------------------------------------- */
+  Object.assign(NET.kategorien, deKategorien);
+  Object.assign(NET.produkte, neu);
+  Object.assign(NET.zuordnung, neuZuordnung);
+  for (const id of gewaehlt) NET.produktReihenfolge.push(slugVon.get(id));
+  NET.warengruppenReihenfolge = knoten.map(kategorieSlug);
+  NET.warengruppen = knoten.filter((k) => !k.eltern).map((k) => ({
+    slug: kategorieSlug(k), name: k.name, anzahl: deKategorien[kategorieSlug(k)].produkte.length,
+    kinder: knoten.filter((x) => x.eltern === k.schluessel).map((x) => ({ slug: kategorieSlug(x), name: x.name, anzahl: deKategorien[kategorieSlug(x)].produkte.length }))
+  }));
+  NET.altsystem = {
+    hinweis: 'Produkte mit quelle "altsystem" kommen aus matten.de (ueber die Bruecke), erzeugt von bau-net-daten.mjs --alle. Schluessel ist die Artikel-ID; die Produkt-Schluessel beginnen mit a<ID>-.',
+    anzahlNeu: gewaehlt.length,
+    anzahlKuratiert: kuratiertSlugs.length,
+    auswahl: { modus: auswahl.modus, varianten: auswahl.varianten, ohneBild: auswahl.ohneBild },
+    preisstammEintraege: Object.keys(preisstamm.artikel).length
+  };
+
+  /* ---- 12  Bericht --------------------------------------------------- */
+  const neuListe = gewaehlt.map((id) => neu[slugVon.get(id)]);
+  bericht.auswahl = auswahl;
+  bericht.preisstamm = preisstamm;
+  bericht.artikelGefunden = artikel.size;
+  bericht.entfallen = entfallen;
+  bericht.neu = neuListe.length;
+  bericht.kategorien = knoten.length;
+  bericht.ohneBild = neuListe.filter((p) => !p.kachel && !p.bilder.length).map((p) => p.slug);
+  bericht.ohneKategorie = neuListe.filter((p) => !p.kategorien.length).map((p) => p.slug);
+  bericht.ohnePreis = neuListe.filter((p) => !p.preisAltsystem && !p.preisdaten).map((p) => p.slug);
+  bericht.ohnePreisKauf = neuListe.filter((p) => !p.preisAltsystem && !p.preisdaten && p.modus === 'kauf').map((p) => p.slug);
+  bericht.ohnePreisAnfrage = bericht.ohnePreis.length - bericht.ohnePreisKauf.length;
+  bericht.nameGeerbt = neuListe.filter((p) => p.nameQuelle === 'liste-geerbt' || p.nameQuelle === 'artikelnummer').map((p) => p.slug);
+  bericht.ohnePreisstamm = neuListe.filter((p) => !p.preisdaten).length;
+  bericht.mitPreisstamm = neuListe.filter((p) => p.preisdaten).length;
+  bericht.varianten = neuListe.filter((p) => p.variante).length;
+  bericht.variantenOhneHaupt = neuListe.filter((p) => p.variante && !p.hauptartikelId).length;
+  bericht.bildVomHauptartikel = neuListe.filter((p) => p.bildVon === 'hauptartikel').length;
+  bericht.zwillinge = Object.values(neuZuordnung).filter((z) => z.deZwilling).length;
+  /* Kuratierte Produkte ohne Zwilling, fuer die sich einer ableiten laesst: nur als Vorschlag,
+     die kuratierte Zuordnung bleibt unangetastet. */
+  NET.altsystem.zwillingsVorschlaege = {};
+  for (const slug of kuratiertSlugs) {
+    const z = ZUORDNUNG[slug];
+    if (!z || z.deZwilling) continue;
+    const id = idJePfad.get(z.dePfad.toLowerCase());
+    const zid = id && zwillingVon.get(id);
+    if (zid) NET.altsystem.zwillingsVorschlaege[slug] = artikel.get(zid).pfad;
+  }
+  bericht.zwillingsVorschlaege = Object.keys(NET.altsystem.zwillingsVorschlaege).length;
+  bericht.kandidatenFuerPreisstamm = neuListe.filter((p) => (p.deMasse || []).length || (p.deAttribute || []).some((x) => x.art === 'spezialoption')).length;
+
+  /* Vorlage fuer den Preisstamm: alle Artikel, die freie Masse aufnehmen. */
+  if (ARG.includes('--preisstamm-vorlage')) {
+    const vorlage = {
+      _hinweis: 'Vorlage: je Artikel-ID einen Eintrag ausfuellen und als preisstamm-altsystem.json speichern (unter "artikel"). Nur Eintraege mit einkaufProQm, salesFactor UND standardbreiten werden zu Preisstammdaten. Nicht benoetigte Eintraege einfach loeschen.',
+      artikel: {}
+    };
+    for (const id of reihenfolge) {
+      const a = artikel.get(id);
+      const p = a.produkt;
+      const frei = (p.masse || []).length > 0 || (p.attribute || []).some((x) => x.art === 'spezialoption');
+      if (!frei) continue;
+      vorlage.artikel[String(id)] = {
+        artikelnummer: p.artikelnummer, name: anzeigeName(a), pfad: a.pfad, modus: p.modus,
+        einkaufProQm: (preisstamm.artikel[String(id)] || {}).einkaufProQm ?? null,
+        salesFactor: (preisstamm.artikel[String(id)] || {}).salesFactor ?? null,
+        standardbreiten: (preisstamm.artikel[String(id)] || {}).standardbreiten ?? null
+      };
+    }
+    const vz = path.join(ARBEIT_DIR, 'preisstamm-vorlage.json');
+    fs.mkdirSync(ARBEIT_DIR, { recursive: true });
+    fs.writeFileSync(vz, JSON.stringify(vorlage, null, 1) + '\n', 'utf8');
+    bericht.vorlage = { datei: path.relative(__dirname, vz), eintraege: Object.keys(vorlage.artikel).length };
+  }
+  return bericht;
+}
+
+/* ==========================================================================
    8  Schreiben
    ========================================================================== */
 const NET = {
@@ -641,25 +1188,60 @@ const NET = {
   mattendesigner
 };
 
-const kopf =
-  '/* ERZEUGT von bau-net-daten.mjs, nicht von Hand ändern.\n' +
-  '   Quellen: spec/struktur.json, spec/texte/*.md, spec/screens/*.html,\n' +
-  '   public/net-neu/assets/img/manifest.json. Neu bauen: node bau-net-daten.mjs */\n';
+/* Mit --alle kommen die Produkte des Altsystems dazu (Abschnitt 7c); die Datei
+   heisst dann anders (daten-alle.js), die heutige daten.js bleibt unberuehrt. */
+let alleBericht = null;
+let zielDatei = argWert('--ausgabe') ? path.resolve(argWert('--ausgabe')) : ZIEL;   /* --ausgabe gilt auch ohne --alle (zum Vergleichen) */
+if (MODUS_ALLE) {
+  zielDatei = path.resolve(argWert('--ausgabe') || path.join(ZIEL_DIR, 'assets', 'js', 'daten-alle.js'));
+  if (zielDatei === path.resolve(ZIEL) && !ARG.includes('--daten-js-ueberschreiben')) {
+    throw new Error('--alle schreibt nicht in daten.js (das Frontend laeuft noch damit). Anderes Ziel mit --ausgabe waehlen, oder bewusst --daten-js-ueberschreiben setzen.');
+  }
+  alleBericht = await erweitereAusAltsystem(NET);
+}
+
+const kopf = MODUS_ALLE
+  ? '/* ERZEUGT von bau-net-daten.mjs --alle, nicht von Hand ändern.\n' +
+    '   Quellen: spec/struktur.json (19 kuratierte Produkte), spec/texte/*.md, spec/screens/*.html,\n' +
+    '   public/net-neu/assets/img/manifest.json und das Altsystem matten.de über die Brücke\n' +
+    '   (Artikel, Warengruppen). Auswahl: _arbeit/produkte-uebernahme/auswahl-altsystem.json,\n' +
+    '   Preisstamm: _arbeit/produkte-uebernahme/preisstamm-altsystem.json.\n' +
+    '   Neu bauen: node bau-net-daten.mjs --alle */\n'
+  : '/* ERZEUGT von bau-net-daten.mjs, nicht von Hand ändern.\n' +
+    '   Quellen: spec/struktur.json, spec/texte/*.md, spec/screens/*.html,\n' +
+    '   public/net-neu/assets/img/manifest.json. Neu bauen: node bau-net-daten.mjs */\n';
 const ausgabe = kopf + 'window.NET = ' + JSON.stringify(NET, null, 1) + ';\n';
-fs.mkdirSync(path.dirname(ZIEL), { recursive: true });
-fs.writeFileSync(ZIEL, ausgabe, 'utf8');
+fs.mkdirSync(path.dirname(zielDatei), { recursive: true });
+fs.writeFileSync(zielDatei, ausgabe, 'utf8');
 
 /* Kurzbericht */
 const ohneKachel = Object.values(produkte).filter((p) => !p.kachel).map((p) => p.slug);
 const ohneKategoriebild = navigation.eintraege.flatMap((e) => e.kategorien || []).filter((k) => !k.bild).map((k) => k.slug);
 const ohneTitelbild = Object.values(kategorien).filter((k) => !k.titelbild).map((k) => k.slug);
-console.log('daten.js geschrieben: ' + path.relative(__dirname, ZIEL) + ' (' + (ausgabe.length / 1024).toFixed(0) + ' KB)');
+if (!MODUS_ALLE) {
+console.log('daten.js geschrieben: ' + path.relative(__dirname, zielDatei) + ' (' + (ausgabe.length / 1024).toFixed(0) + ' KB)');
 console.log('  Kategorien ' + kategorieReihenfolge.length + ' · Produkte ' + produktReihenfolge.length +
   ' · Farben ' + Object.keys(farben).length + ' · Karussell ' + startseite.karussell.length +
   ' · Gruppen ' + gruppen.length + ' (' + gruppen.reduce((n, g) => n + g.kategorien.length, 0) + ' Kaestchen)');
-if (ohneKachel.length) console.log('  ohne Kartenbild (bleibt leer): ' + ohneKachel.join(', '));
-if (ohneKategoriebild.length) console.log('  Menuekacheln ohne Bild (Fremdressource im Original): ' + ohneKategoriebild.join(', '));
-if (ohneTitelbild.length) console.log('  Kategorien ohne Titelbild: ' + ohneTitelbild.join(', '));
+} else {
+  const b = alleBericht;
+  const kat = Object.values(NET.kategorien);
+  console.log('daten-alle.js geschrieben: ' + path.relative(__dirname, zielDatei) + ' (' + (ausgabe.length / 1024).toFixed(0) + ' KB, ' + Buffer.byteLength(ausgabe, 'utf8') + ' Bytes)');
+  console.log('  Produkte ' + Object.keys(NET.produkte).length + ' (' + (Object.keys(NET.produkte).length - b.neu) + ' kuratiert + ' + b.neu + ' aus dem Altsystem)' +
+    ' · Kategorien ' + kat.length + ' (' + kategorieReihenfolge.length + ' Produktlinien + ' + b.kategorien + ' Warengruppen)');
+  console.log('  Gelesen: ' + b.pfadeGesamt + ' verschiedene Pfade -> ' + b.artikelGefunden + ' Artikel (Listenzeilen: ' + b.listenzeilenKategorien + ' in Warengruppen, ' + b.listenzeilenKatalog + ' im Gesamtkatalog)');
+  console.log('  Teaser-Zeilen ohne Modus (nicht uebernommen): ' + b.teaser.length + ' · Kein Artikel (Info-Seiten u. a.): ' + b.keinArtikel.length + ' · von kuratierten Produkten abgedeckt: ' + b.kuratiertAbgedeckt +
+    ' · durch Auswahl entfallen: ' + JSON.stringify(b.entfallen));
+  console.log('  Varianten (-a): ' + b.varianten + ' (ohne Hauptartikel: ' + b.variantenOhneHaupt + ', Bild vom Hauptartikel: ' + b.bildVomHauptartikel + ') · Zwillinge eingetragen: ' + b.zwillinge +
+    ' (verworfen mangels freier Masse: ' + (b.zwillingOhneMasse || 0) + ') · Vorschlaege fuer kuratierte Produkte: ' + b.zwillingsVorschlaege);
+  console.log('  Preisstamm: ' + b.mitPreisstamm + ' mit Preisdaten, ' + b.ohnePreisstamm + ' ohne (Datei: ' + b.preisstamm.quelle + ', ' + Object.keys(b.preisstamm.artikel).length + ' Eintraege) · Kandidaten mit freien Massen: ' + b.kandidatenFuerPreisstamm);
+  console.log('  Auswahl: ' + b.auswahl.quelle + ' · modus=' + b.auswahl.modus + ' varianten=' + b.auswahl.varianten + ' ohneBild=' + b.auswahl.ohneBild);
+  if (b.vorlage) console.log('  Vorlage Preisstamm: ' + b.vorlage.datei + ' (' + b.vorlage.eintraege + ' Artikel)');
+  for (const w of b.warnungen) console.log('  WARNUNG: ' + w);
+}
+if (!MODUS_ALLE && ohneKachel.length) console.log('  ohne Kartenbild (bleibt leer): ' + ohneKachel.join(', '));
+if (!MODUS_ALLE && ohneKategoriebild.length) console.log('  Menuekacheln ohne Bild (Fremdressource im Original): ' + ohneKategoriebild.join(', '));
+if (!MODUS_ALLE && ohneTitelbild.length) console.log('  Kategorien ohne Titelbild: ' + ohneTitelbild.join(', '));
 
 /* ==========================================================================
    9  Optional: Zuordnungspfade ueber die laufende Bruecke pruefen
@@ -676,11 +1258,39 @@ if (process.argv.includes('--pruefen')) {
       const p = d.produkt || {};
       const ok = d.ok && p.kaufbar === true;
       if (!ok) fehler++;
-      console.log((ok ? '  ok      ' : '  FEHLER  ') + pfad + '  modus=' + (p.modus || '-') + '  id=' + (p.artikelId || '-'));
+      if (!ok || !MODUS_ALLE) console.log((ok ? '  ok      ' : '  FEHLER  ') + pfad + '  modus=' + (p.modus || '-') + '  id=' + (p.artikelId || '-'));
     } catch (e) {
       fehler++;
       console.log('  FEHLER  ' + pfad + '  ' + e.message);
     }
   }
-  console.log(fehler ? fehler + ' Pfad(e) nicht kaufbar oder nicht erreichbar.' : 'Alle Pfade kaufbar.');
+  console.log(fehler ? fehler + ' Pfad(e) nicht kaufbar oder nicht erreichbar.' : (MODUS_ALLE ? 'Alle ' + pfade.length + ' Pfade kaufbar.' : 'Alle Pfade kaufbar.'));
+}
+
+/* --------------------------------------------------------------------------
+   Zusatz zu --pruefen: wie viele Produkte sind ohne Bild, ohne Kategorie,
+   ohne Preis geblieben? Mit --alle gilt die Zaehlung den Altsystem-Artikeln,
+   sonst den 19 kuratierten Produkten.
+   -------------------------------------------------------------------------- */
+if (process.argv.includes('--pruefen')) {
+  console.log('\nVollstaendigkeit:');
+  if (MODUS_ALLE) {
+    const b = alleBericht;
+    const zeige = (liste) => liste.length ? ' (' + liste.slice(0, 8).join(', ') + (liste.length > 8 ? ', …' : '') + ')' : '';
+    console.log('  Altsystem-Artikel gesamt:      ' + b.neu);
+    console.log('  ohne Bild:                     ' + b.ohneBild.length + zeige(b.ohneBild));
+    console.log('  ohne Kategorie:                ' + b.ohneKategorie.length + zeige(b.ohneKategorie));
+    console.log('  ohne Preis (weder Altsystem-Preis noch Preisstamm): ' + b.ohnePreis.length + ' (davon Kaufartikel: ' + b.ohnePreisKauf.length + zeige(b.ohnePreisKauf) + '; Anfrageartikel, Preis nur auf Anfrage: ' + b.ohnePreisAnfrage + ')');
+    console.log('  Name unsicher (aus der Liste geerbt oder nur Artikelnummer): ' + b.nameGeerbt.length + zeige(b.nameGeerbt));
+    console.log('  ohne Preisstammdaten (Formel nicht vorbereitet):    ' + b.ohnePreisstamm + ' von ' + b.neu);
+  } else {
+    const liste = Object.values(produkte);
+    const ohneBild = liste.filter((p) => !p.kachel && !p.bilder.length).map((p) => p.slug);
+    const ohneKat = liste.filter((p) => !p.kategorien.length).map((p) => p.slug);
+    const ohnePreis = liste.filter((p) => !(p.preisdaten && p.preisdaten.einkaufProQm > 0)).map((p) => p.slug);
+    console.log('  kuratierte Produkte gesamt:    ' + liste.length);
+    console.log('  ohne Bild:                     ' + ohneBild.length + (ohneBild.length ? ' (' + ohneBild.join(', ') + ')' : ''));
+    console.log('  ohne Kategorie:                ' + ohneKat.length + (ohneKat.length ? ' (' + ohneKat.join(', ') + ')' : ''));
+    console.log('  ohne Preisstammdaten (EK 0):   ' + ohnePreis.length + (ohnePreis.length ? ' (' + ohnePreis.join(', ') + ')' : '') + '  -> rechnen ueber /api/price');
+  }
 }

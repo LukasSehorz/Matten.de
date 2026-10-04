@@ -203,7 +203,23 @@
 
 /* --- 5  Kleinigkeiten ---------------------------------------------------- */
 /* Produktkarte ohne lokales Bild: gleiche Hoehe wie ein Kartenbild, leer */
-.product-card .card-img-leer { display: block; width: 100%; height: 170px; background: #e9ecef; }
+/* Seit 04.10.2026: Karten ohne Bild zeigen den Produktnamen auf grauem Grund;
+   Bild und Platzhalter haben dasselbe Seitenverhaeltnis (256 x 170, wie die
+   Kacheln), damit die Karten beim verzoegerten Bildladen nicht springen und
+   Fotos mit anderem Format nicht verzerrt oder abgeschnitten werden. */
+.product-card .card-img-top { aspect-ratio: 256 / 170; object-fit: contain; background: #fff; }
+.product-card .card-img-leer {
+  display: flex; align-items: center; justify-content: center; width: 100%;
+  background: #e9ecef; padding: .5rem; text-align: center; overflow: hidden;
+}
+.product-card .card-img-name {
+  font-size: .8125rem; line-height: 1.3; color: #6c757d; font-weight: 700;
+  display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+  overflow-wrap: anywhere;
+}
+/* Blaetterleiste: darf auf schmalen Bildschirmen umbrechen (bis zu neun
+   Zahlen plus "Vorherige"/"Naechste" passen nicht in 375 px) */
+.pagination { flex-wrap: wrap; }
 /* Kategorie-Kachel im Bildmenue ohne Bild (im Original ein via.placeholder.com-Bild) */
 .category-dropdown-link .kachel-leer { display: block; width: 100%; padding-top: 66.6%; background: #e9ecef; }
 /* Vorteilsleiste: die beiden Icons liegen nicht lokal vor — die Flaeche bleibt in Bildgroesse leer */

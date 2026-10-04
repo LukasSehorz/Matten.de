@@ -1,0 +1,1679 @@
+{
+ "_hinweis": "Vorlage: je Artikel-ID einen Eintrag ausfuellen und als preisstamm-altsystem.json speichern (unter \"artikel\"). Nur Eintraege mit einkaufProQm, salesFactor UND standardbreiten werden zu Preisstammdaten. Nicht benoetigte Eintraege einfach loeschen.",
+ "artikel": {
+  "6": {
+   "artikelnummer": "64000161",
+   "name": "schön&sauber-Iron-Horse XL, melierte Fussmatten",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/64000161",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "7": {
+   "artikelnummer": "kokosmatte-natur-a",
+   "name": "Kokosvelour, Naturfaser, naturfarbig, mit flexiblem Vinylrücken",
+   "pfad": "/kokosmatten/kokosmatte-natur-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "8": {
+   "artikelnummer": "kokosmatte-farbig-k",
+   "name": "Kokosvelourmatten, farbig, mit flexiblem Vinylrücken",
+   "pfad": "/kokosmatten/kokosmatte-farbig-k",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "10": {
+   "artikelnummer": "aluminium-anlaufprofil",
+   "name": "Aluminium-Anlaufprofil",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/aluminium-anlaufprofil",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "18": {
+   "artikelnummer": "beflockte_kokosmatte-a",
+   "name": "Kokosmatte gestaltet, Logobeflockung",
+   "pfad": "/kokosmatten/beflockte_kokosmatte-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "26": {
+   "artikelnummer": "5262",
+   "name": "Aluminium-Profilmatte, Typ CB - Cassettenbürste",
+   "pfad": "/aluminium_profilmatten/5262",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "27": {
+   "artikelnummer": "5261",
+   "name": "Diplomat Typ RCB - Aluminium-Profilmatte, Ripsstreifen + Cassettenbürste",
+   "pfad": "/aluminium_profilmatten/5261",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "28": {
+   "artikelnummer": "5265",
+   "name": "Aluminium-Profilmatte -Alu /-Color-Edition, Typ G - Gummistreifen auf Wusch mit Bürstenleiste / Kratzkante",
+   "pfad": "/aluminium_profilmatten/5265",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "69": {
+   "artikelnummer": "admats",
+   "name": "Avertising-Mats",
+   "pfad": "/logomatten/werbematten-dekomatten/admats",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "70": {
+   "artikelnummer": "barrunner",
+   "name": "s&s-Bar-runner",
+   "pfad": "/logomatten/werbematten-dekomatten/barrunner",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "71": {
+   "artikelnummer": "dekomatten",
+   "name": "s&s-Dekomatten",
+   "pfad": "/logomatten/werbematten-dekomatten/dekomatten",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "79": {
+   "artikelnummer": "messing-winkelprofil-rahmen",
+   "name": "Messing-Winkelprofil-Rahmen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/messing-winkelprofil-rahmen",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "80": {
+   "artikelnummer": "aluminium-lumina-rahmen1",
+   "name": "Aluminium-LUMINA-Rahmen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/aluminium-lumina-rahmen1",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "81": {
+   "artikelnummer": "rahmeninsonderformen",
+   "name": "Rahmen in Sonderformen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/rahmeninsonderformen",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "83": {
+   "artikelnummer": "aluminium-vollprofil-rahmen",
+   "name": "Aluminium-AS-Vollprofil-Rahmen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/aluminium-vollprofil-rahmen",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "85": {
+   "artikelnummer": "5420",
+   "name": "Marschall-Aluminium-Profilmatte für extreme Belastungen",
+   "pfad": "/aluminium_profilmatten/5420",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "86": {
+   "artikelnummer": "topclean-r",
+   "name": "Top Clean-Aluminium-Profile-Matte",
+   "pfad": "/aluminium_profilmatten/topclean-r",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "88": {
+   "artikelnummer": "5263",
+   "name": "Aluminium-Profilmatte, Typ RB - Ripsstreifen + Bürststreifen",
+   "pfad": "/aluminium_profilmatten/5263",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "89": {
+   "artikelnummer": "5266",
+   "name": "Aluminium-Profilmatte, Typ GB - Gummistreifen und Bürststreifen",
+   "pfad": "/aluminium_profilmatten/5266",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "90": {
+   "artikelnummer": "5270",
+   "name": "Diplomat Typ G - Aluminium-Profilmatte, Gummistreifen",
+   "pfad": "/aluminium_profilmatten/5270",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "91": {
+   "artikelnummer": "5267",
+   "name": "Aluminium-Profilmatte, Typ GCB Gummistreifen mit Cassettenbürste",
+   "pfad": "/aluminium_profilmatten/5267",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "92": {
+   "artikelnummer": "5264",
+   "name": "Aluminium-Profilmatte, Typ RK Ripsstreifen + Kratzkante",
+   "pfad": "/aluminium_profilmatten/5264",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "95": {
+   "artikelnummer": "s_und_s-gummiwabenmatten",
+   "name": "Gummi-Wabenmatten, in Standardgröße oder Sondergrößen und Sonderformen",
+   "pfad": "/gummi_und_kunststoffmatten/s_und_s-gummiwabenmatten",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "96": {
+   "artikelnummer": "mitwell-matten",
+   "name": "Mitwell-Fussmatte",
+   "pfad": "/gummi_und_kunststoffmatten/mitwell-matten",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "98": {
+   "artikelnummer": "sixform-star",
+   "name": "Sixform Star",
+   "pfad": "/gummi_und_kunststoffmatten/sixform-star",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "116": {
+   "artikelnummer": "jetprint-designs-kinderkunstwerke",
+   "name": "JetPrint-Designs, Kinderkunstwerke",
+   "pfad": "/logomatten/matten_fuer_haus_und_heim/jetprint-designs-kinderkunstwerke",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "119": {
+   "artikelnummer": "6100200",
+   "name": "Baumwoll-Fussmatte, Wash-Horse™",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/6100200",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "121": {
+   "artikelnummer": "hoehenausgleich",
+   "name": "Matten - Höhenausgleich",
+   "pfad": "/kokosmatten/hoehenausgleich",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "122": {
+   "artikelnummer": "kokosmatte-farbig-a",
+   "name": "Kokosvelourmatten, farbig, mit flexiblem Vinylrücken",
+   "pfad": "/kokosmatten/kokosmatte-farbig-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "123": {
+   "artikelnummer": "stewell-front-extra",
+   "name": "STEWELL Front Extra Cfl-s1 - Zuschnitt",
+   "pfad": "/gummi_und_kunststoffmatten/stewell-front-extra",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "124": {
+   "artikelnummer": "stewell_grip_2000",
+   "name": "STEWELL Grip 2000 Cfl-s1",
+   "pfad": "/gummi_und_kunststoffmatten/stewell_grip_2000",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "125": {
+   "artikelnummer": "stewell-front-tex",
+   "name": "STEWELL Front Tex Cfl-s1",
+   "pfad": "/gummi_und_kunststoffmatten/stewell-front-tex",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "126": {
+   "artikelnummer": "stewell-komfort",
+   "name": "STEWELL Komfort",
+   "pfad": "/gummi_und_kunststoffmatten/stewell-komfort",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "128": {
+   "artikelnummer": "mountville-design",
+   "name": "Design-Matten, individuelle Größe und Design",
+   "pfad": "/logomatten/wunschdesign-matten/mountville-design",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "129": {
+   "artikelnummer": "5269",
+   "name": "Aluminium-Profilmatte, Typ RG - Ripsstreifen+Gummistreifen",
+   "pfad": "/aluminium_profilmatten/5269",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "138": {
+   "artikelnummer": "jetprint-designs-der-naechste-bitte",
+   "name": "JetPrint-Designs, Der Nächste bitte",
+   "pfad": "/logomatten/jetprint-designs-der-naechste-bitte",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "157": {
+   "artikelnummer": "nomad-zuschnitt",
+   "name": "Nomad-Eingangsbeläge / Zuschnitt",
+   "pfad": "/gummi_und_kunststoffmatten/nomad-zuschnitt",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "158": {
+   "artikelnummer": "aluminium-spezial-rahmen1",
+   "name": "Aluminium-Spezialprofil-Rahmen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/aluminium-spezial-rahmen1",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "164": {
+   "artikelnummer": "kokosmatte-mit-randprofil-glatt",
+   "name": "Kokosvelour mit flexiblem Vinylrücken und 25mm breitem Vinyl-Randprofil",
+   "pfad": "/kokosmatten/kokosmatte-mit-randprofil-glatt",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "172": {
+   "artikelnummer": "jetprint-designs-herzlich-willkommen",
+   "name": "JetPrint-Designmatte \"Herzlich Willkommen\"",
+   "pfad": "/logomatten/jetprint-designs-herzlich-willkommen",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "181": {
+   "artikelnummer": "kokosmatte-natur-kauf",
+   "name": "Kokosvelour, Naturfaser, naturfarbig, mit flexiblem Vinylrücken",
+   "pfad": "/kokosmatten/kokosmatte-natur-kauf",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "191": {
+   "artikelnummer": "5430",
+   "name": "Marschall-Aluminium-Profilmatte für extreme Belastungen",
+   "pfad": "/aluminium_profilmatten/5430",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "207": {
+   "artikelnummer": "attache",
+   "name": "Attache",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/attache",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "211": {
+   "artikelnummer": "gummiunterlage1",
+   "name": "Gummi-Unterlagematte",
+   "pfad": "/aluminium_profilmatten/gummiunterlage1",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "218": {
+   "artikelnummer": "nomad-zuschnitt1",
+   "name": "Nomad-Eingangsbeläge, komplette Rollen",
+   "pfad": "/gummi_und_kunststoffmatten/nomad-zuschnitt1",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "221": {
+   "artikelnummer": "aussparung",
+   "name": "Aussparung, rund / eckig",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/aussparung",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "223": {
+   "artikelnummer": "mattenschraege",
+   "name": "Rahmenschräge / Mattenschräge",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/mattenschraege",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "224": {
+   "artikelnummer": "5452r",
+   "name": "Rahmenrundung / Mattenrundung",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/5452r",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "306": {
+   "artikelnummer": "stewell_grip_2000-rollenware",
+   "name": "STEWELL Grip 2000 Cfl-s1 - Rollenware",
+   "pfad": "/gummi_und_kunststoffmatten/stewell_grip_2000-rollenware",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "312": {
+   "artikelnummer": "5561542",
+   "name": "PLAZA Typ 542 S/ - mit",
+   "pfad": "/aluminium_profilmatten/5561542",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "315": {
+   "artikelnummer": "aluprofil-r",
+   "name": "Aluprofil-R",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/aluprofil-r",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "316": {
+   "artikelnummer": "aluprofil-tl",
+   "name": "Aluprofil-TL",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/aluprofil-tl",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "317": {
+   "artikelnummer": "alu-pvc-profil-h",
+   "name": "Alu/PVC-Profil H",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/alu-pvc-profil-h",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "372": {
+   "artikelnummer": "service-ripswechsel",
+   "name": "Service-Ripswechsel",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/service-ripswechsel",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "377": {
+   "artikelnummer": "schmutzfangwanne-a",
+   "name": "Schmutzfangwanne Typ 5000 für MARSCHALL Profilmatten",
+   "pfad": "/aluminium_profilmatten/schmutzfangwanne-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "397": {
+   "artikelnummer": "cfl-s1",
+   "name": "Zulage cfl-s1 Brandschutz",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/cfl-s1",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "410": {
+   "artikelnummer": "zargen",
+   "name": "Zarge, feuerverzinkt, für Gitterrost",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/zargen",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "418": {
+   "artikelnummer": "complete_comfort-sondermass",
+   "name": "Complete-Comfort Gummimatte",
+   "pfad": "/gummi_und_kunststoffmatten/complete_comfort-sondermass",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "430": {
+   "artikelnummer": "assistent1",
+   "name": "Assistent 560",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/assistent1",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "450": {
+   "artikelnummer": "jetprint_matten-light-einfarbig",
+   "name": "JetPrint™light-Matte, einfarbig > Auswahl aus 66 Standardfarben.",
+   "pfad": "/fussmatten/fussmatten/jetprint_matten-light-einfarbig",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "459": {
+   "artikelnummer": "6300000",
+   "name": "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/6300000",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "461": {
+   "artikelnummer": "monoton-standard",
+   "name": "IRON-HORSE mono™-Schmutzfangmatten, in Standardgröße, einfarbig> Auswahl aus 8 Farben",
+   "pfad": "/fussmatten/fussmatten/monoton-standard",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "472": {
+   "artikelnummer": "64000121",
+   "name": "melierte Eingangsmatten, IRON-HORSE™ in Standardgrößen und Sondergrößen",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/64000121",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "474": {
+   "artikelnummer": "64000122",
+   "name": "Eingangsmatten, meliert, IRON-HORSE™- bis 150cm Breite und bis 700cm Länge - 4 Farben",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/64000122",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "480": {
+   "artikelnummer": "6320301-quadrat",
+   "name": "RTA-Quadrat-REHAB-JetPrint-Matte mit Kunden-Design",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320301-quadrat",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "482": {
+   "artikelnummer": "6320301-quadrat-ang",
+   "name": "RTA-Quadrat-REHAB-JetPrint-Matte mit Kunden-Design",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320301-quadrat-ang",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "484": {
+   "artikelnummer": "6320302",
+   "name": "RTA-Y-REHA-JetPrint™Matte, individuell gestaltet",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320302",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "487": {
+   "artikelnummer": "counter-mats_bar-mats-a",
+   "name": "Counter-Mats_Bar-Mats™, in Standardgröße, bis 32-farbig individuell gestaltet, Auswahl aus 66",
+   "pfad": "/logomatten/counter-mats_bar-mats-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "490": {
+   "artikelnummer": "6400201-velourmatte",
+   "name": "JetPrint™-Velourmatten, in Wunschgröße, fotorealistisch, individuell gestaltet, Auswahl aus 66",
+   "pfad": "/logomatten/6400201-velourmatte",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "501": {
+   "artikelnummer": "6320307-5punkt",
+   "name": "5-Punkt-REHAB-JetPrint™-Matten, bis 20-farbig individuell gestaltet, Auswahl aus 44",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320307-5punkt",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "503": {
+   "artikelnummer": "6320307-5punkt-ang",
+   "name": "5-Punkt-REHAB-JetPrint™-Matten, bis 20-farbig individuell gestaltet, Auswahl aus 44",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320307-5punkt-ang",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "504": {
+   "artikelnummer": "52600",
+   "name": "Aluminium-Profilmatten mit verschiedenen Trittflächen in WUNSCHGRÖSSE",
+   "pfad": "/aluminium_profilmatten/52600",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "505": {
+   "artikelnummer": "kleen-way",
+   "name": "Kleen-Way™ HORIZON Fussmatten-Bahnen, in brillianten Farben individuell gestaltet oder einfarbig",
+   "pfad": "/logomatten/kleen-way",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "506": {
+   "artikelnummer": "crystal-baumwoll-polyester-matten-a",
+   "name": "Polyester/Baumwollmatte-Fussmatten, Crystal™",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/crystal-baumwoll-polyester-matten-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "511": {
+   "artikelnummer": "kleen-way-a",
+   "name": "Kleen-Way™ HORIZON Fussmatten-Bahnen, in brillianten Farben individuell gestaltet oder einfarbig",
+   "pfad": "/logomatten/kleen-way-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "516": {
+   "artikelnummer": "diplomat-premium-aluminium-profilmatten",
+   "name": "Premium-Aluminium-Profilmatte, Typ P-, mit Performance-Einlagen in verschiedenen Trittflächen-Kombinationen",
+   "pfad": "/aluminium_profilmatten/diplomat-premium-aluminium-profilmatten",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "520": {
+   "artikelnummer": "monoton-standard-a",
+   "name": "IRON-HORSE mono™-Schmutzfangmatten, in Standardgröße, einfarbig> Auswahl aus 8 Farben",
+   "pfad": "/fussmatten/fussmatten/monoton-standard-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "521": {
+   "artikelnummer": "64000121a",
+   "name": "melierte Eingangsmatten, IRON-HORSE™ in Standardgrößen und Sondergrößen",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/64000121a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "522": {
+   "artikelnummer": "64000122a",
+   "name": "Eingangsmatten, meliert, IRON-HORSE™- bis 150cm Breite und bis 700cm Länge - 4 Farben",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/64000122a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "523": {
+   "artikelnummer": "diplomat_aluminium-profilmatte",
+   "name": "Diplomat Aluminium-Profilmatte G, CB, GCB und mit Bürstenleiste",
+   "pfad": "/aluminium_profilmatten/diplomat_aluminium-profilmatte",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "548": {
+   "artikelnummer": "6320309",
+   "name": "OS-REHAB-Bahnen-Matte, bis 32-farbig, Wahl aus 66 Standardfarben",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320309",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "549": {
+   "artikelnummer": "6320309a",
+   "name": "OS-REHAB-Bahnen-Matte, bis 32-farbig, Wahl aus 66 Standardfarben",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320309a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "550": {
+   "artikelnummer": "6320304",
+   "name": "OS-Stern-REHAB-Matte nach Kundenangaben",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320304",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "551": {
+   "artikelnummer": "6320304a",
+   "name": "OS-Stern-REHAB-Matte nach Kundenangaben",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320304a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "553": {
+   "artikelnummer": "6320306",
+   "name": "OS-Gitter-REHAB-Matte nach Kundenangaben",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320306",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "554": {
+   "artikelnummer": "6320306a",
+   "name": "OS-Gitter-REHAB-Matte nach Kundenangaben",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320306a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "556": {
+   "artikelnummer": "6320308",
+   "name": "OS-Basis-REHAB-Matte-Matte",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320308",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "557": {
+   "artikelnummer": "6320308a",
+   "name": "OS-Basis-REHAB-Matte-Matte",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320308a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "567": {
+   "artikelnummer": "5262-a",
+   "name": "Aluminium-Profilmatte, Typ CB - Cassettenbürste",
+   "pfad": "/aluminium_profilmatten/5262-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "569": {
+   "artikelnummer": "6300201-logomatte-a",
+   "name": "JetPrint™-Matten, in Wunschgröße, individuell gestaltet, Auswahl aus 66 Farben",
+   "pfad": "/logomatten/6300201-logomatte-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "574": {
+   "artikelnummer": "jetprint_light-matten",
+   "name": "Jet-Print™-Light-Fussmatte, Wunschgrößen*, bis 32-farbig individuell gestaltet, Auswahl aus 66 Standardfarben",
+   "pfad": "/logomatten/jetprint_light-matten",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "578": {
+   "artikelnummer": "bitte-abstand-halten",
+   "name": "JetPrint-Designs, Bitte Abstand halten",
+   "pfad": "/logomatten/bitte-abstand-halten",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "579": {
+   "artikelnummer": "bitte-abstand-halten-a",
+   "name": "JetPrint-Designs, Bitte Abstand halten",
+   "pfad": "/logomatten/bitte-abstand-halten-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "594": {
+   "artikelnummer": "patio",
+   "name": "Chromojet™-Patio-Werbematte, beliebig individuell gestaltet, Auswahl aus Pantonefarben",
+   "pfad": "/logomatten/patio",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "595": {
+   "artikelnummer": "patio-a",
+   "name": "Chromojet™-Patio-Werbematte, beliebig individuell gestaltet, Auswahl aus Pantonefarben",
+   "pfad": "/logomatten/patio-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "600": {
+   "artikelnummer": "k-turf_outdoor-matte-kundendesign",
+   "name": "Outdoormatte in \"Rasenoptik\"",
+   "pfad": "/logomatten/k-turf_outdoor-matte-kundendesign",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "601": {
+   "artikelnummer": "k-turf_outdoor-matte-kundendesign-a",
+   "name": "Outdoormatte in \"Rasenoptik\"",
+   "pfad": "/logomatten/k-turf_outdoor-matte-kundendesign-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "602": {
+   "artikelnummer": "5430a",
+   "name": "Marschall-Aluminium-Profilmatte für extreme Belastungen",
+   "pfad": "/aluminium_profilmatten/5430a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "604": {
+   "artikelnummer": "5420a",
+   "name": "Marschall-Aluminium-Profilmatte für extreme Belastungen",
+   "pfad": "/aluminium_profilmatten/5420a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "606": {
+   "artikelnummer": "5270-a",
+   "name": "Diplomat Typ G - Aluminium-Profilmatte, Gummistreifen",
+   "pfad": "/aluminium_profilmatten/5270-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "607": {
+   "artikelnummer": "5265-a",
+   "name": "Aluminium-Profilmatte -Alu /-Color-Edition, Typ G - Gummistreifen auf Wusch mit Bürstenleiste / Kratzkante",
+   "pfad": "/aluminium_profilmatten/5265-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "610": {
+   "artikelnummer": "optibrush",
+   "name": "Optibrush",
+   "pfad": "/gummi_und_kunststoffmatten/optibrush",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "613": {
+   "artikelnummer": "bitte-abstand-halten-light",
+   "name": "JetPrint-Light-Designs, Bitte Abstand halten",
+   "pfad": "/logomatten/bitte-abstand-halten-light",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "614": {
+   "artikelnummer": "bitte-abstand-halten-light-a",
+   "name": "JetPrint-Light-Designs, Bitte Abstand halten",
+   "pfad": "/logomatten/bitte-abstand-halten-light-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "638": {
+   "artikelnummer": "jetprint-designs-der-naechste-bitte-a",
+   "name": "JetPrint-Designs, Der Nächste bitte",
+   "pfad": "/logomatten/jetprint-designs-der-naechste-bitte-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "639": {
+   "artikelnummer": "jetprint-designs-herzlich-willkommen-a",
+   "name": "JetPrint-Designmatte \"Herzlich Willkommen\"",
+   "pfad": "/logomatten/jetprint-designs-herzlich-willkommen-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "648": {
+   "artikelnummer": "6300201-logomatte",
+   "name": "JetPrint™-Matten, in Wunschgröße, individuell gestaltet, Auswahl aus 66 Farben",
+   "pfad": "/logomatten/6300201-logomatte",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "649": {
+   "artikelnummer": "gitterrost",
+   "name": "Maß-Gitterrost für Zarge, feuerverzinkt",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/gitterrost",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "652": {
+   "artikelnummer": "unterkonstruktion_spezialrahmen",
+   "name": "Spezialrahmen mit Unterkonstruktion",
+   "pfad": "/aluminium_profilmatten/unterkonstruktion_spezialrahmen",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "653": {
+   "artikelnummer": "5261a",
+   "name": "Diplomat Typ RCB - Aluminium-Profilmatte, Ripsstreifen + Cassettenbürste",
+   "pfad": "/aluminium_profilmatten/5261a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "659": {
+   "artikelnummer": "aluminium-as-vollprofil-rahmen1",
+   "name": "Aluminium-Vollprofil-Rahmen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/aluminium-as-vollprofil-rahmen1",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "662": {
+   "artikelnummer": "polycotton-matten",
+   "name": "Polyester/Baumwollmatte-Fussmatten, PolyCotton™",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/polycotton-matten",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "664": {
+   "artikelnummer": "52603",
+   "name": "Classic Typ R - Aluminium-Profilmatte mit Ripseinlage",
+   "pfad": "/aluminium_profilmatten/52603",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "665": {
+   "artikelnummer": "bigsize",
+   "name": "BigSize™ gestaltet nach Kundenwunsch",
+   "pfad": "/logomatten/bigsize",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "666": {
+   "artikelnummer": "rollrost",
+   "name": "Rollrost",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/rollrost",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "667": {
+   "artikelnummer": "polycotton-matten-a",
+   "name": "Polyester/Baumwollmatte-Fussmatten, PolyCotton™",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/polycotton-matten-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "672": {
+   "artikelnummer": "5440",
+   "name": "Marschall-Premium Aluminium-Profilmatten mit Performance-Einlagen",
+   "pfad": "/aluminium_profilmatten/5440",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "673": {
+   "artikelnummer": "5440a",
+   "name": "Marschall-Premium Aluminium-Profilmatten mit Performance-Einlagen",
+   "pfad": "/aluminium_profilmatten/5440a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "674": {
+   "artikelnummer": "5453t",
+   "name": "T-Profil",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/5453t",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "675": {
+   "artikelnummer": "hoehenausgleich-",
+   "name": "Matten - Höhenausgleich",
+   "pfad": "/kokosmatten/hoehenausgleich-",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "678": {
+   "artikelnummer": "52603-a",
+   "name": "Classic Typ R - Aluminium-Profilmatte mit Ripseinlage",
+   "pfad": "/aluminium_profilmatten/52603-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "679": {
+   "artikelnummer": "enter",
+   "name": "Enter - Teppichboden mit Ripsoberfläche",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/enter",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "684": {
+   "artikelnummer": "6320302-ang",
+   "name": "RTA-Y-REHA-JetPrint™Matte, individuell gestaltet",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320302-ang",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "687": {
+   "artikelnummer": "52601",
+   "name": "Diplomat / Diplomat-Color-Edition",
+   "pfad": "/aluminium_profilmatten/52601",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "688": {
+   "artikelnummer": "52601-a",
+   "name": "Diplomat / Diplomat-Color-Edition",
+   "pfad": "/aluminium_profilmatten/52601-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "690": {
+   "artikelnummer": "55xx",
+   "name": "Schmutzfangwanne Typ 55XX für Profilmatten",
+   "pfad": "/aluminium_profilmatten/55xx",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "691": {
+   "artikelnummer": "5022",
+   "name": "Schmutzfangwanne Typ 5022 für MARSCHALL Profilmatten",
+   "pfad": "/aluminium_profilmatten/5022",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "692": {
+   "artikelnummer": "gitterrost-mit-zarge",
+   "name": "Maß-Gitterrost mit Zarge, feuerverzinkt",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/gitterrost-mit-zarge",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "694": {
+   "artikelnummer": "6303010",
+   "name": "Bierbankmatte: einfarbig oder mit Ihrem individuellem Design",
+   "pfad": "/logomatten/bierbankmatten/6303010",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "696": {
+   "artikelnummer": "5267a",
+   "name": "Aluminium-Profilmatte, Typ GCB Gummistreifen mit Cassettenbürste",
+   "pfad": "/aluminium_profilmatten/5267a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "698": {
+   "artikelnummer": "5263a",
+   "name": "Aluminium-Profilmatte, Typ RB - Ripsstreifen + Bürststreifen",
+   "pfad": "/aluminium_profilmatten/5263a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "699": {
+   "artikelnummer": "5264a",
+   "name": "Aluminium-Profilmatte, Typ RK Ripsstreifen + Kratzkante",
+   "pfad": "/aluminium_profilmatten/5264a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "700": {
+   "artikelnummer": "5269a",
+   "name": "Aluminium-Profilmatte, Typ RG - Ripsstreifen+Gummistreifen",
+   "pfad": "/aluminium_profilmatten/5269a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "702": {
+   "artikelnummer": "schmutzfangwanne",
+   "name": "Schmutzfangwanne Typ 5000 für MARSCHALL Profilmatten",
+   "pfad": "/aluminium_profilmatten/schmutzfangwanne",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "703": {
+   "artikelnummer": "5022a",
+   "name": "Schmutzfangwanne Typ 5022 für MARSCHALL Profilmatten",
+   "pfad": "/aluminium_profilmatten/5022a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "704": {
+   "artikelnummer": "5266a",
+   "name": "Aluminium-Profilmatte, Typ GB - Gummistreifen und Bürststreifen",
+   "pfad": "/aluminium_profilmatten/5266a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "706": {
+   "artikelnummer": "diplomat_aluminium-profilmatte-a",
+   "name": "Diplomat Aluminium-Profilmatte G, CB, GCB und mit Bürstenleiste",
+   "pfad": "/aluminium_profilmatten/diplomat_aluminium-profilmatte-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "707": {
+   "artikelnummer": "53601a",
+   "name": "Premium-Aluminium-Profilmatte, Typ P-, mit Performance-Einlagen in verschiedenen Trittflächen-Kombinationen",
+   "pfad": "/aluminium_profilmatten/53601a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "708": {
+   "artikelnummer": "aluminium-anlaufprofil-a",
+   "name": "Aluminium-Anlaufprofil",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/aluminium-anlaufprofil-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "714": {
+   "artikelnummer": "670328",
+   "name": "Color-Edition",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/670328",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "715": {
+   "artikelnummer": "670327-a",
+   "name": "Winkelprofil-Rahmen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/670327-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "719": {
+   "artikelnummer": "enter-a",
+   "name": "Enter - Teppichboden mit Ripsoberfläche",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/enter-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "720": {
+   "artikelnummer": "attache-a",
+   "name": "Attache",
+   "pfad": "/fussmatten/fussmatten/attache-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "721": {
+   "artikelnummer": "6400031-a",
+   "name": "Super-Mat-Fussmatte",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/6400031-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "722": {
+   "artikelnummer": "jetprint_light-matten-a",
+   "name": "Jet-Print™-Light-Fussmatte, Wunschgrößen*, bis 32-farbig individuell gestaltet, Auswahl aus 66 Standardfarben",
+   "pfad": "/logomatten/jetprint_light-matten-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "725": {
+   "artikelnummer": "counter-mat",
+   "name": "Counter-Mat",
+   "pfad": "/logomatten/werbematten-dekomatten/counter-mat",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "730": {
+   "artikelnummer": "jetprint_matten-light-einfarbig-a",
+   "name": "JetPrint™light-Matte, einfarbig > Auswahl aus 66 Standardfarben.",
+   "pfad": "/fussmatten/fussmatten/jetprint_matten-light-einfarbig-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "736": {
+   "artikelnummer": "6400031",
+   "name": "Super-Mat-Fussmatte",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/6400031",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "737": {
+   "artikelnummer": "64000161a",
+   "name": "schön&sauber-Iron-Horse XL, melierte Fussmatten",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/64000161a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "739": {
+   "artikelnummer": "master",
+   "name": "Master - Teppichboden mit Ripsoberfläche",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/master",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "740": {
+   "artikelnummer": "master-a",
+   "name": "Master - Teppichboden mit Ripsoberfläche",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/master-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "741": {
+   "artikelnummer": "55xxa",
+   "name": "Schmutzfangwanne Typ 55XX für Profilmatten",
+   "pfad": "/aluminium_profilmatten/55xxa",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "748": {
+   "artikelnummer": "gummiunterlage-a",
+   "name": "Gummi-Unterlagematte",
+   "pfad": "/aluminium_profilmatten/gummiunterlage-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "749": {
+   "artikelnummer": "18-dura-grip_meta-hartboden-a",
+   "name": "RS 18 DURA-GRIP META® (PET) Bodenschutzmatten für Hartböden",
+   "pfad": "/gummi_und_kunststoffmatten/bodenschutzmatten/18-dura-grip_meta-hartboden-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "750": {
+   "artikelnummer": "k-turf_outdoor-matte-ind",
+   "name": "Individuelle Outdoormatte in \"Rasenoptik\"",
+   "pfad": "/logomatten/k-turf_outdoor-matte-ind",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "752": {
+   "artikelnummer": "optibrush-a",
+   "name": "Optibrush",
+   "pfad": "/gummi_und_kunststoffmatten/optibrush-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "754": {
+   "artikelnummer": "k-turf_outdoor-matte-ind-a",
+   "name": "Individuelle Outdoormatte in \"Rasenoptik\"",
+   "pfad": "/logomatten/k-turf_outdoor-matte-ind-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "755": {
+   "artikelnummer": "k-turf_outdoor-matte",
+   "name": "K-Turf™ Outdoor-Matte",
+   "pfad": "/fussmatten/matten_fuer_aussenbereiche/k-turf_outdoor-matte",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "757": {
+   "artikelnummer": "k-turf_outdoor-matte-a",
+   "name": "K-Turf™ Outdoor-Matte",
+   "pfad": "/fussmatten/matten_fuer_aussenbereiche/k-turf_outdoor-matte-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "759": {
+   "artikelnummer": "k-turf-outdoor-matte_welcome",
+   "name": "Outdoor-Matte, K-Turf, Welcome",
+   "pfad": "/fussmatten/matten_fuer_aussenbereiche/k-turf-outdoor-matte_welcome",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "760": {
+   "artikelnummer": "k-turf-outdoor-matte_welcome-a",
+   "name": "Outdoor-Matte, K-Turf, Welcome",
+   "pfad": "/fussmatten/matten_fuer_aussenbereiche/k-turf-outdoor-matte_welcome-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "761": {
+   "artikelnummer": "k-turf_outdoor-matte-flower",
+   "name": "Outdoor-Matte, K-Turf, Flower",
+   "pfad": "/fussmatten/matten_fuer_aussenbereiche/k-turf_outdoor-matte-flower",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "762": {
+   "artikelnummer": "k-turf_outdoor-matte-flower-a",
+   "name": "Outdoor-Matte, K-Turf, Flower",
+   "pfad": "/fussmatten/matten_fuer_aussenbereiche/k-turf_outdoor-matte-flower-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "763": {
+   "artikelnummer": "k-turf_outdoor-matte-willkommen",
+   "name": "Outdoor-Matte, K-Turf™ - Willkommen",
+   "pfad": "/fussmatten/matten_fuer_aussenbereiche/k-turf_outdoor-matte-willkommen",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "764": {
+   "artikelnummer": "k-turf_outdoor-matte-willkommen-a",
+   "name": "Outdoor-Matte, K-Turf™ - Willkommen",
+   "pfad": "/fussmatten/matten_fuer_aussenbereiche/k-turf_outdoor-matte-willkommen-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "765": {
+   "artikelnummer": "6300000-a",
+   "name": "JetPrint™HD-Fussmatten, einfarbig> Auswahl aus 66 Farben",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/6300000-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "766": {
+   "artikelnummer": "profileinlagen-a",
+   "name": "Ripseinlagen für Aluminium-Profilmatten",
+   "pfad": "/aluminium_profilmatten/profileinlagen-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "767": {
+   "artikelnummer": "5561542-a",
+   "name": "PLAZA Typ 542 S/ - mit",
+   "pfad": "/aluminium_profilmatten/5561542-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "768": {
+   "artikelnummer": "stahlrahmen-feuerverzinkt",
+   "name": "Stahlrahmen, feuerverzinkt",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/stahlrahmen-feuerverzinkt",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "769": {
+   "artikelnummer": "5022plus",
+   "name": "Schmutzfangwanne Typ 5022+ mit MIT EINLEGER (verzinkt) für MARSCHALL Profilmatten",
+   "pfad": "/aluminium_profilmatten/5022plus",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "776": {
+   "artikelnummer": "6400201-velourmatte-a",
+   "name": "JetPrint™-Velourmatten, in Wunschgröße, fotorealistisch, individuell gestaltet, Auswahl aus 66",
+   "pfad": "/logomatten/6400201-velourmatte-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "778": {
+   "artikelnummer": "messing-winkelprofil-rahmen-a",
+   "name": "Messing-Winkelprofil-Rahmen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/messing-winkelprofil-rahmen-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "779": {
+   "artikelnummer": "winkelprofil-rahmen-eloxiert-a",
+   "name": "Winkelprofil-Rahmen, eloxiert, gold-farbig, Mittelbronze, schwarz, Edelstahl",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/winkelprofil-rahmen-eloxiert-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "780": {
+   "artikelnummer": "winkelprofil-rahmen_eloxiert_gold-farbig_mittelbronze_schwarz_edelstahl",
+   "name": "Winkelprofil-Rahmen, eloxiert, gold-farbig, Mittelbronze, schwarz, Edelstahl",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/winkelprofil-rahmen_eloxiert_gold-farbig_mittelbronze_schwarz_edelstahl",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "784": {
+   "artikelnummer": "52600-a",
+   "name": "Aluminium-Profilmatten mit verschiedenen Trittflächen in WUNSCHGRÖSSE",
+   "pfad": "/aluminium_profilmatten/52600-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "785": {
+   "artikelnummer": "winkelprofil-rahmen",
+   "name": "Winkelprofil-Rahmen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/winkelprofil-rahmen",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "786": {
+   "artikelnummer": "profileinlagen",
+   "name": "Ripseinlagen für Aluminium-Profilmatten",
+   "pfad": "/aluminium_profilmatten/profileinlagen",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "788": {
+   "artikelnummer": "6320303-a",
+   "name": "JetPrint-Vision™, in Wunschgröße, individuell gestaltet, Auswahl aus 66 Farben",
+   "pfad": "/logomatten/6320303-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "790": {
+   "artikelnummer": "6320305",
+   "name": "OS-QUER-STEPPING-Matte nach Kundenangaben",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320305",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "791": {
+   "artikelnummer": "6320303",
+   "name": "JetPrint-Vision™, in Wunschgröße, individuell gestaltet, Auswahl aus 66 Farben",
+   "pfad": "/logomatten/6320303",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "792": {
+   "artikelnummer": "6320305-a",
+   "name": "OS-QUER-STEPPING-Matte nach Kundenangaben",
+   "pfad": "/logomatten/os-physio-rehab-matten/6320305-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "793": {
+   "artikelnummer": "abdeckschiene",
+   "name": "Abdeckschiene",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/abdeckschiene",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "797": {
+   "artikelnummer": "eventmatte",
+   "name": "Eventmatte™ gestaltet nach Kundenwunsch",
+   "pfad": "/logomatten/eventmatte",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "798": {
+   "artikelnummer": "eventmatte-a",
+   "name": "Eventmatte™ gestaltet nach Kundenwunsch",
+   "pfad": "/logomatten/eventmatte-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "799": {
+   "artikelnummer": "assistent-a",
+   "name": "Assistent 560",
+   "pfad": "/fussmatten/standard-schmutzfangmatten/assistent-a",
+   "modus": "anfrage",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  },
+  "802": {
+   "artikelnummer": "winkelprofil-rahmens1",
+   "name": "Winkelprofil-Rahmen",
+   "pfad": "/aluminium_profilmatten/rahmen_und_zubehoer/winkelprofil-rahmens1",
+   "modus": "kauf",
+   "einkaufProQm": null,
+   "salesFactor": null,
+   "standardbreiten": null
+  }
+ }
+}

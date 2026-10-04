@@ -1606,8 +1606,12 @@ async function kontoRegister(session, felder) {
  *   Namenskuerzel (attache, optibrush). Pfade sind gross-/kleinschreibungs-
  *   unempfindlich; unbekannte Pfade antworten mit 302 auf "/".
  *
- *   Es gibt KEINE Blaetterung: ?seite=1 ist die ganze Kategorie, ?seite=2
- *   liefert eine leere Liste. Die Blaetterung hier ist darum unsere eigene.
+ *   Das Altsystem blaettert Kategorien ab 80 Produkten selbst
+ *   ("Seite 1 von 2", Parameter ?seite=N, 80 Produkte je Seite). Kleinere
+ *   Kategorien haben nur Seite 1; ?seite=2 liefert dort eine leere Liste.
+ *   holeKategorie() folgt dem Zaehler und liefert die GANZE Kategorie --
+ *   frueher fehlten bei aluminium_profilmatten dadurch 2 von 82 Artikeln.
+ *   Die Blaetterung der Bruecke (blaettere) ist davon unabhaengig.
  */
 
 /** Wie lange Katalogdaten zwischengespeichert werden. */
@@ -1615,6 +1619,9 @@ const KATALOG_TTL_MS = 10 * 60 * 1000;
 
 /** Suchseite des Altsystems. Der Parameter heisst "search". */
 const SUCH_PFAD = '/suche';
+
+/** Mehr Seiten als das folgt holeKategorie() beim Blaettern des Altsystems nicht. */
+const KATEGORIE_SEITEN_MAX = 30;
 
 /** Voreinstellung und Obergrenze der Blaetterung. */
 const SEITE_STANDARD = 24;
@@ -2075,7 +2082,7 @@ function parseUntermenue(html) {
  *
  * Jedes Feld faellt einzeln auf null zurueck; ein kaputter Block wirft nie.
  */
-function parseProduktliste(html) {
+function parseProduktliste(html, { vorheriger: fortsetzung = null } = {}) {
   const bereich = inhaltsbereich(html);
   const gridPos = bereich.search(/<div class=['"]artikel_grid[^'"]*['"]>/i);
   const quelle = gridPos >= 0 ? bereich.slice(gridPos) : bereich;
@@ -2140,7 +2147,9 @@ function parseProduktliste(html) {
       // ihnen keinen eigenen Namen. Damit ein Frontend keine namenlosen
       // Kacheln zeigt, wird die Zugehoerigkeit hier festgehalten -- der
       // Name selbst wird NICHT erfunden.
-      const vorheriger = produkte.length ? produkte[produkte.length - 1] : null;
+      // Beginnt die Seite mit einem namenlosen Block, gehoert er zum letzten
+      // Produkt der Vorseite (`fortsetzung`).
+      const vorheriger = produkte.length ? produkte[produkte.length - 1] : fortsetzung;
       const elternteil = name ? null : (vorheriger ? (vorheriger.gehoertZu || vorheriger.pfad) : null);
       const elternName = name ? null : (vorheriger ? (vorheriger.nameGeerbt || vorheriger.name) : null);
 
@@ -2219,6 +2228,11 @@ function parsePreis(html) {
     ustSatz: Number.isFinite(ustSatz) ? ustSatz : null,
     brutto: /Inkl\.?\s*Umsatzsteuer/i.test(block) ? true : null,
     unvollstaendigPraefix: praefix || null,
+    // Neu. Stehen NICHT auf der Seite, sondern kommen aus der Preisabfrage
+    // der Seite (ergaenzePreisaufbau) und sind darum erst gefuellt, wenn
+    // der Preisaufbau angefordert wurde -- sonst bleibt es bei null.
+    netto: null,
+    aufbau: null,
   };
 }
 
@@ -2290,17 +2304,31 @@ function parseKaufformular(html) {
   }
 
   /* --- Attribute aus Farb-/Design-Radios (zweites Seitenlayout) --- */
+  /* Das Farbmuster steht im Label zum Radiofeld:
+       <input type="radio" ... id="613-koenigsblau_farboption">
+       <label class="label_item" for="613-koenigsblau_farboption"><img src="/media/bild/613-..._farboption.JPG"></label>
+     Die Verbindung laeuft ueber id <-> for, nicht ueber den Dateinamen --
+     das ist die sichere Zuordnung fuer das MUSTER. (Die Fotos der Farbe
+     lassen sich nur ueber den Namen zuordnen, siehe ordneFarbbilder.) */
+  const musterZuId = new Map();
+  for (const m of form.matchAll(/<label\b[^>]*\bfor=(["'])([\s\S]*?)\1[^>]*>\s*<img\b[^>]*src=(["'])(\/media\/[^"']+)\3/gi)) {
+    musterZuId.set(m[2], m[4]);
+  }
   const radiogruppen = new Map();
   for (const m of form.matchAll(/<input\b[^>]*type=["']radio["'][^>]*>/gi)) {
     const tag = m[0];
     const feld = attribut(tag, 'name');
     if (!feld || !/^attribute\[/.test(feld)) continue;
     if (!radiogruppen.has(feld)) radiogruppen.set(feld, []);
-    radiogruppen.get(feld).push({
+    const musterRoh = musterZuId.get(attribut(tag, 'id'));
+    const option = {
       wert: attribut(tag, 'value') ?? '',
       label: attribut(tag, 'data-color') || attribut(tag, 'value') || '',
       gewaehlt: /\bchecked\b/i.test(tag),
-    });
+    };
+    // Neu: das Farbmuster dieser Option (null, wenn das Label kein Bild traegt).
+    option.muster = musterRoh ? mediaZuApiPfad(musterRoh) : null;
+    radiogruppen.get(feld).push(option);
   }
   for (const [feld, optionen] of radiogruppen) {
     const name = (feld.match(/^attribute\[([\s\S]*)\]$/) || [])[1] || feld;
@@ -2336,6 +2364,11 @@ function parseKaufformular(html) {
       vorgabe: attribut(tag, 'value') || null,
     });
   }
+
+  /* --- Spezialoption (Massware) im Zusammenhang lesen ---
+     Ergaenzt die Felder oben um Typ, Achse, Einheit, Beschriftung, m2-Preis.
+     Bestehende Felder bleiben unveraendert, es kommen nur neue hinzu. */
+  const spezialoption = parseSpezialoption(form, attribute, masse);
 
   /* --- Das komplette Feldset, so wie es abgeschickt werden muss ---
      Bei <select> und Radiogruppen steht der abzuschickende Wert nicht im
@@ -2374,7 +2407,154 @@ function parseKaufformular(html) {
     unvollstaendigPraefix: firstMatch(form, /name="price_incomplete_prefix" value="([^"]*)"/i),
     attribute,
     masse,
+    spezialoption,
     felder,
+  };
+}
+
+/**
+ * Die Spezialoption (Massware) eines Kaufformulars.
+ *
+ * Was die Seite verraet -- und was nicht:
+ *   steht auf der Seite   Typ (aus dem Feldnamen: spezial | flaeche | laenge),
+ *                         Beschreibung ("Wannen-Aussenmasse"), Eingabeeinheit
+ *                         (cm/mm), Beschriftung der Achsen, Vorgabewerte,
+ *                         Min/Max (nur beim Typ `spezial`), die Auswahlliste
+ *                         der Breiten, und -- bei 35 Seiten -- der m2-Preis
+ *                         als verstecktes Feld `sqmprice`.
+ *   steht NICHT drauf     das Rechenmodell (`calc`: varL/custom), der
+ *                         Umrechnungsfaktor (input_unit_factor), Einkaufs-
+ *                         preise und der Preis je laufendem Meter.
+ *   nicht erkennbar       der Typ `umfang`: SpezialoptionUmfang::getFrontendForm()
+ *                         schreibt die Felder als `flaeche[x|y]` -- auf der
+ *                         Seite sieht er aus wie eine Flaeche. Ob ein Artikel
+ *                         Umfang ist, steht nur in der Datenbank.
+ *   m2-Preis              Der Wert wird so geliefert, wie die Seite ihn
+ *                         traegt. Ob netto oder brutto, sagt die Seite nicht.
+ *
+ * Gibt null zurueck, wenn das Formular keine Spezialoption hat.
+ */
+function parseSpezialoption(form, attribute, masse) {
+  const von = form.search(/<div class=['"]spezialoption\b/i);
+  const felder = masse.filter((x) => /^spezialoption\[/.test(x.feld));
+  const selects = attribute.filter((x) => x.art === 'spezialoption');
+  if (von < 0 && !felder.length && !selects.length) return null;
+
+  // Block: vom Spezialoption-Container bis zum Kommentarfeld bzw. Preisblock.
+  const ab = von >= 0 ? von : 0;
+  const enden = [
+    form.indexOf("<label class='control-label'>Kommentar", ab),
+    form.indexOf('name="kommentar"', ab),
+    form.indexOf("class='produktpreis'", ab),
+  ].filter((i) => i > ab);
+  const bis = enden.length ? Math.min(...enden) : Math.min(form.length, ab + 5000);
+  const block = form.slice(ab, bis);
+
+  // Block in Text umschreiben, die Felder als Marken §n§ stehen lassen.
+  const marken = [];
+  const text = decodeEntities(
+    block
+      .replace(/<select\b([^>]*)>[\s\S]*?<\/select>/gi, (_, a) => {
+        const name = attribut(a, 'name');
+        marken.push(name);
+        return ` §${marken.length - 1}§ `;
+      })
+      .replace(/<input\b([^>]*)>/gi, (_, a) => {
+        const name = attribut(a, 'name');
+        if (!name || !/^spezialoption\[/.test(name)) return ' ';
+        marken.push(name);
+        return ` §${marken.length - 1}§ `;
+      })
+      .replace(/<[^>]+>/g, ' ')
+  ).replace(/\s+/g, ' ');
+
+  const teile = text.split(/§(\d+)§/); // [vorText, nr, nachText, nr, nachText ...]
+  const beschreibung = (teile[0] || '').replace(/:\s*$/, '').trim() || null;
+  const nachText = new Map();
+  for (let i = 1; i < teile.length; i += 2) {
+    // Alles ab dem Warnhinweis bzw. den Mindest-/Maximalmassen gehoert nicht
+    // mehr zur Beschriftung dieses Feldes.
+    const rest = (teile[i + 1] || '').split(/Bitte beachten|Mindestma|Maximalma/i)[0];
+    nachText.set(marken[Number(teile[i])], rest.replace(/\s*[x×]\s*$/i, '').trim());
+  }
+
+  const kenn = (feld) => {
+    const m = String(feld).match(/^spezialoption\[(\d+)\]\[(\w+)\]\[(\w+)\]$/);
+    return m ? { id: Number(m[1]), option: m[2], achse: m[3] } : null;
+  };
+  const einheitAus = (s) => {
+    const m = String(s || '').match(/^(mm|cm|m)\b\s*(.*)$/i);
+    return m ? { einheit: m[1].toLowerCase(), beschriftung: m[2].trim() || null } : { einheit: null, beschriftung: String(s || '').trim() || null };
+  };
+
+  const achsen = {};
+  let id = null;
+  let option = null;
+  let m2Preis = null;
+
+  for (const f of masse) {
+    const k = kenn(f.feld);
+    if (!k) continue;
+    id = k.id; option = option || k.option;
+    if (k.achse === 'sqmprice') {
+      const n = Number(String(f.vorgabe ?? '').replace(',', '.'));
+      m2Preis = Number.isFinite(n) && n > 0 ? n : null;
+      f.achse = 'sqmprice';
+      continue;
+    }
+    const { einheit, beschriftung } = einheitAus(nachText.get(f.feld));
+    f.option = k.option;
+    f.achse = k.achse;
+    f.einheit = einheit;
+    f.beschriftung = beschriftung;
+    achsen[k.achse] = {
+      achse: k.achse, art: 'eingabe', feld: f.feld, einheit, beschriftung,
+      min: f.min, max: f.max, vorgabe: f.vorgabe,
+    };
+  }
+  for (const s of selects) {
+    const k = kenn(s.feld);
+    if (!k) continue;
+    id = k.id; option = option || k.option;
+    // Die Einheit steht in den Werten selbst ("60 cm").
+    const werte = s.optionen.map((o) => o.wert);
+    const einheit = ((werte.find((w) => /(mm|cm|m)\s*$/i.test(w)) || '').match(/(mm|cm|m)\s*$/i) || [])[1] || null;
+    s.option = k.option;
+    s.achse = k.achse;
+    s.einheit = einheit ? einheit.toLowerCase() : null;
+    achsen[k.achse] = {
+      achse: k.achse, art: 'auswahl', feld: s.feld, einheit: s.einheit,
+      beschriftung: (s.optionen[0] && String(s.optionen[0].label).replace(/\s*\d.*$/, '').trim()) || null,
+      werte, vorgabe: s.gewaehlt,
+    };
+  }
+  // Fehlt einer Auswahl die Einheit, ist es meist die der anderen Achse.
+  for (const a of Object.values(achsen)) {
+    if (!a.einheit) a.einheit = Object.values(achsen).find((b) => b.einheit)?.einheit || null;
+  }
+  if (!option) return null;
+
+  // Die Block-Angaben auch an jedes Feld haengen, damit sie am Mass-Eintrag
+  // selbst stehen (/api/produkt liefert `masse` und `attribute` mit).
+  for (const f of felder) {
+    f.beschreibung = beschreibung;
+    f.m2Preis = m2Preis;
+  }
+  for (const s of selects) {
+    s.beschreibung = beschreibung;
+    s.m2Preis = m2Preis;
+  }
+
+  return {
+    artikelId: id,
+    typ: option,
+    beschreibung,
+    achsen: ['x', 'y'].filter((a) => achsen[a]).map((a) => achsen[a]),
+    m2Preis,
+    m2PreisHinweis: m2Preis == null
+      ? 'Die Seite traegt keinen m2-Preis (versteckte Eingabe sqmprice fehlt oder ist 0).'
+      : 'Wert aus der versteckten Eingabe sqmprice, unveraendert. Ob netto oder brutto, sagt die Seite nicht.',
+    nichtAufDerSeite: ['calc (Rechenmodell)', 'input_unit_factor (Umrechnung)', 'Einkaufspreis', 'Preis je laufendem Meter'],
   };
 }
 
@@ -2397,19 +2577,178 @@ function parseKaufformular(html) {
 function parseBilder(html) {
   const bereich = inhaltsbereich(html).replace(/<script[\s\S]*?<\/script>/gi, ' ');
   const roh = [];
-  for (const m of bereich.matchAll(/<a\b[^>]*href=['"](\/media\/[^'"]+)['"][^>]*>/gi)) roh.push(m[1]);
-  for (const m of bereich.matchAll(/<img\b[^>]*src=['"](\/media\/[^'"]+)['"][^>]*>/gi)) roh.push(m[1]);
+  for (const m of bereich.matchAll(/<a\b[^>]*href=['"](\/media\/[^'"]+)['"][^>]*>/gi)) roh.push({ src: m[1], pos: m.index });
+  for (const m of bereich.matchAll(/<img\b[^>]*src=['"](\/media\/[^'"]+)['"][^>]*>/gi)) roh.push({ src: m[1], pos: m.index });
+
+  /* Wo das Kaufformular endet: alles davor gehoert zur Bildleiste des
+     Artikels (Schieber, Hauptbild, Farbmuster), alles danach steht im von
+     Hand gepflegten Beschreibungstext. Die Unterscheidung steht in `ort`. */
+  const formVon = bereich.search(/<form\b[^>]*class=['"][^'"]*artikel_buy_form/i);
+  const formEnde = formVon >= 0 ? bereich.indexOf('</form>', formVon) : -1;
+
+  /* Farbmuster sind die Bilder in den Labels der Farbwahl
+     (<label class="label_item"><img src=...>). Daran erkennt man auch
+     das Muster "default.jpg", das keinen _farboption im Namen traegt. */
+  const musterQuellen = new Set();
+  for (const m of bereich.matchAll(/<label\b[^>]*class=['"][^'"]*label_item[^'"]*['"][^>]*>\s*<img\b[^>]*src=['"](\/media\/[^'"]+)['"]/gi)) {
+    const api = mediaZuApiPfad(m[1]);
+    if (api) musterQuellen.add(api);
+  }
 
   const out = [];
   const gesehen = new Set();
-  for (const src of roh) {
+  for (const { src, pos } of roh) {
     const api = mediaZuApiPfad(src);
     if (!api || gesehen.has(api)) continue;
     gesehen.add(api);
-    out.push({ bild: api, original: decodeEntities(src) });
-    if (out.length >= 60) break;
+    const eintrag = { bild: api, original: decodeEntities(src), ...bildEinordnung(src, api, pos, formEnde, musterQuellen) };
+    out.push(eintrag);
+    // Sicherheitsgrenze gegen eine entgleiste Seite, KEINE fachliche
+    // Grenze. Frueher stand hier 60 -- das schnitt bei Artikel 6300000
+    // (JetPrint: die Seite traegt 104 Bilder, davon 45 Farbmuster) 44 Bilder
+    // ab, darunter 43 von 44 Farbmustern. Gemessen an allen 356 Kaufseiten
+    // des lokalen Altsystems (Stand 04.10.2026) ist das Maximum 206 Bilder
+    // (bar-mats-a); 600 laesst reichlich Luft und schuetzt trotzdem vor
+    // einer Seite mit tausenden Links.
+    if (out.length >= BILDER_MAX) break;
   }
   return out;
+}
+
+/** Sicherheitsgrenze fuer die Bildzahl je Artikelseite (siehe parseBilder). */
+const BILDER_MAX = 600;
+
+/**
+ * Vergleichsform eines Dateinamens: Endung ab, Unicode auf NFC (Dateinamen
+ * mit Umlaut kommen im Altsystem mal zerlegt, mal zusammengesetzt vor),
+ * kleingeschrieben. NUR zum Vergleichen -- ausgeliefert wird der Originalname.
+ */
+function bildStamm(pfad) {
+  let name = String(pfad);
+  try { name = decodeURIComponent(name); } catch { /* roher Name bleibt */ }
+  name = name.split('/').pop().replace(/\.[A-Za-z0-9]{2,4}$/, '');
+  return name.normalize('NFC').toLowerCase();
+}
+
+/**
+ * Ordnet ein Bild ein -- allein nach Namensregel und Lage auf der Seite.
+ * Das Altsystem speichert die Verbindung Bild <-> Farbe nicht in der
+ * Datenbank, sondern nur im Dateinamen:
+ *   <farbe>_farboption.JPG   Farbmuster der Grundfarbe (34 x 20 px)
+ *   <farbe>_designoption.JPG Farbmuster der Designfarbe
+ *   <farbe>_0.JPG            Foto des Artikels in dieser Farbe
+ *   *variant*                gilt bei JEDER Farbe
+ *   *default*                gilt bei der Auswahl "default"
+ * `art` ist hier die grobe Einordnung; das Foto-zu-Farbe-Zuordnen macht
+ * ordneFarbbilder(), weil es die Farbwerte aus dem Formular braucht.
+ */
+function bildEinordnung(src, api, pos, formEnde, musterQuellen) {
+  const stamm = bildStamm(src);
+  const ort = formEnde >= 0 && pos > formEnde ? 'beschreibung' : 'seitenkopf';
+  const m = stamm.match(/^(.*)_(farb|design)option$/);
+  if (m) {
+    return { art: 'muster', ort, farbwert: m[1], farbgruppe: m[2] === 'farb' ? 'Grundfarbe' : 'Designfarbe' };
+  }
+  if (musterQuellen.has(api)) return { art: 'muster', ort, farbwert: stamm, farbgruppe: 'Grundfarbe' };
+  if (ort === 'beschreibung') return { art: 'beschreibung', ort };
+  if (/variant/.test(stamm)) return { art: 'variante', ort };
+  if (/default/.test(stamm)) return { art: 'standard', ort };
+  return { art: 'bild', ort };
+}
+
+/**
+ * Ordnet Farbmuster und Farbfotos den Optionen der Farbwahl zu.
+ *
+ * Die Farbwahl (`typ: farbwahl`, Attribute Grundfarbe / Designfarbe) steht
+ * als Radiogruppe im Formular. Pro Option kommen neue Felder dazu:
+ *   muster  Pfad des Farbmusters (34 x 20 px). Sicher: kommt aus dem Label
+ *           der Option (id <-> for), nicht aus dem Dateinamen. Fehlt es dort,
+ *           greift der Name `<wert>_farboption` bzw. `<wert>_designoption`.
+ *   fotos   Fotos des Artikels in dieser Farbe (`<wert>_0.JPG` u. a.).
+ *           Zuordnung NUR ueber den Dateinamen -- so macht es auch das
+ *           Altsystem. Strenger als dort: der Farbwert muss als ganzes Wort
+ *           im Namen stehen, nicht irgendwo als Teilstring (der Wert "1"
+ *           passte sonst auf fast jeden Dateinamen). Ein Foto gehoert
+ *           genau EINER Option, der mit dem laengsten passenden Wert --
+ *           sonst erbte "Prem-CARE-anthrazit" die Fotos von
+ *           "Prem-CARE-anthrazit-large".
+ *   foto    das erste davon (oder null)
+ * Am Attribut selbst steht `farbbilder`: die Bilder, die zu keiner Farbe
+ * gehoeren -- `standard` (*default*, gilt bei "default") und `variante`
+ * (*variant*, gilt bei jeder Farbe), plus `zuordnung: "namensregel"`.
+ * In `bilder` bekommen die zugeordneten Fotos `art: "farbfoto"`, `farbwert`
+ * und `farbgruppe`.
+ *
+ * Aendert nichts an bestehenden Feldern.
+ */
+function ordneFarbbilder(attribute, bilder) {
+  const norm = (s) => String(s ?? '').normalize('NFC').toLowerCase();
+  // Zeichen, die einen Farbwert im Dateinamen begrenzen duerfen.
+  const wortGrenze = (s, von, bis) => {
+    const davor = von === 0 ? '' : s[von - 1];
+    const danach = bis >= s.length ? '' : s[bis];
+    const istBuchstabe = (c) => c !== '' && /[\p{L}\p{N}]/u.test(c);
+    return !istBuchstabe(davor) && (danach === '' || !istBuchstabe(danach));
+  };
+  const trifft = (stamm, wert) => {
+    if (!wert) return false;
+    let ab = 0;
+    for (;;) {
+      const i = stamm.indexOf(wert, ab);
+      if (i < 0) return false;
+      if (wortGrenze(stamm, i, i + wert.length)) return true;
+      ab = i + 1;
+    }
+  };
+
+  const fotoKandidaten = bilder.filter((b) => b.art === 'bild' || b.art === 'standard' || b.art === 'variante');
+  const farbwahlen = attribute.filter((a) => a.typ === 'farbwahl');
+  for (const attr of farbwahlen) {
+    const gruppe = attr.name.replace(/[:=\s]+$/, '').trim();
+    const werte = attr.optionen.map((o) => ({ o, w: norm(o.wert) })).filter((x) => x.w && x.w !== 'default');
+    const alle = attr.optionen.map((o) => ({ o, w: norm(o.wert) }));
+    for (const o of attr.optionen) { o.fotos = []; }
+
+    for (const b of fotoKandidaten) {
+      const stamm = bildStamm(b.original);
+      if (b.art === 'variante') continue;
+      // `default`-Bilder gehoeren zur Option "default"; sie tragen den Wert
+      // nicht im Namen, sondern das Wort selbst.
+      if (b.art === 'standard') {
+        const d = alle.find((x) => x.w === 'default');
+        if (d) { d.o.fotos.push(b.bild); b.farbwert = 'default'; b.farbgruppe = gruppe; }
+        continue;
+      }
+      // Laengster passender Wert gewinnt.
+      let best = null;
+      for (const x of werte) {
+        if (trifft(stamm, x.w) && (!best || x.w.length > best.w.length)) best = x;
+      }
+      if (best) {
+        best.o.fotos.push(b.bild);
+        // Gleicher Wert in zwei Farbgruppen (Grund- und Designfarbe haben
+        // dieselbe Palette): das Foto behaelt die erste Gruppe, die es findet.
+        if (b.art !== 'farbfoto') { b.art = 'farbfoto'; b.farbwert = best.o.wert; b.farbgruppe = gruppe; }
+      }
+    }
+
+    for (const o of attr.optionen) {
+      o.foto = o.fotos.length ? o.fotos[0] : null;
+      if (!o.muster) {
+        // Zweiter Weg zum Muster: der Dateiname <wert>_farboption / _designoption.
+        const m = bilder.find((b) => b.art === 'muster' && norm(b.farbwert) === norm(o.wert));
+        o.muster = m ? m.bild : null;
+      }
+    }
+    attr.farbbilder = {
+      zuordnung: 'namensregel',
+      standard: bilder.filter((b) => b.art === 'standard').map((b) => b.bild),
+      variante: bilder.filter((b) => b.art === 'variante').map((b) => b.bild),
+      mitMuster: attr.optionen.filter((o) => o.muster).length,
+      mitFoto: attr.optionen.filter((o) => o.fotos.length).length,
+      optionen: attr.optionen.length,
+    };
+  }
 }
 
 /**
@@ -2460,6 +2799,9 @@ function parseArtikel(html, pfad) {
   const formular = parseKaufformular(html);
   const preis = parsePreis(bereich);
   const bilder = parseBilder(html);
+  // Farbmuster und Farbfotos den Optionen der Farbwahl zuordnen (ergaenzt
+  // `attribute` und `bilder` um neue Felder, aendert keine bestehenden).
+  ordneFarbbilder(formular ? formular.attribute : [], bilder);
 
   /* Beschreibung: alles im Inhaltsbereich ausser Kopfzeile, Formular und
      Bildergeruest. Praktisch geht das am zuverlaessigsten so: Formular und
@@ -2492,6 +2834,7 @@ function parseArtikel(html, pfad) {
     verfuegbarkeit: verfuegbarkeit || null,
     attribute: formular ? formular.attribute : [],
     masse: formular ? formular.masse : [],
+    spezialoption: formular ? formular.spezialoption : null,
     technischeDaten: parseTechnischeDaten(html),
     sprachen: [...SPRACHEN],
     // Rohbeschreibung des Formulars. Wird von kaufformularAntwort() gelesen
@@ -2673,16 +3016,43 @@ async function holeKategorie(pfad, { sprache = null, frisch = false } = {}) {
     produkte: parseProduktliste(seite.html),
     upstream: seite.logs,
   };
+
+  // Weitere Seiten des Altsystems nachladen ("Seite 1 von N").
+  const seitenzahl = Number(firstMatch(seite.html, /Seite\s+1\s+von\s+(\d+)/i) || 1);
+  if (seitenzahl > 1) {
+    const bisSeite = Math.min(seitenzahl, KATEGORIE_SEITEN_MAX);
+    const folgeseiten = await parallel(
+      Array.from({ length: bisSeite - 1 }, (_, i) => i + 2),
+      2,
+      (n) => holeSeite(`${seite.kanonisch || pfad}?seite=${n}`, { sprache })
+    );
+    for (const f of folgeseiten) {
+      if (!f || f.fehler || f.umleitung || !f.html) {
+        wert.hinweise = [...(wert.hinweise || []), `Eine Folgeseite der Kategorie liess sich nicht lesen: ${(f && (f.fehler || f.umleitung)) || 'leer'}`];
+        continue;
+      }
+      const vorher = wert.produkte.length ? wert.produkte[wert.produkte.length - 1] : null;
+      wert.produkte.push(...parseProduktliste(f.html, { vorheriger: vorher }));
+      wert.upstream = [...wert.upstream, ...f.logs];
+    }
+    wert.altsystemSeiten = seitenzahl;
+    if (seitenzahl > bisSeite) {
+      wert.hinweise = [...(wert.hinweise || []), `Das Altsystem meldet ${seitenzahl} Seiten, gelesen wurden ${bisSeite} (KATEGORIE_SEITEN_MAX).`];
+    }
+  }
   cacheSchreib(key, wert);
   return { ...wert, gecacht: false };
 }
 
 /** Eine Artikelseite -- mit Zwischenspeicher. */
-async function holeArtikel(pfad, { sprache = null, frisch = false } = {}) {
+async function holeArtikel(pfad, { sprache = null, frisch = false, preisaufbau = PREISAUFBAU_STANDARD } = {}) {
   const key = `artikel:${sprache || 'de'}:${pfadSchluessel(pfad)}`;
   if (!frisch) {
     const treffer = cacheLies(key);
-    if (treffer) return { ...treffer, gecacht: true };
+    if (treffer) {
+      if (preisaufbau) await sichernPreisaufbau(key, treffer.artikel, sprache);
+      return { ...treffer, gecacht: true };
+    }
   }
 
   const seite = await holeSeite(pfad, { sprache });
@@ -2725,6 +3095,7 @@ async function holeArtikel(pfad, { sprache = null, frisch = false } = {}) {
 
   const wert = { ok: true, artikel, parsen: bewerteArtikel(artikel), upstream: seite.logs };
   cacheSchreib(key, wert);
+  if (preisaufbau) await sichernPreisaufbau(key, artikel, sprache);
   return { ...wert, gecacht: false };
 }
 
@@ -2873,6 +3244,8 @@ function kaufformularAntwort(a) {
     vorhanden: true,
     modus: a.modus,
     knopfbeschriftung: a.modus === 'anfrage' ? 'in den Anfragenkorb' : 'In den Warenkorb',
+    // Neu: die Massware-Angaben im Zusammenhang (Typ, Achsen, Einheit, m2-Preis).
+    spezialoption: a.spezialoption || null,
     upstream: {
       methode: 'POST',
       pfad: CART_PATH,
@@ -3322,6 +3695,174 @@ async function fetchPricePfad(session, pfad, anzahl, attributPaare) {
     json = { error: true, message: 'Antwort war kein gueltiges JSON.' };
   }
   return { ok: !json?.error, json, uebernommen, abgelehnt, artikelId: a.artikelId, logs: [...(r.upstream || []), ...res.logs] };
+}
+
+/* ------------------------------------------------------------------ */
+/* Preisaufbau: Netto-Grundpreis und Aufpreise je Option               */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Ob holeArtikel() den Preisaufbau standardmaessig mitliefert.
+ *
+ * Er steht NICHT im HTML der Artikelseite -- die Seite zeigt nur den
+ * fertigen Bruttopreis der Vorauswahl, die Optionen tragen keinen Preis.
+ * Er laesst sich nur aus der Preisabfrage der Seite (price_updates, JSON)
+ * zurueckrechnen, und die kostet eine Anfrage je Option. Bei einer
+ * 45-Farben-Matte mit zwei Farbgruppen sind das ueber 90 Anfragen.
+ * Darum ist er abgeschaltet, solange niemand ihn verlangt:
+ *   - holeArtikel(pfad, { preisaufbau: true })  fuer einen Aufruf
+ *   - BRUECKE_PREISAUFBAU=1 beim Start          fuer den ganzen Prozess
+ * Die Ergebnisse liegen im Katalog-Zwischenspeicher (10 Minuten).
+ * Netlify-Function: nicht einschalten (zustandslos, kurze Laufzeit).
+ */
+const PREISAUFBAU_STANDARD = process.env.BRUECKE_PREISAUFBAU === '1';
+/** Hoechstzahl Preisabfragen je Artikel (Maximum im Altsystem: 143 Optionen). */
+const PREISAUFBAU_PROBEN_MAX = 400;
+const PREISAUFBAU_PARALLEL = 6;
+/** Je Artikel nur eine Berechnung gleichzeitig. */
+const preisaufbauLaeuft = new Map();
+
+/**
+ * Rechnet einen gerundeten Bruttobetrag auf den Nettobetrag in Cent zurueck.
+ * Das Altsystem rundet erst das Brutto; der Nettobetrag ist der (eindeutige)
+ * Centwert, der gerundet wieder genau dieses Brutto ergibt.
+ */
+function nettoAusBrutto(brutto, ustSatz) {
+  if (!Number.isFinite(brutto) || !Number.isFinite(ustSatz)) return null;
+  const faktor = 1 + ustSatz / 100;
+  const mitte = Math.round((brutto / faktor) * 100);
+  const zielCent = Math.round(brutto * 100);
+  for (const d of [0, -1, 1, -2, 2]) {
+    if (Math.round(((mitte + d) / 100) * faktor * 100) === zielCent) return (mitte + d) / 100;
+  }
+  return mitte / 100;
+}
+
+const rund2 = (x) => Math.round(x * 100) / 100;
+
+/** Eine Preisabfrage wie die Seite sie selbst stellt (POST, Formularfelder). */
+async function preisProbe(sitzung, url, artikelId, paare) {
+  const body = buildForm([['artikel', String(artikelId)], ['anzahl', '1'], ...paare]);
+  const res = await upstream('POST', url.toString(), { session: sitzung, body });
+  let json = null;
+  try { json = JSON.parse(decodeBody(res.buffer)); } catch { return null; }
+  const p = json && !json.error && Array.isArray(json.prices) ? json.prices[0] : null;
+  if (!p || ![p.preis, p.attributepreis, p.optionenpreis].every((n) => Number.isFinite(Number(n)))) return null;
+  return { preis: Number(p.preis), attribut: Number(p.attributepreis), optionen: Number(p.optionenpreis) };
+}
+
+/** Wie holeArtikel sie nutzt: je Artikel einmal, Ergebnis bleibt im Cache. */
+async function sichernPreisaufbau(key, artikel, sprache) {
+  if (!artikel || !artikel.preis || artikel.preis.aufbau) return;
+  if (!preisaufbauLaeuft.has(key)) {
+    preisaufbauLaeuft.set(key, ergaenzePreisaufbau(artikel, { sprache }).finally(() => preisaufbauLaeuft.delete(key)));
+  }
+  try { await preisaufbauLaeuft.get(key); } catch (err) {
+    console.error('  [preisaufbau]', artikel.pfad, err && err.message ? err.message : err);
+  }
+}
+
+/**
+ * Ergaenzt an einem geparsten Artikel:
+ *   preis.netto                 Netto-Grundpreis: Preis mit der jeweils ERSTEN
+ *                               Option jedes Attributs, ohne Spezialoption und
+ *                               ohne Versand
+ *   preis.aufbau                Herleitung und Gegenprobe (siehe unten)
+ *   attribute[].optionen[].aufpreis        Aufpreis netto gegenueber der ersten
+ *                                          Option desselben Attributs
+ *   attribute[].optionen[].aufpreisBrutto  derselbe Betrag inkl. USt
+ *
+ * Verfahren: Die Preisabfrage liefert preis (brutto, gesamt),
+ * attributepreis (brutto, Summe der Aufpreise der gewaehlten Optionen) und
+ * optionenpreis (brutto, Anteil der Spezialoption).
+ *
+ * Wichtig, nachgemessen: Ein Attribut, das in der Abfrage fehlt (oder einen
+ * unbekannten Wert traegt), wird vom Altsystem wie die ERSTE Option gerechnet,
+ * nicht wie "0". Deshalb sind Aufpreise nur als Unterschied zur ersten Option
+ * erfassbar: aufpreis(o) = attributepreis(Attribut = o) - attributepreis(ohne
+ * Auswahl). Die erste Option steht damit immer bei 0. Hat sie im Altsystem
+ * selbst einen Aufpreis (8 von 191 Kaufartikeln, z. B. die JetPrint-Designs
+ * mit 15,25 EUR), steckt der in `preis.netto`; getrennt ausweisen laesst er
+ * sich nicht, weil sich bei mehreren Attributen nicht sagen laesst, auf welchem
+ * er liegt. Summen stimmen trotzdem immer:
+ *   Preis = netto + Summe(aufpreis der gewaehlten Optionen) [+ Spezialoption]
+ * `preis.aufbau.nettoOhneErsteOptionen` ist der Grundpreis ohne diese Anteile
+ * (der "reine" artikel.preis); `erstOptionenNetto` die abgezogene Summe.
+ *
+ * Gegenprobe (`stimmig`): Grundpreis + Aufpreise der Vorauswahl muss den
+ * Bruttopreis der Seite ergeben (2 Cent Toleranz).
+ *
+ * Nicht erfasst: Optionen der Spezialoption (Breiten-Auswahl). Ihr Preis
+ * haengt von den eingegebenen Massen ab und ist kein fester Aufpreis.
+ * Anfrageartikel haben keinen Preis, also auch keinen Aufbau.
+ */
+async function ergaenzePreisaufbau(a, { sprache = null } = {}) {
+  const preis = a.preis;
+  const nein = (grund) => { preis.aufbau = { geprueft: false, grund }; };
+  if (!a.kaufbar || a.modus !== 'kauf') return nein('Anfrageartikel: das Altsystem nennt keinen Preis.');
+  if (preis.wert == null || preis.ustSatz == null) return nein('Die Seite nennt keinen Preis oder keinen Steuersatz.');
+  const url = preisAbfrageZiel(a);
+  if (!url || a.artikelId == null) return nein('Keine brauchbare Preisadresse.');
+
+  const sitzung = katalogSitzung(sprache);
+  const basis = await preisProbe(sitzung, url, a.artikelId, []);
+  if (!basis) return; // Netzfehler o. ae.: nichts vermerken, naechster Aufruf versucht es erneut
+
+  const u = preis.ustSatz;
+  const faktor = 1 + u / 100;
+  const vorzeichenNetto = (brutto) => (brutto < 0 ? -1 : 1) * nettoAusBrutto(Math.abs(brutto), u);
+
+  // Alle Optionen der Attribute, die einen Aufpreis tragen koennen.
+  const ziele = [];
+  for (const attr of a.attribute) {
+    if (attr.art !== 'attribut') continue;
+    for (const o of attr.optionen) ziele.push({ feld: attr.feld, o });
+  }
+  const begrenzt = ziele.slice(0, PREISAUFBAU_PROBEN_MAX);
+  const ergebnisse = await parallel(begrenzt, PREISAUFBAU_PARALLEL, (z) =>
+    preisProbe(sitzung, url, a.artikelId, [[z.feld, z.o.wert]])
+  );
+  let fehlgeschlagen = 0;
+  begrenzt.forEach((z, i) => {
+    const r = ergebnisse[i];
+    if (!r || r.fehler) { z.o.aufpreis = null; z.o.aufpreisBrutto = null; fehlgeschlagen++; return; }
+    const diff = rund2(r.attribut - basis.attribut);
+    z.o.aufpreisBrutto = diff;
+    z.o.aufpreis = vorzeichenNetto(diff);
+  });
+  for (const z of ziele.slice(PREISAUFBAU_PROBEN_MAX)) { z.o.aufpreis = null; z.o.aufpreisBrutto = null; fehlgeschlagen++; }
+
+  // Gegenprobe: Preis der Seite = Preis ohne Auswahl + Aufpreise der Vorauswahl.
+  let vorauswahlBrutto = 0;
+  let vollstaendig = fehlgeschlagen === 0;
+  for (const attr of a.attribute) {
+    if (attr.art !== 'attribut') continue;
+    const gew = attr.optionen.find((o) => o.gewaehlt) || attr.optionen[0];
+    if (!gew) continue;
+    if (gew.aufpreisBrutto == null) vollstaendig = false;
+    else vorauswahlBrutto += gew.aufpreisBrutto;
+  }
+  const erwartet = rund2(basis.preis + vorauswahlBrutto);
+  const netto = nettoAusBrutto(rund2(basis.preis - basis.optionen), u);
+  preis.netto = netto;
+  preis.aufbau = {
+    geprueft: true,
+    quelle: 'Preisabfrage der Seite (price_updates), zurueckgerechnet',
+    ustSatz: u,
+    nettoGrundpreis: netto,
+    nettoOhneErsteOptionen: nettoAusBrutto(rund2(basis.preis - basis.optionen - basis.attribut), u),
+    erstOptionenNetto: nettoAusBrutto(rund2(basis.attribut), u),
+    aufpreiseVorauswahlNetto: vorzeichenNetto(rund2(vorauswahlBrutto)),
+    optionenBrutto: rund2(basis.optionen),
+    bruttoVorauswahl: preis.wert,
+    bruttoErwartet: erwartet,
+    stimmig: vollstaendig ? Math.abs(erwartet - preis.wert) <= 0.03 : null,
+    proben: 1 + begrenzt.length,
+    fehlgeschlagen,
+    hinweis: 'Netto ist aus dem gerundeten Brutto zurueckgerechnet (Cent genau, bei Aufpreisen +-1 Cent). '
+      + 'Aufpreise gelten gegenueber der ersten Option des Attributs. '
+      + 'optionenBrutto ist der Anteil, den das Altsystem als "optionenpreis" ausweist (Spezialoption bzw. Masse, bei einigen Artikeln auch ein fester Zuschlag); er aendert sich mit den eingegebenen Massen.',
+  };
 }
 
 /* ------------------------------------------------------------------ */
@@ -3983,9 +4524,11 @@ export {
   parseHauptnavigation, parseUntermenue, parseProduktliste, parseTrefferzahl,
   parsePreis, parseOptionen, parseKaufformular, parseBilder,
   parseTechnischeDaten, parseArtikel, bewerteArtikel,
+  parseSpezialoption, ordneFarbbilder, bildStamm,
 
   /* Fachlogik: Katalog */
   baueKatalog, katalogMitCache, holeKategorie, holeArtikel, holeSuche,
+  ergaenzePreisaufbau, nettoAusBrutto,
   blaettere, reichereListeAn, kaufformularAntwort, diagnose,
 
   /* Generischer Warenkorb- und Preiszugang fuer beliebige Artikel */

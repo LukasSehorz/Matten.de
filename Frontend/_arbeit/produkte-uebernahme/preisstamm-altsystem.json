@@ -1,0 +1,7 @@
+{
+  "_hinweis": "Preisstammdaten fuer die Excel-Formel, je Artikel-ID des Altsystems. Nur Eintraege mit einkaufProQm, salesFactor UND standardbreiten werden zu preisdaten; alle anderen Artikel rechnen weiter ueber /api/price. Vorlage mit allen in Frage kommenden Artikeln: node bau-net-daten.mjs --alle --preisstamm-vorlage (schreibt preisstamm-vorlage.json). Danach neu bauen: node bau-net-daten.mjs --alle.",
+  "_beispiel": {
+    "459": { "einkaufProQm": 52.67, "salesFactor": 1.931, "standardbreiten": [60, 75, 85, 115, 150, 200], "sondermassFaktor": 1.25, "singleColorFaktor": 0.9 }
+  },
+  "artikel": {}
+}
