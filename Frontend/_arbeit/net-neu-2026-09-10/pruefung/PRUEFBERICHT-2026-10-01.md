@@ -122,6 +122,33 @@ suchte „Fussmatten" und fand nur die *mobile* Navigationsleiste (`d-lg-none`, 
 Navigation sei kaputt. Erst der Blick auf den Screenshot hat es geklärt. Lehre: Bei
 „Element nicht anklickbar" zuerst ein Bild ansehen, bevor man die Anwendung verdächtigt.
 
+### Korrektur vom 09.10.2026: Abschnitt 7 war falsch
+
+Lukas meldete beide Fehler erneut, mit Screenshots. Live nachgestellt, beide echt:
+
+**a) „Ladeanzeige verschwindet" stimmte nicht.** `ladeAnzeige(false)` setzte
+`#editor-laden.hidden = true`. Das Element trägt aber `d-flex`
+(`display:flex !important`), und das schlägt das hidden-Attribut. Die weiße
+Schicht (rgba 255,255,255,.7, z-index 999) mit dem Kreisel blieb für immer über
+dem Editor und fing jeden Klick ab. Gemessen wurde am 01.10. nur, ob das Programm
+die Schicht für versteckt *hielt* (`hidden === true`), nicht, ob sie wirklich weg
+war (`getComputedStyle(...).display`). Behoben in `seite-designer.js`
+(Klassen d-flex/d-none tauschen). Ein Suchlauf über alle 12 Seiten fand keine
+weitere Stelle mit „hidden, aber sichtbar".
+
+**b) Das Flackern kam nicht vom Warenkorb, sondern vom Menü.** `shell.js`
+blendete beim Überfahren eines Bildmenüs den Schleier `.overlay` ein. Der liegt
+(absolute, top 0, 100vh, z-index 999997) auch über der Menüleiste: Die Maus steht
+dann auf dem Schleier, `mouseleave` blendet ihn aus, `mouseenter` wieder ein.
+Live gemessen: **43 Wechsel in 2 Sekunden bei ruhender Maus.** Das Original
+matten.net zeigt beim Überfahren gar keinen Schleier (0 Wechsel). Der Code ist
+raus; nachher 0 Wechsel, alle 9 Bildmenüs klappen auf, Kachel-Klick führt zur
+Kategorie.
+
+**Lehre:** Sichtbarkeit immer über den berechneten Stil oder `elementFromPoint`
+messen, nie über das Attribut. Und eine Meldung „flackert, wenn man oben in der
+Navbar ist" heißt: mit der Maus auf die Navbar gehen und zählen.
+
 ## Was nicht geprüft werden konnte
 
 * **Warenkorb-Konsistenz auf Netlify.** Die Konsistenzläufe (Punkt 1) liefen lokal mit

@@ -438,7 +438,18 @@ import { berechne, runde, zahl, stammdatenFuer } from '../../../preisformel.js';
 
   function knopfStand() { $('ordern').disabled = !allowSubmit(); }
 
-  function ladeAnzeige(ja) { Z.loading = !!ja; $('editor-laden').hidden = !ja; }
+  /* Ladeschicht ein/aus (09.10.2026). Vorher stand hier ".hidden = !ja" — das
+     wirkt bei diesem Element NICHT: Es traegt die Bootstrap-Klasse d-flex
+     (display:flex !important), und die schlaegt das hidden-Attribut. Die weisse
+     Schicht mit dem Kreisel blieb darum fuer immer ueber dem Editor liegen und
+     fing jeden Klick ab (Lukas: "laedt ewig und funktioniert nicht"). Deshalb
+     wird jetzt die Klasse getauscht: d-none ist ebenfalls !important. */
+  function ladeAnzeige(ja) {
+    Z.loading = !!ja;
+    var el = $('editor-laden');
+    el.classList.toggle('d-flex', !!ja);
+    el.classList.toggle('d-none', !ja);
+  }
 
   function schriftHinweis(text) { $('schrift-hinweis').textContent = text || ''; }
 

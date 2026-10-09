@@ -629,14 +629,16 @@
     verdrahteModal();
     verdrahteCookie();
 
-    /* Bildmenue: beim Ueberfahren den dunklen Schleier (.overlay) einblenden. */
-    var overlay = document.querySelector('.overlay');
-    if (overlay) {
-      Array.prototype.forEach.call(document.querySelectorAll('.category-dropdown-trigger'), function (t) {
-        t.addEventListener('mouseenter', function () { overlay.style.display = 'block'; });
-        t.addEventListener('mouseleave', function () { overlay.style.display = 'none'; });
-      });
-    }
+    /* Bildmenue: KEIN dunkler Schleier beim Ueberfahren (09.10.2026).
+       Hier stand bis dahin ein mouseenter/mouseleave, das .overlay ein- und
+       ausblendete. Der Schleier (position absolute, top 0, 100vh, z-index
+       999997) liegt aber auch UEBER der Menueleiste: Er erscheint, die Maus
+       steht ploetzlich auf ihm statt auf dem Menuepunkt, mouseleave blendet
+       ihn aus, mouseenter wieder ein — gemessen 43 Wechsel in 2 Sekunden bei
+       ruhender Maus. Das war Lukas' "flackert, wenn man oben in der Navbar
+       ist". Das Original matten.net blendet beim Ueberfahren gar keinen
+       Schleier ein (live nachgemessen: 0 Wechsel), das Bildmenue klappt nur
+       per CSS (:hover) auf. Genau so jetzt hier. */
 
     /* Newsletter: abgefangen, Hinweis statt Fremdversand. */
     var nl = document.getElementById('subscribe-form');
