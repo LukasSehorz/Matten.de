@@ -829,21 +829,60 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
     Array.prototype.forEach.call($bilder.querySelectorAll('.product-image-nav-item'), function (a) { a.classList.toggle('active', a.getAttribute('data-target') === ziel); });
   }
 
-  /** Kundenwunsch 7.5: das Produktbild folgt der Grundfarbe. */
+  /**
+   * Kundenwunsch 7.5: das Produktbild folgt der Grundfarbe.
+   *
+   * Reihenfolge (09.10.2026): 1. Foto des Altsystems zur Farbe, 2. Foto des
+   * Originals matten.net (P.farbbilder, spec/farbbilder.json), 3. eine
+   * gezeichnete Farbvorschau aus dem Hexwert der Palette.
+   *
+   * Vorher endete die Funktion still, wenn es kein Foto gab — dann blieb das
+   * Foto der ZUVOR gewaehlten Farbe stehen. Bei JetPrint light 1-farbig (nur
+   * 2 von 43 Fotos im Altsystem) zeigte "602 Gelb" so das Zitronengelb-Foto,
+   * "605 Signalrot" das orange. Jetzt passt das Bild immer zur Auswahl.
+   */
   function bildSetzen() {
     var g = farbgruppen[0];
     if (!g) return;
+    var wert = wahl.farben[g.feld];
+    var o = g.optionen.filter(function (x) { return x.wert === wert; })[0];
     var quelle = artikel && artikel.attribute.some(function (a) { return a.feld === g.feld; }) ? artikel : zwilling;
-    var b = bildZurFarbe(quelle, wahl.farben[g.feld]) || bildZurFarbe(quelle === artikel ? zwilling : artikel, wahl.farben[g.feld]);
+    var b = bildZurFarbe(quelle, wert) || bildZurFarbe(quelle === artikel ? zwilling : artikel, wert);
+    if (!b && o && o.nummer && P.farbbilder) b = P.farbbilder[o.nummer] || null;
+    if (!b && o && o.hex) b = farbvorschau(o);
     var $c = document.querySelector('#image-farbe img');
     var $n = document.getElementById('bild-nav-farbe');
-    if (!b || !$c || !$n) return;
+    if (!$c || !$n) return;
+    if (!b) {
+      /* Weder Foto noch Hexwert: zurueck aufs Produktbild, nie ein fremdes Farbfoto. */
+      $n.hidden = true;
+      bildAktiv('#image-1');
+      return;
+    }
     $c.src = b;
     $n.querySelector('img').src = b;
-    var o = g.optionen.filter(function (x) { return x.wert === wahl.farben[g.feld]; })[0];
     $c.alt = P.name + (o ? ' in ' + o.titel : '');
     $n.hidden = false;
     bildAktiv('#image-farbe');
+  }
+
+  /**
+   * Gezeichnete Farbvorschau (SVG) fuer Farben ohne Foto: einfarbige Matte mit
+   * dunklem Gummirand in der Farbe der Palette, darunter klein "Farbvorschau ·
+   * Nummer Name", damit niemand sie fuer ein Foto haelt. 512 x 340 wie die
+   * Produktfotos, damit nichts springt.
+   */
+  function farbvorschau(o) {
+    var t = ('Farbvorschau · ' + o.titel).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="340" viewBox="0 0 512 340">' +
+      '<defs><filter id="f"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/>' +
+      '<feColorMatrix in="n" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer>' +
+      '<feComposite in2="SourceGraphic" operator="in"/><feBlend in="SourceGraphic" mode="multiply"/></filter></defs>' +
+      '<rect width="512" height="340" fill="#f4f4f4"/>' +
+      '<rect x="36" y="26" width="440" height="262" rx="10" fill="#2b2b2b"/>' +
+      '<rect x="50" y="40" width="412" height="234" rx="4" fill="' + o.hex + '" filter="url(#f)"/>' +
+      '<text x="256" y="318" font-family="Nunito, Arial, sans-serif" font-size="15" fill="#555" text-anchor="middle">' + t + '</text></svg>';
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
   }
 
   /* ======================================================================

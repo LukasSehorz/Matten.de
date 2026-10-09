@@ -23,6 +23,7 @@
                                                  Hexwert) und Beschreibungs-HTML
      spec/screens/ajax-custom-mat-materials.json Farbpalette (code, name, RGB)
      public/net-neu/assets/img/manifest.json     Original-URL -> lokale Datei
+     spec/farbbilder.json                        Foto je Farbnummer (Original-URL)
 
    Regeln:
      * Bildpfade werden ueber das Manifest auf lokale Pfade (assets/img/...)
@@ -50,6 +51,7 @@ const json = (p) => JSON.parse(lesen(p));
 
 const struktur = json(path.join(SPEC, 'struktur.json'));
 const manifest = json(path.join(ZIEL_DIR, 'assets', 'img', 'manifest.json'));
+const FARBBILDER = (() => { const f = path.join(SPEC, 'farbbilder.json'); if (!fs.existsSync(f)) return {}; const d = json(f); delete d._quelle; return d; })();
 
 /* ==========================================================================
    1  Zuordnung matten.net-Produkt -> matten.de-Artikel
@@ -478,6 +480,19 @@ for (const p of struktur.produkte) {
     kategorien: kategorieReihenfolge.filter((s) => kategorien[s].produkte.includes(p.slug)),
     beschreibung: BESCHREIBUNG_SCREEN[p.slug] || BESCHREIBUNG_TEXT[p.slug] || ''
   };
+  /* Foto je Farbe (09.10.2026, Lukas: "wenn ich die Farbe wechsle, soll sich
+     die Farbe der Matte aendern"). Normalerweise liefert das Altsystem diese
+     Bilder; bei JetPrint light 1-farbig hat es aber nur 2 von 43. Das
+     Original matten.net hat 42 — erfasst in spec/farbbilder.json
+     (Farbnummer -> Original-URL), lokal ueber das Manifest. Nur wenn
+     vorhanden, sonst bleibt das Feld weg (daten.js bleibt fuer alle anderen
+     Produkte byteweise gleich). */
+  const fb = FARBBILDER[p.slug];
+  if (fb) {
+    const karte = {};
+    for (const nr of Object.keys(fb).sort()) { const l = lokal(fb[nr]); if (l) karte[nr] = l; }
+    if (Object.keys(karte).length) produkte[p.slug].farbbilder = karte;
+  }
 }
 
 /* Die 9 Gruppen mit 26 Kategorie-Kaestchen der Produktliste (IDs des
