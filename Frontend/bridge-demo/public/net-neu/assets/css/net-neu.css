@@ -53,8 +53,11 @@
    waagerecht aus der Seite laufen; stattdessen kleiner gesetzt.
    Seit 01.10.2026 ist nur noch der BETRAG fett (Screenshot des
    Auftraggebers), die Beschriftung davor steht normal. */
-#endpreis { display: block; font-weight: 400; font-size: .8125rem; color: #212529; }
-#endpreis .endpreis-betrag { font-weight: 700; font-size: .9375rem; }
+/* Seit 13.10.2026 (Entwurf Fuchsius): Betrag vorn und so gross wie der
+   Preis darueber, die Beschriftung klein dahinter. */
+#endpreis { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .4rem; color: #212529; }
+#endpreis .endpreis-betrag { font-weight: 700; font-size: 1.5rem; line-height: 1.15; }
+#endpreis small { font-size: .8125rem; }
 /* Zeile unter dem Preis: was beim Klick geschieht (Anfrage statt Kauf) */
 #weg-hinweis { display: block; font-size: .8rem; color: #856404; }
 #weg-hinweis:empty { display: none; }
@@ -74,36 +77,39 @@
 #order-form .form-row { margin-bottom: 0; }
 #order-form .form-text { margin-top: .0625rem; }
 
-/* 2 — Sonderfarben: Beschriftung "Anzahl" in der Label-Spalte (wie Rand,
-   Form, Menge, Preis), daneben der erklaerende Text und das schmale
-   Zahlenfeld. Geaendert am 01.10.2026 nach dem Screenshot des Auftraggebers:
-   vorher stand die ganze Erklaerung in der Beschriftung, dadurch sass das
-   Feld weiter rechts als alle anderen Felder der Spalte. */
-.sonderfarben-zeile .sonderfarben-feld { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
-/* Diese Zeile nimmt die GANZE Formularbreite ein (anders als Rand/Form, die
-   sich eine Spalte teilen). Ohne die Null-Basis waere der Inhalt breiter als
-   die Spalte und die Zeile bräche hinter der Beschriftung um — dann stuende
-   "Anzahl" ueber dem Feld statt daneben. */
-@media (min-width: 576px) {
-  /* Mit #order-form davor, weil die allgemeine Regel weiter unten
-     (#order-form .form-group.row > .col-sm-8 { flex: 1 1 auto }) sonst
-     staerker waere. */
-  #order-form .sonderfarben-zeile .form-group.row > .sonderfarben-feld { flex: 1 1 0; min-width: 0; }
+/* 2 — Sonderfarbe (Entwurf Fuchsius 13.10.2026): Paar neben "Form", im
+   Kasten vorn "Anzahl", dahinter die Zahl. Der Vorsatz wird weiss statt grau
+   gezeichnet, damit es wie EIN Feld aussieht (so im Entwurf). */
+.sonderfarben-feld { flex-wrap: nowrap; }
+#order-form .sonderfarben-feld .input-group-text {
+  height: calc(1.5em + .375rem + 2px); padding: .1875rem .5rem; font-size: .875rem;
+  background: #fff; color: #6c757d; border-right: 0;
 }
-.sonderfarben-zeile .sonderfarben-erklaerung { font-size: .8125rem; color: #6c757d; }
-.sonderfarben-zeile .form-control { flex: 0 0 4rem; width: 4rem; }
+#order-form .sonderfarben-feld .form-control { border-left: 0; text-align: right; min-width: 3rem; }
+/* "Sonderfarbe" darf in der schmalen Beschriftungsspalte umbrechen (&shy;). */
+#order-form label[for="input_sonderfarben"] { line-height: 1.1; hyphens: manual; }
 
-/* 4 — Preis gross und hervorgehoben, "inkl. MWSt." klein daneben, der
-   Versand klein darunter (Screenshot des Auftraggebers 18.09.2026). */
-.preis-zeile { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem; }
+/* 4 — Preisblock (Entwurf Fuchsius 13.10.2026): zwei Zeilen ueber die
+   ganze Breite. Vorn eine Beschriftungsspalte so breit wie die der Felder
+   (5,5 rem), damit "Preis"/"Standard" unter "Menge" und die beiden Betraege
+   buendig untereinander stehen:
+     Preis      € 29,05  inkl. MWSt.  Plus 11,90€ Versandkosten
+     Standard   € 40,95  Endpreis inkl. MwSt. und Versand
+   flex-wrap, damit die Zeilen auf dem Handy umbrechen statt die Seite zu
+   verbreitern. */
+.preis-block { margin: .25rem 0 .5rem; }
+/* Zwei feste Spalten je Zeile: Beschriftung | Werte. Brechen die Werte auf
+   dem Handy um, bleiben sie in ihrer Spalte, statt unter "Preis" zu rutschen. */
+.preis-zeile, .endpreis-zeile { display: flex; align-items: baseline; gap: 0; }   /* ohne Abstand: Betrag buendig mit den Feldern darueber */
+.preis-werte { flex: 1 1 0; min-width: 0; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .4rem; }
+.preis-beschriftung { flex: 0 0 5.5rem; max-width: 5.5rem; margin: 0; font-size: .875rem; }
 .preis-zeile #price { font-weight: 700; font-size: 1.5rem; line-height: 1.15; color: #212529; }
-.preis-nebenzeile { margin-top: 0; font-size: .8125rem; }
-
-/* Endpreis-Zeile: "Standard | Endpreis inkl. MWSt. | € 33,44" — die Art der
-   Groesse steht VOR dem Endpreis in derselben Zeile (Screenshot 18.09.2026).
-   flex-wrap, damit die Zeile auf dem Handy umbrechen darf statt die Seite
-   zu verbreitern. */
-.endpreis-zeile { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem; }
+.preis-mwst, .preis-nebenzeile { font-size: .8125rem; }
+.preis-nebenzeile { color: #6c757d; }
+.endpreis-zeile #endpreis { flex: 1 1 0; min-width: 0; }
+/* Ohne "Standard"/"Spezial" bleibt die Spalte trotzdem stehen, damit die
+   Betraege buendig bleiben. */
+.endpreis-zeile .groessen-art:empty { display: block; }
 
 /* Standard / Spezial (WhatsApp-Notiz 17.09.2026, Wortwahl aus der Mail vom
    18.09.2026): gruen bzw. rot. Farben aus Bootstrap 4 (success/danger),
@@ -161,19 +167,15 @@
    Beschriftung und Feld absichtlich untereinander. */
 @media (min-width: 576px) {
   #order-form .form-group.row > .col-form-label { flex: 0 0 5.5rem; max-width: 5.5rem; }
-  #order-form .form-group.row > .col-sm-8 { flex: 1 1 auto; max-width: none; }
+  /* Null-Basis und min-width 0 (13.10.2026): Mit "auto" bestand ein Feld auf
+     seiner vollen Breite und rutschte in den schmalen Paaren unter die
+     Beschriftung — im Entwurf des Auftraggebers steht sie links daneben. */
+  #order-form .form-group.row > .col-sm-8 { flex: 1 1 0; min-width: 0; max-width: none; }
 }
 
-/* Die Endpreis-Zeile ("Standard · Endpreis inkl. MWSt. · € 33,44") soll nicht
-   umbrechen; sie darf dafuer die Spalte nach links verlassen, ohne die Seite
-   zu verbreitern. Nur ab Tablet-Breite: auf dem Handy stehen Beschriftung und
-   Feld untereinander, dort gaebe es keine Spalte zum Ausbrechen.
-   Seit 01.10.2026 gilt das fuer die ganze Zeile samt "Standard"/"Spezial"
-   davor — nicht mehr nur fuer #endpreis allein. */
-@media (min-width: 576px) {
-  .endpreis-zeile { flex-wrap: nowrap; margin-left: -5.5rem; }
-  #endpreis { white-space: nowrap; }
-}
+/* Bis 13.10.2026 stand hier ein Ausbruch der Endpreis-Zeile nach links
+   (margin-left: -5.5rem). Der Preisblock steht jetzt selbst ueber die ganze
+   Breite mit eigener Beschriftungsspalte, das braucht es nicht mehr. */
 
 /* Meldung nach "In den Warenkorb" / "Angebot anfordern" */
 #produkt-meldung:empty { display: none; }

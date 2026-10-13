@@ -465,15 +465,35 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
        (JetPrint Premium 1-farbig, JetPrint light 1-farbig) — Kundenwunsch 7.1. */
     var custom = P.customOption || (wunschmassMoeglich() ? 'FIXED+CUSTOM_SIZE' : null);
     var h = '';
-    if (fix.length) {
-      h += '<div class="form-row"><div class="col"><div class="form-group row">' +
-        '<label for="input_fixed_size" class="col-sm-4 col-form-label">Größe</label><div class="col-sm-8">' +
-        '<select type="number" class="form-control" id="input_fixed_size" name="size_id">' +
-        fix.map(function (f) {
-          return '<option value="' + esc(f.sizeId) + '" data-price="' + (f.price != null ? esc(Number(f.price).toFixed(2)) : '') + '" data-width="' + esc(f.width) + '" data-length="' + esc(f.length) + '">' + esc(f.label) + '</option>';
-        }).join('') +
-        (custom ? '<option value="' + esc(custom) + '">Custom</option>' : '') +
-        '</select></div></div></div><div class="col"></div></div>\n';
+    /* Aufbau nach dem Entwurf des Auftraggebers (Mail Fuchsius 13.10.2026,
+       "EXEL-Preiskalkulation Darstellung auf der Kundenseite"): immer zwei
+       Paare je Zeile, Beschriftung links neben dem Feld —
+         Groesse | Rand
+         Breite  | Laenge        (nur bei "Custom")
+         Form    | Sonderfarbe
+         Menge
+       darunter die zwei Preiszeilen und die Kunden-Bemerkung. Vorher standen
+       Rand/Form in einer eigenen Zeile, die Sonderfarben ueber die volle
+       Breite und der Preis rechts neben der Menge. */
+    var paar = function (id, beschriftung, feld) {
+      return '<div class="col"><div class="form-group row">' +
+        '<label for="' + id + '" class="col-sm-4 col-form-label">' + beschriftung + '</label>' +
+        '<div class="col-sm-8">' + feld + '</div></div></div>\n';
+    };
+    var randFeld = '<select class="form-control" id="input_rand">' +
+      '<option value="mit" selected>Mit Rand</option>' +
+      '<option value="ohne">Ohne Rand</option></select>';
+    var groesseFeld = fix.length ? '<select type="number" class="form-control" id="input_fixed_size" name="size_id">' +
+      fix.map(function (f) {
+        return '<option value="' + esc(f.sizeId) + '" data-price="' + (f.price != null ? esc(Number(f.price).toFixed(2)) : '') + '" data-width="' + esc(f.width) + '" data-length="' + esc(f.length) + '">' + esc(f.label) + '</option>';
+      }).join('') +
+      (custom ? '<option value="' + esc(custom) + '">Custom</option>' : '') +
+      '</select>' : '';
+    if (fix.length || einkaufBekannt) {
+      h += '<div class="form-row">\n' +
+        (fix.length ? paar('input_fixed_size', 'Größe', groesseFeld) : '<div class="col"></div>\n') +
+        (einkaufBekannt ? paar('input_rand', 'Rand', randFeld) : '<div class="col"></div>\n') +
+        '</div>\n';
     }
     h += '<div class="form-row">\n' +
       '<div class="col" id="order_input_fixed_width"><div class="form-group row"><label for="input_fixed_width" class="col-sm-4 col-form-label">Breite</label><div class="col-sm-8">' +
@@ -491,73 +511,60 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
       '<div class="input-group-append"><span class="input-group-text">cm</span></div></div>' +
       '<small class="mass-hinweis" id="hinweis-laenge"></small></div></div></div>\n' +
       '</div>\n';
-    /* Kundenwunsch 7.6, geaendert am 17.09.2026: statt drei Kreuzen zwei
-       Auswahlfelder (Form, Rand) und ein Zahlenfeld fuer die Sonderfarben.
-       Ohne Aufpreisangabe — der Preis unten rechnet sie automatisch ein. */
+    /* Kundenwunsch 7.6 (17.09.2026): Form und Rand als Auswahl, Sonderfarben
+       als Zahl. Seit 13.10.2026 (Entwurf Fuchsius) steht Rand oben neben der
+       Groesse, Form und Sonderfarbe teilen sich eine Zeile. Im Sonderfarben-
+       Feld steht "Anzahl" vorn im Kasten; die Erklaerung "0 = keine" traegt
+       das Feld fuer Vorlesehilfen und als Tooltip. Ohne Aufpreisangabe — der
+       Preis unten rechnet sie automatisch ein. */
     if (einkaufBekannt) {
-      /* Reihenfolge Rand vor Form (Aenderungswunsch 17.09.2026, Punkt 1). */
       h += '<div class="form-row sonder-auswahl">\n' +
-        '<div class="col"><div class="form-group row"><label for="input_rand" class="col-sm-4 col-form-label">Rand</label><div class="col-sm-8">' +
-        '<select class="form-control" id="input_rand">' +
-        '<option value="mit" selected>Mit Rand</option>' +
-        '<option value="ohne">Ohne Rand</option>' +
-        '</select></div></div></div>\n' +
-        '<div class="col"><div class="form-group row"><label for="input_form" class="col-sm-4 col-form-label">Form</label><div class="col-sm-8">' +
-        '<select class="form-control" id="input_form">' +
-        '<option value="rechteckig" selected>Rechteckig</option>' +
-        '<option value="sonderform">Sonderform</option>' +
-        '</select></div></div></div>\n' +
-        '</div>\n' +
-        /* Sonderfarben einzeilig (Punkt 2, 17.09.2026), Beschriftung geaendert
-           am 01.10.2026 nach dem Screenshot des Auftraggebers: in der
-           Beschriftungsspalte steht nur noch "Anzahl" — buendig mit "Rand",
-           "Form", "Menge" und "Preis" darueber und darunter. Der erklaerende
-           Text "Sonderfarben, 0 = keine" steht rechts daneben beim Feld,
-           wie im Bild, und ist kein <label> mehr. */
-        '<div class="form-row sonder-auswahl sonderfarben-zeile">\n' +
-        '<div class="col"><div class="form-group row mb-0">' +
-        '<label for="input_sonderfarben" class="col-sm-4 col-form-label">Anzahl</label>' +
-        '<div class="col-sm-8 sonderfarben-feld">' +
-        '<span class="sonderfarben-erklaerung">Sonderfarben, 0 = keine</span>' +
-        '<input type="number" class="form-control" id="input_sonderfarben" min="0" max="9" step="1" value="0">' +
-        '</div>' +
-        '</div></div>\n' +
+        paar('input_form', 'Form', '<select class="form-control" id="input_form">' +
+          '<option value="rechteckig" selected>Rechteckig</option>' +
+          '<option value="sonderform">Sonderform</option></select>') +
+        paar('input_sonderfarben', 'Sonder&shy;farbe', '<div class="input-group sonderfarben-feld">' +
+          '<div class="input-group-prepend"><span class="input-group-text">Anzahl</span></div>' +
+          '<input type="number" class="form-control" id="input_sonderfarben" min="0" max="9" step="1" value="0" ' +
+          'title="Anzahl Sonderfarben, 0 = keine" aria-label="Anzahl Sonderfarben, 0 = keine"></div>') +
         '</div>\n';
     }
     h += '<div class="form-row">\n' +
       '<div class="col"><div class="form-group row"><label for="input_quantity" class="col-sm-4 col-form-label">Menge</label><div class="col-sm-8">' +
       '<input type="number" class="form-control" id="input_quantity" placeholder="Quantity" value="1" name="quantity" min="1"></div></div></div>\n' +
-      /* Preisblock nach dem Screenshot des Auftraggebers (18.09.2026):
-         der Betrag gross und hervorgehoben, daneben klein "inkl. MWSt.",
-         darunter "plus 11,90€ Versand" — und in der Endpreiszeile steht
-         "Standard"/"Spezial" VOR dem Endpreis:
-           Standard   Endpreis inkl. MWSt.   € 33,44
-         #groessen-art ist deshalb von der Preiszeile in die Endpreiszeile
-         gewandert (Farben: gruen bzw. rot, siehe groessenArtZeigen()). */
-      '<div class="col"><div class="form-group row"><label for="price" class="col-sm-4 col-form-label">Preis</label><div class="col-sm-8">' +
+      '<div class="col"></div>\n</div>\n' +
+      /* Preisblock nach dem Entwurf des Auftraggebers (13.10.2026), zwei Zeilen
+         ueber die ganze Breite, die Betraege buendig untereinander:
+           Preis      € 29,05  inkl. MWSt.  Plus 11,90€ Versandkosten
+           Standard   € 40,95  Endpreis inkl. MwSt. und Versand
+         "Standard"/"Spezial" (groessenArtZeigen()) steht dort, wo oben
+         "Preis" steht. Ohne Standardbreiten bleibt es leer. */
+      '<div class="preis-block">' +
       '<div class="preis-zeile">' +
+      '<label for="price" class="preis-beschriftung">Preis</label>' +
+      '<span class="preis-werte">' +
       '<span id="price"><span class="spinner-border" role="status" style="width: 1rem; height: 1rem;"><span class="sr-only">Loading...</span></span></span>' +
-      '<small class="text-muted no-wrap">inkl. MWSt.</small>' +
+      '<small class="no-wrap preis-mwst">inkl. MWSt.</small>' +
+      '<small class="preis-nebenzeile" id="shipping_cost"></small>' +
+      '</span>' +
       '</div>' +
-      '<small class="form-text text-muted preis-nebenzeile"><span class="no-wrap"><span id="shipping_cost"></span></span></small>' +
       '<div class="endpreis-zeile">' +
-      '<span class="groessen-art" id="groessen-art"></span>' +
-      '<small class="preis-nebenzeile" id="endpreis"></small>' +
+      '<span class="preis-beschriftung groessen-art" id="groessen-art"></span>' +
+      '<span id="endpreis"></span>' +
       '</div>' +
       '<small id="weg-hinweis"></small>' +
-      '</div></div></div>\n</div>\n' +
+      '</div>\n' +
       /* Kunden-Bemerkung (neu 01.10.2026, Screenshot des Auftraggebers):
          mehrzeiliges Feld unter dem Preisblock. Der Text wandert in den
          Bestellkommentar an matten.de (kommentarFuer(), Abschnitt
          "Kundenbemerkung"). 500 Zeichen, weil der Kommentar des Altsystems
          insgesamt begrenzt ist. */
-      '<div class="form-row">\n' +
-      '<div class="col-12"><div class="form-group row kunden-bemerkung">' +
-      '<label for="input_bemerkung" class="col-sm-4 col-form-label">Kunden-Bemerkung</label>' +
-      '<div class="col-sm-8">' +
+      /* Seit 13.10.2026 (Entwurf Fuchsius) steht "Kunden-Bemerkung" im Feld
+         selbst, das Feld nutzt die ganze Breite. Die Beschriftung bleibt fuer
+         Vorlesehilfen erhalten (sr-only). */
+      '<div class="form-group kunden-bemerkung">' +
+      '<label for="input_bemerkung" class="sr-only">Kunden-Bemerkung</label>' +
       '<textarea class="form-control" id="input_bemerkung" name="kunden_bemerkung" rows="3" maxlength="' + BEMERKUNG_MAX + '" ' +
-      'placeholder="Platz für Wünsche, Hinweise oder Rückfragen"></textarea>' +
-      '</div></div></div>\n' +
+      'placeholder="Kunden-Bemerkung"></textarea>' +
       '</div>\n' +
       '<div class="knopf-zeile">' +
       '<button class="btn btn-primary" id="add-to-cart" value="CART" name="submit">In den Warenkorb</button> ' +
@@ -900,8 +907,10 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
   function endpreisZeigen($end, betrag) {
     if (!$end) return;
     if (betrag == null) { $end.textContent = ''; return; }
-    $end.innerHTML = 'Endpreis inkl. MwSt. und Versand: ' +
-      '<strong class="endpreis-betrag">' + esc(euroText(betrag)) + '</strong>';
+    /* Seit 13.10.2026 (Entwurf Fuchsius): Betrag gross vorn, buendig mit dem
+       Preis darueber, die Beschriftung klein dahinter. */
+    $end.innerHTML = '<strong class="endpreis-betrag">' + esc(euroText(betrag)) + '</strong> ' +
+      '<small>Endpreis inkl. MwSt. und Versand</small>';
   }
 
   /**
@@ -954,10 +963,10 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
     var $a = document.getElementById('groessen-art');
     if (!$a) return;
     var standard = zeigen === false ? null : istStandardmass();
-    if (standard === null) { $a.textContent = ''; $a.className = 'groessen-art'; return; }
+    if (standard === null) { $a.textContent = ''; $a.className = 'preis-beschriftung groessen-art'; return; }
     if (standard) standard = !zuschlaege();
     $a.textContent = standard ? 'Standard' : 'Spezial';
-    $a.className = 'groessen-art ' + (standard ? 'ist-standard' : 'ist-spezial');
+    $a.className = 'preis-beschriftung groessen-art ' + (standard ? 'ist-standard' : 'ist-spezial');
   }
 
   function neuRechnen() {
