@@ -1,0 +1,320 @@
+{
+ "_quelle": "erzeugt am 24.10.2026: hochaufgeloeste Fassungen desselben Motivs (matten.net /uploads ohne Cache-Filter bzw. Altsystem matten.de /media/bild), max. Breite je Verwendung, JPEG Qualitaet 82. Schluessel = 1x-Datei unter assets/.",
+ "bilder": {
+  "img/kategorie-kacheln/5c45865f923d2jpeg.jpeg": {
+   "abweichung": 10.0,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c45865f923d2jpeg.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.de/media/bild/katzen_willkommen_512x340.jpg"
+  },
+  "img/kategorie-kacheln/5c47f8cfcc5b7jpeg.jpeg": {
+   "abweichung": 16.1,
+   "breite": 510,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c47f8cfcc5b7jpeg.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/MARSCHALL_522S_R.jpg"
+  },
+  "img/kategorie-kacheln/5c47f937b4f5fjpeg.jpeg": {
+   "abweichung": 9.0,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c47f937b4f5fjpeg.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.de/media/bild/Dip-R.jpg"
+  },
+  "img/kategorie-kacheln/5c47fa2b5364ejpeg.jpeg": {
+   "abweichung": 11.4,
+   "breite": 600,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c47fa2b5364ejpeg.jpg",
+   "hoehe": 400,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/matte_008.jpg"
+  },
+  "img/kategorie-kacheln/5c47fa5a8109ejpeg.jpeg": {
+   "abweichung": 7.0,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c47fa5a8109ejpeg.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.de/media/bild/IHXL_01.jpg"
+  },
+  "img/kategorie-kacheln/5c47fa829d279jpeg.jpeg": {
+   "abweichung": 12.1,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c47fa829d279jpeg.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.de/media/bild/kokos_farbig_140.jpg"
+  },
+  "img/kategorie-kacheln/5c47fafe5a2a8jpeg.jpeg": {
+   "abweichung": 6.2,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c47fafe5a2a8jpeg.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.de/media/bild/Kokos-gestalt_140.jpg"
+  },
+  "img/kategorie-kacheln/5c47fbd86c22fjpeg.jpeg": {
+   "abweichung": 9.9,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c47fbd86c22fjpeg.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.de/media/bild/K-Turf-7081-mi.jpg"
+  },
+  "img/kategorie-kacheln/5c47fd1c6e5f7jpeg.jpeg": {
+   "abweichung": 8.2,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c47fd1c6e5f7jpeg.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.de/media/bild/535-.jpg"
+  },
+  "img/kategorie-kacheln/5c4cc0ab6bb26jpeg.jpeg": {
+   "abweichung": 11.4,
+   "breite": 600,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c4cc0ab6bb26jpeg.jpg",
+   "hoehe": 400,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/matte_008.jpg"
+  },
+  "img/kategorie-kacheln/5c4cc9df3e243jpeg.jpeg": {
+   "abweichung": 10.7,
+   "breite": 510,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/5c4cc9df3e243jpeg.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/5c4cc9df3e243jpeg"
+  },
+  "img/kategorie-kacheln/JPL-621-aubergine_0.jpg": {
+   "abweichung": 17.4,
+   "breite": 600,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/jpl-621-aubergine-0.jpg",
+   "hoehe": 400,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/JPL-621-aubergine_0.jpg"
+  },
+  "img/kategorie-kacheln/JPrint-light.jpg": {
+   "abweichung": 11.5,
+   "breite": 300,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/jprint-light.jpg",
+   "hoehe": 200,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/JPrint-light.jpg"
+  },
+  "img/kategorie-kacheln/JetPrint-Design.jpg": {
+   "abweichung": 12.4,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/jetprint-design.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.net/uploads/JetPrint-Design.jpg"
+  },
+  "img/kategorie-kacheln/kokos-natur_512x340.jpg": {
+   "abweichung": 21.7,
+   "breite": 510,
+   "breite1x": 150,
+   "datei": "img/hd/kategorie-kacheln/kokos-natur-512x340.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/kokos-natur_512x340.jpg"
+  },
+  "img/produkt-kacheln/005-jet-print-light-5eb35cd44d2e3268777520.jpg": {
+   "abweichung": 11.0,
+   "breite": 800,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/005-jet-print-light-5eb35cd44d2e3268777520.jpg",
+   "hoehe": 531,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/005-jet-print-light-5eb35cd44d2e3268777520.jpg"
+  },
+  "img/produkt-kacheln/5c47fa2b58b3djpeg.jpeg": {
+   "abweichung": 13.4,
+   "breite": 800,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/5c47fa2b58b3djpeg.jpg",
+   "hoehe": 531,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/matte_008.jpg"
+  },
+  "img/produkt-kacheln/5c47fa829d279jpeg.jpeg": {
+   "abweichung": 22.8,
+   "breite": 512,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/5c47fa829d279jpeg.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/kokos_farbig_140.jpg"
+  },
+  "img/produkt-kacheln/5c47fafe5a2a8jpeg.jpeg": {
+   "abweichung": 6.9,
+   "breite": 512,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/5c47fafe5a2a8jpeg.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/Kokos-gestalt_140.jpg"
+  },
+  "img/produkt-kacheln/5c47fb75ede37jpeg.jpeg": {
+   "abweichung": 21.6,
+   "breite": 512,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/5c47fb75ede37jpeg.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/Jet-Print_Vision-512x340-Nr.jpg"
+  },
+  "img/produkt-kacheln/5c4c1812b732ejpeg.jpeg": {
+   "abweichung": 13.4,
+   "breite": 800,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/5c4c1812b732ejpeg.jpg",
+   "hoehe": 531,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/matte_008.jpg"
+  },
+  "img/produkt-kacheln/637-leuchtblau.JPG": {
+   "abweichung": 6.4,
+   "breite": 512,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/637-leuchtblau.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/637-leuchtblau.JPG"
+  },
+  "img/produkt-kacheln/Eing-Logo-512x340.jpg": {
+   "abweichung": 5.3,
+   "breite": 512,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/eing-logo-512x340.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/Eing-Logo-512x340.jpg"
+  },
+  "img/produkt-kacheln/Herzlich Willkommen_512x340.JPG": {
+   "abweichung": 5.3,
+   "breite": 512,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/herzlich-willkommen-512x340.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/Herzlich Willkommen_512x340.JPG"
+  },
+  "img/produkt-kacheln/Jet-Print Light_800x600.jpg": {
+   "abweichung": 13.0,
+   "breite": 800,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/jet-print-light-800x600.jpg",
+   "hoehe": 531,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/Jet-Print Light_800x600.jpg"
+  },
+  "img/produkt-kacheln/JetPrint-Logo-616.jpg": {
+   "abweichung": 8.9,
+   "breite": 800,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/jetprint-logo-616.jpg",
+   "hoehe": 531,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/JetPrint-Logo-616.jpg"
+  },
+  "img/produkt-kacheln/JetPrint-Velour-512x340.jpg": {
+   "abweichung": 11.9,
+   "breite": 512,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/jetprint-velour-512x340.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/JetPrint-Velour-512x340.jpg"
+  },
+  "img/produkt-kacheln/kokos-natur_512x340.jpg": {
+   "abweichung": 9.8,
+   "breite": 512,
+   "breite1x": 256,
+   "datei": "img/hd/produkt-kacheln/kokos-natur-512x340.jpg",
+   "hoehe": 340,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/kokos-natur_512x340.jpg"
+  },
+  "img/produkte/005-jet-print-light-5eb35cd44d2e3268777520.jpg": {
+   "abweichung": 7.0,
+   "breite": 1400,
+   "breite1x": 512,
+   "datei": "img/hd/produkte/005-jet-print-light-5eb35cd44d2e3268777520.jpg",
+   "hoehe": 930,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/005-jet-print-light-5eb35cd44d2e3268777520.jpg"
+  },
+  "img/produkte/5c47fa2b58b3djpeg.jpeg": {
+   "abweichung": 21.7,
+   "breite": 1400,
+   "breite1x": 512,
+   "datei": "img/hd/produkte/5c47fa2b58b3djpeg.jpg",
+   "hoehe": 930,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/matte_008.jpg"
+  },
+  "img/produkte/JPL-601-zitronengelb_0.jpg": {
+   "abweichung": 10.1,
+   "breite": 800,
+   "breite1x": 512,
+   "datei": "img/hd/produkte/jpl-601-zitronengelb-0.jpg",
+   "hoehe": 531,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.net/uploads/JPL-601-zitronengelb_0.jpg"
+  },
+  "img/uploads/5c47fa2b58b3djpeg.jpeg": {
+   "abweichung": 11.3,
+   "breite": 1600,
+   "breite1x": 150,
+   "datei": "img/hd/uploads/5c47fa2b58b3djpeg.jpg",
+   "hoehe": 1067,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/matte_008.jpg"
+  },
+  "img/uploads/5c47fa5a8336bjpeg.jpeg": {
+   "abweichung": 5.0,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/uploads/5c47fa5a8336bjpeg.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.de/media/bild/IHXL_01.jpg"
+  },
+  "img/uploads/5c47fbd86f17cjpeg.jpeg": {
+   "abweichung": 7.3,
+   "breite": 512,
+   "breite1x": 150,
+   "datei": "img/hd/uploads/5c47fbd86f17cjpeg.jpg",
+   "hoehe": 341,
+   "passung": "gestreckt",
+   "quelle": "https://matten.de/media/bild/K-Turf-7081-mi.jpg"
+  },
+  "img/uploads/5c4cc0ab73be2jpeg.jpeg": {
+   "abweichung": 20.4,
+   "breite": 1600,
+   "breite1x": 512,
+   "datei": "img/hd/uploads/5c4cc0ab73be2jpeg.jpg",
+   "hoehe": 1062,
+   "passung": "zuschnitt",
+   "quelle": "https://matten.de/media/bild/matte_008.jpg"
+  }
+ }
+}

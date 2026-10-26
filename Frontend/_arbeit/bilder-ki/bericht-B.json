@@ -1,0 +1,138 @@
+[
+ {
+  "original": "assets/img/kategorie-kacheln/5c773ded137fb.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Steinwaschbecken: KI erfindet eine völlig andere Marmorzeichnung (Kristalladern statt der weichen Maserung), Beckenform und Abfluss verändert. Auf 150x100 ist zu wenig Information da; kein zweiter Versuch, weil das Ergebnis ein anderes Produkt zeigt.",
+  "farbabweichung": "24.5/19.5",
+  "credits": 6
+ },
+ {
+  "original": "assets/img/kategorie-kacheln/5c785fa38931b.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Eingangsbereich mit Matte: KI baut die Szene neu (Tür, Sofa, Lobby anders, Mattenfläche bekommt erfundene Bouclé-Struktur und schwarze Randleiste). Nicht dasselbe Bild.",
+  "farbabweichung": "33.5/22.5",
+  "credits": 6
+ },
+ {
+  "original": "assets/img/kategorie-kacheln/5c899bca0f1ab.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Grüne Matte mit Logo: Logo in der Ecke durch ein erfundenes weißes Piktogramm ersetzt, Rand wird pfirsichfarben statt beige, gepunktete Linie wird gestrichelt, schwarzer Außenrahmen dazu.",
+  "farbabweichung": "13.2/16.6",
+  "credits": 6
+ },
+ {
+  "original": "assets/img/kategorie-kacheln/5c899da8bc245.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Rotes Gerät: KI erfindet lesbaren Text 'TAYLOR TX-4000' (im Original unlesbar), beiger Rand wird schwarz, Hintergrund der Halle neu gezeichnet.",
+  "farbabweichung": "47.4/48.1",
+  "credits": 6
+ },
+ {
+  "original": "assets/img/kategorie-kacheln/5c899e468cda6.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Versuch 1: Ziffern 0-9 durch erfundene Symbole ersetzt, Schrift 'System/Operation' statt 'functionaltraining'. Versuch 2 (mit Textangabe im Prompt): Ziffern und Schrift stimmen, aber KI erfindet Haken an den senkrechten Linien, doppelte Ringe um die Kreise und Verbindungsstriche zwischen den Kreisen. Verworfen.",
+  "farbabweichung": "Versuch 1: 16.0/12.9; Versuch 2: 13.8/10.9",
+  "credits": 12
+ },
+ {
+  "original": "assets/img/kategorie-kacheln/5c899f0b48969.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Stern auf beigem Rahmen. Versuch 1: sauber, aber alle Strahlen gleich dünn (das Original hat dickere Mittelstücke, siehe großes Schwesterbild). Versuch 2 (Prompt mit Strichstärke): Strahlen spitz zulaufend, in der Mitte ein erfundener Ring statt des vollen Punkts, Strahlenlänge anders. Beides weicht vom Motiv ab.",
+  "farbabweichung": "Versuch 1: 4.7/3.7; Versuch 2: 22.0/6.9",
+  "credits": 12
+ },
+ {
+  "original": "assets/img/kategorie-kacheln/5cca3e65b5598.jpeg",
+  "ki": "assets/img/ki/kategorie-kacheln/5cca3e65b5598.jpg",
+  "akzeptiert": true,
+  "grund": "Einzelne rote Linie auf Braun. Versuch 1 war 3 % nach oben verrutscht (verworfen). Versuch 2 sitzt nach Ausrichtung (Massstab 0.9995/1.007) auf dem Original: Linie gleiche Höhe, gleicher Anfang, hellgraue Randstreifen gleich, JPEG-Fehler im Original (grüner Streifen, Fleck links) sind weg. Vorbehalt: Linie rechts ca. 4 % länger als der harte Teil im Original (Original hat dort einen unscharfen Auslauf).",
+  "farbabweichung": "11.4/1.8",
+  "credits": 12
+ },
+ {
+  "original": "assets/img/uploads/5c36ad55d8af8jpeg.jpeg",
+  "ki": "assets/img/ki/uploads/5c36ad55d8af8jpeg.jpg",
+  "akzeptiert": true,
+  "grund": "Best Price Guarantee: Schrift 'BEST PRICE / GUARANTEE / BEST PRICE', Ringe und Buchstabenformen unverändert und deutlich schärfer; Rot (166,9,8) und Weiß stimmen. Farbabgleich über Kennlinie je Kanal (eigene Fassung des Abgleichs, damit Weiß weiß bleibt).",
+  "farbabweichung": "26.3/12.3",
+  "credits": 6
+ },
+ {
+  "original": "assets/img/uploads/5c36ad9452e74jpeg.jpeg",
+  "ki": "assets/img/ki/uploads/5c36ad9452e74jpeg.jpg",
+  "akzeptiert": true,
+  "grund": "Express Delivery: Versuch 1 verworfen, weil 'DELIVERY' fett statt dünn und das Gelb zitronig war. Versuch 2 (Prompt: DELIVERY dünn lassen): Lkw, Tacho, 'EXPRESS' fett weiß und 'DELIVERY' dünn stimmen. Gelb nachträglich auf das Original zurückgerechnet (248,205,8; KI hatte 250,244,9).",
+  "farbabweichung": "39.2/10.0",
+  "credits": 12
+ },
+ {
+  "original": "assets/img/uploads/5cca3e65c6da1.jpeg",
+  "ki": "assets/img/ki/uploads/5cca3e65c6da1.jpg",
+  "akzeptiert": true,
+  "grund": "Einzelne rote Linie auf Braun: Linie gleiche Höhe und Länge, Randstreifen und Feldfarbe (74,39,37) gleich, kantenschärfer. Auf 150 px Anzeigegröße kaum sichtbarer Gewinn, bei großer/Retina-Darstellung sauberer.",
+  "farbabweichung": "8.0/3.9",
+  "credits": 6
+ },
+ {
+  "original": "assets/img/uploads/5c899f57088f7.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Grüne Fläche mit Logo (Tierkopf mit Kappe): Strichführung stimmt nach Ausrichtung, aber die KI zeichnet das Logo neu: Augen mit weißem Augapfel und Iris statt grauer Augen mit weißem Punkt, rechtes Ohr länger, Kappennähte neu. Logo nicht identisch, daher verworfen. Rohbild liegt im Arbeitsordner. Kein zweiter Versuch, weil das Guthaben bereits unter der Untergrenze lag.",
+  "farbabweichung": "6.1/2.5",
+  "credits": 6
+ },
+ {
+  "original": "assets/img/uploads/5c899fcaea079.jpeg",
+  "ki": "assets/img/ki/uploads/5c899fcaea079.jpg",
+  "akzeptiert": true,
+  "grund": "Stern auf Braun. Versuch 1 war ein Format-Problem (1:1-Vorgabe bei 1.13:1-Original, KI verschob und skalierte den Stern, Ausrichtung hätte ihn verfälscht). Versuch 2: Original vorher per Randwiederholung auf 1:1 aufgefüllt, danach zurückgeschnitten. Stern liegt deckungsgleich (Massstab 1.000), dicke Mittelstücke und dünne Spitzen erhalten, Farben gleich.",
+  "farbabweichung": "7.6/2.0",
+  "credits": 12
+ },
+ {
+  "original": "assets/img/uploads/5c89a066994bd.jpeg",
+  "ki": "assets/img/ki/uploads/5c89a066994bd.jpg",
+  "akzeptiert": true,
+  "grund": "Fünf Punkte auf Braun. Versuch 1 verworfen (Punkte um bis zu 9 % verschoben/gestaucht wegen 1:1-Vorgabe). Versuch 2 mit Auffüllen auf 1:1: Positionen stimmen, Punktgröße weicht um etwa 2 % ab (Höhe der Punkte leicht kleiner), Farbe gleich.",
+  "farbabweichung": "9.5/0.6",
+  "credits": 12
+ },
+ {
+  "original": "assets/img/uploads/5c899f359ba7d.jpeg",
+  "ki": "assets/img/ki/uploads/5c899f359ba7d.jpg",
+  "akzeptiert": true,
+  "grund": "Ziffern 0-9, 'functionaltraining' und alle Linien identisch und schärfer. Farben: Weiß blieb weiß (erst mit Kennlinien-Abgleich; der Standardabgleich färbte Weiß türkis, der örtliche Abgleich erzeugte Lichthöfe).",
+  "farbabweichung": "12.4/3.4",
+  "credits": 6
+ },
+ {
+  "original": "assets/img/uploads/JPL-613-königsblau_0.jpg",
+  "ki": "assets/img/ki/uploads/JPL-613-königsblau_0.jpg",
+  "akzeptiert": true,
+  "grund": "Eingangshalle mit blauer Matte: Szene, Kreise auf der Scheibe, Auto, Pflanze, Klavier und Mattenlogo 'Mattenfuchs' deckungsgleich und schärfer (Teppichflor sichtbar). Matte war nach dem Standardabgleich zu blau (B 140 statt 128); mit örtlichem Abgleich (Radius 3) jetzt (33,51,128) wie im Original, keine Lichthöfe.",
+  "farbabweichung": "16.5/8.0",
+  "credits": 6
+ },
+ {
+  "original": "assets/img/kategorie-kacheln/5cca325ee6c13.jpeg",
+  "ki": "assets/img/ki/kategorie-kacheln/5cca325ee6c13.jpg",
+  "akzeptiert": true,
+  "grund": "Nicht selbst geschärft: aus ki/produkte/5cca325ee6c13.jpg (Agent A) abgeleitet, auf 3:2 zugeschnitten und auf 450x300 verkleinert. Motiv (fünf Punkte auf Braun, beiger Rahmen) per Blick als dasselbe bestätigt.",
+  "farbabweichung": "-",
+  "credits": 0
+ },
+ {
+  "original": "assets/img/kategorie-kacheln/5cce29fead941.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Nicht bearbeitet: unter assets/img/ki/produkte/ lag bis zum Ende keine KI-Fassung des großen Produktfotos.",
+  "farbabweichung": "-",
+  "credits": 0
+ }
+]

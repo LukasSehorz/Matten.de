@@ -113,6 +113,18 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
   var farbgruppen = [];     /* [{feld, name, optionen:[{wert, nummer, name, hex, muster}], gewaehlt}] */
   var stamm = null;         /* Stammdaten fuer berechne() + ustSatz/versand   */
   var livePreis = null;     /* letzter Live-Preis (Produkte ohne EK/m2)       */
+  /* Preisformel-Stammwerte AUS DEM ALTSYSTEM (24.10.2026). Herr Fuchsius
+     pflegt EK, Mengenstaffel, Standardbreiten und Zuschlaege in der
+     Staffeltabelle der Artikelmaske von matten.de. Liefert das Altsystem sie
+     mit (GET /api/price -> preisformel, nur bei eingeschalteter Formel),
+     rechnet diese Seite mit DIESEN Werten statt mit der Kopie in daten.js —
+     eine Aenderung im Backend wirkt damit sofort im Shop. Kommt nichts
+     (Livesystem ohne Staffeltabelle, Netlify), bleibt alles wie bisher. */
+  var backendPF = null;
+  /* Solange die Antwort des Altsystems aussteht, zeigt die Preiszeile den
+     Ladekreis statt des Preises aus daten.js — sonst sprang der Preis nach
+     einer Sekunde um (hinweismatten 22,53 -> 30,13 €). Hoechstens 4 s. */
+  var wartetAufAltsystem = false;
   var lauf = 0;
 
   var einkaufBekannt = !!(P.preisdaten && P.preisdaten.einkaufProQm > 0);
@@ -125,7 +137,9 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
     var pd = P.preisdaten || {};
     var preis = (artikel && artikel.preis) || {};
     var st = null;
-    if (einkaufBekannt) {
+    if (einkaufBekannt && backendPF && backendPF.stammdaten) {
+      st = stammdatenFuer(Object.assign({ artikelnummer: P.artikelnummer, bezeichnung: P.name }, backendPF.stammdaten));
+    } else if (einkaufBekannt) {
       st = stammdatenFuer({
         artikelnummer: P.artikelnummer,
         bezeichnung: P.name,
@@ -168,9 +182,21 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
   function mitSteuerUndVersand(nettoGesamt, st, zusatz) {
     var z = zusatz || {};
     var aufschlag = runde((z.aufschlagJeStueck || 0) * (z.menge || 1), 2);   /* Spec 13.8: absolut je Stueck */
-    var netto = runde(nettoGesamt + aufschlag, 2);
-    var ust = z.bruttoBereits ? 0 : runde(netto * (st.ustSatz / 100), 2);
-    var wareBrutto = runde(netto + ust, 2);
+    /* Rundung wie das Altsystem (ArtikelPage: round(preis * steuerrate, 2)):
+       das Brutto wird aus dem UNGERUNDETEN Netto gerundet. Vorher wurde erst
+       das Netto gerundet — bei 100 x 100 cm ergab das 156,91 statt 156,92 €,
+       also einen Cent weniger als Warenkorb und Rechnung (24.10.2026). */
+    var nettoRoh = nettoGesamt + aufschlag;
+    var netto = runde(nettoRoh, 2);
+    var menge = z.menge || 1;
+    var faktor = 1 + st.ustSatz / 100;
+    /* Mit z.jeStueckRunden (Preis kommt aus dem Altsystem) wie dort: erst das
+       Stueck brutto runden, dann mal Menge — 20 x 50x200 sind 2.234,60 €,
+       nicht 2.234,50 €. */
+    var wareBrutto = z.bruttoBereits ? netto
+      : z.jeStueckRunden ? runde(runde(nettoRoh / menge * faktor, 2) * menge, 2)
+      : runde(nettoRoh * faktor, 2);
+    var ust = runde(wareBrutto - netto, 2);
     var versandBrutto = Number.isFinite(st.versandBrutto) ? runde(st.versandBrutto, 2) : null;
     return {
       netto: netto, aufschlag: aufschlag, ustSatz: st.ustSatz, ust: ust, wareBrutto: wareBrutto,
@@ -201,11 +227,63 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
     }, stamm.stammdaten);
     if (!r.ok) return { ok: false, r: r, grund: rat(r) };
     var aufschlag = attributAufschlag();
+    /* Preis-Korrektur aus der Artikelmaske des Altsystems (+5 / -5 / +5% /
+       -5%, je Stueck) — wie Preisformel::rechneKorrektur() dort. */
+    var menge = wahl.menge > 0 ? wahl.menge : 1;
+    var k = backendPF ? korrigiere(r.vkGesamt / menge, backendPF.korrektur) : null;
+    var gesamtNetto = k == null ? r.vkGesamt : k * menge;
+    var ks = k == null ? null : korrigiere(r.vkProStueckOhneEinmaliges, backendPF.korrektur);
+    var stueckNetto = ks == null ? r.vkProStueckOhneEinmaliges : ks;   /* nie leer (Kommentar zeigte sonst 0,00 €) */
     return {
       ok: true, r: r,
-      stueck: mitSteuerUndVersand(r.vkProStueckOhneEinmaliges, { ustSatz: stamm.ustSatz, versandBrutto: null }, { aufschlagJeStueck: aufschlag, menge: 1 }),
-      gesamt: mitSteuerUndVersand(r.vkGesamt, stamm, { aufschlagJeStueck: aufschlag, menge: wahl.menge })
+      stueck: mitSteuerUndVersand(stueckNetto, { ustSatz: stamm.ustSatz, versandBrutto: null }, { aufschlagJeStueck: aufschlag, menge: 1 }),
+      gesamt: mitSteuerUndVersand(gesamtNetto, stamm, { aufschlagJeStueck: aufschlag, menge: wahl.menge, jeStueckRunden: !!backendPF })
     };
+  }
+
+  /**
+   * Preis-Korrektur wie im Altsystem (Preisformel::rechneKorrektur): "+5",
+   * "-5", "+5%", "-5%", Komma erlaubt. Unlesbar oder Ergebnis <= 0 -> null
+   * (dann keine Korrektur; das Altsystem faellt in diesem Fall auf seine alte
+   * Rechnung zurueck, was das Frontend nicht nachbilden kann).
+   */
+  function korrigiere(preis, korrektur) {
+    var t = String(korrektur || '').trim();
+    if (!t) return null;
+    var prozent = t.indexOf('%') >= 0;
+    var w = alsZahl(t.replace(/%/g, ''));
+    if (w == null) return null;
+    var neu = prozent ? preis * (1 + w / 100) : preis + w;
+    return neu > 0 ? neu : null;
+  }
+
+  /**
+   * Zahl lesen wie Preisformel::alsZahl() im Altsystem — sonst rechneten Shop
+   * und Altsystem bei Eingaben wie "1e2" oder "0x10" verschieden (Pruefbericht
+   * 24.10.2026). Leerzeichen raus, ein Vorzeichen, dann nur Ziffern, Punkt,
+   * Komma. Stehen beide Zeichen da, ist das hintere das Dezimalzeichen; eine
+   * Sorte genau einmal = Dezimalzeichen, mehrfach = Tausender (Gruppen zu 3).
+   */
+  function alsZahl(t) {
+    var s = String(t == null ? '' : t).replace(/[\s\u00a0]/g, '');
+    var vz = 1;
+    if (s[0] === '+' || s[0] === '-') { if (s[0] === '-') vz = -1; s = s.slice(1); }
+    if (!s || !/^[0-9.,]+$/.test(s)) return null;
+    var k = s.lastIndexOf(','), p = s.lastIndexOf('.');
+    if (k >= 0 && p >= 0) {
+      s = k > p ? s.replace(/\./g, '').replace(/,/g, '.') : s.replace(/,/g, '');
+    } else if (k >= 0 || p >= 0) {
+      var teile = s.split(k >= 0 ? ',' : '.');
+      if (teile.length > 2) {
+        if (teile.slice(1).some(function (g) { return g.length !== 3; })) return null;
+        s = teile.join('');
+      } else {
+        s = teile[0] + '.' + teile[1];
+      }
+    }
+    if (s === '' || s === '.' || !/^\d*\.?\d*$/.test(s)) return null;
+    var n = vz * Number(s);
+    return Number.isFinite(n) ? n : null;
   }
 
   /** Was der Kunde bei einem Fehler von berechne() lesen soll — mit Richtung. */
@@ -238,6 +316,42 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
     return (a.attribute || []).filter(function (x) {
       return x.typ !== 'farbwahl' && !/\[(x|y)\]$/.test(x.feld) && (x.optionen || []).some(function (o) { return massAus(o.wert); });
     })[0] || null;
+  }
+
+  /**
+   * Live-Preis (Artikel ohne EK): Hat der Artikel Wunschmass-Felder
+   * (spezialoption[…][x|y]), werden sie nach der gewaehlten Groesse gefuellt
+   * ("115cm x 130cm" -> x 115, y 130; die Altsystem-Seiten nennen X zuerst).
+   * Bietet x die Zahl nicht an (OS-REHA Quadrat: x nur 115/150/200, Groesse
+   * "130 x 115"), dieselbe Matte gedreht. Ohne die Felder rechnet das
+   * Altsystem mit einer Vorgabegroesse, die zu keiner Option passt — bei
+   * OS-REHA 143,51 statt 186,57 € (24.10.2026). Nur beide Felder oder keins.
+   */
+  function wunschmassAusGroesse(a, werte) {
+    var fx = massfeld(a, 'x'), fy = massfeld(a, 'y');
+    if (!fx || !fy || werte[fx.feld] != null || werte[fy.feld] != null) return;
+    /* Klammern wie "(X)" und "(Y in Gehrichtung)" weglassen — massAus() liest
+       "130cm Breite (X) x 115cm Länge (Y …)" sonst nicht (das X in der Klammer
+       gilt dort als Trennzeichen). */
+    var lese = function (t) { return massAus(String(t || '').replace(/\([^)]*\)/g, '')); };
+    var gf = (a.attribute || []).filter(function (x) {
+      return x.typ !== 'farbwahl' && !/\[(x|y)\]$/.test(x.feld) && (x.optionen || []).some(function (o) { return lese(o.wert); });
+    })[0];
+    var m = gf ? lese(werte[gf.feld] || gf.gewaehlt) : null;
+    if (!m) return;
+    var feldwert = function (f, wert) {
+      if (f.typ === 'zahl') {
+        return (f.min == null || wert >= f.min) && (f.max == null || wert <= f.max) ? String(/\[flaeche\]/.test(f.feld) ? Math.round(wert * 10) : wert) : null;
+      }
+      var o = f.optionen.filter(function (x) { return x.zahl === wert; })[0];
+      return o ? o.wert : null;
+    };
+    [[m.a, m.b], [m.b, m.a]].some(function (p) {
+      var vx = feldwert(fx, p[0]), vy = feldwert(fy, p[1]);
+      if (vx == null || vy == null) return false;
+      werte[fx.feld] = vx; werte[fy.feld] = vy;
+      return true;
+    });
   }
 
   /** Option des Groessenfelds, deren Zahlen zum Mass passen (in beiden Reihenfolgen). */
@@ -364,15 +478,19 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
     var haupt = artikel && S.bild(artikel.hauptbild);
     if (!lokal.length && haupt) lokal.push(haupt);   /* Produkt ohne eigenes matten.net-Bild: Hauptbild des Altsystems */
     var h = '';
+    /* srcset (24.10.2026): gibt es zum lokalen Bild eine schaerfere Fassung
+       (NET.hd), nimmt der Browser sie, sobald Anzeigegroesse x Pixeldichte es
+       verlangt. Nicht beim Farbbild #image-farbe — dessen src setzt bildSetzen(),
+       ein srcset wuerde den Wechsel ueberstimmen. */
     lokal.forEach(function (b, i) {
       h += '<div id="image-' + (i + 1) + '" class="product-image-container animated fadeIn' + (i === 0 ? ' active' : '') + '">' +
-        '<img src="' + esc(b) + '" alt="image" width="512" height="340"></div>\n';
+        '<img src="' + esc(b) + '"' + S.srcsetAttr(b, '(max-width: 991.98px) calc(100vw - 32px), 720px') + ' alt="image" width="512" height="340"></div>\n';
     });
     h += '<div id="image-farbe" class="product-image-container animated fadeIn"><img src="" alt="image" width="512" height="340"></div>\n';
     h += '<div class="row no-gutters pt-1" id="bild-nav">\n';
     lokal.forEach(function (b, i) {
       h += '<div class="col-4 col-lg-3"><a href="#" class="product-image-nav-item' + (i === 0 ? ' active' : '') + '" data-target="#image-' + (i + 1) + '">' +
-        '<img src="' + esc(b) + '" alt="image" class="img-fluid" width="512" height="340"></a></div>\n';
+        '<img src="' + esc(b) + '"' + S.srcsetAttr(b, '170px') + ' alt="image" class="img-fluid" width="512" height="340"></a></div>\n';
     });
     h += '<div class="col-4 col-lg-3" id="bild-nav-farbe" hidden><a href="#" class="product-image-nav-item" data-target="#image-farbe">' +
       '<img src="" alt="image" class="img-fluid" width="512" height="340"></a></div>\n</div>';
@@ -866,7 +984,11 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
       bildAktiv('#image-1');
       return;
     }
+    /* srcset vor src setzen, sonst laedt der Browser kurz die kleine Fassung
+       und dann die grosse; ohne schaerfere Fassung wird ein altes srcset entfernt. */
+    S.srcsetSetzen($c, b, '(max-width: 991.98px) calc(100vw - 32px), 720px');
     $c.src = b;
+    S.srcsetSetzen($n.querySelector('img'), b, '170px');
     $n.querySelector('img').src = b;
     $c.alt = P.name + (o ? ' in ' + o.titel : '');
     $n.hidden = false;
@@ -997,6 +1119,12 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
     }
 
     if (!einkaufBekannt) { livePreisHolen(); return; }
+    if (wartetAufAltsystem) {
+      $preis.innerHTML = '<span class="spinner-border" role="status" style="width: 1rem; height: 1rem;"><span class="sr-only">Loading...</span></span>';
+      $versand.textContent = '';
+      $end.textContent = '';
+      return;
+    }
 
     var e = preisFuer();
     if (!e.ok) {
@@ -1026,6 +1154,7 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
       return;
     }
     var werte = werteFuer(artikel, false);
+    wunschmassAusGroesse(artikel, werte);
     var url = '/api/price?pfad=' + encodeURIComponent(artikel.pfad) + '&anzahl=' + encodeURIComponent(wahl.menge);
     Object.keys(werte).forEach(function (f) { url += '&' + encodeURIComponent(f) + '=' + encodeURIComponent(werte[f]); });
     var meiner = ++lauf;
@@ -1399,7 +1528,29 @@ import { berechne, runde, zahl, stammdatenFuer, faktorBreiteFuer } from '../../.
         melde('<div class="alert alert-warning">Der Artikel des Altsystems (<code>' + esc(Z.dePfad) + '</code>) ließ sich nicht laden' +
           (r[0] && r[0].d && r[0].d.fehler ? ': ' + esc(r[0].d.fehler) : '') + '. Farben und Warenkorb sind deshalb nicht verfügbar; der Preis wird trotzdem berechnet.</div>');
       }
+      wartetAufAltsystem = !!(einkaufBekannt && artikel && artikel.pfad);
       aufbauen();
+      stammwerteVomAltsystem();
+    });
+  }
+
+  /* Nach dem Aufbau (die Seite rechnet sofort mit daten.js) einmal beim
+     Altsystem nachfragen, ob dort die Preisformel mit eigener Staffeltabelle
+     laeuft. Wenn ja: Stammwerte uebernehmen und neu rechnen. Blockiert nichts —
+     auf Netlify (Livesystem ohne Staffeltabelle) kommt null zurueck und es
+     bleibt bei daten.js. */
+  function stammwerteVomAltsystem() {
+    if (!einkaufBekannt || !artikel || !artikel.pfad) return;
+    S.hole('/api/price?pfad=' + encodeURIComponent(artikel.pfad) + '&anzahl=1', 4000).then(function (res) {
+      var pf = res && res.ok && res.d ? res.d.preisformel : null;
+      if (pf && pf.aktiv && pf.stammdaten) {
+        backendPF = pf;
+        stamm = stammdatenAufbauen();
+        document.body.setAttribute('data-preis-quelle', 'altsystem');
+      }
+      /* ohne brauchbare Antwort (auch nach 4 s): bleibt bei daten.js */
+      wartetAufAltsystem = false;
+      neuRechnen();
     });
   }
 

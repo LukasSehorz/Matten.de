@@ -207,6 +207,7 @@ class SpezialoptionSpezial extends Spezialoption{
         		   Leere Felder sind kein Fehler — dann gilt der Vorgabewert, der
         		   im Feld als Platzhalter steht.
         		   ---------------------------------------------------------------- */ ?>
+        		<?php if($this->zeigtPreisformel()): ?>
         		<fieldset style="margin-top:1em;border:1px solid #999;padding:0.5em;">
         		<legend><strong>Preisformel (Excel-Mappe)</strong></legend>
         		<p style="margin:0 0 0.5em 0;">
@@ -261,11 +262,6 @@ class SpezialoptionSpezial extends Spezialoption{
         			</tr>
         			<?php endif; ?>
         			<tr>
-        				<td width="260">EK-Listenpreis je m² in € (netto):</td>
-        				<td><input size='8' name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_ek_qm]' value='<?=htmlspecialchars($this->get('pf_ek_qm'))?>' placeholder='<?=htmlspecialchars($this->vorgabe('ekListenpreisProQm'))?>' /></td>
-        				<td colspan="2" style="color:#666;">Preis des Lieferanten je Quadratmeter. Basis der ganzen Rechnung.</td>
-        			</tr>
-        			<tr>
         				<td width="260">Welcher Salesfactor gilt (Colortype):</td>
         				<td>
         					<select name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_colortype]'>
@@ -289,42 +285,15 @@ class SpezialoptionSpezial extends Spezialoption{
         				<td colspan="2" style="color:#666;">Macht aus dem Einkauf den Verkauf. Höher = teurer.</td>
         			</tr>
         			<tr>
-        				<td width="260">Standardbreiten der Rolle in cm:</td>
-        				<td colspan="3"><input size='40' name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_standardbreiten]' value='<?=htmlspecialchars($this->get('pf_standardbreiten'))?>' placeholder='<?=htmlspecialchars(implode(', ', $this->vorgabe('standardbreiten')))?>' />
-        				<span style="color:#666;">Mit Komma trennen, z.&nbsp;B. „60, 75, 85, 115, 150, 200“. Trifft weder Breite noch Länge eine davon, greift der Sondermaß-Faktor. Der größte Wert ist zugleich die Rollenbreite.</span></td>
-        			</tr>
-        			<tr>
         				<td width="260">Sondermaß-Faktor:</td>
         				<td><input size='8' name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_f_sondermass]' value='<?=htmlspecialchars($this->get('pf_f_sondermass'))?>' placeholder='<?=htmlspecialchars($this->vorgabe('faktorSondermass'))?>' /></td>
         				<td colspan="2" style="color:#666;">1,25 bedeutet 25&nbsp;% Aufschlag, weil aus der Rolle geschnitten werden muss.</td>
         			</tr>
         			<tr>
-        				<td width="260">Sonderform ohne Rand (Faktor):</td>
-        				<td><input size='8' name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_f_form_ohne]' value='<?=htmlspecialchars($this->get('pf_f_form_ohne'))?>' placeholder='<?=htmlspecialchars($this->vorgabe('faktorSonderformOhne'))?>' /></td>
-        				<td width="200">Sonderform mit Rand (Faktor):</td>
-        				<td><input size='8' name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_f_form_mit]' value='<?=htmlspecialchars($this->get('pf_f_form_mit'))?>' placeholder='<?=htmlspecialchars($this->vorgabe('faktorSonderformMit'))?>' /></td>
-        			</tr>
-        			<tr>
-        				<td width="260">Sonderfarbe Verkauf in €:</td>
-        				<td><input size='8' name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_sonderfarbe_vk]' value='<?=htmlspecialchars($this->get('pf_sonderfarbe_vk'))?>' placeholder='<?=htmlspecialchars($this->vorgabe('aufschlagSonderfarbeVK'))?>' /></td>
-        				<td width="200">Sonderfarbe Einkauf in €:</td>
-        				<td><input size='8' name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_sonderfarbe_ek]' value='<?=htmlspecialchars($this->get('pf_sonderfarbe_ek'))?>' placeholder='<?=htmlspecialchars($this->vorgabe('aufschlagSonderfarbeEK'))?>' /></td>
-        			</tr>
-        			<tr>
-        				<td></td>
-        				<td colspan="3" style="color:#666;">Fester Betrag, der <strong>einmal je Auftrag</strong> anfällt, nicht je Stück.
-        				Vorgabe ist der Mappenwert 50&nbsp;€ für den Einkauf; am 17.09.2026 waren mündlich 54&nbsp;€ genannt — bitte selbst entscheiden und hier eintragen.</td>
-        			</tr>
-        			<tr>
-        				<td width="260">Teuerungszuschlag in Prozent:</td>
-        				<td><input size='8' name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_tz_prozent]' value='<?=htmlspecialchars($this->get('pf_tz_prozent'))?>' placeholder='<?=htmlspecialchars($this->vorgabe('tzProzent'))?>' /></td>
-        				<td colspan="2" style="color:#666;">„5“ bedeutet 5&nbsp;% Aufschlag. Wirkt nur auf den Verkauf, nie auf den Einkauf.</td>
-        			</tr>
-        			<tr>
-        				<td width="260">Mengenstaffel:</td>
-        				<td colspan="3"><input size='60' name='spezialoption[<?=$this->getArtikel()->getId()?>][spezial][pf_mengenstaffel]' value='<?=htmlspecialchars($this->get('pf_mengenstaffel'))?>' placeholder='<?=htmlspecialchars($this->getMengenstaffelVorgabeText())?>' />
-        				<span style="color:#666;">Je Stufe „Stückzahl:Faktor“, mit Komma getrennt — z.&nbsp;B. „1:1, 2:0,95, 3:0,92, 10:0,90, 20:0,89, 30:0,88“.
-        				0,95 heißt 5&nbsp;% Nachlass ab dieser Stückzahl.</span></td>
+        				<td width="260">Staffeltabelle:</td>
+        				<td colspan="3" style="color:#666;">EK je m², Teuerungszuschlag, Mengenstaffel, Standardbreiten,
+        				Sonderform und Sonderfarbe stehen seit 24.10.2026 <strong>oben bei „Preisstaffel“</strong> als Tabelle
+        				wie in der Excel-Mappe.</td>
         			</tr>
         			<tr>
         				<td width="260">Mindestbreite in cm:</td>
@@ -347,6 +316,7 @@ class SpezialoptionSpezial extends Spezialoption{
         			</tr>
         		</table>
         		</fieldset>
+        		<?php endif; ?>
 			<?php
         return ob_get_clean();
     }
@@ -488,6 +458,323 @@ class SpezialoptionSpezial extends Spezialoption{
     public function getPfColortype(){
         $v = Preisformel::alsZahl($this->get('pf_colortype'));
         return ($v !== null and $v >= 1 and $v <= 3) ? (int) $v : (int) $this->vorgabe('colortype');
+    }
+
+    /* ------------------------------------------------------------------
+       Staffeltabelle wie in der Excel-Mappe (24.10.2026)
+       ------------------------------------------------------------------
+       Herr Fuchsius (Mails vom 30.08. und 14.10.2026, Screenshot der
+       Stammdaten von 6300201-Logomatte) will die Werte der Preisstaffel
+       NICHT als Textzeile ("1:1, 2:0,95, ...") pflegen, sondern als
+       Tabelle mit einzelnen Feldern, genau wie im Excel-Bereich Q2:W7:
+
+           TZ %   | 0      | 1 (Faktor) | ab 01.04.2022
+           staggered prices / sqm                    | one-color
+           54,63  | 0,95 | 0,92 | 0,90 | 0,89 | 0,88 | 0,95
+           1      | 2    | 3    | 10   | 20   | 30   | staggered quantity
+           60     | 75   | 85   | 115  | 150  | 200  | standard-width
+
+       dazu Sonderform ohne/mit Rand (30 % / 50 %) und Sonderfarbe EK/VK.
+       Die Tabelle steht in der Artikelmaske neben "Preisstaffel"
+       (PreisstaffelFormFieldHandler). Gespeichert wird in DIESELBEN Felder
+       wie bisher (pf_mengenstaffel, pf_standardbreiten, pf_f_form_*, ...),
+       die Rechnung in Preisformel.php bleibt unberuehrt.
+
+       Leere Zellen = Vorgabe der Mappe (grauer Platzhalter), wie ueberall
+       in der Preisformel. Die erste Staffelmenge hat keinen eigenen Faktor:
+       in der Mappe steht in dieser Spalte der EK je m² (Q5), der Faktor
+       der ersten Stufe ist 1.
+       ------------------------------------------------------------------ */
+
+    /**
+     * Fuer welche Artikel gibt es Preisformel und Staffeltabelle?
+     * Vorerst NUR JetPrint (Lukas, 24.10.2026: "erstmal nur JetPrint, und
+     * wenn alles passt, fuer alle Produkte"). Erkannt an der
+     * Lieferanten-Artikelnummer "MJPRNT…" (JetPrint von Kleen-Tex) oder an
+     * "jetprint" in der Artikelnummer. Fuer alle Artikel freischalten:
+     * hier einfach true zurueckgeben.
+     */
+    public function zeigtPreisformel(){
+        $a = $this->getArtikel();
+        if(!$a) return false;
+        $lief = strtoupper(trim((string) $a->get('lieferanten_artikelnummer')));
+        $nr = strtolower((string) $a->get('artikelnummer'));
+        return (strpos($lief, 'MJPRNT') === 0) or (strpos($nr, 'jetprint') !== false);
+    }
+
+    /** Zahl deutsch fuer die Anzeige; $stellen = null laesst sie, wie sie ist. */
+    private static function zahlDe($z, $stellen = null){
+        if($z === null or $z === ''){
+            return '';
+        }
+        $t = ($stellen === null) ? (string) (0 + $z) : number_format((float) $z, $stellen, '.', '');
+        return str_replace('.', ',', $t);
+    }
+
+    /**
+     * Faktor fuer die Anzeige: mindestens zwei Nachkommastellen ("0,90"),
+     * aber nie gerundet. Vorher stand hier zahlDe($f, 2) — aus 0,955 wurde in
+     * der Maske 0,96, und das naechste unveraenderte Speichern schrieb 0,96
+     * zurueck (Pruefbericht 24.10.2026, B2).
+     */
+    private static function faktorDe($f){
+        if($f === null or $f === '') return '';
+        $t = rtrim(number_format((float) $f, 6, '.', ''), '0');
+        $nachkomma = strlen(substr(strrchr($t, '.'), 1));
+        if($nachkomma < 2) $t = number_format((float) $f, 2, '.', '');
+        return str_replace('.', ',', $t);
+    }
+
+    /** Die 6 Staffelstufen (aufsteigend) — gepflegt oder leer. */
+    private function staffelZellen(){
+        $gepflegt = self::leseMengenstaffel($this->get('pf_mengenstaffel'));
+        $vorgabe = array_reverse($this->vorgabe('mengenstaffel'));
+        $auf = array_reverse($gepflegt);
+        $zellen = array();
+        for($i = 0; $i < 6; $i++){
+            $zellen[] = array(
+                'menge'          => isset($auf[$i]) ? self::zahlDe($auf[$i]['schwelle']) : '',
+                'faktor'         => isset($auf[$i]) ? self::faktorDe($auf[$i]['faktor']) : '',
+                'menge_vorgabe'  => isset($vorgabe[$i]) ? self::zahlDe($vorgabe[$i]['schwelle']) : '',
+                'faktor_vorgabe' => isset($vorgabe[$i]) ? self::faktorDe($vorgabe[$i]['faktor']) : ''
+            );
+        }
+        /* Seit der Pruefung beim Speichern stehen immer genau 6 Stufen drin
+           (leere Zelle = Vorgabe). Andere Anzahlen kommen nur aus Altbestand
+           oder dem frueheren Textfeld — dann passen die Spalten nicht. */
+        return array('zellen' => $zellen, 'mehr_als_6' => count($auf) > 6, 'nicht_6' => count($auf) > 0 && count($auf) != 6);
+    }
+
+    /* Fehler der letzten Eingabe in der Tabelle, je Artikel. Statisch, damit
+       sie NICHT mit der Spezialoption in spezialoption_data serialisiert
+       werden; ueber die Sitzung, falls die Maske nach dem Speichern neu
+       geladen wird. */
+    private static $tabellenFehler = array();
+
+    private function merkeTabellenFehler($fehler){
+        $id = (int) $this->getArtikel()->getId();
+        self::$tabellenFehler[$id] = $fehler;
+        if(session_status() === PHP_SESSION_ACTIVE){
+            if($fehler) $_SESSION['pf_staffel_fehler'][$id] = $fehler;
+            else unset($_SESSION['pf_staffel_fehler'][$id]);
+        }
+    }
+
+    private function holeTabellenFehler(){
+        $id = (int) $this->getArtikel()->getId();
+        $f = isset(self::$tabellenFehler[$id]) ? self::$tabellenFehler[$id] : array();
+        if(session_status() === PHP_SESSION_ACTIVE and isset($_SESSION['pf_staffel_fehler'][$id])){
+            if(!$f) $f = $_SESSION['pf_staffel_fehler'][$id];
+            unset($_SESSION['pf_staffel_fehler'][$id]);   // einmal zeigen
+        }
+        return $f;
+    }
+
+    /** Faktor (1,3) -> Prozent (30) fuer die Anzeige "no border 30 %". */
+    private static function faktorAlsProzent($wert){
+        $z = Preisformel::alsZahl($wert);
+        return ($z === null) ? '' : self::zahlDe(round(($z - 1) * 100, 2));
+    }
+
+    /**
+     * Die Tabelle fuer die Artikelmaske. Feldnamen wie alle Felder der
+     * Spezialoption, damit parseAdminPost() sie beim Speichern findet.
+     */
+    public function getStaffelTabelle(){
+        $id = $this->getArtikel()->getId();
+        $n = function($feld) use ($id){ return "spezialoption[$id][spezial][$feld]"; };
+        $h = function($t){ return htmlspecialchars((string) $t, ENT_QUOTES); };
+        $st = $this->staffelZellen();
+        $breitenG = Preisformel::alsZahlenliste($this->get('pf_standardbreiten'));
+        $breitenV = $this->vorgabe('standardbreiten');
+        $tz = Preisformel::alsZahl($this->get('pf_tz_prozent'));
+        $tzFaktor = 1 + (($tz === null ? (float) $this->vorgabe('tzProzent') : $tz) / 100);
+        $zelle = 'border:1px solid #333;padding:2px 4px;text-align:center;';
+        $feld  = 'width:4.2em;text-align:right;border:1px solid #bbb;padding:1px 3px;';
+        /* Zellen, die beim letzten Speichern abgelehnt wurden: roter Rahmen,
+           Grund als Tooltip. Im Feld steht weiter der gespeicherte Wert. */
+        $fehler = $this->holeTabellenFehler();
+        $rs = function($k) use ($fehler){ return isset($fehler[$k]) ? 'border:2px solid #c00;background:#fdd;' : ''; };
+        ob_start(); ?>
+        <?php if($fehler): ?>
+        <div class="pf-tabellen-fehler" style="border:1px solid #c00;background:#fdecea;color:#900;padding:4px 8px;margin-bottom:6px;font-size:12px;max-width:46em;">
+            <strong>Nicht übernommen</strong> — für die betroffene Zeile gilt weiter der bisherige Stand:
+            <ul style="margin:2px 0 0 18px;padding:0;"><?php foreach($fehler as $text): ?><li><?=$h($text)?></li><?php endforeach; ?></ul>
+        </div>
+        <?php endif; ?>
+        <table class="pf-staffeltabelle" style="border-collapse:collapse;font-size:12px;margin:0 0 0 0;">
+            <tr style="background:#f4b183;">
+                <td style="<?=$zelle?>"><strong>TZ %</strong></td>
+                <td style="<?=$zelle?>"><input name="<?=$n('pf_tz_prozent')?>" value="<?=$h($this->get('pf_tz_prozent'))?>" placeholder="<?=$h($this->vorgabe('tzProzent'))?>" style="<?=$feld?>" title="Teuerungszuschlag in Prozent — wirkt nur auf den Verkauf" class="pf-tz" /></td>
+                <td style="<?=$zelle?>" title="Faktor = 1 + TZ/100"><span class="pf-tz-faktor"><?=$h(self::zahlDe($tzFaktor))?></span></td>
+                <td style="<?=$zelle?>" colspan="4"><input name="<?=$n('pf_tz_ab')?>" value="<?=$h($this->get('pf_tz_ab'))?>" placeholder="ab 01.04.2022" style="<?=$feld?>width:8em;text-align:left;" title="Nur Beschriftung, rechnet nicht mit" /></td>
+            </tr>
+            <tr style="background:#dce6f1;">
+                <td style="<?=$zelle?>" colspan="6"><strong>staggered prices / sqm</strong> <span style="color:#555;">(EK €/m² · Rabattfaktoren)</span></td>
+                <td style="<?=$zelle?>"><strong>one-color</strong></td>
+            </tr>
+            <tr>
+                <td style="<?=$zelle?>"><input name="<?=$n('pf_ek_qm')?>" value="<?=$h($this->get('pf_ek_qm'))?>" placeholder="<?=$h($this->vorgabe('ekListenpreisProQm'))?>" style="<?=$feld?>" title="EK-Listenpreis je m² (netto) vom Lieferanten" /></td>
+                <?php for($i = 1; $i < 6; $i++): ?>
+                <td style="<?=$zelle?>"><input name="<?=$n('pf_grid')?>[faktor][<?=$i?>]" value="<?=$h($st['zellen'][$i]['faktor'])?>" placeholder="<?=$h($st['zellen'][$i]['faktor_vorgabe'])?>" style="<?=$feld?><?=$rs('faktor.'.$i)?>" title="<?=$h(isset($fehler['faktor.'.$i]) ? $fehler['faktor.'.$i] : 'Rabattfaktor ab der Stückzahl darunter (0,95 = 5 % Nachlass)')?>" /></td>
+                <?php endfor; ?>
+                <td style="<?=$zelle?>"><input name="<?=$n('pf_one_color')?>" value="<?=$h($this->get('pf_one_color'))?>" placeholder="0,95" style="<?=$feld?>" title="Wie in der Mappe (W5) — rechnet derzeit nicht mit" /></td>
+            </tr>
+            <tr>
+                <?php for($i = 0; $i < 6; $i++): ?>
+                <td style="<?=$zelle?>"><input name="<?=$n('pf_grid')?>[menge][<?=$i?>]" value="<?=$h($st['zellen'][$i]['menge'])?>" placeholder="<?=$h($st['zellen'][$i]['menge_vorgabe'])?>" style="<?=$feld?><?=$rs('menge.'.$i)?>" title="<?=$h(isset($fehler['menge.'.$i]) ? $fehler['menge.'.$i] : 'Staffelmenge (ab Stückzahl)')?>" /></td>
+                <?php endfor; ?>
+                <td style="<?=$zelle?>background:#eee;">staggered quantity</td>
+            </tr>
+            <tr>
+                <?php for($i = 0; $i < 6; $i++): ?>
+                <td style="<?=$zelle?>"><input name="<?=$n('pf_grid')?>[breite][<?=$i?>]" value="<?=$h(isset($breitenG[$i]) ? self::zahlDe($breitenG[$i]) : '')?>" placeholder="<?=$h(isset($breitenV[$i]) ? $breitenV[$i] : '')?>" style="<?=$feld?><?=$rs('breite.'.$i)?>" title="<?=$h(isset($fehler['breite.'.$i]) ? $fehler['breite.'.$i] : 'Standardbreite der Rolle in cm')?>" /></td>
+                <?php endfor; ?>
+                <td style="<?=$zelle?>background:#eee;">standard-width</td>
+            </tr>
+        </table>
+        <table class="pf-sondertabelle" style="border-collapse:collapse;font-size:12px;margin-top:6px;">
+            <tr style="background:#dce6f1;">
+                <td style="<?=$zelle?>" colspan="2"><strong>Specialform = X</strong></td>
+                <td style="<?=$zelle?>" colspan="2"><strong>Specialcolor</strong> <span style="color:#555;">(einmal je Auftrag)</span></td>
+            </tr>
+            <tr>
+                <td style="<?=$zelle?>">no border <input name="<?=$n('pf_grid')?>[form_ohne_prozent]" value="<?=$h(self::faktorAlsProzent($this->get('pf_f_form_ohne')))?>" placeholder="<?=$h(self::faktorAlsProzent($this->vorgabe('faktorSonderformOhne')))?>" style="<?=$feld?>width:3em;<?=$rs('form_ohne_prozent')?>" /> %</td>
+                <td style="<?=$zelle?>">with border <input name="<?=$n('pf_grid')?>[form_mit_prozent]" value="<?=$h(self::faktorAlsProzent($this->get('pf_f_form_mit')))?>" placeholder="<?=$h(self::faktorAlsProzent($this->vorgabe('faktorSonderformMit')))?>" style="<?=$feld?>width:3em;<?=$rs('form_mit_prozent')?>" /> %</td>
+                <td style="<?=$zelle?>">EK <input name="<?=$n('pf_sonderfarbe_ek')?>" value="<?=$h($this->get('pf_sonderfarbe_ek'))?>" placeholder="<?=$h($this->vorgabe('aufschlagSonderfarbeEK'))?>" style="<?=$feld?>width:3.5em;" /> €</td>
+                <td style="<?=$zelle?>">VK <input name="<?=$n('pf_sonderfarbe_vk')?>" value="<?=$h($this->get('pf_sonderfarbe_vk'))?>" placeholder="<?=$h($this->vorgabe('aufschlagSonderfarbeVK'))?>" style="<?=$feld?>width:3.5em;" /> €</td>
+            </tr>
+        </table>
+        <div style="font-size:11px;color:#666;max-width:46em;margin-top:4px;">
+            Wie in der Excel-Mappe. Leere Felder = grauer Vorgabewert. Gilt erst, wenn unten im Block
+            „Preisformel (Excel-Mappe)“ der Schalter auf „Ja“ steht.
+            <?php if($st['mehr_als_6']): ?><br><strong style="color:#c00;">Achtung: gespeichert sind mehr als 6 Staffelstufen — beim Speichern bleiben nur die 6 angezeigten.</strong>
+            <?php elseif($st['nicht_6']): ?><br><strong style="color:#c00;">Achtung: gespeichert sind weniger als 6 Staffelstufen (<?=$h($this->get('pf_mengenstaffel'))?>). Bitte alle Spalten prüfen und speichern.</strong><?php endif; ?>
+            <?php if(count($breitenG) > 6): ?><br><strong style="color:#c00;">Achtung: gespeichert sind mehr als 6 Standardbreiten (<?=$h($this->get('pf_standardbreiten'))?>) — beim Speichern bleiben nur die 6 angezeigten, die Rollenbreite wäre dann <?=$h(self::zahlDe($breitenG[5]))?> cm.</strong><?php endif; ?>
+        </div>
+        <script>
+        (function(){
+            var tz = document.querySelectorAll('.pf-staffeltabelle .pf-tz');
+            Array.prototype.forEach.call(tz, function(f){
+                f.addEventListener('input', function(){
+                    var v = parseFloat(String(f.value || f.placeholder || '0').replace(',', '.'));
+                    var a = f.closest('table').querySelector('.pf-tz-faktor');
+                    if(a && isFinite(v)) a.textContent = String(Math.round((1 + v / 100) * 10000) / 10000).replace('.', ',');
+                });
+            });
+        })();
+        </script>
+        <?php
+        return ob_get_clean();
+    }
+
+    /**
+     * Liest die Tabelle aus dem POST und schreibt sie in die bestehenden
+     * Felder. Ist eine Zelle leer, gilt an dieser Stelle die Vorgabe der
+     * Mappe — so laesst sich auch nur ein einzelner Wert aendern. Sind ALLE
+     * Zellen einer Gruppe leer, bleibt das Feld leer (= ganz die Vorgabe).
+     *
+     * Jede Zelle wird geprueft (Pruefbericht 24.10.2026, B1/B3). Ist in einer
+     * Zeile etwas falsch, wird diese Zeile NICHT gespeichert — es bleibt der
+     * bisherige Stand, die Zelle wird rot markiert und der Grund steht ueber
+     * der Tabelle. Vorher fiel eine Stufe mit Tippfehler still weg, die
+     * Spalten rutschten nach links und das naechste Speichern machte den
+     * Verlust dauerhaft.
+     */
+    public function parseStaffelTabelle($post){
+        if(!isset($post['pf_grid']) or !is_array($post['pf_grid'])){
+            return;
+        }
+        $g = $post['pf_grid'];
+        $txt = function($v){ return trim(strip_tags((string) $v)); };
+        $fehler = array();
+
+        /* Mengenstaffel: 6 Mengen, Faktoren ab Stufe 2 (Stufe 1 = 1).
+           Mengen ganze Zahlen, erste = 1, streng aufsteigend; Faktoren
+           groesser 0 und hoechstens 1. */
+        $vorgabe = array_reverse($this->vorgabe('mengenstaffel'));
+        $menge = isset($g['menge']) && is_array($g['menge']) ? $g['menge'] : array();
+        $faktor = isset($g['faktor']) && is_array($g['faktor']) ? $g['faktor'] : array();
+        $irgendwas = false;
+        foreach(array_merge($menge, $faktor) as $v){ if($txt($v) !== ''){ $irgendwas = true; } }
+        if($irgendwas){
+            $teile = array();
+            $davor = 0;
+            $fehlerVorher = count($fehler);
+            for($i = 0; $i < 6; $i++){
+                $spalte = $i + 1;
+                $m = isset($menge[$i]) ? $txt($menge[$i]) : '';
+                $f = ($i === 0) ? '1' : (isset($faktor[$i]) ? $txt($faktor[$i]) : '');
+                if($m === '' and isset($vorgabe[$i])) $m = (string) $vorgabe[$i]['schwelle'];
+                if($f === '' and isset($vorgabe[$i])) $f = self::faktorDe($vorgabe[$i]['faktor']);
+                if($m === '' or $f === '') continue;
+                if(!preg_match('/^\d+$/', $m) or (int) $m < 1){
+                    $fehler['menge.'.$i] = 'Spalte '.$spalte.', Menge „'.$m.'“: bitte eine ganze Stückzahl ab 1.';
+                } elseif($i === 0 and (int) $m !== 1){
+                    $fehler['menge.'.$i] = 'Spalte 1, Menge „'.$m.'“: die erste Stufe beginnt bei 1 Stück.';
+                } elseif((int) $m <= $davor){
+                    $fehler['menge.'.$i] = 'Spalte '.$spalte.', Menge '.$m.': muss größer sein als die Menge davor ('.$davor.').';
+                } else {
+                    $davor = (int) $m;
+                }
+                $fz = Preisformel::alsZahl($f);
+                if($fz === null or $fz <= 0 or $fz > 1){
+                    $fehler['faktor.'.$i] = 'Spalte '.$spalte.', Faktor „'.$f.'“: bitte eine Zahl größer 0 und höchstens 1, z. B. 0,95.';
+                    continue;
+                }
+                $teile[] = ((int) $m).':'.(($i === 0) ? '1' : self::faktorDe($fz));
+            }
+            /* Mit "; " getrennt: eindeutig, auch wenn der Faktor ein Komma hat. */
+            if(count($fehler) === $fehlerVorher) $this->set('pf_mengenstaffel', implode('; ', $teile));
+        } else {
+            $this->set('pf_mengenstaffel', '');
+        }
+
+        /* Standardbreiten: Zahlen groesser 0, streng aufsteigend (die letzte
+           ist die Rollenbreite, ab der "zu breit" gilt). */
+        $breite = isset($g['breite']) && is_array($g['breite']) ? $g['breite'] : array();
+        $vorgabeB = $this->vorgabe('standardbreiten');
+        $irgendwas = false;
+        foreach($breite as $v){ if($txt($v) !== ''){ $irgendwas = true; } }
+        if($irgendwas){
+            $liste = array();
+            $davor = 0;
+            $fehlerVorher = count($fehler);
+            for($i = 0; $i < 6; $i++){
+                $b = isset($breite[$i]) ? $txt($breite[$i]) : '';
+                if($b === '' and isset($vorgabeB[$i])) $b = (string) $vorgabeB[$i];
+                if($b === '') continue;
+                $bz = Preisformel::alsZahl($b);
+                if($bz === null or $bz <= 0){
+                    $fehler['breite.'.$i] = 'Spalte '.($i + 1).', Standardbreite „'.$b.'“: bitte eine Zahl in cm größer 0.';
+                } elseif($bz <= $davor){
+                    $fehler['breite.'.$i] = 'Spalte '.($i + 1).', Standardbreite '.$b.': muss größer sein als die Breite davor ('.self::zahlDe($davor).').';
+                } else {
+                    $davor = $bz;
+                    /* Mit Punkt speichern: leseZahlenliste() trennt auch am Komma,
+                       aus "62,5" wuerden sonst die Breiten 62 und 5. */
+                    $liste[] = (string) (0 + $bz);
+                }
+            }
+            if(count($fehler) === $fehlerVorher) $this->set('pf_standardbreiten', implode('; ', $liste));
+        } else {
+            $this->set('pf_standardbreiten', '');
+        }
+
+        /* Sonderform in Prozent -> Faktor (30 -> 1,3). Leer = Vorgabe.
+           "30%" mit Zeichen ist erlaubt, negative Werte nicht. */
+        foreach(array('form_ohne_prozent' => 'pf_f_form_ohne', 'form_mit_prozent' => 'pf_f_form_mit') as $k => $feld){
+            if(!isset($g[$k])) continue;
+            $roh = $txt($g[$k]);
+            $p = Preisformel::alsZahl(trim(str_replace('%', '', $roh)));
+            if($roh !== '' and ($p === null or $p < 0)){
+                $fehler[$k] = 'Sonderform „'.$roh.'“: bitte einen Aufschlag in Prozent ab 0, z. B. 30.';
+                continue;
+            }
+            $this->set($feld, ($p === null) ? '' : self::zahlDe(round(1 + $p / 100, 4)));
+        }
+
+        $this->merkeTabellenFehler($fehler);
     }
 
     /** Die Mengenstaffel der Vorgabe als Text fuer das Admin-Feld. */
@@ -1000,7 +1287,9 @@ class SpezialoptionSpezial extends Spezialoption{
                 'pf_aktiv','pf_ek_qm','pf_colortype','pf_sf_mehrfarbig','pf_sf_einfarbig','pf_sf_pedprint',
                 'pf_standardbreiten','pf_f_sondermass','pf_f_form_ohne','pf_f_form_mit',
                 'pf_sonderfarbe_vk','pf_sonderfarbe_ek','pf_tz_prozent','pf_mengenstaffel',
-                'pf_min_breite','pf_max_laenge','pf_korrektur');
+                'pf_min_breite','pf_max_laenge','pf_korrektur',
+                /* Staffeltabelle (24.10.2026): reine Beschriftungen aus der Mappe. */
+                'pf_tz_ab','pf_one_color');
         
         foreach($fields as $field){
             if(isset($_POST['spezialoption'][$this->getArtikel()->getId()]['spezial'][$field])){
@@ -1008,6 +1297,7 @@ class SpezialoptionSpezial extends Spezialoption{
                 $this->set($field, $value);
             }
         }
+        $this->parseStaffelTabelle($_POST['spezialoption'][$this->getArtikel()->getId()]['spezial']);
     }
     
     public function parseFrontendPost(){

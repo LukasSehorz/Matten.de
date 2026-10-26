@@ -303,10 +303,23 @@ class ArtikelPage extends KatalogPage{
 			   Preisformel eingeschaltet waere. Die Zusage lautet aber:
 			   ohne Schalter aendert sich nichts. */
 			$pf_menge = 1;
+			$pf_daten = null;
 			try{
 				$spezopt = $artikel->getSpezialoption();
 				if($spezopt instanceof SpezialoptionSpezial and $spezopt->istPreisformelAktiv()){
 					$pf_menge = $anzahl;
+					/* Verbindung zum neuen Shop (24.10.2026): die Stammwerte der
+					   Preisformel (EK, Salesfactor, Mengenstaffel, Standardbreiten,
+					   Zuschlaege, TZ — gepflegt in der Staffeltabelle der
+					   Artikelmaske) gehen mit, damit das neue Frontend mit
+					   DENSELBEN Werten rechnet wie dieses System. Nur bei
+					   eingeschalteter Formel; sonst bleibt das Feld null und der
+					   neue Shop nimmt seine eigenen Werte. */
+					$pf_daten = array(
+						'aktiv'      => true,
+						'stammdaten' => $spezopt->getPreisformelStammdaten(),
+						'korrektur'  => (string) $spezopt->get('pf_korrektur')
+					);
 				}
 			} catch(Exception $e){
 				// keine Spezialoption — bleibt bei 1, also wie bisher
@@ -323,6 +336,7 @@ class ArtikelPage extends KatalogPage{
 				'is_complete' => $is_complete?true:false,
 				'zubehoer' => $post['zubehoer']?true:false,
 				'brutto' => Katalog::bruttoPreise()?true:false,
+				'preisformel' => $pf_daten,
 			);
 		}
 		return $ausgabe;

@@ -29,7 +29,7 @@
     }).join('\n');
     folien.innerHTML = k.map(function (f, i) {
       return '<div class="carousel-item' + (i === 0 ? ' active' : '') + '">\n' +
-        (f.bild ? '<img class="d-block w-100" src="' + esc(f.bild) + '" alt="' + esc(f.alt) + '">\n' : '') +
+        (f.bild ? '<img class="d-block w-100" src="' + esc(f.bild) + '"' + S.srcsetAttr(f.bild, '100vw') + ' alt="' + esc(f.alt) + '">\n' : '') +
         '<div class="carousel-caption d-inline">\n<a href="' + esc(f.href) + '">\n' +
         '<h5 class="h2">' + esc(f.titel) + '</h5>\n<p class="h4">' + esc(f.untertitel) + '</p>\n' +
         '</a>\n</div>\n</div>';
@@ -42,7 +42,7 @@
     var f = start.featured;
     feat.innerHTML = '<div class="col-md-6">\n<!-- Category cover -->\n' +
       '<a href="' + esc(f.href) + '">\n<div class="category-thumbnail-container" style="margin-bottom: 30px;">\n' +
-      '<div class="category-thumbnail"' + (f.bild ? ' style="background-image: url(\'' + esc(f.bild) + '\')"' : '') + '></div>\n' +
+      '<div class="category-thumbnail"' + (f.bild ? ' style="background-image: url(\'' + esc(S.hdBild(f.bild)) + '\')"' : '') + '></div>\n' +
       '<p class="category-thumbnail-caption">' + esc(f.caption) + '</p>\n</div>\n</a>\n' +
       '<!-- End category cover -->\n</div>';
   }
@@ -65,7 +65,7 @@
     vt.innerHTML = (start.vorteile || []).map(function (v) {
       return '<div class="col-2 info-col text-center">\n<div>' +
         (v.bild
-          ? '<img src="' + esc(v.bild) + '" alt="' + esc(v.alt) + '" width="120" height="120">'
+          ? '<img src="' + esc(v.bild) + '"' + S.srcsetAttr(v.bild, '120px') + ' alt="' + esc(v.alt) + '" width="120" height="120">'
           : '<span class="info-bild-leer" role="img" aria-label="' + esc(v.alt) + '"></span>') +
         '</div>\n<p class="info-text text-center">' + esc(v.text) + '</p>\n</div>';
     }).join('\n');

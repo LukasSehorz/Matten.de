@@ -801,6 +801,10 @@ const server = http.createServer(async (req, res) => {
           preisText: preis?.preis != null ? preis.preis : null,
           grundpreis: preis?.grundpreis ?? null,
           attributepreis: preis?.attributepreis ?? null,
+          /* Stammwerte der Preisformel aus dem Altsystem (24.10.2026) --
+             nur bei eingeschalteter Formel, sonst null. Das Frontend rechnet
+             damit, statt mit seiner eigenen Kopie in daten.js. */
+          preisformel: preis?.preisformel ?? null,
           versand: preis?.versand ?? null,
           brutto: preis?.brutto ?? null,
           gesamt: preis?.preis != null ? Number((preis.preis * anzahl).toFixed(2)) : null,

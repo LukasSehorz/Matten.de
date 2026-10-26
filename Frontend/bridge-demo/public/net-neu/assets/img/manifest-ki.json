@@ -1,0 +1,82 @@
+{
+ "_quelle": "erzeugt von _arbeit/bilder-ki/manifest-ki-bauen.py: mit GPT Image 2.5 (kie.ai) geschaerfte Fassungen, Farben auf das Original zurueckgerechnet, je Bild per Blick abgenommen. Schluessel = 1x-Datei unter assets/.",
+ "bilder": {
+  "img/kategorie-kacheln/5cca325ee6c13.jpeg": {
+   "datei": "img/ki/kategorie-kacheln/5cca325ee6c13.jpg",
+   "breite": 450,
+   "hoehe": 300,
+   "breite1x": 150,
+   "quelle": "bericht-B.json"
+  },
+  "img/produkt-kacheln/5cca325ee6c13.jpeg": {
+   "datei": "img/ki/produkt-kacheln/5cca325ee6c13.jpg",
+   "breite": 512,
+   "hoehe": 340,
+   "breite1x": 256,
+   "quelle": "bericht-A.json"
+  },
+  "img/produkt-kacheln/JPrint-005.jpg": {
+   "datei": "img/ki/produkt-kacheln/JPrint-005.jpg",
+   "breite": 512,
+   "hoehe": 340,
+   "breite1x": 256,
+   "quelle": "bericht-A.json"
+  },
+  "img/produkte/5cca325ee6c13.jpeg": {
+   "datei": "img/ki/produkte/5cca325ee6c13.jpg",
+   "breite": 1536,
+   "hoehe": 1020,
+   "breite1x": 512,
+   "quelle": "bericht-A.json"
+  },
+  "img/produkte/JP-601.jpg": {
+   "datei": "img/ki/produkte/JP-601.jpg",
+   "breite": 1536,
+   "hoehe": 1020,
+   "breite1x": 512,
+   "quelle": "bericht-A.json"
+  },
+  "img/produkte/JPrint-005.jpg": {
+   "datei": "img/ki/produkte/JPrint-005.jpg",
+   "breite": 1536,
+   "hoehe": 1020,
+   "breite1x": 512,
+   "quelle": "bericht-A.json"
+  },
+  "img/uploads/5c36ad55d8af8jpeg.jpeg": {
+   "datei": "img/ki/uploads/5c36ad55d8af8jpeg.jpg",
+   "breite": 360,
+   "hoehe": 360,
+   "breite1x": 120,
+   "quelle": "bericht-B.json"
+  },
+  "img/uploads/5c36ad9452e74jpeg.jpeg": {
+   "datei": "img/ki/uploads/5c36ad9452e74jpeg.jpg",
+   "breite": 360,
+   "hoehe": 360,
+   "breite1x": 120,
+   "quelle": "bericht-B.json"
+  },
+  "img/uploads/5c899f359ba7d.jpeg": {
+   "datei": "img/ki/uploads/5c899f359ba7d.jpg",
+   "breite": 978,
+   "hoehe": 1530,
+   "breite1x": 326,
+   "quelle": "bericht-B.json"
+  },
+  "img/uploads/5c89a066994bd.jpeg": {
+   "datei": "img/ki/uploads/5c89a066994bd.jpg",
+   "breite": 978,
+   "hoehe": 864,
+   "breite1x": 326,
+   "quelle": "bericht-B.json"
+  },
+  "img/uploads/JPL-613-königsblau_0.jpg": {
+   "datei": "img/ki/uploads/JPL-613-königsblau_0.jpg",
+   "breite": 1448,
+   "hoehe": 1086,
+   "breite1x": 800,
+   "quelle": "bericht-B.json"
+  }
+ }
+}

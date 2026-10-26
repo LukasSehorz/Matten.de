@@ -1,0 +1,82 @@
+[
+ {
+  "original": "assets/img/slides/SL-1024x170-1farbig.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Methodentest an Logo-Folie fehlgeschlagen (Abbruchregel)",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/slides/SL-1024x170-Alu-RCB.JPG",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Methodentest an Logo-Folie fehlgeschlagen (Abbruchregel)",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/slides/SL-1024x170-Aluminium.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Methodentest an Logo-Folie fehlgeschlagen (Abbruchregel)",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/slides/SL-1024x170-Eing.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Methodentest an Logo-Folie fehlgeschlagen (Abbruchregel)",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/slides/SL-1024x170-Logo.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Test der 21:9-Methode, 2 Versuche. Versuch 1 (gespiegelte Randstreifen): KI hat die ganze Leinwand als Bild behandelt, Motiv neu komponiert, Schrift 'TOGETHER TO THE TOP' wurde 'SULANUGA HOG GELE YNZ'. Versuch 2 (schwarze Balken oben/unten + Prompt): Streifen blieb deckungsgleich (+-4 px), deutlich schaerfer, aber Schrift wieder erfunden ('IOCEIDLR TA YIIK YAR'), und Ergebnis nur 1568 px breit (Ziel ~2000). --ar 21:9 wird angenommen. Test nicht sauber -> Abbruch, keine weiteren Folien gesendet.",
+  "farbabweichung": "24.2/19.2 (Versuch 2, nur zur Messung, Datei liegt im Arbeitsordner, nicht unter assets/img/ki)",
+  "credits": "2 Auftraege a ca. 6 (1K); gemessener Guthabenverlust 36 und 30 enthaelt Verbrauch paralleler Agenten"
+ },
+ {
+  "original": "assets/img/slides/SL-1024x170-OS-Phys.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Methodentest an Logo-Folie fehlgeschlagen (Abbruchregel)",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/slides/SL-1024x170-Rollen.JPG",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Methodentest an Logo-Folie fehlgeschlagen (Abbruchregel)",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/slides/SL-1024x170-VierJahr.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Methodentest an Logo-Folie fehlgeschlagen (Abbruchregel)",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/slides/SL-1024x170-Washtafel.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Methodentest an Logo-Folie fehlgeschlagen (Abbruchregel)",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/slides/SL-1024x170-willkommen.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Methodentest an Logo-Folie fehlgeschlagen (Abbruchregel)",
+  "farbabweichung": null,
+  "credits": 0
+ }
+]

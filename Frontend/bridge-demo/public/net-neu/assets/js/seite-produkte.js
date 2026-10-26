@@ -4,7 +4,7 @@
    Adresse:  products.html[?page=n][&keyword=…][&category[]=ID…][&filter_sort=…]
 
    Filter mit den 26 Kategorie-Kaestchen unter 9 Gruppen (IDs des Originals),
-   Sortierung, 16 Karten je Seite, Paginierung "« Vorherige | 1 | 2 | Nächste »"
+   Sortierung, 24 Karten je Seite (Original 16, siehe JE_SEITE), Paginierung "« Vorherige | 1 | 2 | Nächste »"
    (bei vielen Seiten gekuerzt: 1 … 8 9 10 11 12 … 25).
    Der Suchbegriff aus dem Kopf (?keyword=) filtert nach dem Produktnamen.
    Die Gruppen sind per <button> auf- und zuklappbar (im Original ein
@@ -17,7 +17,10 @@
   var NET = window.NET || {};
   var S = window.Shell;
   var esc = S.esc;
-  var JE_SEITE = 16;
+  /* Original 16. Bei mehr Spalten (6 ab 1920 px) blieb die dritte Reihe halb
+     leer; 24 geht in 2, 3, 4, 6 und 8 Spalten auf, nur bei 9 Spalten (ab etwa
+     2300 px) bleibt die letzte Reihe teilweise offen (24.10.2026). */
+  var JE_SEITE = 24;
 
   /* --- Hilfen fuer grosse Mengen (Stand 04.10.2026) -------------------------
      Bei bis zu 385 Produkten duerfen die Bilder nicht alle sofort laden, und

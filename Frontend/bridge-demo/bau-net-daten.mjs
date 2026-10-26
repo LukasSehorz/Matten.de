@@ -52,6 +52,18 @@ const json = (p) => JSON.parse(lesen(p));
 const struktur = json(path.join(SPEC, 'struktur.json'));
 const manifest = json(path.join(ZIEL_DIR, 'assets', 'img', 'manifest.json'));
 const FARBBILDER = (() => { const f = path.join(SPEC, 'farbbilder.json'); if (!fs.existsSync(f)) return {}; const d = json(f); delete d._quelle; return d; })();
+/* Hochaufgeloeste Fassungen (24.10.2026, Kundenwunsch Fuchsius "Bilder schaerfer"):
+   assets/img/manifest-hd.json nennt je 1x-Datei (Schluessel, relativ zu assets/)
+   eine groessere Fassung DESSELBEN Motivs unter assets/img/hd/ — aus dem Original
+   ohne Cache-Filter bei matten.net (/uploads/...) oder aus dem Altsystem matten.de
+   (/media/bild/...), einmal heruntergeladen und verkleinert. Daraus entsteht
+   NET.hd (1x-Pfad -> [HD-Pfad, HD-Breite, 1x-Breite]); die Seiten setzen damit
+   srcset bzw. das schaerfere Hintergrundbild. Fehlt die Datei, bleibt alles wie bisher. */
+const MANIFEST_HD = (() => { const f = path.join(ZIEL_DIR, 'assets', 'img', 'manifest-hd.json'); if (!fs.existsSync(f)) return {}; return json(f).bilder || {}; })();
+/* Mit GPT Image 2.5 geschaerfte Fassungen (assets/img/ki/, Liste manifest-ki.json aus
+   _arbeit/bilder-ki/manifest-ki-bauen.py, je Bild abgenommen). Gleiches Format. Eine echte
+   HD-Fassung (Originalfoto) bleibt, solange sie mindestens so breit ist wie die KI-Fassung. */
+const MANIFEST_KI = (() => { const f = path.join(ZIEL_DIR, 'assets', 'img', 'manifest-ki.json'); if (!fs.existsSync(f)) return {}; return json(f).bilder || {}; })();
 
 /* ==========================================================================
    1  Zuordnung matten.net-Produkt -> matten.de-Artikel
@@ -278,8 +290,22 @@ function titelAus(mdText) {
    ========================================================================== */
 
 const K = struktur.kopfzeile;
+/* Logo seit 24.10.2026 (Kundenwunsch Fuchsius): Lorbeer-Abzeichen "40 JAHRE
+   ERFAHRUNG" statt "35 JAHRE". Neu gezeichnet in gleicher Optik — Fuchs aus
+   mattenfuchs_square.png, Schriftzug und Lorbeer aus dem Original als Vektor
+   nachgezogen, Zahl und Text in Arial Bold, Gold #9b844d — und in zwei
+   Groessen abgelegt: 520 x 100 (1x) und 1040 x 200 (2x, Retina). Bauanleitung
+   in Frontend/_arbeit/logo-40/. Fehlen die Dateien, gilt das Original. */
+const LOGO_40 = path.join(ZIEL_DIR, 'assets', 'img', 'logo_german_40.png');
+const LOGO_40_2X = path.join(ZIEL_DIR, 'assets', 'img', 'logo_german_40_2x.png');
 const kopfzeile = {
-  logo: { href: lokalerPfad(K.logo.href), img: lokal(K.logo.img), breite: K.logo.breite, hoehe: K.logo.hoehe },
+  logo: {
+    href: lokalerPfad(K.logo.href),
+    img: fs.existsSync(LOGO_40) ? 'assets/img/logo_german_40.png' : lokal(K.logo.img),
+    img2x: fs.existsSync(LOGO_40) && fs.existsSync(LOGO_40_2X) ? 'assets/img/logo_german_40_2x.png' : null,
+    alt: fs.existsSync(LOGO_40) ? 'Mattenfuchs – 40 Jahre Erfahrung' : 'Logo',
+    breite: K.logo.breite, hoehe: K.logo.hoehe
+  },
   sprachwahl: {
     aktuell: K.sprachwahl.aktuell,
     optionen: K.sprachwahl.optionen.map((o) => ({
@@ -516,6 +542,10 @@ const gruppen = [];
    ========================================================================== */
 const startHtml = lesen(path.join(SPEC, 'screens', 'startseite.html'));
 const startseite = {};
+/* 24.10.2026 (Kundenwunsch Fuchsius, "40 Jahre Erfahrung"): die Erfassung von
+   matten.net sagt "Seit mehr als 35 Jahren". Die Spec bleibt unveraendert (sie ist
+   die Abschrift des Originals); ersetzt wird hier beim Bauen — Startseite und Blog. */
+function vierzigJahre(t) { return String(t).replace(/\b35 Jahren\b/g, '40 Jahren'); }
 {
   const m = /<div class="protection-info">\s*([\s\S]*?)\s*<\/div>\s*<\/div>/.exec(startHtml);
   startseite.datenschutzhinweisHtml = m
@@ -543,7 +573,7 @@ const startseite = {};
   while ((f = kre.exec(startHtml))) startseite.topAngebote.push(f[1]);
 
   const mf = /<span>Der Mattenfuchs<\/span>\s*<\/h2>\s*<div>\s*([\s\S]*?)\s*<\/div>/.exec(startHtml);
-  startseite.mattenfuchsText = mf ? entitiesAufloesen(mf[1].trim()) : '';
+  startseite.mattenfuchsText = mf ? vierzigJahre(entitiesAufloesen(mf[1].trim())) : '';
 
   startseite.vorteile = [];
   const vre = /<img src="([^"]+)" alt="([^"]*)" width="120" height="120">\s*<\/div>\s*<p class="info-text text-center">([^<]*)<\/p>/g;
@@ -566,7 +596,7 @@ for (const s of ['agb', 'impressum', 'data-protection', 'datenschutzerklarung-ds
     const titel = t.split('\n')[0].replace(/^\d+\.\s*/, '').trim();
     const url = (/^- URL:\s*(\S+)/m.exec(t) || [])[1] || '';
     const datum = (/^- Datum \(wörtlich\):\s*\*([^*]+)\*/m.exec(t) || [])[1] || '';
-    const absaetze = t.split('\n').filter((z) => /^> /.test(z)).map((z) => inline(z.slice(2).trim()));
+    const absaetze = t.split('\n').filter((z) => /^> /.test(z)).map((z) => vierzigJahre(inline(z.slice(2).trim())));
     blog.push({ titel, slug: url.split('/').pop(), datum, absaetze });
   }
   texte.blog = blog;
@@ -1200,8 +1230,27 @@ const NET = {
   startseite,
   texte,
   laenderCodes: LAENDER_CODES,
-  mattendesigner
+  mattendesigner,
+  hd: hdKarte()
 };
+
+/** NET.hd: 1x-Pfad (genau so geschrieben, wie lokal() ihn liefert) ->
+    [HD-Pfad, HD-Breite in px, 1x-Breite in px]. Nur Eintraege, deren beide
+    Dateien wirklich auf der Platte liegen; sortiert, damit die Ausgabe
+    deterministisch bleibt. */
+function hdKarte() {
+  const kodiert = (rel) => 'assets/' + rel.split('/').map(encodeURIComponent).join('/');
+  const karte = {};
+  const alle = { ...MANIFEST_HD };
+  for (const [rel, e] of Object.entries(MANIFEST_KI)) if (!alle[rel] || e.breite > alle[rel].breite) alle[rel] = e;
+  for (const rel of Object.keys(alle).sort()) {
+    const e = alle[rel];
+    if (!fs.existsSync(path.join(ZIEL_DIR, 'assets', rel)) || !fs.existsSync(path.join(ZIEL_DIR, 'assets', e.datei))) continue;
+    if (!(e.breite > e.breite1x)) continue;   /* nicht groesser als das Original: bringt nichts, kostet nur Ladezeit */
+    karte[kodiert(rel)] = [kodiert(e.datei), e.breite, e.breite1x];
+  }
+  return karte;
+}
 
 /* Mit --alle kommen die Produkte des Altsystems dazu (Abschnitt 7c); die Datei
    heisst dann anders (daten-alle.js), die heutige daten.js bleibt unberuehrt. */

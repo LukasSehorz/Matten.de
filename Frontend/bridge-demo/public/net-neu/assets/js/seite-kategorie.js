@@ -2,7 +2,7 @@
    seite-kategorie.js — Kategorieseite (kategorie.html?slug=<netSlug>), Spec 6
    --------------------------------------------------------------------------
    Titelbereich mit Titelbild, Name und Beschreibung; Filter "Sort by";
-   Produktkarten der Kategorie (16 je Seite, Blaetterung wie products.html). Leere Kategorien bleiben leer — wie im
+   Produktkarten der Kategorie (24 je Seite, Blaetterung wie products.html). Leere Kategorien bleiben leer — wie im
    Original ohne Hinweistext (14 der 27 Kategorien).
    ========================================================================== */
 
@@ -12,7 +12,10 @@
   var NET = window.NET || {};
   var S = window.Shell;
   var esc = S.esc;
-  var JE_SEITE = 16;
+  /* Original 16. Bei mehr Spalten (6 ab 1920 px) blieb die dritte Reihe halb
+     leer; 24 geht in 2, 3, 4, 6 und 8 Spalten auf, nur bei 9 Spalten (ab etwa
+     2300 px) bleibt die letzte Reihe teilweise offen (24.10.2026). */
+  var JE_SEITE = 24;
 
   /* --- Hilfen fuer grosse Mengen (Stand 04.10.2026) -------------------------
      Bei bis zu 385 Produkten duerfen die Bilder nicht alle sofort laden, und
@@ -83,7 +86,12 @@
   }
 
   document.title = 'Mattenfuchs';
-  if (kopf && kat.titelbild) kopf.style.backgroundImage = 'url(\'' + kat.titelbild + '\')';
+  /* Titelbild: die schaerfere Fassung, wenn es eine gibt (24.10.2026) — das
+     Bild fuellt die ganze Fensterbreite, 150 x 100 px waren dort nur Brei. */
+  /* Die schaerfere Fassung (bis 419 KB) erst ab Tablet-Breite — auf dem Handy
+     reicht die kleine (5 KB), dort ist der Titelbereich schmal. */
+  var titelbild = kat.titelbild && window.matchMedia && window.matchMedia('(min-width: 768px)').matches ? S.hdBild(kat.titelbild) : kat.titelbild;
+  if (kopf && titelbild) kopf.style.backgroundImage = 'url(\'' + titelbild + '\')';
   if (name) name.textContent = kat.name;
   if (beschr) beschr.textContent = kat.beschreibung || '';
   if (slugFeld) slugFeld.value = slug;
@@ -96,7 +104,7 @@
     produkte.sort(function (a, b) { return a.name.localeCompare(b.name, 'de'); });
     if (sort === 'NAME_DESC') produkte.reverse();
   }
-  /* Blaetterung wie auf der Produktliste: 16 Karten je Seite. */
+  /* Blaetterung wie auf der Produktliste: JE_SEITE Karten je Seite. */
   var seiten = Math.max(1, Math.ceil(produkte.length / JE_SEITE));
   var seite = Math.min(seiten, Math.max(1, parseInt(S.param('page', '1'), 10) || 1));
   var ab = (seite - 1) * JE_SEITE;

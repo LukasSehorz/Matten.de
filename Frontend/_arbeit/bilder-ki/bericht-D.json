@@ -1,0 +1,330 @@
+[
+ {
+  "original": "assets/img/farbbilder/JP-605.jpg",
+  "ki": "assets/img/ki/farbbilder/JP-605.jpg",
+  "akzeptiert": true,
+  "grund": "Akzeptiert. Schaerfer, gleiche Szene, Mann/Pflanzen/Schilder unveraendert (Gesicht scharf rekonstruiert, Pose/Ausdruck gleich). Standardabgleich ergab Matte +6.3 (G); --radius 2.0 verworfen (weisse Halos/gruenlicher Mattenrand); Matte stattdessen mit eigener Maske auf Originalmittel gezogen. Boden/Topf/graue Tuermatte um +-11-14 heller/dunkler (nicht Produkt).",
+  "farbabweichung": "15.1 (ganzes Bild, mittlere Abweichung)/Matte max 6.3 nach Standardabgleich/Matte max 1.4 nach Mattenkorrektur",
+  "credits": 6.0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-613.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Verworfen nach 2 Versuchen. V1 (Standardprompt): Schilder 'Automatic door' zu erfundenem Buchstabensalat. V2 (Prompt mit Schilderwortlaut): Schilder korrekt, Farbe der Matte exakt (max 2.0 nach Mattenkorrektur), aber die KI zeichnet einen dicken dunklen Gummirand rundherum (oben/rechts/links), den das Original nicht hat (dort nur duenner dunkler Rand unten links). Kandidat liegt zur Ansicht in scratchpad/ki-D/JP-613-versuch2-verworfen.jpg",
+  "farbabweichung": "13.9 (ganzes Bild)/Matte max 2.0 (Versuch 2)",
+  "credits": 12.0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-617.jpg",
+  "ki": "assets/img/ki/farbbilder/JP-617.jpg",
+  "akzeptiert": true,
+  "grund": "Akzeptiert im zweiten Versuch. V1 verworfen (Gesicht veraendert). V2 mit Referenzbild (akzeptiertes JP-605-Ergebnis als zweites Eingabebild): gleiches laechelndes Gesicht wie 605, Schilder 'Automatic door' korrekt, duenner dunkler Rand nur unten links, Mattenfarbe exakt (max 2.7 in R, wegen Beschneidung bei 0).",
+  "farbabweichung": "20.0 (ganzes Bild); Standardabgleich haette Matte um 14.5 verfehlt/Matte max 2.7 nach Mattenkorrektur",
+  "credits": 18.0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-632.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-604.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-623.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-630.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-622.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-602.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-603.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-606.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-607.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-608.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-609.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-610.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-611.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-612.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-614.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-615.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-616.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-618.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-619.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-620.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-621.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-624.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-625.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-626.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-627.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-628.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-629.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-631.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-635.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-636.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-637.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-638.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-639.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-640.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-641.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-642.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-643.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ },
+ {
+  "original": "assets/img/farbbilder/JP-644.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "nicht bearbeitet: Guthaben 58.5 Credits (Untergrenze 60) erreicht, weil parallele Agenten es verbraucht haben",
+  "farbabweichung": null,
+  "credits": 0
+ }
+]

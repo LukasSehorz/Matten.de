@@ -7,7 +7,9 @@ window.NET = {
  "kopfzeile": {
   "logo": {
    "href": "index.html",
-   "img": "assets/img/logo_german.png",
+   "img": "assets/img/logo_german_40.png",
+   "img2x": "assets/img/logo_german_40_2x.png",
+   "alt": "Mattenfuchs – 40 Jahre Erfahrung",
    "breite": 1024,
    "hoehe": 197
   },
@@ -2667,7 +2669,7 @@ window.NET = {
    "mjplit-jetprint-light-1-farbig",
    "designmatten-jetprint"
   ],
-  "mattenfuchsText": "Seit mehr als 35 Jahren liefern wir Fussmatten in einer Vielzahl von Standardmaßen und nahezu beliebigen Wunschmaßen in mehr als 100 verschiedenen Farben, einfarbig und individuell nach Kundenwunsch gestaltet. Wir haben in dieser Zeit weltweit in vielen namhaften Firmen, Top-Handelshäusern und Filialunternehmen, Hotels, Verwaltungen, Ladengeschäften und Privathaushalten für saubere Eingangsbereiche und den Schutz der angrenzenden Böden gesorgt. Unsere Angebotspalette ist in den zurückliegenden Jahren stetig gewachsen und wurde den permanent steigenden Anforderungen laufend angepasst. So haben wir für jedes Schmutzproblem -und auch für die passende Werbung für Ihr Haus- immer eine hervorragende Lösung parat. \"NICHTS\"  gibt es nicht bei uns. Wir sind stets für Sie unter \"info@matten.de\" erreichbar und freuen uns über Ihre Anfrage.  Ihr Mattenfuchs-Team",
+  "mattenfuchsText": "Seit mehr als 40 Jahren liefern wir Fussmatten in einer Vielzahl von Standardmaßen und nahezu beliebigen Wunschmaßen in mehr als 100 verschiedenen Farben, einfarbig und individuell nach Kundenwunsch gestaltet. Wir haben in dieser Zeit weltweit in vielen namhaften Firmen, Top-Handelshäusern und Filialunternehmen, Hotels, Verwaltungen, Ladengeschäften und Privathaushalten für saubere Eingangsbereiche und den Schutz der angrenzenden Böden gesorgt. Unsere Angebotspalette ist in den zurückliegenden Jahren stetig gewachsen und wurde den permanent steigenden Anforderungen laufend angepasst. So haben wir für jedes Schmutzproblem -und auch für die passende Werbung für Ihr Haus- immer eine hervorragende Lösung parat. \"NICHTS\"  gibt es nicht bei uns. Wir sind stets für Sie unter \"info@matten.de\" erreichbar und freuen uns über Ihre Anfrage.  Ihr Mattenfuchs-Team",
   "vorteile": [
    {
     "bild": "assets/img/uploads/5c36ad55d8af8jpeg.jpeg",
@@ -2704,7 +2706,7 @@ window.NET = {
     "slug": "der-mattenfuchs",
     "datum": "February 1, 2019 08:06",
     "absaetze": [
-     "Seit mehr als 35 Jahren liefern wir Fussmatten in einer Vielzahl von Standardmaßen und nahezu beliebigen Wunschmaßen in mehr als 100 verschiedenen Farben, einfarbig und individuell nach Kundenwunsch gestaltet.",
+     "Seit mehr als 40 Jahren liefern wir Fussmatten in einer Vielzahl von Standardmaßen und nahezu beliebigen Wunschmaßen in mehr als 100 verschiedenen Farben, einfarbig und individuell nach Kundenwunsch gestaltet.",
      "Wir haben in dieser Zeit weltweit in vielen namhaften Firmen, Top-Handelshäusern und Filialunternehmen, Hotels, Verwaltungen, Ladengeschäften und Privathaushalten für saubere Eingangsbereiche und den Schutz der angrenzenden Böden gesorgt.",
      "Unsere Angebotspalette ist in den zurückliegenden Jahren stetig gewachsen und wurde den permanent steigenden Anforderungen laufend angepasst. So haben wir für jedes Schmutzproblem -und auch für die passende Werbung für Ihr Haus- immer eine hervorragende Lösung parat. \"NICHTS\"  gibt es <strong>nicht</strong> bei uns.",
      "Wir sind stets für Sie unter \"info@matten.de\" erreichbar und freuen uns über Ihre Anfrage.",
@@ -3858,5 +3860,237 @@ window.NET = {
   ],
   "hintergrund": "assets/img/mat-editor-background.jpg",
   "beispielbild": "assets/img/mattenfuchs_square.png"
+ },
+ "hd": {
+  "assets/img/kategorie-kacheln/5c45865f923d2jpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c45865f923d2jpeg.jpg",
+   512,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c47f8cfcc5b7jpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c47f8cfcc5b7jpeg.jpg",
+   510,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c47f937b4f5fjpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c47f937b4f5fjpeg.jpg",
+   512,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c47fa2b5364ejpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c47fa2b5364ejpeg.jpg",
+   600,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c47fa5a8109ejpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c47fa5a8109ejpeg.jpg",
+   512,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c47fa829d279jpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c47fa829d279jpeg.jpg",
+   512,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c47fafe5a2a8jpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c47fafe5a2a8jpeg.jpg",
+   512,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c47fbd86c22fjpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c47fbd86c22fjpeg.jpg",
+   512,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c47fd1c6e5f7jpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c47fd1c6e5f7jpeg.jpg",
+   512,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c4cc0ab6bb26jpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c4cc0ab6bb26jpeg.jpg",
+   600,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5c4cc9df3e243jpeg.jpeg": [
+   "assets/img/hd/kategorie-kacheln/5c4cc9df3e243jpeg.jpg",
+   510,
+   150
+  ],
+  "assets/img/kategorie-kacheln/5cca325ee6c13.jpeg": [
+   "assets/img/ki/kategorie-kacheln/5cca325ee6c13.jpg",
+   450,
+   150
+  ],
+  "assets/img/kategorie-kacheln/JPL-621-aubergine_0.jpg": [
+   "assets/img/hd/kategorie-kacheln/jpl-621-aubergine-0.jpg",
+   600,
+   150
+  ],
+  "assets/img/kategorie-kacheln/JPrint-light.jpg": [
+   "assets/img/hd/kategorie-kacheln/jprint-light.jpg",
+   300,
+   150
+  ],
+  "assets/img/kategorie-kacheln/JetPrint-Design.jpg": [
+   "assets/img/hd/kategorie-kacheln/jetprint-design.jpg",
+   512,
+   150
+  ],
+  "assets/img/kategorie-kacheln/kokos-natur_512x340.jpg": [
+   "assets/img/hd/kategorie-kacheln/kokos-natur-512x340.jpg",
+   510,
+   150
+  ],
+  "assets/img/produkt-kacheln/005-jet-print-light-5eb35cd44d2e3268777520.jpg": [
+   "assets/img/hd/produkt-kacheln/005-jet-print-light-5eb35cd44d2e3268777520.jpg",
+   800,
+   256
+  ],
+  "assets/img/produkt-kacheln/5c47fa2b58b3djpeg.jpeg": [
+   "assets/img/hd/produkt-kacheln/5c47fa2b58b3djpeg.jpg",
+   800,
+   256
+  ],
+  "assets/img/produkt-kacheln/5c47fa829d279jpeg.jpeg": [
+   "assets/img/hd/produkt-kacheln/5c47fa829d279jpeg.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkt-kacheln/5c47fafe5a2a8jpeg.jpeg": [
+   "assets/img/hd/produkt-kacheln/5c47fafe5a2a8jpeg.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkt-kacheln/5c47fb75ede37jpeg.jpeg": [
+   "assets/img/hd/produkt-kacheln/5c47fb75ede37jpeg.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkt-kacheln/5c4c1812b732ejpeg.jpeg": [
+   "assets/img/hd/produkt-kacheln/5c4c1812b732ejpeg.jpg",
+   800,
+   256
+  ],
+  "assets/img/produkt-kacheln/5cca325ee6c13.jpeg": [
+   "assets/img/ki/produkt-kacheln/5cca325ee6c13.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkt-kacheln/637-leuchtblau.JPG": [
+   "assets/img/hd/produkt-kacheln/637-leuchtblau.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkt-kacheln/Eing-Logo-512x340.jpg": [
+   "assets/img/hd/produkt-kacheln/eing-logo-512x340.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkt-kacheln/Herzlich%20Willkommen_512x340.JPG": [
+   "assets/img/hd/produkt-kacheln/herzlich-willkommen-512x340.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkt-kacheln/JPrint-005.jpg": [
+   "assets/img/ki/produkt-kacheln/JPrint-005.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkt-kacheln/Jet-Print%20Light_800x600.jpg": [
+   "assets/img/hd/produkt-kacheln/jet-print-light-800x600.jpg",
+   800,
+   256
+  ],
+  "assets/img/produkt-kacheln/JetPrint-Logo-616.jpg": [
+   "assets/img/hd/produkt-kacheln/jetprint-logo-616.jpg",
+   800,
+   256
+  ],
+  "assets/img/produkt-kacheln/JetPrint-Velour-512x340.jpg": [
+   "assets/img/hd/produkt-kacheln/jetprint-velour-512x340.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkt-kacheln/kokos-natur_512x340.jpg": [
+   "assets/img/hd/produkt-kacheln/kokos-natur-512x340.jpg",
+   512,
+   256
+  ],
+  "assets/img/produkte/005-jet-print-light-5eb35cd44d2e3268777520.jpg": [
+   "assets/img/hd/produkte/005-jet-print-light-5eb35cd44d2e3268777520.jpg",
+   1400,
+   512
+  ],
+  "assets/img/produkte/5c47fa2b58b3djpeg.jpeg": [
+   "assets/img/hd/produkte/5c47fa2b58b3djpeg.jpg",
+   1400,
+   512
+  ],
+  "assets/img/produkte/5cca325ee6c13.jpeg": [
+   "assets/img/ki/produkte/5cca325ee6c13.jpg",
+   1536,
+   512
+  ],
+  "assets/img/produkte/JP-601.jpg": [
+   "assets/img/ki/produkte/JP-601.jpg",
+   1536,
+   512
+  ],
+  "assets/img/produkte/JPL-601-zitronengelb_0.jpg": [
+   "assets/img/hd/produkte/jpl-601-zitronengelb-0.jpg",
+   800,
+   512
+  ],
+  "assets/img/produkte/JPrint-005.jpg": [
+   "assets/img/ki/produkte/JPrint-005.jpg",
+   1536,
+   512
+  ],
+  "assets/img/uploads/5c36ad55d8af8jpeg.jpeg": [
+   "assets/img/ki/uploads/5c36ad55d8af8jpeg.jpg",
+   360,
+   120
+  ],
+  "assets/img/uploads/5c36ad9452e74jpeg.jpeg": [
+   "assets/img/ki/uploads/5c36ad9452e74jpeg.jpg",
+   360,
+   120
+  ],
+  "assets/img/uploads/5c47fa2b58b3djpeg.jpeg": [
+   "assets/img/hd/uploads/5c47fa2b58b3djpeg.jpg",
+   1600,
+   150
+  ],
+  "assets/img/uploads/5c47fa5a8336bjpeg.jpeg": [
+   "assets/img/hd/uploads/5c47fa5a8336bjpeg.jpg",
+   512,
+   150
+  ],
+  "assets/img/uploads/5c47fbd86f17cjpeg.jpeg": [
+   "assets/img/hd/uploads/5c47fbd86f17cjpeg.jpg",
+   512,
+   150
+  ],
+  "assets/img/uploads/5c4cc0ab73be2jpeg.jpeg": [
+   "assets/img/hd/uploads/5c4cc0ab73be2jpeg.jpg",
+   1600,
+   512
+  ],
+  "assets/img/uploads/5c899f359ba7d.jpeg": [
+   "assets/img/ki/uploads/5c899f359ba7d.jpg",
+   978,
+   326
+  ],
+  "assets/img/uploads/5c89a066994bd.jpeg": [
+   "assets/img/ki/uploads/5c89a066994bd.jpg",
+   978,
+   326
+  ],
+  "assets/img/uploads/JPL-613-k%C3%B6nigsblau_0.jpg": [
+   "assets/img/ki/uploads/JPL-613-k%C3%B6nigsblau_0.jpg",
+   1448,
+   800
+  ]
  }
 };

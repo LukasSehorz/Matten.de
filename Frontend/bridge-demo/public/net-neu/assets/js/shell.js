@@ -20,6 +20,11 @@
      Shell.hole(url, grenzeMs?)     GET  -> Promise<{ok, http, d}>   (wirft nie)
      Shell.sende(url, daten)        POST -> Promise<{ok, http, d}>   (wirft nie)
      Shell.bild(pfad)               nur /api/img/… durchlassen, sonst null
+     Shell.srcsetAttr(src, sizes)   ' srcset=… sizes=…', wenn es zu src eine
+                                    schaerfere Fassung gibt (NET.hd), sonst ''
+     Shell.hdBild(src)              schaerfere Fassung fuer Hintergrundbilder
+     Shell.srcsetSetzen(img, src, sizes)  dasselbe fuer ein schon vorhandenes
+                                    <img> (setzt oder entfernt srcset/sizes)
      Shell.warenkorbLaden()         GET /api/cart (immer frisch), rendert das
                                     Modal, setzt Zaehler
      Shell.warenkorbZaehler(n)      "Cart (n)" im Kopf, merkt die Zahl
@@ -143,6 +148,33 @@
     return null;
   }
 
+  /* Schaerfere Bilder (24.10.2026, Kundenwunsch Fuchsius "Bilder schaerfer").
+     NET.hd (daten.js, aus assets/img/manifest-hd.json) nennt zu einem lokalen
+     Bild eine groessere Fassung desselben Motivs: [HD-Pfad, HD-Breite, 1x-Breite].
+     srcsetAttr() haengt daran srcset/sizes an — der Browser laedt die grosse
+     Fassung nur, wenn die angezeigte Groesse x Pixeldichte sie braucht. Ohne
+     Eintrag bleibt das <img> genau wie bisher. hdBild() liefert fuer
+     Hintergrundbilder (kein srcset moeglich) direkt die groessere Fassung. */
+  function hdEintrag(src) {
+    var e = (NET.hd || {})[String(src == null ? '' : src)];
+    return e && e[0] ? e : null;
+  }
+  function srcsetAttr(src, sizes) {
+    var e = hdEintrag(src);
+    if (!e) return '';
+    return ' srcset="' + esc(src) + ' ' + e[2] + 'w, ' + esc(e[0]) + ' ' + e[1] + 'w" sizes="' + esc(sizes) + '"';
+  }
+  function hdBild(src) {
+    var e = hdEintrag(src);
+    return e ? e[0] : src;
+  }
+  function srcsetSetzen(img, src, sizes) {
+    var e = hdEintrag(src);
+    if (!img) return;
+    if (e) { img.setAttribute('srcset', src + ' ' + e[2] + 'w, ' + e[0] + ' ' + e[1] + 'w'); img.setAttribute('sizes', sizes); }
+    else { img.removeAttribute('srcset'); img.removeAttribute('sizes'); }
+  }
+
   /* Seitenweiter Absendeknopf-Effekt (Spec 10): Breite festhalten, Spinner
      statt Beschriftung, Knopf sperren. */
   function knopfArbeitet(knopf, ja) {
@@ -176,7 +208,11 @@
       '<!-- Logo col -->\n<div class="col-lg-6">\n' +
       '<a class="logo-link" href="' + esc(logo.href || 'index.html') + '">\n' +
       '<h1 class="logo" style="margin-bottom: 0;">' +
-      (logo.img ? '<img src="' + esc(logo.img) + '" width="' + esc(logo.breite || 1024) + '" height="' + esc(logo.hoehe || 197) + '" class="d-md-inline" alt="Logo">' : 'Mattenfuchs') +
+      /* Seit 24.10.2026: Logo "40 JAHRE ERFAHRUNG" mit 2x-Fassung fuer Retina
+         (srcset) und sprechendem alt-Text (Kundenwunsch Fuchsius). */
+      (logo.img ? '<img src="' + esc(logo.img) + '"' +
+        (logo.img2x ? ' srcset="' + esc(logo.img) + ' 1x, ' + esc(logo.img2x) + ' 2x"' : '') +
+        ' width="' + esc(logo.breite || 1024) + '" height="' + esc(logo.hoehe || 197) + '" class="d-md-inline" alt="' + esc(logo.alt || 'Logo') + '">' : 'Mattenfuchs') +
       '</h1>\n</a>\n</div>\n' +
       '<!-- Cart & search col -->\n<div class="col-lg-6">\n' +
       '<div class="text-right header-links">\n' +
@@ -477,7 +513,11 @@
     return '<div class="col-2 category-dropdown-link-container">\n' +
       '<a class="category-dropdown-link" href="' + esc(k.href) + '">\n' +
       (k.bild
-        ? '<img src="' + esc(k.bild) + '" width="150" height="100" alt="Category" style="width: 100%; height: auto;">\n'
+        /* loading="lazy" (24.10.2026): die schaerferen Kacheln sind zusammen rund
+           0,5 MB. Das Bildmenue ist bis zum Ueberfahren unsichtbar und auf dem
+           Handy ganz ausgeblendet — dort sollen sie gar nicht laden. Am Desktop
+           holt kachelnVorladen() sie nach dem Seitenaufbau im Leerlauf. */
+        ? '<img src="' + esc(k.bild) + '"' + srcsetAttr(k.bild, '240px') + ' loading="lazy" width="150" height="100" alt="Category" style="width: 100%; height: auto;">\n'
         : '<span class="kachel-leer" aria-hidden="true"></span>\n') +
       '<p class="text-center text-dark">' + esc(k.label) + '</p>\n</a>\n</div>\n';
   }
@@ -609,7 +649,7 @@
     return '<div class="col-6 col-lg-4 col-xl-3 mb-3">\n<!-- Product card -->\n' +
       '<a href="' + esc(p.href) + '" title="' + esc(p.name) + '">\n<div class="card product-card">\n' +
       (p.kachel
-        ? '<img src="' + esc(p.kachel) + '" class="card-img-top img-fluid" width="256" height="170" alt="' + esc(p.name) + '">\n'
+        ? '<img src="' + esc(p.kachel) + '"' + srcsetAttr(p.kachel, '(max-width: 575.98px) 50vw, 320px') + ' class="card-img-top img-fluid" width="256" height="170" alt="' + esc(p.name) + '">\n'
         : '<span class="card-img-top card-img-leer" role="img" aria-label="Kein Bild vorhanden"></span>\n') +
       '<div class="card-body">\n<h5 class="card-title product-card-title">' +
       '<span title="' + esc(p.name) + '">' + esc(p.name) + '</span></h5>\n</div>\n</div>\n</a>\n' +
@@ -735,6 +775,20 @@
     };
     spaeter(still);
 
+    /* Bildmenue-Kacheln am Desktop vorladen (24.10.2026): Sie stehen mit
+       loading="lazy" im Markup (siehe kategorieKachel), damit Handys die
+       ausgeblendete Leiste nicht laden. Am Desktop sollen sie beim ersten
+       Ueberfahren aber schon da sein — sonst ploppen sie sichtbar nach. Darum
+       nach dem Laden der Seite im Leerlauf auf "eager" umstellen. */
+    var kachelnVorladen = function () {
+      if (!window.matchMedia || !window.matchMedia('(min-width: 992px)').matches) return;
+      Array.prototype.forEach.call(document.querySelectorAll('.category-dropdown-link img[loading="lazy"]'), function (i) {
+        i.loading = 'eager';
+      });
+    };
+    if (document.readyState === 'complete') spaeter(kachelnVorladen);
+    else window.addEventListener('load', function () { spaeter(kachelnVorladen); });
+
     /* Zurueck aus dem Verlaufsspeicher: der Korb kann sich inzwischen
        geaendert haben, also frisch nachfragen (ebenfalls zurueckgestellt). */
     window.addEventListener('pageshow', function (ev) { if (ev.persisted) spaeter(still); });
@@ -742,6 +796,7 @@
 
   window.Shell = {
     esc: esc, param: param, hole: hole, sende: sende, bild: bild,
+    srcsetAttr: srcsetAttr, hdBild: hdBild, srcsetSetzen: srcsetSetzen,
     knopfArbeitet: knopfArbeitet,
     warenkorbLaden: warenkorbLaden, warenkorbAnzeigen: warenkorbAnzeigen,
     warenkorbZaehler: warenkorbZaehler, warenkorbOeffnen: warenkorbOeffnen,

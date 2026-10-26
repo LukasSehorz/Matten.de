@@ -3687,7 +3687,13 @@ async function fetchPricePfad(session, pfad, anzahl, attributPaare) {
     }
   }
 
-  const res = await upstream('GET', url.toString(), { session });
+  /* Wie die Seite selbst (artikel.form.js): POST mit Formularfeldern. Das
+     Altsystem liest die Wunschmasse (spezialoption[…][x|y]) nur aus POST — per
+     GET galt still die Vorgabegroesse, obwohl die Masse unter "uebernommen"
+     standen (Pruefbericht 24.10.2026). */
+  const felder = [...url.searchParams].filter(([k]) => k !== 'getpricejson');
+  for (const [k] of felder) url.searchParams.delete(k);
+  const res = await upstream('POST', url.toString(), { session, body: buildForm(felder) });
   let json = null;
   try {
     json = JSON.parse(decodeBody(res.buffer));

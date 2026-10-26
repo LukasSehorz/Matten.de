@@ -10,6 +10,8 @@
         Anfragehinweis, Sonderform/Sonderfarbe), Meldungen
      4  Kasse (auf matten.net nicht erfassbar) im Bootstrap-Stil der Seite
      5  Kleinigkeiten: Karten ohne Bild, Rechtstext-Hinweis, Ladezustaende
+     6  Volle Fensterbreite (24.10.2026)
+     7  Vorteilsleiste ohne uebereinanderliegende Bilder (24.10.2026)
    ========================================================================== */
 
 /* --- 1  Cookie-Hinweis --------------------------------------------------- */
@@ -240,3 +242,141 @@
 .search-box input::placeholder { color: #6c757d; }
 /* Gaestebuch / leere Zustaende */
 .leer-hinweis { color: #6c757d; padding: 1rem 0; }
+
+/* --- 6  Volle Fensterbreite (24.10.2026) -----------------------------------
+   Kundenwunsch Fuchsius im Gespraech vom 24.10.2026: "ganze Breite nutzen".
+   matten-net.css begrenzt .big-container auf 1400 px und .container je nach
+   Fenster auf 540/720/960/1140 px — bei 1709 px Fenster stand der Inhalt
+   zwischen x=165 und x=1540, rechts und links blieb ein breiter weisser Rand.
+   Jetzt reicht alles bis knapp an den Rand: seitlich 16 px (Handy), 24 px
+   (Tablet), 32 px (ab 1200 px).
+
+   Obergrenze 2400 px: Bis 2560 px Fensterbreite (27-Zoll-QHD, der breiteste
+   uebliche Buerobildschirm) bleibt die Seite damit praktisch randlos (80 px je
+   Seite). Erst auf Ultrabreit-Bildschirmen (3440 px) setzt die Grenze ein —
+   sonst stuenden Logo und Warenkorb ueber 3.300 px auseinander, und die
+   Menueleiste klebte verloren am linken Rand. */
+:root { --seitenrand: 16px; }
+@media (min-width: 768px) { :root { --seitenrand: 24px; } }
+@media (min-width: 1200px) { :root { --seitenrand: 32px; } }
+.big-container,
+.container { max-width: 2400px; padding-left: var(--seitenrand); padding-right: var(--seitenrand); }
+/* Fusszeile: footer.p-2 bringt schon .5rem mit — die Spalten stehen so buendig
+   unter dem Logo. */
+footer.footer > .container { max-width: calc(2400px - 1rem); padding-left: calc(var(--seitenrand) - .5rem); padding-right: calc(var(--seitenrand) - .5rem); }
+/* Ein .container im .big-container (Vorteilsleiste der Startseite) nicht doppelt einruecken */
+.big-container .container { padding-left: 0; padding-right: 0; }
+/* Desktop-Menue: matten-net.css setzt den Innenabstand der Leiste auf 0, die
+   Menuepunkte bringen selbst .5rem mit. So steht "Mattendesigner" genau unter
+   dem linken Rand des Logos. */
+.main-navbar > .big-container { padding-left: calc(var(--seitenrand) - .5rem); padding-right: calc(var(--seitenrand) - .5rem); }
+/* Die 13 Menuepunkte sind zusammen 1198 px breit — schon im Original lief die
+   Leiste zwischen 992 und 1199 px rechts aus dem Fenster (waagerechter
+   Rollbalken, "Alle Produkte"/"Blog" abgeschnitten). Mit dem Seitenrand waere es
+   bis 1221 px so. Darum dort kleinere Schrift und engere Abstaende; die Zeilen-
+   hoehe bleibt gleich (11,2 px x 1,714 = 19,2 px wie .8rem x 1,5), damit das
+   Bildmenue weiterhin nahtlos unter der Leiste haengt und beim Herunterfahren
+   mit der Maus offen bleibt. */
+@media (min-width: 992px) and (max-width: 1279.98px) {
+  .main-navbar .nav-link { font-size: .7rem; line-height: 1.7143; padding-left: .3rem !important; padding-right: .3rem !important; }
+  .main-navbar .category-dropdown-trigger { margin-left: 0 !important; margin-right: 0 !important; }
+}
+@media (min-width: 992px) and (max-width: 1099.98px) {
+  .main-navbar .nav-link { padding-left: .2rem !important; padding-right: .2rem !important; }
+}
+
+/* Bildmenue: die Kacheln wuerden mit der Breite mitwachsen (6 je Reihe, bei
+   1920 px je 310 px) — die Vorlagen haben teils nur 150 x 100 px. Darum auf
+   breiten Bildschirmen mehr Kacheln je Reihe; jede bleibt 175–235 px breit wie
+   bisher. */
+@media (min-width: 1440px) {
+  .category-dropdown-menu .category-dropdown-link-container { flex: 0 0 12.5%; max-width: 12.5%; }
+}
+@media (min-width: 1800px) {
+  .category-dropdown-menu .category-dropdown-link-container { flex: 0 0 10%; max-width: 10%; }
+}
+
+/* Produktkarten (Startseite TOP-ANGEBOTE, Kategorie, Produktliste): MEHR
+   Spalten statt breiter gezogener Karten. Raster mit Mindestbreite 230 px je
+   Spalte (Karte mind. 200 px + 30 px Abstand wie bisher — das Original zeigt
+   bei 1280 px Karten von 208 px); so viele Spalten, wie hineinpassen: in der
+   Produktliste bei 1280/1440/1920/2560 px 4/4/6/9 Spalten (vorher immer 4),
+   auf der Startseite 5/6/8/10. Auf dem Handy bleiben es zwei. Die
+   Bootstrap-Spaltenklassen der Karte (col-6 col-lg-4 col-xl-3) wirken im
+   Raster nicht mehr. */
+#top-angebote,
+#produkt-raster { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 576px) {
+  #top-angebote,
+  #produkt-raster { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+}
+#top-angebote > [class*="col-"],
+#produkt-raster > [class*="col-"] { flex: none; max-width: none; width: auto; }
+/* Startseite: Es gibt nur 5 TOP-ANGEBOTE. Mit auto-fill standen sie ab 1440 px
+   links, rechts blieben 3 bis 5 Spalten leer (Pruefbericht 24.10.2026). Jetzt
+   fuellen sie die Zeile (auto-fit laesst leere Spalten weg). Damit die Karten
+   auf sehr breiten Schirmen nicht riesig werden, ist die Reihe hoechstens
+   2000 px breit (5 Karten je 400 px) und steht mittig. Mit einer festen
+   Hoechstbreite je Spalte (minmax(230px, 380px)) brach sie bei 1920 px in 4 + 1 um. */
+@media (min-width: 576px) {
+  #top-angebote { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); max-width: 2000px; margin-left: auto; margin-right: auto; }
+}
+
+/* Karussell und Kachel "Was ist neu": Die Bilder sind nur 1024 x 170 px. Ueber
+   die volle Breite gezogen (bei 1920 px 1856 px) wurden sie fast doppelt so
+   gross und weich. Beide hoechstens 1600 px breit und mittig, bis es Bilder in
+   voller Groesse gibt. Die Kachel nimmt dafuer die ganze Zeile statt der halben
+   und behaelt das Seitenverhaeltnis des Bildes (statt fest 167 px hoch). */
+#carousel { max-width: 1600px; margin-left: auto; margin-right: auto; }
+#featured > .col-md-6 { flex: 0 0 100%; max-width: calc(1600px + 30px); margin-left: auto; margin-right: auto; }   /* + Spaltenabstand: Kachel so breit wie das Karussell */
+@media (min-width: 768px) {
+  #featured .category-thumbnail { height: auto; aspect-ratio: 1024 / 170; background-position: center; }
+}
+
+/* Formularseiten (Registrieren): Felder von 900 px Breite liest niemand gern —
+   hoechstens 1200 px, linksbuendig unter Ueberschrift und Login-Hinweis. */
+#register-form { max-width: 1200px; }
+
+/* Produktliste und Kategorie: die Filterspalte waere bei 25 % auf breiten
+   Schirmen 470 px und mehr — sie bleibt 280 px, das Raster nimmt den Rest. */
+@media (min-width: 1200px) {
+  .filter-spalte { flex: 0 0 280px; max-width: 280px; }
+  .raster-spalte { flex: 1 1 0; max-width: none; min-width: 0; }
+}
+
+/* Produktseite: Das Grossbild waechst nur maessig mit — die Fotos haben meist
+   800 x 600 px (Altsystem) oder 512 x 340 px, breiter gezogen werden sie
+   unscharf. Es bekommt hoechstens 46 % bzw. 720 px (ab 2000 px Fenster 800 px).
+   Die Bestellspalte nimmt den Rest, aber hoechstens 1010 px: breiter ergaebe
+   meterlange Auswahlfelder, und der Bestellbereich nach dem Entwurf von Herrn
+   Fuchsius (13.10.2026) verloere seine Proportionen. */
+@media (min-width: 992px) {
+  .produkt-bilder-spalte { flex: 0 0 min(46%, 720px); max-width: min(46%, 720px); }
+  #product_view .single-product-info { flex: 1 1 0; max-width: 1010px; min-width: 0; }
+}
+@media (min-width: 2000px) {
+  .produkt-bilder-spalte { flex-basis: 800px; max-width: 800px; }
+}
+
+/* Lange Fliesstexte bleiben lesbar: hoechstens 80 rem (1280 px) breit, sonst
+   stuenden auf 1920 px ueber 230 Zeichen in einer Zeile. */
+.description-content,
+#seite,
+#blog > * { max-width: 80rem; }
+#mattenfuchs-text { max-width: 80rem; margin-left: auto; margin-right: auto; }
+
+/* --- 7  Vorteilsleiste: Bilder lagen uebereinander (24.10.2026) ------------
+   Kundenwunsch "Bilder, die uebereinander sind, fixen". Ursache: die zwei
+   Vorteils-Bilder (120 x 120 px, feste Breite im Markup) stehen in Spalten
+   .col-2 = 16,7 % der Breite. Unter ca. 840 px ist die Spalte schmaler als das
+   Bild; es ragte in die Nachbarspalte, und "EXPRESS DELIVERY" verdeckte
+   "BEST PRICE GUARANTEE" zur Haelfte (gemessen 390 px: 60 px Ueberdeckung).
+   Jetzt: breitere Spalten unter 992 px, und das Bild passt sich nie breiter an
+   als seine Spalte. */
+.info-col img { max-width: 100%; height: auto; }
+@media (max-width: 991.98px) {
+  #vorteile > .info-col { flex: 0 0 33.333%; max-width: 33.333%; }
+}
+@media (max-width: 575.98px) {
+  #vorteile > .info-col { flex: 0 0 50%; max-width: 50%; }
+}

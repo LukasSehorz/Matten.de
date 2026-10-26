@@ -1,0 +1,114 @@
+[
+ {
+  "original": "assets/img/produkte/2-Black Pearl 646.png",
+  "ki": "assets/img/ki/produkte/2-Black Pearl 646.jpg",
+  "akzeptiert": true,
+  "grund": "Gleiche Struktur (Korrelation 0,92 bei Weichzeichnung), Mittelfarbe identisch (95/99/94 gegen 95/99/94), Fasern deutlich schaerfer. Der Farbabgleich hatte 4 dunkle Zeilen oben und 5 Spalten rechts erzeugt; Rand von 8 px rundum abgeschnitten und auf 1536x1020 zurueckgesetzt (ca. 1 % Zoom). Faserdetails sind neu gezeichnet (Zweck des Schaerfens).",
+  "farbabweichung": "21.9/17.7 (pixelweise, wegen neuer Fasertextur; Mittelfarbe gleich)",
+  "credits": 6,
+  "ausgabegroesse": "1536x1020"
+ },
+ {
+  "original": "assets/img/produkte/5cca325ee6c13.jpeg",
+  "ki": "assets/img/ki/produkte/5cca325ee6c13.jpg",
+  "akzeptiert": true,
+  "grund": "Flaechengrafik (braune Matte, 5 rote Punkte): Layout und Position deckungsgleich, Kanten scharf, Halo und JPEG-Schatten um die Punkte weg. Der Standard-Farbabgleich liess das Rot zu hell (196/14/36 statt 159/11/35); Nachbesserung mit eigenem Flaechenfarb-Abgleich (palette_fix.py im Scratchpad ki-A): Rot 159/11/35, Matte 57/29/28, Beige 211/190/145 jetzt exakt wie im Original. Vorbehalt: die duenne dunkle Randlinie an Matte (links/unten) des Originals fehlt im Ergebnis.",
+  "farbabweichung": "8.9/1.9 (Standard + Radius 2 hatte Halos; final Flaechenfarben exakt)",
+  "credits": 6,
+  "ausgabegroesse": "1536x1020"
+ },
+ {
+  "original": "assets/img/produkt-kacheln/5cca325ee6c13.jpeg",
+  "ki": "assets/img/ki/produkt-kacheln/5cca325ee6c13.jpg",
+  "akzeptiert": true,
+  "grund": "Gleiches Motiv wie produkte/5cca325ee6c13.jpeg (Differenz nur 2,7/255, gleiches Seitenverhaeltnis); aus dem geschaerften Gross-Bild abgeleitet, auf 512x340 (2x Kachelgroesse fuer Retina) verkleinert.",
+  "farbabweichung": "wie Gross-Bild",
+  "credits": 0,
+  "ausgabegroesse": "512x340"
+ },
+ {
+  "original": "assets/img/produkte/5cce29fead941.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Zwei Versuche (je 3:2). Versuch 1: Matte horizontal ca. 5 % verbreitert, gruenes Quadrat verschoben, RTA-Logo vereinfacht (kleines Symbol oben und Stern-Marke fehlen), Gruen neonfarbig statt dunkelgruen. Versuch 2: Matte noch ca. 2 % groesser, Quadrat ca. 1,5 % nach oben verschoben, RTA-Zeichen oben/Stern-Marke wieder weg, Gruen (ca. 40/230/30) deutlich zu hell. Logo und Geometrie weichen ab, daher verworfen.",
+  "farbabweichung": "17.1/9.3 (V1), 12.4/6.3 (V2)",
+  "credits": 12
+ },
+ {
+  "original": "assets/img/produkt-kacheln/5cce29fead941.jpeg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Gross-Bild verworfen, daher keine Kachel abgeleitet.",
+  "farbabweichung": "-",
+  "credits": 0
+ },
+ {
+  "original": "assets/img/produkte/601-zitronengelb.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "Zwei Versuche (je 3:2). Beide Male Szene umgedeutet: Matte in der Hoehe kuerzer (untere Ecke ca. 25 px hoeher als im Original), Marmorboden jetzt glaenzend mit Spiegelungen (vorher matt), Klavier/Pflanze/Kugeln anders gross. Mattenfarbe Versuch 1: 231/208/16 statt 253/226/2 (stumpfer, golden statt zitronengelb). Matten werden nach Farbe gekauft und der Ausschnitt stimmt nicht, daher verworfen.",
+  "farbabweichung": "18.3/14.8 (V1), 13.8/11.7 (V2)",
+  "credits": 12
+ },
+ {
+  "original": "assets/img/produkte/JP-601.jpg",
+  "ki": "assets/img/ki/produkte/JP-601.jpg",
+  "akzeptiert": true,
+  "grund": "Gleiche Szene, Maske der gelben Matte deckt sich bis ca. 1-2 px mit dem Original (Flaeche 17.050 gegen 17.344 px), Person, Pflanzen, Schilder 'Automatic door' lesbar und identisch, Tuerpfosten und Boden gleich. Mattenfarbe war nach dem Standard-Abgleich zu stumpf (251/235/52 statt 254/255/39); nur dort korrigiert (mat_fix.py, Scratchpad ki-A, Maske der gelben Pixel in der Matte): jetzt 250/250/37. Hinweis: Matte im Original ist eine flache, einfarbig eingesetzte Flaeche, im Ergebnis hat sie jetzt Faserstruktur und schwarze Randkante wie ein echter Teppich. Auto-Randpruefung hat 8 px oben beschnitten (ca. 1 % Zoom).",
+  "farbabweichung": "15.6/13.9 (pixelweise; Mattenfarbe nach Korrektur 250/250/37 gegen 254/255/39)",
+  "credits": 6,
+  "ausgabegroesse": "1536x1020"
+ },
+ {
+  "original": "assets/img/produkte/JPrint-005.jpg",
+  "ki": "assets/img/ki/produkte/JPrint-005.jpg",
+  "akzeptiert": true,
+  "grund": "Nahaufnahme gleiche Motive (orange Bahn mit hellem Fleck, Violett unten, Blau links, schwarze Matten-Kante), Farben praktisch identisch (Orange 249/178/68 gegen 248/180/70, Violett 84/64/142 gegen 86/63/144, Gesamtmittel 165/125/99 gegen 164/125/98), deutlich schaerfere Fasern, keine Artefakte. Schwarzer Bereich links etwas heller (58/53/61 gegen 81/67/59). Auto-Randpruefung hat 8 px beschnitten (unter 1 % Zoom).",
+  "farbabweichung": "19.0/15.6 (pixelweise, neue Fasertextur)",
+  "credits": 6,
+  "ausgabegroesse": "1536x1020"
+ },
+ {
+  "original": "assets/img/produkt-kacheln/JPrint-005.jpg",
+  "ki": "assets/img/ki/produkt-kacheln/JPrint-005.jpg",
+  "akzeptiert": true,
+  "grund": "Gleiches Motiv wie produkte/JPrint-005.jpg (per Blick bestaetigt), aus dem geschaerften Gross-Bild abgeleitet, 512x340.",
+  "farbabweichung": "wie Gross-Bild",
+  "credits": 0,
+  "ausgabegroesse": "512x340"
+ },
+ {
+  "original": "assets/img/produkte/JetPrint-light-colors.jpg",
+  "ki": "assets/img/ki/produkte/JetPrint-light-colors.jpg",
+  "akzeptiert": true,
+  "grund": "ACHTUNG Auftrag: Das Bild ist KEINE Farbkarte mit Nummern, sondern eine stark verpixelte Mattennahaufnahme (rot/weiss/gelb/schwarz/grau, Randstreifen mit abgerissenen Farben am unteren Rand). Es gibt keine Zahlen oder Schrift zu pruefen. Gleiche Anordnung der Flaechen (Korrelation 0,988 bei Weichzeichnung), Farben nah (Gesamtmittel identisch 152/118/110; Weiss 223/221/211 gegen 222/221/212, Gelb 219/168/93 gegen 221/167/81, Rot unten 166/52/54 gegen 175/60/61 etwas heller). Vorbehalt: feine Formen (schwarze Schleifen, blauer Streifen oben, jetzt kraeftiger und breiter) sind neu gezeichnet statt nur geschaerft, der defekte Farbstreifen am unteren Bildrand aus dem Original bleibt erhalten. Bitte vor Einsatz nochmals mit eigenen Augen pruefen.",
+  "farbabweichung": "23.6/20.5 (pixelweise)",
+  "credits": 6,
+  "ausgabegroesse": "1538x1022"
+ },
+ {
+  "original": "assets/img/produkte/Stern-601-605.jpg",
+  "ki": "assets/img/ki/produkte/Stern-601-605.jpg",
+  "akzeptiert": true,
+  "grund": "Flaechengrafik gelb mit rotem Stern: Position und Form von Matte und 8 Linien deckungsgleich, Kanten glatt statt Treppenstufen. Farben per Flaechenfarb-Abgleich (palette_fix.py): Gelb 255/254/41 gegen 255/254/40, Beige 211/190/145 exakt, Rot 187/57/34 gegen 188/57/34. Hinweis: im Original ist die waagerechte Linie braeunlicher (165/77/4, JPEG-Farbsaum), im Ergebnis haben alle Linien dasselbe Rot wie die senkrechte.",
+  "farbabweichung": "9.1/7.1 (Standard), danach Flaechenfarben fast exakt",
+  "credits": 6,
+  "ausgabegroesse": "1248x829"
+ },
+ {
+  "original": "assets/img/produkt-kacheln/JetPrint light 1-farbig.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "NICHT BEARBEITET: Guthaben fiel waehrend meiner Arbeit (parallele Agenten) auf 58,5 Credits, unter meiner Untergrenze von 150. Motiv ist nicht dasselbe wie JP-601 (rote statt gelbe Matte, anderer Ausschnitt), muesste also einzeln geschaerft werden.",
+  "farbabweichung": "-",
+  "credits": 0
+ },
+ {
+  "original": "assets/img/produkt-kacheln/Stern-630-606.jpg",
+  "ki": null,
+  "akzeptiert": false,
+  "grund": "NICHT BEARBEITET: Guthaben 58,5 Credits, unter der Untergrenze von 150. Eigenes Motiv (graue Matte, roter Stern); Geometrie gleicht Stern-601-605 (Rot-Maske nur 4,5 % Unterschied), man koennte spaeter aus dem geschaerften Stern-601-605 durch reinen Farbtausch ableiten, wurde aber nicht gemacht (nicht im Auftrag).",
+  "farbabweichung": "-",
+  "credits": 0
+ }
+]
